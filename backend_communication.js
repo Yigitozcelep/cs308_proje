@@ -1,3 +1,13 @@
+const SeatStatus = {
+    avaliable: "avaliable",
+    unAvaliable: "unavaliable",
+}
+
+const SeatTypes = {
+    ecenomy: "ecenomy",
+    bussiness: "bussiness",
+}
+
 
 class FlightData {
     #from 
@@ -68,68 +78,35 @@ class Seat {
         this.#seatCost     = seatCost;
         this.#status       = status;  // avaliable or not
     }
-    getSeatNumber()    { return this.#seatPosition[0];         } // if seat is A2 it return A
-    getSeatLetter()    { return this.#seatPosition[1];         } // if seat is A2 it return 2
-    getSeatPosition()  { return this.#seatPosition;            } // if seat is A2 it return A2
-    isSeatEcenomy()    { return this.#seatType == "ecenomy";   }
-    isSeatBussiness()  { return this.#seatType == "bussiness"; }
-    getSeatCost()      { return this.#seatCost;                }
-    getSeatType()      { return this.#seatType;                }
-    IsBuyyable()       { return this.#status  == "avaliable";  }
+    getSeatNumber()    { return this.#seatPosition[0];                } // if seat is A2 it return A
+    getSeatLetter()    { return this.#seatPosition[1];                } // if seat is A2 it return 2
+    getSeatPosition()  { return this.#seatPosition;                   } // if seat is A2 it return A2
+    isSeatEcenomy()    { return this.#seatType == SeatTypes.ecenomy   }
+    isSeatBussiness()  { return this.#seatType == SeatTypes.bussiness }
+    getSeatCost()      { return this.#seatCost;                       }
+    getSeatType()      { return this.#seatType;                       }
+    isSeatAvaliable()  { return this.#status  == SeatStatus.avaliable }
 }
 
 class Seats {
     #seats
     /**
-     * @param {Seat[]} ecenomySeats 
-     * @param {Seat[]} bussinessSeats 
+     * @param {Seat[]} seats 
      */
     constructor(seats) {
         this.#seats = seats;
     }
-    getCountOfAvaliableEcenomySeats() {
-
-    }   
-
-    getCountOfAvaliableBussinessSeats() {
-       
-    }
-
-    getCountOfAnyAvaliableSeats() {
-
-    }
-
-    getAvaliableEcenomySeats() {
-
-    }
-
-    getAvaliableBussinesSeats() {
-
-    }
-
-    getAllAvaliableSeats() {
-
-    }
-
-    isEcenomySeatAvaliable() {
-
-    }
-
-    isBussinessSeatAvaliable() {
-
-    }
-
-    isAnySeatAvaliable() {
-
-    }
-    
-    sortSeatsByPrice() {
-
-    }
-
-    getSeatWithPosition() {
-
-    }
+    getCountOfAvaliableEcenomySeats()   { return this.#seats.filter(seat => seat.isSeatEcenomy()).length                                    }   
+    getCountOfAvaliableBussinessSeats() { return this.#seats.filter(seat => seat.isSeatBussiness()).length                                  }
+    getCountOfAnyAvaliableSeats()       { return this.#seats.filter(seat => seat.isSeatAvaliable()).length                                  }
+    getAllAvaliableSeats()              { return new Seats(this.#seats.filter(seat => seat.isSeatAvaliable()))                              }    
+    getAvaliableEcenomySeats()          { return new Seats(this.#seats.filter(seat => seat.isSeatEcenomy()   && seat.isSeatAvaliable()))    }
+    getAvaliableBussinesSeats()         { return new Seats(this.#seats.filter(seat => seat.isSeatBussiness() && seat.isSeatAvaliable()))    }
+    isEcenomySeatAvaliable()            { return this.getAvaliableEcenomySeats().#seats.length  != 0;                                       }
+    isBussinessSeatAvaliable()          { return this.getAvaliableBussinesSeats().#seats.length != 0;                                       }
+    isAnySeatAvaliable()                { return this.getAllAvaliableSeats().#seats.length      != 0;                                       }
+    sortSeatsByPrice()                  { return Seats([...this.#seats].sort((seat1, seat2) => seat1.getSeatCost() <= seat2.getSeatCost())) }
+    getSeatWithPosition(position)       { return this.#seats.find(seat => seat.getSeatPosition() == position);                              }
 }
 
 
@@ -181,7 +158,7 @@ class AirPort {
 
 
 const BackEndController = {
-    
+
     isValidUser() {
 
     },
@@ -215,10 +192,9 @@ const BackEndController = {
 
     },
 
-    
+
     getAirPorts() {
 
     }
-
 }
 

@@ -8,7 +8,6 @@ const SeatTypes = {
     bussiness: "bussiness",
 }
 
-
 class FlightData {
     #from 
     #goTo 
@@ -31,12 +30,11 @@ class FlightData {
      * @param {String} planeType 
      * @param {Date} flightTime 
      * @param {String} airlineCompany 
-     * @param {Seats} seats 
      * @param {Number} flightId 
      * 
      */
     constructor(from, goTo, departureAirport, landingAirport, departureTime, landingTime,
-         planeType, flightTime, airlineCompany, seats, flightId) {
+         planeType, flightTime, airlineCompany, flightId) {
         
         this.#from              = from;
         this.#goTo              = goTo;
@@ -47,7 +45,6 @@ class FlightData {
         this.#planeType         = planeType;
         this.#flightTime        = flightTime;
         this.#airlineCompany    = airlineCompany;
-        this.seats              = seats;
         this.#flightId          = flightId;
     }
 
@@ -109,7 +106,6 @@ class Seats {
     getSeatWithPosition(position)       { return this.#seats.find(seat => seat.getSeatPosition() == position);                              }
 }
 
-
 class UserFlightData {
     /**
      * 
@@ -156,15 +152,14 @@ class AirPort {
     }
 }
 
-
 const BackEndController = {
-
+    
     isValidUser() {
 
     },
     
     getUserData() {
-
+        
     },
 
     deleteUser() {
@@ -178,7 +173,6 @@ const BackEndController = {
     refundSeat() {
 
     },
-
 
     /**
      * @param {String} from 
@@ -195,6 +189,9 @@ const BackEndController = {
 
     getAirPorts() {
 
+    },
+
+    getSeatsData(flightId) {
+
     }
 }
-

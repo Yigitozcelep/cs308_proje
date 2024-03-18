@@ -21,11 +21,12 @@ class FlightData {
      * @param {String} planeType 
      * @param {Date} flightTime 
      * @param {String} airlineCompany 
+     * @param {Seats} seats 
      * @param {Number} flightId 
      * 
      */
     constructor(from, goTo, departureAirport, landingAirport, departureTime, landingTime,
-         planeType, flightTime, airlineCompany, ecenomySeats, bussinessSeats, flightId) {
+         planeType, flightTime, airlineCompany, seats, flightId) {
         
         this.#from              = from;
         this.#goTo              = goTo;
@@ -36,8 +37,8 @@ class FlightData {
         this.#planeType         = planeType;
         this.#flightTime        = flightTime;
         this.#airlineCompany    = airlineCompany;
+        this.seats              = seats;
         this.#flightId          = flightId;
-
     }
 
     getFrom()               { return this.#from;             }
@@ -62,18 +63,18 @@ class Seat {
      * @param {Number} cost
      */
     constructor(seatPosition, seatType, seatCost, status) {
-        this.#seatPosition = seatPosition;
-        this.#seatType     = seatType;
+        this.#seatPosition = seatPosition; //A3 B2 etc.
+        this.#seatType     = seatType; // bussiness or ecenomy
         this.#seatCost     = seatCost;
-        this.#status       = status; // avaliable or not
+        this.#status       = status;  // avaliable or not
     }
-    getSeatNumber()    { return this.#seatPosition[0];         } // if seat is A7 it return 7
-    getSeatLetter()    { return this.#seatPosition[1];         } // if seat is A7 it return A
-    getSeatPosition()  { return this.#seatPosition;            } // if seat is A7 it return A7
+    getSeatNumber()    { return this.#seatPosition[0];         } // if seat is A2 it return A
+    getSeatLetter()    { return this.#seatPosition[1];         } // if seat is A2 it return 2
+    getSeatPosition()  { return this.#seatPosition;            } // if seat is A2 it return A2
     isSeatEcenomy()    { return this.#seatType == "ecenomy";   }
     isSeatBussiness()  { return this.#seatType == "bussiness"; }
     getSeatCost()      { return this.#seatCost;                }
-    getSeatType()      { return this.#seatType;                } // economy or bussiness
+    getSeatType()      { return this.#seatType;                }
     IsBuyyable()       { return this.#status  == "avaliable";  }
 }
 
@@ -91,7 +92,7 @@ class Seats {
     }   
 
     getCountOfAvaliableBussinessSeats() {
-
+       
     }
 
     getCountOfAnyAvaliableSeats() {
@@ -129,21 +130,21 @@ class Seats {
     getSeatWithPosition() {
 
     }
-
 }
+
 
 class UserFlightData {
     /**
      * 
      * @param {FlightData} flightData 
-     * @param {Seat} seat 
+     * @param {Seat} userSeat 
      * @param {Date} boughtTime 
      * @param {Number} purchaseCost 
      * @param {Number} purchaseId 
      */
     constructor(flightData, seat, boughtTime, purchaseCost, purchaseId) {
         this.flightData     = flightData;
-        this.seat           = seat;
+        this.userSeat       = seat;
         this.boughtTime     = boughtTime;
         this.purchaseId     = purchaseId;
     }
@@ -152,31 +153,29 @@ class UserFlightData {
 class UserData {
     #userName
     #password
+    #userId
     #currentFlights
-    constructor(userName, password, currentFlights) {
-        this.#userName = userName;
+
+    /**
+     * 
+     * @param {String} userName 
+     * @param {String} password 
+     * @param {Number} userId 
+     * @param {Number} currentFlights 
+     */
+    constructor(userName, password, userId, currentFlights) {
+        this.#userName  = userName;
         this.#password  = password;
+        this.#userId    = userId;
         this.#currentFlights = currentFlights;
     }
+}
 
-    changePassword() {
-
-    }
-
-    changeUserName() {
-
-    }
-
-    buyFlight() {
-
-    }
-
-    refundFlight() {
-
-    }
-
-    upgradeSeat() {
-
+class AirPort {
+    constructor(city, airportName, country) {
+        this.city = city;
+        this.airportName = airportName; 
+        this.country = country;
     }
 }
 
@@ -189,6 +188,37 @@ const BackEndController = {
     
     getUserData() {
 
+    },
+
+    deleteUser() {
+
+    },
+
+    buySeat() {
+
+    },
+
+    refundSeat() {
+
+    },
+
+
+    /**
+     * @param {String} from 
+     * @param {String} goTo 
+     * if customer looking for a flight during march 10-20
+     * intervalStart should be 10 and intervalEnd should be 20
+     * @param {Date} intervalStart
+     * @param {Date} intervalEnd 
+     */
+    getFlightsData(from, goTo, intervalStart, intervalEnd) {
+
+    },
+
+    
+    getAirPorts() {
+
     }
+
 }
 

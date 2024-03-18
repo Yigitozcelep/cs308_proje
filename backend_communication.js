@@ -25,7 +25,7 @@ class FlightData {
      * 
      */
     constructor(from, goTo, departureAirport, landingAirport, departureTime, landingTime,
-         planeType, flightTime, airlineCompany, flightId) {
+         planeType, flightTime, airlineCompany, ecenomySeats, bussinessSeats, flightId) {
         
         this.#from              = from;
         this.#goTo              = goTo;
@@ -49,7 +49,6 @@ class FlightData {
     getPlaneType()          { return this.#planeType;        }
     getFlightTime()         { return this.#flightTime;       }
     getFlightId()           { return this.#flightId;         }
-
 }
 
 class Seat {
@@ -78,16 +77,59 @@ class Seat {
     IsBuyyable()       { return this.#status  == "avaliable";  }
 }
 
-
-class BookingData {
-    #flightData
-    #bussinessSeats
-    #ecenomySeats
-    constructor(flightData, bussinesSeats, ecenomySeats) {
-        this.#flightData     = flightData;
-        this.#bussinessSeats = bussinesSeats;
-        this.#ecenomySeats   = ecenomySeats;
+class Seats {
+    #seats
+    /**
+     * @param {Seat[]} ecenomySeats 
+     * @param {Seat[]} bussinessSeats 
+     */
+    constructor(seats) {
+        this.#seats = seats;
     }
+    getCountOfAvaliableEcenomySeats() {
+
+    }   
+
+    getCountOfAvaliableBussinessSeats() {
+
+    }
+
+    getCountOfAnyAvaliableSeats() {
+
+    }
+
+    getAvaliableEcenomySeats() {
+
+    }
+
+    getAvaliableBussinesSeats() {
+
+    }
+
+    getAllAvaliableSeats() {
+
+    }
+
+    isEcenomySeatAvaliable() {
+
+    }
+
+    isBussinessSeatAvaliable() {
+
+    }
+
+    isAnySeatAvaliable() {
+
+    }
+    
+    sortSeatsByPrice() {
+
+    }
+
+    getSeatWithPosition() {
+
+    }
+
 }
 
 class UserFlightData {
@@ -148,5 +190,5 @@ const BackEndController = {
     getUserData() {
 
     }
-    
 }
+

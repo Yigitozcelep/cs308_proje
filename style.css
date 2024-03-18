@@ -1,0 +1,31 @@
+label {
+    width: 100px;
+    display: inline-block;
+}
+body {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+}
+#form {
+    display: grid;
+    grid-template-columns: auto auto; 
+    background-color: #FFFDD0;
+    border-radius: 1px;
+    padding: 20px;
+}
+
+#submit  {
+    background-color: blue; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    justify-self: end;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: calc(100% - 60px); 
+}

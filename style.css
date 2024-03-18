@@ -3,15 +3,22 @@ label {
     display: inline-block;
 }
 body {
+    background-image: url(background.jpg);
+
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+
     display: flex;
-    justify-content: center; 
+    justify-content: left;
+    padding-left: 100px; 
     align-items: center; 
     height: 100vh; 
 }
 #form {
     display: grid;
     grid-template-columns: auto auto; 
-    background-color: #FFFDD0;
+
     border-radius: 1px;
     padding: 20px;
 }

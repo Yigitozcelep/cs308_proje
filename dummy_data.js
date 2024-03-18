@@ -1,4 +1,6 @@
 const cities = ["Bangkok", "London", "Paris", "Dubai", "Singapore", "New York City", "Istanbul", "Tokyo", "Seoul", "Barcelona", "Amsterdam", "Milan", "Taipei", "Rome", "Osaka", "Bali", "Hong Kong", "Mumbai", "Berlin", "Beijing", "Shanghai", "Madrid", "Las Vegas", "Miami", "Orlando", "San Francisco", "Los Angeles", "Kuala Lumpur", "Vienna", "Prague", "Sydney", "Venice", "Mexico City", "Lisbon", "Bangkok", "Johannesburg", "Cairo", "Athens", "Moscow", "Dubai", "Toronto", "Vancouver", "Istanbul", "Rio de Janeiro", "Buenos Aires", "Santiago", "Lima", "Stockholm", "Copenhagen", "Budapest"]
+const planeTypes = [ "Boeing 737", "Airbus A320", "Embraer E190", "Bombardier CRJ200", "Cessna Citation X", "Gulfstream G650", "Airbus A380", "Boeing 777", "Learjet 45", "ATR 72" ];
+const airlineCompanies = [ "American Airlines", "Delta Air Lines", "United Airlines", "Southwest Airlines", "Air Canada", "British Airways", "Lufthansa", "Emirates", "Qatar Airways", "Singapore Airlines" ];
 
 const airports = [
     new AirPort("New York", "John F. Kennedy International Airport", "USA"),
@@ -27,21 +29,32 @@ const users = [
     { userName: "IanMalcolm", password: "jurassicPark1993",    id: 10}
 ];
 
-function generateRandomSeat() {
-    const randomNumber30To100 = Math.floor(Math.random() * (100 - 30 + 1)) + 30;
-    
+
+
+function getRandomFutureDate() {
+    const today              = new Date();
+    const randomNumberOfDays = Math.floor(Math.random() * 30);
+    return new Date(today.setDate(today.getDate() + randomNumberOfDays));
 }
 
-function generateRandomSeats(numberOfSeats) {
-    let seats = [];
-    for (let i = 0; i < numberOfSeats; i++) {
-        seats.push(generateRandomSeat());
-    }
-    return new Seats(seats);
-}
-
-const flightsData = [];
+const dummyFlightData = [];
+const dummySeads      = [];
 
 for (let i = 0; i < 10; i++) {
-    
+    const from              = cities[i];
+    const goTo              = cities[(i + 1) % 10];
+    const departureAirport  = airports[i];
+    const landingAirport    = airports[(i + 1) % 10];
+    const departureTime     = getRandomFutureDate();
+    const landingTime       = new Date(departureTime.getTime() + (2 + i) * 60 * 60 * 1000);
+    const planeType         = planeTypes[i];
+    const flightTime        = new Date(0, 0, 0, 2 + i);
+    const airlineCompany    = airlineCompanies[i];
+    const flightId          = i;
+    dummyFlightData.push(new FlightData(from, goTo, departureAirport, landingAirport, departureTime, landingTime, planeType, flightTime, airlineCompany, flightId));
+}
+
+
+for (let i = 0; i < 10; i++) {
+
 }

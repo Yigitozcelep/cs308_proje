@@ -145,6 +145,11 @@ class UserData {
 }
 
 class AirPort {
+    /**
+     * @param {String} city 
+     * @param {String} airportName 
+     * @param {String} country 
+     */
     constructor(city, airportName, country) {
         this.city = city;
         this.airportName = airportName; 
@@ -154,23 +159,23 @@ class AirPort {
 
 const BackEndController = {
     
-    isValidUser() {
+    async isValidUser() {
 
     },
     
-    getUserData() {
+    async getUserData() {
         
     },
 
-    deleteUser() {
+    async deleteUser() {
 
     },
 
-    buySeat() {
+    async buySeat() {
 
     },
 
-    refundSeat() {
+    async refundSeat() {
 
     },
 
@@ -182,16 +187,19 @@ const BackEndController = {
      * @param {Date} intervalStart
      * @param {Date} intervalEnd 
      */
-    getFlightsData(from, goTo, intervalStart, intervalEnd) {
+    async getFlightsData(from, goTo, intervalStart, intervalEnd) {
 
     },
 
+    async getAirlineCompaniesNames() {
+        
+    },
 
-    getAirPorts() {
+    async getAirPortsNames() {
 
     },
 
-    getSeatsData(flightId) {
-
+    async getSeatsData(flightId) {
+        
     }
 }

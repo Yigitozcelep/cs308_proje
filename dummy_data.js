@@ -1,4 +1,4 @@
-import { AirPort, FlightData } from "./backend_communication.js";
+import { AirPort, FlightData, Seat, SeatTypes, Seats } from "./backend_communication.js";
 
 const createDummyAirlineCompanies = () => {
     return [ "American Airlines", "Delta Air Lines", "United Airlines", "Southwest Airlines", "Air Canada", "British Airways", "Lufthansa", "Emirates", "Qatar Airways", "Singapore Airlines" ];
@@ -28,18 +28,10 @@ const createDummyAirPort = () => {
 }
 
 const createDummyUser = () => {
-    return [
-        { userName: "JaneDoe", password: "securePassword123",      id: 1 },
-        { userName: "JohnSmith", password: "anotherGreatPass88",   id: 2 },
-        { userName: "AliceJones", password: "passwordAlice2024",   id: 3 },
-        { userName: "CharlieBrown", password: "charliePass!2024",  id: 4 },
-        { userName: "DianaPrince", password: "wonderfulDiana$",    id: 5 },
-        { userName: "EthanHunt", password: "missionPossible2024",  id: 6 },
-        { userName: "FionaGallagher", password: "fionaShameless",  id: 7 },
-        { userName: "GeorgeLucas", password: "starWarsFan1977",    id: 8 },
-        { userName: "HannahBaker", password: "bakerHannah13",      id: 9 },
-        { userName: "IanMalcolm", password: "jurassicPark1993",    id: 10}
-    ];
+    const dummyFlights = createDummyFlightData();
+    const usernames = ["Liam43", "Elijah45", "Charlotte1", "Emma12", "Sophia54", "Ava98", "William99", "Noah67", "Olivia14", "Oliver46"]
+    const password  = ["drn088", "dob735", "ylo940", "ayn112", "bgz490", "weg593", "wog223", "yzc297", "jwx973", "znt151"]
+    
 }
 
 
@@ -56,7 +48,7 @@ const createDummyFlightData = () => {
     const planeTypes = createDummyPlaneTypes();
     const airlineCompanies = createDummyAirlineCompanies();
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 100; i++) {
         const from              = cities[i];
         const goTo              = cities[(i + 1) % 10];
         const departureAirport  = airports[i];
@@ -65,17 +57,54 @@ const createDummyFlightData = () => {
         const landingTime       = new Date(departureTime.getTime() + (2 + i) * 60 * 60 * 1000);
         const planeType         = planeTypes[i];
         const flightTime        = new Date(0, 0, 0, 2 + i);
-        const airlineCompany    = airlineCompanies[i];
+        const airlineCompany    = airlineCompanies[i % 10];
         const flightId          = i;
         dummyFlightData.push(new FlightData(from, goTo, departureAirport, landingAirport, departureTime, landingTime, planeType, flightTime, airlineCompany, flightId));
     }
     return dummyFlightData;
 }
 
+const getPrice = (isBussiness) => {
+    if (isBussiness) return  Math.floor(Math.random() * 500) + 500;
+    return  Math.floor(Math.random() * 200) + 200;
+}
+
+const getStatus = () => Math.random() < 0.5;
+
 const createDummySeatData = () => {
-    const seadCount = Math.floor(Math.random() * 410 + 130);
-    const conSecutiveBussiness = Math.floor(Math.random() * 2) + 1;
-    
+    const seads = [];
+    let seadCount = Math.floor(Math.random() * 300 + 130);
+    const rowCount  = Math.floor(Math.random() * 2) + 2;
+    const bussinessConsecutiveSeat = Math.floor(Math.random() * 2) + 2;
+    let ecenomyConsecutiveSeat   = Math.floor(Math.random() * 2) + 2;
+    if (bussinessConsecutiveSeat == 3) ecenomyConsecutiveSeat = 3;
+
+    const BussinessCount = (Math.floor(seadCount / (rowCount * bussinessConsecutiveSeat * 10))) * rowCount * bussinessConsecutiveSeat;
+    const EcenomyCount   = (Math.floor((BussinessCount * 9) / (rowCount * ecenomyConsecutiveSeat))) * rowCount * ecenomyConsecutiveSeat;
+    seadCount = BussinessCount + EcenomyCount;
+
+    const bussinessRowSeadCount = (BussinessCount / (rowCount * bussinessConsecutiveSeat));
+    for (let row = 0; row < rowCount; row++) {
+        for (let i = 1; i <= bussinessRowSeadCount; i++) {
+            for (let j = 0; j < bussinessConsecutiveSeat; j++) {
+                const char = String(i) + String.fromCharCode(65 + row * bussinessConsecutiveSeat + j);
+                seads.push(new Seat(char, SeatTypes.bussiness, getPrice(true), getStatus()));
+            }
+        }
+    }
+
+    const ecenomyRowSeadCount = (EcenomyCount / (rowCount * ecenomyConsecutiveSeat));
+
+    for (let row = 0; row < rowCount; row++) {
+        for (let i = 1 + bussinessRowSeadCount; i <= ecenomyRowSeadCount; i++) {
+            for (let j = 0; j < ecenomyConsecutiveSeat; j++) {
+                const char = String(i) + String.fromCharCode(65 + row * ecenomyConsecutiveSeat + j);
+                seads.push(new Seat(char, SeatTypes.ecenomy, getPrice(false), getStatus()));
+            }
+        }
+    }
+
+    return new Seats(seads, rowCount, bussinessConsecutiveSeat, ecenomyConsecutiveSeat);
 }   
 
-export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyAirPort, createDummyUser, createDummyFlightData}
+export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyAirPort, createDummyUser, createDummyFlightData, createDummySeatData}

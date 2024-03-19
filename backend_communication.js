@@ -1,3 +1,5 @@
+import * as dummyDatas from "./dummy_data.js";
+
 const SeatStatus = {
     avaliable:   "avaliable",
     unAvaliable: "unavaliable",
@@ -87,12 +89,24 @@ class Seat {
 
 class Seats {
     #seats
+    #rowCount
+    #bussinessConsecutiveSeat
+    #ecenomyConsecutiveSeat
     /**
-     * @param {Seat[]} seats 
+     * @param {Seat[]} seats
+     * @param {Number} rowCount  // kaç sıra var 2 yada 3
+     * @param {Number} bussinessConsecutiveSeat // 2 or 3 yan yana koltuklar 2limi 3lümü
+     * @param {ecenomyConsecutiveSeat} ecenomyConsecutiveSeat // 2 or 3
      */
-    constructor(seats) {
+    constructor(seats, rowCount, bussinessConsecutiveSeat, ecenomyConsecutiveSeat) {
         this.#seats = seats;
+        this.#rowCount = rowCount;
+        this.#bussinessConsecutiveSeat = bussinessConsecutiveSeat;
+        this.#ecenomyConsecutiveSeat   = ecenomyConsecutiveSeat;
     }
+    getEcenomyConsecutiveSeat()         { return this.#ecenomyConsecutiveSeat;                                                              }
+    getBussinessConsecutiveSeat()       { return this.#bussinessConsecutiveSeat                                                             }
+    getRowCount()                       { return this.#rowCount;                                                                            }
     getCountOfAvaliableEcenomySeats()   { return this.#seats.filter(seat => seat.isSeatEcenomy()).length                                    }   
     getCountOfAvaliableBussinessSeats() { return this.#seats.filter(seat => seat.isSeatBussiness()).length                                  }
     getCountOfAnyAvaliableSeats()       { return this.#seats.filter(seat => seat.isSeatAvaliable()).length                                  }
@@ -159,25 +173,38 @@ class AirPort {
 }
 
 
+
+const dummyUsers = dummyDatas.createDummyUser();
+
 const BackEndController = {
     
-    async isValidUser() {
-
+    async isValidUser(userName, password) {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        for (let i = 0; i < dummyUsers.length; i++) {
+            if (dummyUsers[i].userName == userName && dummyUsers[i] == password) return true;
+        }
+        return false;
     },
     
-    async getUserData() {
-        
+    async getUserData(userName, password) {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        for (let i = 0; i < dummyUsers.length; i++) {
+            if (dummyUsers[i].userName == userName && dummyUsers[i] == password) return dummyUsers[i];
+        }
     },
 
     async deleteUser() {
+        await new Promise(resolve => setTimeout(resolve, 200));
         
     },
 
     async buySeat() {
+        await new Promise(resolve => setTimeout(resolve, 200));
 
     },
 
     async refundSeat() {
+        await new Promise(resolve => setTimeout(resolve, 200));
 
     },
 
@@ -190,20 +217,26 @@ const BackEndController = {
      * @param {Date} intervalEnd 
      */
     async getFlightsData(from, goTo, intervalStart, intervalEnd) {
+        await new Promise(resolve => setTimeout(resolve, 200));
 
     },
 
     async getAirlineCompaniesNames() {
+        await new Promise(resolve => setTimeout(resolve, 200));
 
     },
 
     async getAirPortsNames() {
+        await new Promise(resolve => setTimeout(resolve, 200));
         
     },
 
     async getSeatsData(flightId) {
+        await new Promise(resolve => setTimeout(resolve, 300));
         
     }
 }
+
+console.log(dummyDatas.createDummySeatData())
 
 export {BackEndController, AirPort, UserData, UserFlightData, Seat, Seats, FlightData, SeatStatus, SeatTypes}

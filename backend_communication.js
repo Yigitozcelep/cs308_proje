@@ -51,7 +51,7 @@ class FlightData {
         this.#flightId          = flightId;
     }
     getFrom()               { return this.#from;             }
-    getTo()                 { return this.#goTo;             }
+    getGoto()                 { return this.#goTo;             }
     getDedepartureAirport() { return this.#departureAirport; }
     getLandingAirport()     { return this.#landingAirport;   }
     getDepartureTime()      { return this.#departureTime;    }
@@ -172,7 +172,8 @@ class AirPort {
 const seats      = []
 const dummyUsers = []
 const dummyFlights = dummyDatas.createDummyFlightData();
-for (let i = 0; i < 100; i++) seats.push(dummyDatas.createDummySeatData())
+
+for (let i = 0; i < 500; i++) seats.push(dummyDatas.createDummySeatData())
 for (let i = 0; i < 20; i += 2) dummyUsers.push(dummyDatas.createDummyUser(dummyFlights, i, i + 1, seats[i], seats[i + 1]));
 
 
@@ -254,22 +255,28 @@ const BackEndController = {
      */
     async getFlightsData(from, goTo, intervalStart, intervalEnd) {
         await new Promise(resolve => setTimeout(resolve, 200));
-        
+        const data = []
+        for (let i = 0; i < dummyFlights.length; i++) {
+            if (dummyFlights[i].getLandingTime() >= intervalStart && dummyFlights[i].getDepartureTime() <= intervalEnd && dummyFlights[i].getFrom() == from && dummyFlights[i].getGoto() == goTo) {
+                data.push(dummyFlights[i]);
+            }
+        }
+        return data;
     },
 
     async getAirlineCompaniesNames() {
         await new Promise(resolve => setTimeout(resolve, 200));
-        
+        return dummyDatas.createDummyAirlineCompanies();
     },
 
     async getAirPortsNames() {
         await new Promise(resolve => setTimeout(resolve, 200));
-        
+        return dummyDatas.createDummyAirPort();
     },
 
     async getSeatsData(flightId) {
         await new Promise(resolve => setTimeout(resolve, 300));
-        
+        return seats[flightId];
     }
 }
 

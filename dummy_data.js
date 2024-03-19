@@ -50,11 +50,19 @@ const createDummyFlightData = () => {
     const planeTypes = createDummyPlaneTypes();
     const airlineCompanies = createDummyAirlineCompanies();
 
-    for (let i = 0; i < 100; i++) {
-        const from              = cities[i];
-        const goTo              = cities[(i + 1) % 10];
-        const departureAirport  = airports[i];
-        const landingAirport    = airports[(i + 1) % 10];
+    for (let i = 0; i < 500; i++) {
+        const r1 = Math.floor(Math.random() * 10);
+        let r2 = Math.floor(Math.random() * 10);
+        if (r2 == r1) r2 = (r1 + 1) % 10;
+
+        const r3 = Math.floor(Math.random() * 10);
+        let r4 = Math.floor(Math.random() * 10);
+        if (r3 == r4) r3 = (r4 + 1) % 10;
+        
+        const from              = cities[r1];
+        const goTo              = cities[r2];
+        const departureAirport  = airports[r3];
+        const landingAirport    = airports[r4];
         const departureTime     = getRandomFutureDate();
         const landingTime       = new Date(departureTime.getTime() + (2 + i) * 60 * 60 * 1000);
         const planeType         = planeTypes[i];
@@ -99,7 +107,7 @@ const createDummySeatData = () => {
     }
 
     const ecenomyRowSeadCount = (EcenomyCount / (rowCount * ecenomyConsecutiveSeat));
-    
+
     for (let row = 0; row < rowCount; row++) {
         for (let i = 1 + bussinessRowSeadCount; i <= ecenomyRowSeadCount; i++) {
             for (let j = 0; j < ecenomyConsecutiveSeat; j++) {

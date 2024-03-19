@@ -1,11 +1,12 @@
 const SeatStatus = {
-    avaliable: "avaliable",
+    avaliable:   "avaliable",
     unAvaliable: "unavaliable",
 }
 
 const SeatTypes = {
-    ecenomy: "ecenomy",
-    bussiness: "bussiness",
+    ecenomy:       "ecenomy",
+    bussiness:     "bussiness",
+    emergencyExit: "emergencyExit"
 }
 
 class FlightData {
@@ -47,7 +48,6 @@ class FlightData {
         this.#airlineCompany    = airlineCompany;
         this.#flightId          = flightId;
     }
-
     getFrom()               { return this.#from;             }
     getTo()                 { return this.#goTo;             }
     getDedepartureAirport() { return this.#departureAirport; }
@@ -144,6 +144,7 @@ class UserData {
     }
 }
 
+
 class AirPort {
     /**
      * @param {String} city 
@@ -151,11 +152,12 @@ class AirPort {
      * @param {String} country 
      */
     constructor(city, airportName, country) {
-        this.city = city;
+        this.city        = city;
         this.airportName = airportName; 
-        this.country = country;
+        this.country     = country;
     }
 }
+
 
 const BackEndController = {
     
@@ -168,7 +170,7 @@ const BackEndController = {
     },
 
     async deleteUser() {
-
+        
     },
 
     async buySeat() {
@@ -192,14 +194,16 @@ const BackEndController = {
     },
 
     async getAirlineCompaniesNames() {
-        
+
     },
 
     async getAirPortsNames() {
-
+        
     },
 
     async getSeatsData(flightId) {
         
     }
 }
+
+export {BackEndController, AirPort, UserData, UserFlightData, Seat, Seats, FlightData, SeatStatus, SeatTypes}

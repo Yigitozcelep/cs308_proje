@@ -1,4 +1,4 @@
-import { AirPort, FlightData, Seat, SeatTypes, Seats } from "./backend_communication.js";
+import { AirPort, FlightData, Seat, SeatTypes, Seats, SeatStatus, UserData, UserFlightData } from "./backend_communication.js";
 
 const createDummyAirlineCompanies = () => {
     return [ "American Airlines", "Delta Air Lines", "United Airlines", "Southwest Airlines", "Air Canada", "British Airways", "Lufthansa", "Emirates", "Qatar Airways", "Singapore Airlines" ];
@@ -27,11 +27,13 @@ const createDummyAirPort = () => {
     ];
 }
 
-const createDummyUser = () => {
-    const dummyFlights = createDummyFlightData();
+const createDummyUser = (dummyFlights, purchaseId1, purchaseId2, seats1, seats2) => {
     const usernames = ["Liam43", "Elijah45", "Charlotte1", "Emma12", "Sophia54", "Ava98", "William99", "Noah67", "Olivia14", "Oliver46"]
     const password  = ["drn088", "dob735", "ylo940", "ayn112", "bgz490", "weg593", "wog223", "yzc297", "jwx973", "znt151"]
-    
+    const seat1 = seats1.getUnAvaliableSeats().iterateSeats()[0];
+    const seat2 = seats2.getUnAvaliableSeats().iterateSeats()[0];
+
+    return new UserData(usernames[purchaseId1 / 2], password[purchaseId1 / 2], purchaseId1 / 2, [new UserFlightData(dummyFlights[purchaseId1], seat1, getRandomFutureDate(), purchaseId1), new UserFlightData(dummyFlights[purchaseId2], seat2, getRandomFutureDate(), purchaseId2)])
 }
 
 
@@ -69,7 +71,10 @@ const getPrice = (isBussiness) => {
     return  Math.floor(Math.random() * 200) + 200;
 }
 
-const getStatus = () => Math.random() < 0.5;
+const getStatus = () => {
+    if (Math.random() < 0.5) return SeatStatus.avaliable;
+    return SeatStatus.unAvaliable;
+}
 
 const createDummySeatData = () => {
     const seads = [];
@@ -94,7 +99,7 @@ const createDummySeatData = () => {
     }
 
     const ecenomyRowSeadCount = (EcenomyCount / (rowCount * ecenomyConsecutiveSeat));
-
+    
     for (let row = 0; row < rowCount; row++) {
         for (let i = 1 + bussinessRowSeadCount; i <= ecenomyRowSeadCount; i++) {
             for (let j = 0; j < ecenomyConsecutiveSeat; j++) {

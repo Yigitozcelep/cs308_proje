@@ -104,20 +104,22 @@ class Seats {
         this.#bussinessConsecutiveSeat = bussinessConsecutiveSeat;
         this.#ecenomyConsecutiveSeat   = ecenomyConsecutiveSeat;
     }
-    getEcenomyConsecutiveSeat()         { return this.#ecenomyConsecutiveSeat;                                                              }
-    getBussinessConsecutiveSeat()       { return this.#bussinessConsecutiveSeat                                                             }
-    getRowCount()                       { return this.#rowCount;                                                                            }
-    getCountOfAvaliableEcenomySeats()   { return this.#seats.filter(seat => seat.isSeatEcenomy()).length                                    }   
-    getCountOfAvaliableBussinessSeats() { return this.#seats.filter(seat => seat.isSeatBussiness()).length                                  }
-    getCountOfAnyAvaliableSeats()       { return this.#seats.filter(seat => seat.isSeatAvaliable()).length                                  }
-    getAllAvaliableSeats()              { return new Seats(this.#seats.filter(seat => seat.isSeatAvaliable()))                              }    
-    getAvaliableEcenomySeats()          { return new Seats(this.#seats.filter(seat => seat.isSeatEcenomy()   && seat.isSeatAvaliable()))    }
-    getAvaliableBussinesSeats()         { return new Seats(this.#seats.filter(seat => seat.isSeatBussiness() && seat.isSeatAvaliable()))    }
-    isEcenomySeatAvaliable()            { return this.getAvaliableEcenomySeats().#seats.length  != 0;                                       }
-    isBussinessSeatAvaliable()          { return this.getAvaliableBussinesSeats().#seats.length != 0;                                       }
-    isAnySeatAvaliable()                { return this.getAllAvaliableSeats().#seats.length      != 0;                                       }
-    sortSeatsByPrice()                  { return Seats([...this.#seats].sort((seat1, seat2) => seat1.getSeatCost() <= seat2.getSeatCost())) }
-    getSeatWithPosition(position)       { return this.#seats.find(seat => seat.getSeatPosition() == position);                              }
+    getEcenomyConsecutiveSeat()         { return this.#ecenomyConsecutiveSeat;                                                                                                                                                }
+    getBussinessConsecutiveSeat()       { return this.#bussinessConsecutiveSeat                                                                                                                                               }
+    getRowCount()                       { return this.#rowCount;                                                                                                                                                              }
+    getCountOfAvaliableEcenomySeats()   { return this.#seats.filter(seat => seat.isSeatEcenomy()).length                                                                                                                      }   
+    getCountOfAvaliableBussinessSeats() { return this.#seats.filter(seat => seat.isSeatBussiness()).length                                                                                                                    }
+    getCountOfAnyAvaliableSeats()       { return this.#seats.filter(seat => seat.isSeatAvaliable()).length                                                                                                                    }
+    isEcenomySeatAvaliable()            { return this.getAvaliableEcenomySeats().#seats.length  != 0;                                                                                                                         }
+    isBussinessSeatAvaliable()          { return this.getAvaliableBussinesSeats().#seats.length != 0;                                                                                                                         }
+    isAnySeatAvaliable()                { return this.getAllAvaliableSeats().#seats.length      != 0;                                                                                                                         }
+    getSeatWithPosition(position)       { return this.#seats.find(seat => seat.getSeatPosition() == position);                                                                                                                }
+    iterateSeats()                      { return this.#seats;                                                                                                                                                                 }
+    getUnAvaliableSeats()               { return new Seats(this.#seats.filter(seat => !seat.isSeatAvaliable()), this.#rowCount, this.#bussinessConsecutiveSeat, this.#ecenomyConsecutiveSeat)                                 }
+    getAllAvaliableSeats()              { return new Seats(this.#seats.filter(seat =>  seat.isSeatAvaliable()), this.#rowCount, this.#bussinessConsecutiveSeat, this.#ecenomyConsecutiveSeat)                                 }    
+    getAvaliableEcenomySeats()          { return new Seats(this.#seats.filter(seat => seat.isSeatEcenomy()   && seat.isSeatAvaliable()), this.#rowCount, this.#bussinessConsecutiveSeat, this.#ecenomyConsecutiveSeat)        }
+    getAvaliableBussinesSeats()         { return new Seats(this.#seats.filter(seat => seat.isSeatBussiness() && seat.isSeatAvaliable()), this.#rowCount, this.#bussinessConsecutiveSeat, this.#ecenomyConsecutiveSeat)        }
+    sortSeatsByPrice()                  { return new Seats([...this.#seats].sort((seat1, seat2) => seat1.getSeatCost() <= seat2.getSeatCost()), this.#rowCount, this.#bussinessConsecutiveSeat, this.#ecenomyConsecutiveSeat) }
 }
 
 class UserFlightData {
@@ -126,10 +128,9 @@ class UserFlightData {
      * @param {FlightData} flightData 
      * @param {Seat} userSeat 
      * @param {Date} boughtTime 
-     * @param {Number} purchaseCost 
      * @param {Number} purchaseId 
      */
-    constructor(flightData, seat, boughtTime, purchaseCost, purchaseId) {
+    constructor(flightData, seat, boughtTime, purchaseId) {
         this.flightData     = flightData;
         this.userSeat       = seat;
         this.boughtTime     = boughtTime;
@@ -138,23 +139,18 @@ class UserFlightData {
 }
 
 class UserData {
-    #userName
-    #password
-    #userId
-    #currentFlights
-
     /**
      * 
      * @param {String} userName 
      * @param {String} password 
      * @param {Number} userId 
-     * @param {Number} currentFlights 
+     * @param {UserFlightData[]} currentFlights 
      */
     constructor(userName, password, userId, currentFlights) {
-        this.#userName  = userName;
-        this.#password  = password;
-        this.#userId    = userId;
-        this.#currentFlights = currentFlights;
+        this.userName  = userName;
+        this.password  = password;
+        this.userId    = userId;
+        this.currentFlights = currentFlights;
     }
 }
 
@@ -173,8 +169,12 @@ class AirPort {
 }
 
 
+const seats      = []
+const dummyUsers = []
+const dummyFlights = dummyDatas.createDummyFlightData();
+for (let i = 0; i < 100; i++) seats.push(dummyDatas.createDummySeatData())
+for (let i = 0; i < 20; i += 2) dummyUsers.push(dummyDatas.createDummyUser(dummyFlights, i, i + 1, seats[i], seats[i + 1]));
 
-const dummyUsers = dummyDatas.createDummyUser();
 
 const BackEndController = {
     
@@ -186,26 +186,62 @@ const BackEndController = {
         return false;
     },
     
+    /**
+     * @param {String} userName 
+     * @param {String} password 
+     * @returns {UserData}
+     */
     async getUserData(userName, password) {
         await new Promise(resolve => setTimeout(resolve, 200));
         for (let i = 0; i < dummyUsers.length; i++) {
             if (dummyUsers[i].userName == userName && dummyUsers[i] == password) return dummyUsers[i];
         }
     },
-
-    async deleteUser() {
+    /**
+     * @param {UserData} user 
+     */
+    async deleteUser(user) {
         await new Promise(resolve => setTimeout(resolve, 200));
-        
+        for (let i = 0; i < dummyUsers.length; i++) {
+            if (dummyUsers[i].username == user.userName) {
+                delete dummyUsers[i];
+                return;
+            }
+        }
     },
 
-    async buySeat() {
+    /**
+     * @param {userData} userData
+     * @param {FlightData} flight 
+     * @param {Seat} seat 
+     */
+    async buySeat(userData, flight, seat) {
         await new Promise(resolve => setTimeout(resolve, 200));
-
+        const cur = seats[flight.getFlightId()].iterateSeats();
+        const newData = []
+        for (let i = 0; i < cur.length; i++) {
+            if (cur[i] == seat) {
+                newData.push(new Seat(seat.getSeatPosition(), seat.getSeatType(), seat.getSeatCost(), SeatStatus.unAvaliable));
+            } else newData.push(cur[i])
+        }
+        seats[flight.getFlightId()] = newData;
     },
 
-    async refundSeat() {
+    /**
+     * @param {userData} userData
+     * @param {FlightData} flight 
+     * @param {Seat} seat 
+     */
+    async refundSeat(userData, flight, seat) {
         await new Promise(resolve => setTimeout(resolve, 200));
-
+        const cur = seats[flight.getFlightId()].iterateSeats();
+        const newData = []
+        for (let i = 0; i < cur.length; i++) {
+            if (cur[i] == seat) {
+                newData.push(new Seat(seat.getSeatPosition(), seat.getSeatType(), seat.getSeatCost(), SeatStatus.avaliable));
+            } else newData.push(cur[i])
+        }
+        seats[flight.getFlightId()] = newData;
     },
 
     /**
@@ -218,12 +254,12 @@ const BackEndController = {
      */
     async getFlightsData(from, goTo, intervalStart, intervalEnd) {
         await new Promise(resolve => setTimeout(resolve, 200));
-
+        
     },
 
     async getAirlineCompaniesNames() {
         await new Promise(resolve => setTimeout(resolve, 200));
-
+        
     },
 
     async getAirPortsNames() {
@@ -236,7 +272,5 @@ const BackEndController = {
         
     }
 }
-
-console.log(dummyDatas.createDummySeatData())
 
 export {BackEndController, AirPort, UserData, UserFlightData, Seat, Seats, FlightData, SeatStatus, SeatTypes}

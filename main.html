@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>308 Airlines</title>    
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
@@ -11,22 +12,43 @@
         <form>
             <h2>FLIGHT SELECTION</h2>
             <div>
-                <label for="fno">Flight no.</label>
-                <input type="text" id="fno" name="fno" placeholder="TK*******">
+                <label for="searchType">Search By:</label>
+                <select id="searchType" name="searchType">
+                    <option value="flightNo" selected>Flight No</option>
+                    <option value="route" >Route</option>
+                    <option value="arrival">Arrival</option>
+                    <option value="departure">Departure</option>
+                    <option value="date">Date</option>
+                </select>
             </div>
             
             <br>
+        
             
-            <div>
-                <label for="fdate">Flight Date</label>
-                <input type="date" id="fdate" name="fdate">
+            <div id="flightNoInput" class="input-field" style="display:none;">
+                <label for="flightNo">Flight No:</label>
+                <input type="text" id="flightNo" name="flightNo" placeholder="Enter flight number">
             </div>
             
-            <br>
+            <div id="routeInput" class="input-field" style="display:none;">
+                <label for="route">Route:</label>
+                <input type="text" id="routeDep" name="route" placeholder="Enter Departure Location">                
+                <input type="text" id="routeArr" name="route" placeholder="Enter Arrival Location">
+            </div>
             
-            <div>
-                <label for="arr">Arrival</label>
-                <input type="text" id="arr" name="arr">
+            <div id="arrivalInput" class="input-field" style="display:none;">
+                <label for="arrival">Arrival:</label>
+                <input type="text" id="arrival" name="arrival" placeholder="Enter Arrival Location">
+            </div>
+
+            <div id="departureInput" class="input-field" style="display:none;">
+                <label for="departure">Departure:</label>
+                <input type="text" id="departure" name="departure" placeholder="Enter Departure Location">
+            </div>
+            
+            <div id="dateInput" class="input-field" style="display:none;">
+                <label for="fdate">Flight Date:</label>
+                <input type="text" id="fdate" name="fdate" placeholder="Enter Desired Date">
             </div>
             
             <br>
@@ -34,7 +56,6 @@
             <div>
                 <input type="submit" name="submit" id="submit">
             </div>
-        
         
         </form>
     </div>

@@ -18,3 +18,6 @@ const dictionary = {
     }
     
 }
+
+
+export {dictionary}

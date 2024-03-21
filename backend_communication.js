@@ -182,7 +182,7 @@ const BackEndController = {
     /**
      * @param {String} email 
      * @param {String} password 
-     * @returns 
+     * @returns {Boolean}
      */
     async isValidUser(email, password) {
         await new Promise(resolve => setTimeout(resolve, 200));
@@ -260,6 +260,7 @@ const BackEndController = {
      * intervalStart should be 10 and intervalEnd should be 20
      * @param {Date} intervalStart
      * @param {Date} intervalEnd 
+     * @returns {FlightData}
      */
     async getFlightsData(from, goTo, intervalStart, intervalEnd) {
         await new Promise(resolve => setTimeout(resolve, 200));

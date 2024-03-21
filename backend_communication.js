@@ -33,7 +33,7 @@ class FlightData {
      * @param {String} planeType 
      * @param {Date} flightTime 
      * @param {String} airlineCompany 
-     * @param {Number} flightId 
+     * @param {String} flightId 
      * 
      */
     constructor(from, goTo, departureAirport, landingAirport, departureTime, landingTime,
@@ -51,7 +51,7 @@ class FlightData {
         this.#flightId          = flightId;
     }
     getFrom()               { return this.#from;             }
-    getGoto()                 { return this.#goTo;             }
+    getGoto()               { return this.#goTo;             }
     getDedepartureAirport() { return this.#departureAirport; }
     getLandingAirport()     { return this.#landingAirport;   }
     getDepartureTime()      { return this.#departureTime;    }
@@ -179,7 +179,12 @@ for (let i = 0; i < 20; i += 2) dummyUsers.push(dummyDatas.createDummyUser(dummy
 
 const BackEndController = {
     
-    async isValidUser(userName, password) {
+    /**
+     * @param {String} email 
+     * @param {String} password 
+     * @returns 
+     */
+    async isValidUser(email, password) {
         await new Promise(resolve => setTimeout(resolve, 200));
         for (let i = 0; i < dummyUsers.length; i++) {
             if (dummyUsers[i].userName == userName && dummyUsers[i] == password) return true;
@@ -204,7 +209,7 @@ const BackEndController = {
     async deleteUser(user) {
         await new Promise(resolve => setTimeout(resolve, 200));
         for (let i = 0; i < dummyUsers.length; i++) {
-            if (dummyUsers[i].username == user.userName) {
+            if (dummyUsers[i].username == user.userName && dummyUsers[i].password == user.password) {
                 delete dummyUsers[i];
                 return;
             }
@@ -218,16 +223,17 @@ const BackEndController = {
      */
     async buySeat(userData, flight, seat) {
         await new Promise(resolve => setTimeout(resolve, 200));
-        const cur = seats[flight.getFlightId()].iterateSeats();
+        const curSeats = seats[flight.getFlightId().slice(2) - "0"];
+        const cur = curSeats.iterateSeats();
         const newData = []
         for (let i = 0; i < cur.length; i++) {
             if (cur[i] == seat) {
                 newData.push(new Seat(seat.getSeatPosition(), seat.getSeatType(), seat.getSeatCost(), SeatStatus.unAvaliable));
             } else newData.push(cur[i])
         }
-        seats[flight.getFlightId()] = newData;
+        seats[flight.getFlightId().slice(2) - "0"] = new Seats(newData, curSeats.getRowCount(), curSeats.getBussinessConsecutiveSeat(), curSeats.getEcenomyConsecutiveSeat());
     },
-
+    
     /**
      * @param {userData} userData
      * @param {FlightData} flight 
@@ -235,16 +241,18 @@ const BackEndController = {
      */
     async refundSeat(userData, flight, seat) {
         await new Promise(resolve => setTimeout(resolve, 200));
-        const cur = seats[flight.getFlightId()].iterateSeats();
+        const curSeats = seats[flight.getFlightId().slice(2) - "0"];
+        const cur = curSeats.iterateSeats();
+        
         const newData = []
         for (let i = 0; i < cur.length; i++) {
             if (cur[i] == seat) {
                 newData.push(new Seat(seat.getSeatPosition(), seat.getSeatType(), seat.getSeatCost(), SeatStatus.avaliable));
             } else newData.push(cur[i])
         }
-        seats[flight.getFlightId()] = newData;
+        seats[flight.getFlightId().slice(2) - "0"] = new Seats(newData, curSeats.getRowCount(), curSeats.getBussinessConsecutiveSeat(), curSeats.getEcenomyConsecutiveSeat());
     },
-
+    
     /**
      * @param {String} from 
      * @param {String} goTo 
@@ -274,10 +282,15 @@ const BackEndController = {
         return dummyDatas.createDummyAirPort();
     },
 
-    async getSeatsData(flightId) {
+    /**
+     * @param {FlightData} flight 
+     * @returns {Seats}
+     */
+    async getSeatsData(flight) {
         await new Promise(resolve => setTimeout(resolve, 300));
-        return seats[flightId];
+        return seats[flight.getFlightId().slice(2) - "0"];
     }
+    
 }
 
 export {BackEndController, AirPort, UserData, UserFlightData, Seat, Seats, FlightData, SeatStatus, SeatTypes}

@@ -1,3 +1,6 @@
+
+
+
 window.addEventListener('load', function() {
     document.getElementById('searchType').dispatchEvent(new Event('change'));
 });
@@ -23,24 +26,19 @@ document.querySelector('form').addEventListener('submit', function(event) {
     var selectedOption = document.getElementById('searchType').value;
     var inputValue = '';
 
-    if (selectedOption === 'flightNo') {
+    if (selectedOption === 'flightNo') 
+    {
         inputValue = document.getElementById('flightNo').value;
         document.getElementById('flightNo').value = ''; 
-    } else if (selectedOption === 'route') {
-        var departure = document.getElementById('routeDep').value;
-        var arrival = document.getElementById('routeArr').value;
-        inputValue = departure + ' to ' + arrival;
-        document.getElementById('routeDep').value = ''; 
-        document.getElementById('routeArr').value = ''; 
-    } else if (selectedOption === 'arrival') {
-        inputValue = document.getElementById('arrival').value;
-        document.getElementById('arrival').value = ''; 
-    } else if (selectedOption === 'departure') {
-        inputValue = document.getElementById('departure').value;
-        document.getElementById('departure').value = ''; 
-    } else if (selectedOption === 'date') {
-        inputValue = document.getElementById('fdate').value;
-        document.getElementById('fdate').value = ''; 
+    } 
+    else if (selectedOption === 'route') 
+    {
+        var departure = document.getElementById('departure').value;
+        var arrival = document.getElementById('arrival').value;
+        var depTime = document.getElementById('depTime').value;
+        var arrTime = document.getElementById('arrTime').value;
+        BackEndController.getFlightsData(departure, arrival, depTime, arrTime)
+        
     }
     
  

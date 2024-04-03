@@ -7,6 +7,11 @@
 </head>
 
 <body>
+    <div class="top-bar">
+        <a href="yourflights.html" class="top-bar-item">My Flights</a>
+        <a href="#" class="top-bar-item" id="helpButton">Help</a>
+        <a href="signout.php" class="top-bar-item">Sign Out</a>
+    </div>
     
     <div id="form">
         <form>
@@ -15,7 +20,8 @@
                 <label for="searchType">Search By:</label>
                 <select id="searchType" name="searchType">
                     <option value="flightNo" selected>Flight No</option>
-                    <option value="route" >Route</option>
+                    <option value="route">Route</option>
+                    <option value="airportAndDate">Airport and Date</option>
                 </select>
             </div>
             
@@ -28,17 +34,25 @@
             </div>
             
             <div id="routeInput" class="input-field" style="display:none;">
-                <label for="route">Route:</label>
-                <input type="text" id="departure" name="route" placeholder="Departure Location">                
-                <input type="text" id="arrival" name="route" placeholder="Arrival Location">
-                <input type="text" id="depDate" name="route" placeholder="Departure Time">
-                <input type="text" id="arrTime" name="route" placeholder="Arrival Time">
+                <label for="departure">Departure:</label>
+                <input type="text" id="departure" name="departure" placeholder="Departure">
+                <label for="arrival">Arrival:</label>
+                <input type="text" id="arrival" name="arrival" placeholder="Arrival">
+                <label for="depDate">Date:</label>
+                <input type="text" id="depDate" name="depDate" placeholder="Date">
+            </div>
+            
+            <div id="airportAndDateInput" class="input-field" style="display:none;">
+                <label for="airport">Airport:</label>
+                <input type="text" id="airport" name="airport" placeholder="Airport">
+                <label for="date">Date:</label>
+                <input type="text" id="depDate" name="depDate" placeholder="Date">
             </div>
                         
             <br>
             
             <div>
-                <input type="submit" name="submit" id="submit">
+                 <button type="submit" name="submit" id="submit">Submit</button>
             </div>
         
         </form>

@@ -1,10 +1,15 @@
 label {
-    width: 100px;
-    display: inline-block;
     font-weight: bold;
+    display: flex;
+    justify-content: left;
+    align-items: center; 
+
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; 
+ 
 }
 body {
-    background-image: url(background.jpg);
+    background-image: url(mainpic.jpg);
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
@@ -16,13 +21,21 @@ body {
     height: 100vh;
     box-sizing: border-box;
     font-family: Arial, sans-serif; 
+    padding-top: 50px;
+    
 }
 #form {
-    display: grid;
+    display: flex;
     grid-template-columns: auto auto; 
 
-    border-radius: 1px;
+    border-radius: 8px;
+    width: 400px;
+    
     padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
 #submit  {
@@ -35,6 +48,31 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: background-color .3s ease;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #0066ffaa;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000; /* Diğer içeriklerin üzerinde görünmesi için */
+}
+
+.top-bar-item {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+.top-bar-item:not(:last-child) {
+    border-right: 1px solid #ffffff; /* Eğer aralarında ayırıcı çizgi isterseniz */
 }
 
 

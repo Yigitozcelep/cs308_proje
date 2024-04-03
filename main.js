@@ -7,9 +7,11 @@ window.addEventListener('load', function() {
 
 
 document.getElementById('searchType').addEventListener('change', function() {
-    var selectedOption = this.value;
-    var inputFields = document.querySelectorAll('.input-field');
+    let selectedOption = this.value;
+    let inputFields = document.querySelectorAll('.input-field');
     
+    
+
     inputFields.forEach(function(inputField) {
         if (inputField.id === selectedOption + 'Input') {
             inputField.style.display = 'block';
@@ -23,24 +25,38 @@ document.getElementById('searchType').addEventListener('change', function() {
 document.querySelector('form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission
 
-    var selectedOption = document.getElementById('searchType').value;
-    var inputValue = '';
+    let selectedOption = document.getElementById('searchType').value;
 
     if (selectedOption === 'flightNo') 
     {
-        inputValue = document.getElementById('flightNo').value;
-        document.getElementById('flightNo').value = ''; 
+        let flightNo = document.getElementById('flightNo').value;
     } 
     else if (selectedOption === 'route') 
     {
-        var departure = document.getElementById('departure').value;
-        var arrival = document.getElementById('arrival').value;
-        var depTime = document.getElementById('depTime').value;
-        var arrTime = document.getElementById('arrTime').value;
-        BackEndController.getFlightsData(departure, arrival, depTime, arrTime)
+        let departure = document.getElementById('departure').value;
+        let arrival = document.getElementById('arrival').value;
+        let depDate = document.getElementById('depTime').value;
         
     }
+    else if (selectedOption === 'airportAndDate')
+    {
+        let airport = document.getElementById('airport').value;
+        let depDate2 = document.getElementById('depDate').value;
+    }
     
- 
-        alert(inputValue);
 });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    let helpButton = document.getElementById("helpButton");
+    helpButton.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        alert("This is a help pop-up!"); 
+        
+       
+    });
+});
+
+
+

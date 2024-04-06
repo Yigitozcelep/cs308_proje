@@ -4,44 +4,64 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0fcff; 
+  background: #f0fcff;
+}
+
+.logo {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  position: fixed;
+  top: 10px;
+  left: 20px;
+}
+
+.help-popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* Above everything else */
+}
+
+.help-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 50%; /* or any appropriate width */
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
 }
   
 .form-box {
-  max-width: 300px;
+  width: 300px;
   background: #f1f7fe;
   border-radius: 16px;
   color: #010101;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   position: relative;
-}
+  padding: 32px 24px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   
-.form-box::before,
-.form-box::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 150px;
-  height: auto;
-  background-image: url('308_air.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  transform: translateY(-50%);
-}
-
-.form-box::before {
-  left: calc(-150px - 20px);
-}
-
-.form-box::after {
-  right: calc(-150px - 20px);
 }
   
 .form {
-  position: relative;
   display: flex;
   flex-direction: column;
-  padding: 32px 24px 24px;
   gap: 16px;
   text-align: center;
 }
@@ -78,7 +98,7 @@ body, html {
 .form-section {
   padding: 16px;
   font-size: .85rem;
-  background-color: #e0ecfb;
+  background-color: #f1f7fe;
   box-shadow: rgb(0 0 0 / 8%) 0 -1px;
 }
   
@@ -121,7 +141,7 @@ body, html {
   width: 100%;
   box-sizing: border-box;
   z-index: 1000;
-  height: 50px;
+  height: 50px; 
 }
 
 .top-bar-item {
@@ -166,7 +186,7 @@ select.input {
 }
 
 .language-select {
-  margin-right: 20px;
+  margin-right: 20 px;
 }
 
 .language-select select {
@@ -176,4 +196,13 @@ select.input {
   border-radius: 4px;
   padding: 5px;
   cursor: pointer;
+}
+
+.airplane-image {
+  position: absolute;
+  left: 50px; /* Adjust the value to move the image more to the left */
+  top: 50%;
+  transform: translate(-150%, -50%); /* Adjust translate values to position the image correctly */
+  max-width: 400px; /* Increase or decrease the size of the image */
+  z-index: -1; /* Keep it behind the form box */
 }

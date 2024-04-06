@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booked Flight - AIR308 Airlines</title>
+    <link rel="stylesheet" href="booked_flight.css">
+</head>
+<body>
+    <header>
+        <h1>AIR308 Airlines</h1>
+        <h2>Booked Flight Details</h2>
+    </header>
+    <div class="top-bar">
+        <div class="language-select">
+            <select id="language" name="language">
+                <option value="EN">EN</option>
+                <option value="TR">TR</option>
+            </select>
+        </div>
+        <a href="#" class="top-bar-item" id="helpButton">Help</a>
+        <div id="helpPopup" class="help-popup" style="display: none;">
+            <div class="help-content">
+              <span class="close">&times;</span>
+              <p>Here is some helpful information:</p>
+              <p>This screen shows the information according to your role(passengers, cockpit crew, cabin crew).</p>
+              <p>For any further information please contact with us. Our mail: 308air@gmail.com </p>
+            </div>
+          </div>
+        <a href="signout.php" class="top-bar-item">Sign Out</a>
+    </div>
+    
+    <section class="flight-info">
+        <h3>Flight Information</h3>
+        <p><strong>Flight No:</strong> 308123</p>
+        <p><strong>Departure:</strong> New York (JFK)</p>
+        <p><strong>Arrival:</strong> London (LHR)</p>
+        <p><strong>Date:</strong> 07/04/2024</p>
+        <p><strong>Time:</strong> 10:00 AM</p>
+    </section>
+    <section class="passenger-list">
+        <h3>Passenger List</h3>
+        <ul>
+            <li>Jane Doe - Seat 12A</li>
+            <li>John Smith - Seat 12B</li>
+            <!-- More passengers -->
+        </ul>
+    </section>
+    <section class="seat-map">
+        <h3>Seat Map</h3>
+        <!-- A simplified example of seat layout -->
+        <div class="row">
+            <span class="seat occupied">1A</span>
+            <span class="seat">1B</span>
+            <!-- More seats -->
+        </div>
+        <!-- More rows -->
+    </section>
+    <footer>
+        <p>&copy; 2024 AIR308 Airlines</p>
+    </footer>
+    <script src="booked_flight.js"></script>
+</body>
+    
+</html>

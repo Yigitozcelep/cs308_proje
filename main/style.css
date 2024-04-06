@@ -74,5 +74,15 @@ body {
 .top-bar-item:not(:last-child) {
     border-right: 1px solid #ffffff; /* Eğer aralarında ayırıcı çizgi isterseniz */
 }
+.language-select {
+    margin: 0 10px; /* Adjust the margin as necessary */
+}
 
-
+.language-select select {
+    background: transparent;
+    border: 1px solid #fff; /* Match the top-bar color */
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+}

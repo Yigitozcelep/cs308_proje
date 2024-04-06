@@ -1,6 +1,3 @@
-
-
-
 window.addEventListener('load', function() {
     document.getElementById('searchType').dispatchEvent(new Event('change'));
 });
@@ -57,6 +54,3 @@ document.addEventListener("DOMContentLoaded", function() {
        
     });
 });
-
-
-

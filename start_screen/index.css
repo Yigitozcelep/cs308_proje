@@ -1,0 +1,33 @@
+/* --------------------------------------------------------------------------------------- */
+/* INDEX.HTML 
+/* --------------------------------------------------------------------------------------- */
+
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .start-btn {
+    background-color: #2b6cb0; /* This is the Tailwind color blue-700*/
+    transition: background-color 0.3s;
+  }
+  
+  .start-btn:hover {
+    background-color: #2c5282; /* This is the Tailwind color blue-800 for hover state */
+  }
+  .language-select {
+    position: absolute;
+    top: 1rem; /* Üstten boşluk */
+    right: 1rem; /* Sağdan boşluk */
+}
+
+.language-select select {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+    appearance: none; /* Tarayıcı varsayılan stilini kaldırmak için */
+}
+

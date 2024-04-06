@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+  <div class="top-bar">
+    <div class="language-select">
+      <select id="language" name="language">
+          <option value="EN">EN</option>
+          <option value="TR">TR</option>
+      </select>
+  </div>
+    <a href="#" class="top-bar-item" id="helpButton">Help</a>
+    <a href="signout.php" class="top-bar-item">Sign Out</a>
+  </div>
+  <div class="form-box">
+    <form class="form">
+        <span class="title">Sign Up</span>
+        <span class="subtitle">Create a free account with your email.</span>
+        <div class="form-container">
+          
+          <input type="text" class="input" placeholder="First Name">
+         
+          <input type="text" class="input" placeholder="Surname">
+          
+          <div class="gender">
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+          </div>
+          
+          <select name="nationality" class="input">
+            <option value="">Select Nationality</option>
+            <option value="dutch">Dutch</option>
+            <option value="english">English</option>
+            <option value="french">French</option>
+            <option value="german">German</option>
+            <option value="italian">Italian</option>
+            <option value="russian">Russian</option>
+            <option value="swedish">Swedish</option>
+            <option value="turkish">Turkish</option>
+            
+          </select>
+          <input type="email" class="input" placeholder="Email">
+          <input type="password" class="input" placeholder="Password">
+        </div>
+        <button type="submit">Sign up</button>
+    </form>
+    <div class="form-section">
+      <p>Have an account? <a href="#" onclick="redirectToSignIn()">Log in</a> </p>
+    </div>
+    </div>
+    
+    <script src="signup.js"></script>    
+</body>
+</html>

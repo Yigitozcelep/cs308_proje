@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tabular View
+        </title>
+        <link>
+        <style>
+            body{
+                margin: 0;
+            }
+
+            .logo{
+                display: block;
+                width: 150px;
+                border-bottom: 0;
+                
+                
+            }
+
+            .topbar {
+                background-color: rgb(55, 75, 226); 
+                color: white;
+                padding: 10px 20px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                height: 20px;
+            }
+            .topbar .header {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            
+            .topbar nav a {
+                color: white;
+                text-decoration: none;
+                margin-left: 20px;
+                padding: 5px 10px;
+                border: 1px solid transparent; /* Makes the buttons look more clickable */
+            }
+            .topbar nav a:hover {
+                border-color: white; /* Adds a border on hover for visual feedback */
+            }
+            .topbar .language-selector {
+                border-radius: 4px;
+                height: 100%;
+                background-color:rgb(55, 75, 226);
+                border-color: white;
+                color: white;
+            }
+
+            .name-search{
+
+                border-radius: 2px;
+                margin-top: 30px;
+                margin-bottom: 7px;
+
+            }
+
+            .input-search{
+
+                border-radius: 2px;
+                margin-bottom: 7px;
+            }
+
+            .filters-container {
+                display: inline-block;
+                border-width: 1px;
+                border-style: solid;
+                border-color: rgb(200, 200, 200);
+                width: 200px;
+                height: 350px;
+                border-radius: 6px;
+                margin-top: 80px;
+                margin-bottom: 10px;
+                margin-left: 20px;
+                font-size: 20px;
+                padding-top: 6px;
+                padding-bottom: 6px;
+                padding-left: 12px;
+                padding-right: 12px;
+
+            }
+
+            .apply{
+
+                display: block;
+                background-color: blue;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                width: 66px;
+                height: 30px;
+                cursor: pointer;
+                margin: 0 auto;
+            
+            }
+
+            .apply:hover {
+                background-color: #02182f; 
+            }
+
+            .buttons-container {
+                display: inline-block;
+                width: 150px;
+                flex-direction: column; 
+                align-items: flex-start; 
+                margin-left: auto;
+                margin-bottom: auto;
+                margin-top: 40px;
+                margin-right: 60px;
+                padding: 40px;
+
+
+            }
+
+            .button {
+                background-color: #004A99; /* Adjust to match your color scheme */
+                color: white; /* Text color */
+                border: none; /* Remove default border */
+                margin-bottom: 10px;
+                border-radius: 4px;
+                padding: 10px 20px; /* Add some padding */
+                text-align: left; /* Align the text to the left */
+                width: 100%; /* Make buttons expand to the width of the container */
+                cursor: pointer; /* Change cursor to pointer on hover */
+            }
+
+            .button:hover {
+                background-color: #003366; /* Darker shade for hover effect */
+            }
+
+            
+
+            .main-container {
+                display: flex;
+                justify-content: space-between; 
+                padding: 10px;
+            }
+
+            .table-navigation{
+                display: flex;
+                justify-content: space-between; 
+                padding-top: 10px; 
+            }
+            .table-container {
+                position: relative; /* Keep if necessary for your layout */
+                z-index: 1; /* Lower than the top bar */
+                padding-top: 80px; /* Adjust if necessary */
+                display: flex; /* Use flexbox to center children */
+                justify-content: center; /* Center horizontally */
+                width: 100%; /* Take the full width to center content properly */
+                padding: 20px 0; /* Top and bottom padding */
+                margin-left: 100px ;
+
+            }
+            
+
+
+          
+
+            .table-name{
+
+                display: flex;
+                font-style: italic;
+                justify-content: center; /* Centers the navigation elements */
+                align-items: center;
+                padding-top: 10px; /* Adds some space between the table and the navigation */
+
+
+            }
+
+            .del-button{
+
+                background-color: white;
+                color: #004A99 ;
+                border-color: #004A99;
+                border-radius: 4px;
+                padding: 10px 20px; 
+                text-align: left; 
+                width: 100%; 
+                cursor: pointer; 
+            }
+
+            .del-button:hover {
+                background-color: #003366; 
+                color: white;
+            
+            }
+
+            table {
+                display: inline-block;
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                text-align: left;
+                padding: 15px;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            tr:nth-child(even) {
+                background-color: #f9f9f9
+            }
+
+            .middde{
+
+                display: flex;
+            }
+
+
+           
+        </style>
+    </head>
+
+    <body>
+        <img class="logo" src="images/Picture1.png">
+
+        <div class="topbar">
+            <div class="left-section">
+                <div class="header">
+                    AIR308 Airlines
+                  </div>
+            </div>
+            <div class="right-section"></div>
+            <nav>
+              <select class="language-selector">
+                <option value="en">EN</option>
+                <option value="es">TR</option>
+              </select>
+              <a href="#help">Help</a>
+              <a href="#signout">Sign Out</a>
+            </nav>
+        </div>
+
+        <div class="main-container">
+            <div class="left">
+
+                <div class="filters-container">
+                    <div>
+                    <div>Filter by:</div>
+                    <input id="name-search" class="name-search" type="text" placeholder="Name">
+                    <input id="surname-search" class="input-search" type="text" placeholder="Surname">
+                    <input id="id-search" class="input-search" type="text" placeholder="ID">
+                    <input id="seat-search" class="input-search" type="text" placeholder="Seat Number">
+                    <button id="apply" class="apply" type="submit">APPLY</button>
+                    </div>
+                
+                </div>
+
+            </div>
+
+            <div class="middle">
+                
+                <div class="table-container" id="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Crew ID</th>
+                            <th>Email</th>
+                            <th>Seat Number</th>
+                        </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    var myArray = [
+                                        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563','Email': 'mryan@gmail.com','SeatNum' : 'AA' },
+                                        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Email': 'j.adams@gmail.com',  'SeatNum' : 'BA' }
+                                    ];
+                                
+                                    function buildTable(data) {
+                                        var tableBody = document.getElementById('table-body');
+                                        tableBody.innerHTML = ''; // Clear existing entries
+                                        data.forEach(item => {
+                                            var row = `<tr>
+                                                <td>${item.Name}</td>
+                                                <td>${item.Surname}</td>
+                                                <td>${item.CrewID}</td>
+                                                <td>${item.Email}</td>
+                                                <td>${item.SeatNum}</td>
+                                            </tr>`;
+                                            tableBody.innerHTML += row;
+                                        });
+                                    }
+                                
+                                    function searchTable(filters) {
+                                    return myArray.filter(item => {
+                                        return (!filters.name || item.Name.toLowerCase().includes(filters.name.toLowerCase())) &&
+                                            (!filters.surname || item.Surname.toLowerCase().includes(filters.surname.toLowerCase())) &&
+                                            (!filters.id || item.CrewID.toLowerCase().includes(filters.id.toLowerCase())) &&    
+                                            (!filters.seatNum || item.SeatNum.toLowerCase().includes(filters.seatNum.toLowerCase()));
+                                    });
+                                }
+
+
+                                    document.getElementById('apply').addEventListener('click', function() {
+                                        var filters = {
+                                            name: document.getElementById('name-search').value,
+                                            surname: document.getElementById('surname-search').value,
+                                            id: document.getElementById('id-search').value,
+                                            seatNum: document.getElementById('seat-search').value
+
+                                        };
+                                        var filteredData = searchTable(filters);
+                                        buildTable(filteredData);
+                                    });
+
+                                
+                                    // Initial table build with all data
+                                    buildTable(myArray);
+                                });
+                                </script>
+                                
+                                                
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="viewing">
+                    <text class="table-name" id="table name">Viewing for:</text>
+                </div>
+
+                <div class="table-navigation">
+                    <button class="nav-button" id="prev-button">&lt; Pilot Crew</button>
+                    <text class="table-info" id="table type">Cabin Crew</text>
+                    <button class="nav-button" id="next-button">Passenger &gt;</button>
+                  </div>
+
+            </div>
+         
+
+            <div class="right"></div>
+
+            <div>
+                <div class="buttons-container">
+                    <button class="button">Add a Member</button>
+                    <button class="button">Update a Member</button>
+                    <button class="del-button">Delete a Member</button>
+                        
+                </div>
+            </div>
+        </div>
+        
+
+        <script>
+
+    
+          
+          
+         
+        </script>
+        
+          
+    </body>
+</html>
+

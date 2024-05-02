@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>308 Airlines</title>    
+    <link href="flightSelection.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div class="logo">
+            AIR308 Airlines
+        </div>
+        <a href="/cs308_proje-Flight-Selection/myFlights/extended_view.html" class="top-bar-item">My Flights</a>
+        
+        <div class="language-select">
+            <select id="language" name="language">
+                <option value="EN">EN</option>
+                <option value="TR">TR</option>
+            </select>
+        </div>
+        <a href="#" class="top-bar-item" id="helpButton">Help</a>
+        <div id="helpPopup" class="help-popup" style="display: none;">
+            <div class="help-content">
+              <span class="close">&times;</span>
+                <h2>Welcome to Flight Selection Help</h2>
+                <p>Here's some helpful information:</p>
+                <h3>Search Options</h3>
+                <p>Choose your preferred search method:</p>
+                <ul>
+                    <li><strong>Flight Number:</strong> Search for a specific flight by its flight number.</li>
+                    <li><strong>Route:</strong> Enter departure and arrival destinations along with the date to search for flights on that route.</li>
+                    <li><strong>Airport and Date:</strong> Search for flights departing from or arriving at a specific airport on a particular date.</li>
+                </ul>
+                <h3>Filling Out the Form</h3>
+                <p>Ensure the accuracy of the information you provide:</p>
+                <ul>
+                    <li>Double-check flight numbers, airport codes, and dates to avoid errors.</li>
+                </ul>
+                <h3>Viewing Booked Flights</h3>
+                <p>Click on "My Flights" to view your booked flights and manage your bookings.</p>
+            </div>
+          </div>
+        <a href="signout.php" class="top-bar-item">Sign Out</a>
+    </div>
+    
+    <div id="form">
+        <form>
+            <h2>FLIGHT SELECTION</h2>
+            <div>
+                <label for="searchType">Search By:</label>
+                <select id="searchType" name="searchType">
+                    <option value="flightNo" selected>Flight No</option>
+                    <option value="route">Route</option>
+                    <option value="airportAndDate">Airport and Date</option>
+                </select>
+            </div>
+            
+            <br>
+        
+            
+            <div id="flightNoInput" class="input-field" style="display:none;">
+                <label for="flightNo">Flight No:</label>
+                <input type="text" id="flightNo" name="flightNo" placeholder="Flight No.">
+            </div>
+            
+            <div id="routeInput" class="input-field" style="display:none;">
+                <label for="departure">Departure:</label>
+                <input type="text" id="departure" name="departure" placeholder="Departure">
+                <label for="arrival">Arrival:</label>
+                <input type="text" id="arrival" name="arrival" placeholder="Arrival">
+                <label for="depDate">Date:</label>
+                <input type="text" id="depDate" name="depDate" placeholder="Date">
+            </div>
+            
+            <div id="airportAndDateInput" class="input-field" style="display:none;">
+                <label for="airport">Airport:</label>
+                <input type="text" id="airport" name="airport" placeholder="Airport">
+                <label for="date">Date:</label>
+                <input type="text" id="depDate" name="depDate" placeholder="Date">
+            </div>
+                        
+            <br>
+            
+            <div>
+                 <button type="submit" name="submit" id="submit">Submit</button>
+            </div>
+        
+        </form>
+    </div>
+    <script src="flightSelection.js"></script>
+</body>
+</html>

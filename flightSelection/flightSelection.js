@@ -34,7 +34,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     {
         let departure = document.getElementById('departure').value;
         let arrival = document.getElementById('arrival').value;
-        let depDate = document.getElementById('depTime').value;
+        let depDate = document.getElementById('depDate').value;
         window.location.href = `/cs308_proje/flightList/flightList.html?searchType=${selectedOption}&departure=${departure}&arrival=${arrival}&depDate=${depDate}`;
         
     }

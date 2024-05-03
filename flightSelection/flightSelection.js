@@ -27,7 +27,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     if (selectedOption === 'flightNo') 
     {
         let flightNo = document.getElementById('flightNo').value;
-        window.location.href = `/cs308_proje/flightList/flightList.html?searchType=${selectedOption}&flightNo=${flightNo}`;
+        window.location.href = `/cs308_proje/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&flightNo=${flightNo}`;
 
     } 
     else if (selectedOption === 'route') 
@@ -35,14 +35,14 @@ document.querySelector('form').addEventListener('submit', function(event) {
         let departure = document.getElementById('departure').value;
         let arrival = document.getElementById('arrival').value;
         let depDate = document.getElementById('depDate').value;
-        window.location.href = `/cs308_proje/flightList/flightList.html?searchType=${selectedOption}&departure=${departure}&arrival=${arrival}&depDate=${depDate}`;
+        window.location.href = `/cs308_proje/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&departure=${departure}&arrival=${arrival}&depDate=${depDate}`;
         
     }
     else if (selectedOption === 'airportAndDate')
     {
         let airport = document.getElementById('airport').value;
         let depDate2 = document.getElementById('depDate').value;
-        window.location.href = `/cs308_proje/flightList/flightList.html?searchType=${selectedOption}&airport=${airport}&depDate2=${depDate2}`;
+        window.location.href = `/cs308_proje/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&airport=${airport}&depDate2=${depDate2}`;
     }
     
 });

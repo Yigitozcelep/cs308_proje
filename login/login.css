@@ -1,0 +1,179 @@
+/* {
+    Yazi tipi degisikligi icin:
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+} */
+
+
+body {
+    display: flex;
+    flex-direction: column; /* Updated for a column layout */
+    justify-content: center; /* Start items at the top */
+    align-items: center;
+    height: 100vh;
+    background-color: #f0fcff;
+}
+
+.logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.help-popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* Above everything else */
+}
+
+.help-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%; /* or any appropriate width */
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.container {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+   
+}
+.airplane-image {
+    position: absolute;
+    left: 50px; /* Adjust the value to move the image more to the left */
+    top: 50%;
+    transform: translate(-150%, -50%); /* Adjust translate values to position the image correctly */
+    max-width: 400px; /* Increase or decrease the size of the image */
+    z-index: -1; /* Keep it behind the form box */
+  }
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    line-height: 2.5;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 95%;  /* kutu genisligini ayarladim */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.login-button {
+    background-color: #0066ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #0066ff;
+}
+
+.forgot-password {
+    text-decoration: none;
+    color: #0066ff8c;
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.forgot-password:hover {
+    color: #0066ff8c;
+}
+
+.remember-me {
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
+/* Checkbox ve label'ı tek bir satırda göstermek için */
+input[type="checkbox"] + label {
+    display: inline-block; /* Yan yana getirir */
+}
+
+/* Checkbox stilini ayarlama */
+input[type="checkbox"] {
+    margin-right: 5px; /* Etiket ile arasına boşluk ekler */
+    vertical-align: middle; /* Dikeyde ortalar */
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #0066ffaa;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000; /* Diğer içeriklerin üzerinde görünmesi için */
+}
+
+.top-bar-item {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+.top-bar-item:not(:last-child) {
+    border-right: 1px solid #ffffff; /* Eğer aralarında ayırıcı çizgi isterseniz */
+}
+.language-select {
+    margin: 0 10px; /* Adjust the margin as necessary */
+}
+
+.language-select select {
+    background: transparent;
+    border: 1px solid #fff; /* Match the top-bar color */
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+}

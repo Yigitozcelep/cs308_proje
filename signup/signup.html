@@ -46,8 +46,8 @@
             <label for="female">Female</label>
             <input type="radio" id="male" name="gender" value="male">
             <label for="male">Male</label>
-            <input type="radio" id="pfns" name="gender" value="prefer not to say">
-            <label for="pfns">Prefer Not To Say</label>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
           </div>
           
           <select name="nationality" class="input">
@@ -64,6 +64,14 @@
           </select>
           <input type="email" class="input" placeholder="Email">
           <input type="password" class="input" placeholder="Password">
+
+          <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="cockpit_crew">Cockpit Crew</option>
+                <option value="cabin_crew">Cabin Crew</option>
+                <option value="passenger">Passenger</option>
+                <option value="admin">Admin</option>
+            </select>
         </div>
         <button type="submit">Sign up</button>
     </form>

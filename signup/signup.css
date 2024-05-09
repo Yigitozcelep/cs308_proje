@@ -186,7 +186,8 @@ select.input {
 }
 
 .language-select {
-  margin-right: 20 px;
+  margin-right: 0 10 px;
+  margin-top: 15px;
 }
 
 .language-select select {

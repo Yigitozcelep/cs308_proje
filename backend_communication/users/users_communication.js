@@ -13,7 +13,7 @@ const UserCommunication = {
     async isValidUser(email, password) {
         await new Promise(resolve => setTimeout(resolve, 200));
         for (let i = 0; i < dummyData.dummyUsers.length; i++) {
-            if (dummyData.dummyUsers[i].userName == userName && dummyData.dummyUsers[i] == password) return true;
+            if (dummyData.dummyUsers[i].email == email && dummyData.dummyUsers[i].password == password) return true;
         }
         return false;
     },

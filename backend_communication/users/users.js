@@ -32,7 +32,7 @@ class UserData {
      * @param {String} gender 
      * @param {String} nationality 
      * @param {String} userType 
-     * @param {UserFlightData[0]} flights 
+     * @param {UserFlightData[]} flights 
      * @param {Bool} canRejectFlight 
      * @param {FlightData} pendingFlight 
      */

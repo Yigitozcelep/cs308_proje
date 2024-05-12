@@ -23,17 +23,18 @@ class UserFlightData {
 
 class UserData {
     /**
+     * @param {String} email 
+     * @param {String} password 
      * @param {String} name 
      * @param {String} surname 
      * @param {String} Id 
-     * @param {Date} birthDay
+     * @param {Date} age 
      * @param {String} gender 
      * @param {String} nationality 
-     * @param {String} email 
-     * @param {UserFlightData[]} flights 
-     * @param {String} userType
-     * @param {Bool} canRejectFlight
-     * @param {FlightData} pendingFlight
+     * @param {String} userType 
+     * @param {UserFlightData[0]} flights 
+     * @param {Bool} canRejectFlight 
+     * @param {FlightData} pendingFlight 
      */
     constructor(email, password, name, surname, Id, age, gender, nationality, userType, flights, canRejectFlight, pendingFlight) {
         this.email           = email;

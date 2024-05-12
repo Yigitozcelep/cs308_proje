@@ -14,7 +14,6 @@ const FligtsCommunication = {
 
     async getFlightsData(from, goTo, intervalStart, intervalEnd, airportName) {
         await new Promise(resolve => setTimeout(resolve, 200));
-        console.log(from, goTo, "---", intervalStart, "---", intervalEnd, airportName);
         const data = []
         for (let i = 0; i < dummyData.dummyFlights.length; i++) {
             if (dummyData.dummyFlights[i].getLandingTime() >= intervalStart && dummyData.dummyFlights[i].getDepartureTime() <= intervalEnd && dummyData.dummyFlights[i].getFrom() == from && dummyData.dummyFlights[i].getGoto() == goTo && dummyData.dummyFlights[i].getDedepartureAirport().airportName == airportName) {
@@ -36,7 +35,7 @@ const FligtsCommunication = {
     
     /**
      * @param {String} plaineId 
-     * @returns 
+     * @returns {Promise<FlightData>}
      */
     async getFlightByPlaineId(plaineId) {
         await new Promise(resolve => setTimeout(resolve, 200));

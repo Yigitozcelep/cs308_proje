@@ -1,4 +1,5 @@
 import * as dummyDatas from "../dummy_data.js";
+import { UserData } from "../users/users.js";
 
 class AirPort {
     /**
@@ -85,11 +86,14 @@ class Seat {
     /**
      * @param {String} seatPosition 
      * @param {String} seatType 
+     * @param {bool} status
+     * @param {UserData} userData
      */
-    constructor(seatPosition, seatType, status) {
+    constructor(seatPosition, seatType, status, userData) {
         this.#seatPosition = seatPosition; //A3 B2 etc.
         this.#seatType     = seatType; // bussiness or ecenomy
         this.#status       = status;  // avaliable or not
+        this.userData      = userData;
     }
     getSeatNumber()    { return this.#seatPosition[0];                } // if seat is A2 it return A
     getSeatLetter()    { return this.#seatPosition[1];                } // if seat is A2 it return 2

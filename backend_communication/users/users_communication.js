@@ -79,3 +79,5 @@ const UserCommunication = {
         await new Promise(resolve => setTimeout(resolve, 200));
     }
 }
+
+export { UserCommunication }

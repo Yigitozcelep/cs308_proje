@@ -146,5 +146,6 @@ const dummyFlights = createDummyFlightData();
 for (let i = 0; i < 500; i++) seats.push(createDummySeatData())
 for (let i = 0; i < 20; i += 2) dummyUsers.push(createDummyUser(dummyFlights, i, i + 1, seats[i], seats[i + 1]));
 for (let i = 0; i < 500; i++) seats[i].iterateSeats().forEach(s => s.userData = dummyUsers[Math.floor(Math.random() * 19)]);
+localStorage.setItem("currentUserId", 0);
 
 export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyAirPort, createDummyUser, createDummyFlightData, createDummySeatData, seats, dummyUsers, dummyFlights}

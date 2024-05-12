@@ -56,16 +56,17 @@ const UserCommunication = {
     },
 
     /**
-     * @param {userData} userData
+     * localstorageda current user idsi  var
      * @param {FlightData} flight 
      * @param {Seat} seat 
      */
-    async buySeat(userData, flight, seat) {
+    async buySeat(flight, seat) {
         await new Promise(resolve => setTimeout(resolve, 200));
 
     },
     
     /**
+     * localstorageda current user idsi var
      * @param {UserFlightData} userFlight 
      */
     async refundSeat(userFlight) {
@@ -73,9 +74,13 @@ const UserCommunication = {
     },
 
     /**
+     * localstorageda current user idsi var
      * @param {UserData} user
      */
     async updateUser(user) {
         await new Promise(resolve => setTimeout(resolve, 200));
     }
 }
+
+
+export { UserCommunication }

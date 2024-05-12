@@ -76,3 +76,6 @@ const FligtsCommunication = {
         return dummyData.seats[flight.getFlightId().slice(2) - "0"];
     }
 }
+
+
+export { FligtsCommunication }

@@ -1,4 +1,5 @@
-import { AirPort, FlightData, Seat, SeatTypes, Seats, SeatStatus, UserData, UserFlightData } from "./backend_communication.js";
+import * as flights from "./flights/flights.js";
+import * as users from "./users/users.js";
 
 const createDummyAirlineCompanies = () => {
     return [ "American Airlines", "Delta Air Lines", "United Airlines", "Southwest Airlines", "Air Canada", "British Airways", "Lufthansa", "Emirates", "Qatar Airways", "Singapore Airlines" ];
@@ -14,26 +15,47 @@ const createDummyPlaneTypes = () => {
 
 const createDummyAirPort = () => {
     return [
-        new AirPort("New York", "John F. Kennedy International Airport", "USA"),
-        new AirPort("London", "Heathrow Airport", "United Kingdom"),
-        new AirPort("Tokyo", "Tokyo International Airport (Haneda)", "Japan"),
-        new AirPort("Paris", "Charles de Gaulle Airport", "France"),
-        new AirPort("Dubai", "Dubai International Airport", "UAE"),
-        new AirPort("Sydney", "Sydney Kingsford Smith Airport", "Australia"),
-        new AirPort("Berlin", "Berlin Brandenburg Airport", "Germany"),
-        new AirPort("Moscow", "Sheremetyevo International Airport", "Russia"),
-        new AirPort("Beijing", "Beijing Capital International Airport", "China"),
-        new AirPort("Singapore", "Singapore Changi Airport", "Singapore")
+        new flights.AirPort("New York", "John F. Kennedy International Airport", "USA"),
+        new flights.AirPort("London", "Heathrow Airport", "United Kingdom"),
+        new flights.AirPort("Tokyo", "Tokyo International Airport (Haneda)", "Japan"),
+        new flights.AirPort("Paris", "Charles de Gaulle Airport", "France"),
+        new flights.AirPort("Dubai", "Dubai International Airport", "UAE"),
+        new flights.AirPort("Sydney", "Sydney Kingsford Smith Airport", "Australia"),
+        new flights.AirPort("Berlin", "Berlin Brandenburg Airport", "Germany"),
+        new flights.AirPort("Moscow", "Sheremetyevo International Airport", "Russia"),
+        new flights.AirPort("Beijing", "Beijing Capital International Airport", "China"),
+        new flights.AirPort("Singapore", "Singapore Changi Airport", "Singapore")
     ];
 }
 
+
 const createDummyUser = (dummyFlights, purchaseId1, purchaseId2, seats1, seats2) => {
-    const usernames = ["Liam43", "Elijah45", "Charlotte1", "Emma12", "Sophia54", "Ava98", "William99", "Noah67", "Olivia14", "Oliver46"]
-    const password  = ["drn088", "dob735", "ylo940", "ayn112", "bgz490", "weg593", "wog223", "yzc297", "jwx973", "znt151"]
+    const names       = ["Liam43", "Elijah45", "Charlotte1", "Emma12", "Sophia54", "Ava98", "William99", "Noah67", "Olivia14", "Oliver46"]
+    const surnames    = ["Surname1", "Surname2", "Surname3", "Surname4", "Surname5", "Surname6", "Surname7", "Surname8", "Surname9", "Surname10"]
+    const password    = ["drn088", "dob735", "ylo940", "ayn112", "bgz490", "weg593", "wog223", "yzc297", "jwx973", "znt151"]
+    const nationality = ["Turkey", "England", "Dubai", "Turkey", "Turkey", "Brazil", "Turkey", "Turkey", "Turkey", "Brazil"];
+    const gender      = ["Man", "Man", "Man", "Female", "Female", "Female", "Female", "Female", "Man", "Man"];
+    const mail        = ["D1@outlook.com", "D2@outlook.com", "D3@outlook.com", "D4@outlook.com", "D5@outlook.com","D6@outlook.com", "D7@outlook.com", "D8@outlook.com", "D9@outlook.com", "D10@outlook.com"];
+    const userType    = ["Admin", "Passanger", "Passanger", "Crew", "Crew", "Crew", "Pilot","Pilot", "Pilot", "Pilot"];
+    const age         = ["18", "5", "20", "25", "30", "9", "12", "50", "85", "1"];
+
     const seat1 = seats1.getUnAvaliableSeats().iterateSeats()[0];
     const seat2 = seats2.getUnAvaliableSeats().iterateSeats()[0];
-
-    return new UserData(usernames[purchaseId1 / 2], password[purchaseId1 / 2], purchaseId1 / 2, [new UserFlightData(dummyFlights[purchaseId1], seat1, getRandomFutureDate(), purchaseId1), new UserFlightData(dummyFlights[purchaseId2], seat2, getRandomFutureDate(), purchaseId2)])
+    // email, password, name, surname, Id, age, gender, nationality, userType, flights, canRejectFlight, pendingFlight
+    return new users.UserData(
+        mail[purchaseId1 / 2],
+        password[purchaseId1 / 2],
+        names[purchaseId1 / 2],
+        surnames[purchaseId1 / 2],
+        purchaseId1,
+        age[purchaseId1 / 2],
+        gender[purchaseId1 / 2],
+        nationality[purchaseId1 / 2],
+        userType[purchaseId1 / 2],
+        [new users.UserFlightData(dummyFlights[purchaseId1], seat1, getRandomFutureDate(), purchaseId1), new users.UserFlightData(dummyFlights[purchaseId2], seat2, getRandomFutureDate(), purchaseId2)],
+        true,
+        dummyFlights[0],
+    )
 }
 
 
@@ -69,19 +91,16 @@ const createDummyFlightData = () => {
         const flightTime        = new Date(0, 0, 0, 2 + i);
         const airlineCompany    = airlineCompanies[i % 10];
         const flightId          = "TK" + i;
-        dummyFlightData.push(new FlightData(from, goTo, departureAirport, landingAirport, departureTime, landingTime, planeType, flightTime, airlineCompany, flightId));
+        const plaineId          = i;
+        dummyFlightData.push(new flights.FlightData(from, goTo, departureAirport, landingAirport, departureTime, landingTime, planeType, flightTime, airlineCompany, flightId, i));
     }
     return dummyFlightData;
 }
 
-const getPrice = (isBussiness) => {
-    if (isBussiness) return  Math.floor(Math.random() * 500) + 500;
-    return  Math.floor(Math.random() * 200) + 200;
-}
 
 const getStatus = () => {
-    if (Math.random() < 0.5) return SeatStatus.avaliable;
-    return SeatStatus.unAvaliable;
+    if (Math.random() < 0.5) return flights.SeatStatus.avaliable;
+    return flights.SeatStatus.unAvaliable;
 }
 
 const createDummySeatData = () => {
@@ -101,7 +120,7 @@ const createDummySeatData = () => {
         for (let i = 1; i <= bussinessRowSeadCount; i++) {
             for (let j = 0; j < bussinessConsecutiveSeat; j++) {
                 const char = String(i) + String.fromCharCode(65 + row * bussinessConsecutiveSeat + j);
-                seads.push(new Seat(char, SeatTypes.bussiness, getPrice(true), getStatus()));
+                seads.push(new flights.Seat(char, flights.SeatTypes.bussiness, getStatus()));
             }
         }
     }
@@ -112,12 +131,20 @@ const createDummySeatData = () => {
         for (let i = 1 + bussinessRowSeadCount; i <= ecenomyRowSeadCount; i++) {
             for (let j = 0; j < ecenomyConsecutiveSeat; j++) {
                 const char = String(i) + String.fromCharCode(65 + row * ecenomyConsecutiveSeat + j);
-                seads.push(new Seat(char, SeatTypes.ecenomy, getPrice(false), getStatus()));
+                seads.push(new flights.Seat(char, flights.SeatTypes.ecenomy, getStatus()));
             }
         }
     }
 
-    return new Seats(seads, rowCount, bussinessConsecutiveSeat, ecenomyConsecutiveSeat);
+    return new flights.Seats(seads, rowCount, bussinessConsecutiveSeat, ecenomyConsecutiveSeat);
 }   
 
-export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyAirPort, createDummyUser, createDummyFlightData, createDummySeatData}
+const seats      = []
+const dummyUsers = []
+const dummyFlights = createDummyFlightData();
+
+for (let i = 0; i < 500; i++) seats.push(createDummySeatData())
+for (let i = 0; i < 20; i += 2) dummyUsers.push(createDummyUser(dummyFlights, i, i + 1, seats[i], seats[i + 1]));
+
+
+export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyAirPort, createDummyUser, createDummyFlightData, createDummySeatData, seats, dummyUsers, dummyFlights}

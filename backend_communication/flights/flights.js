@@ -96,8 +96,14 @@ class Seat {
         this.#status       = status;  // avaliable or not 
         this.#userId       = userId;
     }
-    getSeatNumber()    { return this.#seatPosition[0];                } // if seat is A2 it return A
-    getSeatLetter()    { return this.#seatPosition[1];                } // if seat is A2 it return 2
+    getSeatNumber()    { 
+        if (this.#seatPosition.length == 2) return this.#seatPosition[0];                
+        return this.#seatPosition[0] + this.#seatPosition[1];
+    } // if seat is A2 it return 2
+    getSeatLetter()    { 
+        if (this.#seatPosition.length == 2) return this.#seatPosition[1];
+        return this.#seatPosition[2];
+    } // if seat is A2 it return A
     getSeatPosition()  { return this.#seatPosition;                   } // if seat is A2 it return A2
     isSeatEcenomy()    { return this.#seatType == SeatTypes.ecenomy   }
     isSeatBussiness()  { return this.#seatType == SeatTypes.bussiness }
@@ -115,7 +121,7 @@ class Seats {
      * @param {Seat[]} seats
      * @param {Number} rowCount  // kaç sıra var 2 yada 3
      * @param {Number} bussinessConsecutiveSeat // 2 or 3 yan yana koltuklar 2limi 3lümü
-     * @param {ecenomyConsecutiveSeat} ecenomyConsecutiveSeat // 2 or 3
+     * @param {Number} ecenomyConsecutiveSeat // 2 or 3
      */
     constructor(seats, rowCount, bussinessConsecutiveSeat, ecenomyConsecutiveSeat) {
         this.#seats = seats;

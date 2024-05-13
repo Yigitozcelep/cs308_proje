@@ -1,5 +1,5 @@
 import * as dummyData from "../dummy_data.js";
-import { FlightData } from "./flights.js";
+import { FlightData, Seats, Seat } from "./flights.js";
 
 const FligtsCommunication = {
 
@@ -104,10 +104,10 @@ const FligtsCommunication = {
     
     /**
      * @param {FlightData} flight 
-     * @returns {Promoise<Seats>}
+     * @returns {Promise<Seats>}
      */
     async getSeatsData(flight) {
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => setTimeout(resolve, 200));
         return dummyData.seats[flight.getFlightId().slice(2) - "0"];
     }
 }

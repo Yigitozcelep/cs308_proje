@@ -1,7 +1,7 @@
 import * as dummyData from "../dummy_data.js";
 import { FlightData } from "./flights.js";
 
-const FligtsCommunication = {
+const FlightsCommunication = {
 
     /**
      * @param {String} from 
@@ -112,5 +112,5 @@ const FligtsCommunication = {
     }
 }
 
-export { FligtsCommunication }
+export { FlightsCommunication }
 

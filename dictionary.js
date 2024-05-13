@@ -16,6 +16,7 @@ const dictionary = {
         [languages.turkish]: "şifre",
         [languages.english]: "password",
     },
+
 }
 
 const getText = (text) => {

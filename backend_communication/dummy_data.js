@@ -119,8 +119,9 @@ const createDummySeatData = () => {
     for (let row = 0; row < rowCount; row++) {
         for (let i = 1; i <= bussinessRowSeadCount; i++) {
             for (let j = 0; j < bussinessConsecutiveSeat; j++) {
+                const userId = Math.floor(Math.random() * 19);
                 const char = String(i) + String.fromCharCode(65 + row * bussinessConsecutiveSeat + j);
-                seads.push(new flights.Seat(char, flights.SeatTypes.bussiness, getStatus()));
+                seads.push(new flights.Seat(char, flights.SeatTypes.bussiness, getStatus(), userId));
             }
         }
     }
@@ -131,7 +132,8 @@ const createDummySeatData = () => {
         for (let i = 1 + bussinessRowSeadCount; i <= ecenomyRowSeadCount; i++) {
             for (let j = 0; j < ecenomyConsecutiveSeat; j++) {
                 const char = String(i) + String.fromCharCode(65 + row * ecenomyConsecutiveSeat + j);
-                seads.push(new flights.Seat(char, flights.SeatTypes.ecenomy, getStatus()));
+                const userId = Math.floor(Math.random() * 19);
+                seads.push(new flights.Seat(char, flights.SeatTypes.ecenomy, getStatus(), userId));
             }
         }
     }
@@ -145,7 +147,8 @@ const dummyFlights = createDummyFlightData();
 
 for (let i = 0; i < 500; i++) seats.push(createDummySeatData())
 for (let i = 0; i < 20; i += 2) dummyUsers.push(createDummyUser(dummyFlights, i, i + 1, seats[i], seats[i + 1]));
-for (let i = 0; i < 500; i++) seats[i].iterateSeats().forEach(s => s.userData = dummyUsers[Math.floor(Math.random() * 19)]);
-localStorage.setItem("currentUserId", 0);
+
+window.currentUser = dummyUsers[0];
+window.currentFlight = dummyFlights[5];
 
 export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyAirPort, createDummyUser, createDummyFlightData, createDummySeatData, seats, dummyUsers, dummyFlights}

@@ -3,7 +3,6 @@ import { Seat } from "../flights/flights.js";
 import { UserData, UserFlightData } from "./users.js";
 
 
-
 const UserCommunication = {
     /**
      * @param {String} email 
@@ -81,6 +80,5 @@ const UserCommunication = {
         await new Promise(resolve => setTimeout(resolve, 200));
     }
 }
-
 
 export { UserCommunication }

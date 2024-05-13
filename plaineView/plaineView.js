@@ -1,9 +1,8 @@
-import { UserCommunication } from "../backend_communication/users/users_communication.js";
-import { dummyUsers } from "../backend_communication/dummy_data.js";
+import { getText } from "../dictionary.js";
+import { FligtsCommunication } from "../backend_communication/flights/flights_comminucation.js";
+import { seats } from "../backend_communication/dummy_data.js";
 
-console.log(dummyUsers);
+console.log(window.currentUser);
+console.log(window.currentFlight);
 
-UserCommunication.isValidUser();
-
-
-
+FligtsCommunication.getSeatsData();

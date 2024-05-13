@@ -3,7 +3,6 @@ import { Seat } from "../flights/flights.js";
 import { UserData, UserFlightData } from "./users.js";
 
 
-
 const UserCommunication = {
     /**
      * @param {String} email 

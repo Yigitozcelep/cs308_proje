@@ -23,6 +23,30 @@ const FligtsCommunication = {
         return data;
     },
 
+    /**
+     * @param {Date} intervalStart 
+     * @param {Date} intervalEnd 
+     * @param {Date} airportName 
+     * @returns {Promise<FlightData[]>}
+     */
+    async getFlightsDataFromWithoutFromGoto(intervalStart, intervalEnd, airportName) {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        const data = []
+        for (let i = 0; i < dummyData.dummyFlights.length; i++) {
+            if (dummyData.dummyFlights[i].getLandingTime() >= intervalStart && dummyData.dummyFlights[i].getDepartureTime() <= intervalEnd && dummyData.dummyFlights[i].getDedepartureAirport().airportName == airportName) {
+                data.push(dummyData.dummyFlights[i]);
+            }
+        }
+        return data;
+    },
+
+    /**
+     * @param {String} from 
+     * @param {String} goTo 
+     * @param {Date} intervalStart 
+     * @param {Date} intervalEnd 
+     * @returns {Promise<FlightData[]>}
+     */
     async getFlightsDataWithoutAirport(from, goTo, intervalStart, intervalEnd) {
         await new Promise(resolve => setTimeout(resolve, 200));
         const data = []

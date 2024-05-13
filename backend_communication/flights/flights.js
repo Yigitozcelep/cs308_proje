@@ -83,17 +83,18 @@ class Seat {
     #seatPosition;
     #seatType;
     #status;
+    #userId;
     /**
      * @param {String} seatPosition 
      * @param {String} seatType 
      * @param {bool} status
-     * @param {UserData} userData
+     * @param {String} userId
      */
-    constructor(seatPosition, seatType, status, userData) {
+    constructor(seatPosition, seatType, status, userId) {
         this.#seatPosition = seatPosition; //A3 B2 etc.
         this.#seatType     = seatType; // bussiness or ecenomy
-        this.#status       = status;  // avaliable or not
-        this.userData      = userData;
+        this.#status       = status;  // avaliable or not 
+        this.#userId       = userId;
     }
     getSeatNumber()    { return this.#seatPosition[0];                } // if seat is A2 it return A
     getSeatLetter()    { return this.#seatPosition[1];                } // if seat is A2 it return 2
@@ -102,6 +103,7 @@ class Seat {
     isSeatBussiness()  { return this.#seatType == SeatTypes.bussiness }
     getSeatType()      { return this.#seatType;                       }
     isSeatAvaliable()  { return this.#status  == SeatStatus.avaliable }
+    getUserId()        { return this.#userId;                         }
 }
 
 class Seats {

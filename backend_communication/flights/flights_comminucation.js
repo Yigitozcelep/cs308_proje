@@ -12,11 +12,22 @@ const FligtsCommunication = {
      * @returns {Promise<FlightData[]>}
      */
 
-    async getFlightsData(from, goTo, intervalStart, intervalEnd, airportName) {
+    async getFlightsDataFrom(from, goTo, intervalStart, intervalEnd, airportName) {
         await new Promise(resolve => setTimeout(resolve, 200));
         const data = []
         for (let i = 0; i < dummyData.dummyFlights.length; i++) {
             if (dummyData.dummyFlights[i].getLandingTime() >= intervalStart && dummyData.dummyFlights[i].getDepartureTime() <= intervalEnd && dummyData.dummyFlights[i].getFrom() == from && dummyData.dummyFlights[i].getGoto() == goTo && dummyData.dummyFlights[i].getDedepartureAirport().airportName == airportName) {
+                data.push(dummyData.dummyFlights[i]);
+            }
+        }
+        return data;
+    },
+
+    async getFlightsDataWithoutAirport(from, goTo, intervalStart, intervalEnd) {
+        await new Promise(resolve => setTimeout(resolve, 200));
+        const data = []
+        for (let i = 0; i < dummyData.dummyFlights.length; i++) {
+            if (dummyData.dummyFlights[i].getLandingTime() >= intervalStart && dummyData.dummyFlights[i].getDepartureTime() <= intervalEnd && dummyData.dummyFlights[i].getFrom() == from && dummyData.dummyFlights[i].getGoto() == goTo) {
                 data.push(dummyData.dummyFlights[i]);
             }
         }

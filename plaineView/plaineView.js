@@ -1,6 +1,8 @@
 import { getText } from "../dictionary.js";
 import { FligtsCommunication } from "../backend_communication/flights/flights_comminucation.js";
+import { seats } from "../backend_communication/dummy_data.js";
 
-const res = document.getElementById("xx");
+console.log(window.currentUser);
+console.log(window.currentFlight);
 
-res.innerHTML = getText("ask");
+FligtsCommunication.getSeatsData();

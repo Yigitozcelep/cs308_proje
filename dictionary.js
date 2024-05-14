@@ -413,6 +413,11 @@ const dictionary = {
         [languages.turkish]: "Sil",
         [languages.english]: "Delete",
     },
+    "refuseButton":
+    {
+        [languages.turkish]: "Reddet",
+        [languages.english]: "Refuse",
+    },
     "addFlight":
     {
         [languages.turkish]: "Uçuş Ekle",

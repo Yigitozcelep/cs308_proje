@@ -1,63 +1,143 @@
+import { getText } from "../dictionary.js";
 window.addEventListener('load', function() {
+
     document.getElementById('searchType').dispatchEvent(new Event('change'));
 });
+function handleLanguageChange() {
+    let lang = document.getElementById('language').value;
+    localStorage.setItem("language", lang);
+    
+    const air308FlightSelection = document.getElementById('air308FlightSelection');
+    const brandName = document.getElementById('brandName');
+    const flightSelectionTable = document.getElementById('flightSelectionTable');
+    const myFlights = document.getElementById('myFlights');
+    const helpButton = document.getElementById('helpButton');
+    const flightSelectionHelp = document.getElementById('flightSelectionHelp');
+    const helpInfo = document.getElementById('helpInfo');
+    const searchOptions = document.getElementById('searchOptions');
+    const flightSelectionSearchMethod = document.getElementById('flightSelectionSearchMethod');
+    const flightNumberInfo = document.getElementById('flightNumberInfo');
+    const routeInfo = document.getElementById('routeInfo');
+    const airportInfo = document.getElementById('airportInfo');
+    const fillingForm = document.getElementById('fillingForm');
+    const ensureAccuracy = document.getElementById('ensureAccuracy');
+    const doubleCheck = document.getElementById('doubleCheck');
+    const viewBookedFlights= document.getElementById('viewBookedFlights');
+    const viewBookedFlightsInfo = document.getElementById('viewBookedFlightsInfo');
+    const signOut = document.getElementById('signOut');
+    const searchBy = document.getElementById('searchBy:');
+    const flightNo =  document.getElementById('flightNo');
+    const flightNoPHolder = document.getElementById('flightNoPHolder');
+    const departurePHolder = document.getElementById('departure');
+    const arrivalPHolder = document.getElementById('arrival');
+    const intervalStartPHolder = document.getElementById('startDate');
+    const intervalEndPHolder = document.getElementById('endDate');
+    const airportPHolder = document.getElementById('airport');
+    const intervalStartPHolder2 = document.getElementById('startDate2');
+    const intervalEndPHolder2 = document.getElementById('endDate2');
+    const route = document.getElementById('routeDropDown');
+    const airport = document.getElementById('airportDropDown');
+    const flightNoText = document.getElementById('flightNo:');
+    const departureInput = document.getElementById('departureInput');
+    const arrivalInput = document.getElementById('arrivalInput');
+    const intervalStartInput = document.getElementById('intervalStartInput');
+    const intervalEndInput = document.getElementById('intervalEndInput'); 
+    const airportInput = document.getElementById('airportText1');
+    const intervalStartInput2 = document.getElementById('intervalStartInput2');
+    const intervalEndInput2 = document.getElementById('intervalEndInput2');
+    const submit = document.getElementById('submit');
+    
+    
+    
+    brandName.innerHTML = getText("brandName");
+    air308FlightSelection.innerHTML = getText("air308FlightSelection");
+    flightSelectionTable.innerHTML = getText("flightSelectionTable");
+    myFlights.innerHTML = getText("myFlights");
+    helpButton.innerHTML = getText("helpButton");
+    flightSelectionHelp.innerHTML = getText("myFlightsHelp");
+    helpInfo.innerHTML = getText("helpInfo");
+    flightSelectionSearchMethod.innerHTML = getText("flightSelectionSearchMethod");
+    searchOptions.innerHTML = getText("searchOptions");
+    flightNumberInfo.innerHTML = getText("flightNumberInfo");
+    routeInfo.innerHTML = getText("routeInfo:");
+    airportInfo.innerHTML = getText("airportInfo:");
+    fillingForm.innerHTML = getText("fillingForm");
+    signOut.innerHTML = getText("signOut");
+    ensureAccuracy.innerHTML = getText("ensureAccuracy");
+    doubleCheck.innerHTML = getText("doubleCheck");
+    flightNo.innerHTML = getText("flightNo");
+    viewBookedFlights.innerHTML = getText("viewBookedFlights");
+    viewBookedFlightsInfo.innerHTML = getText("viewBookedFlightsInfo");
+    searchBy.innerHTML = getText("searchBy:");
+    route.innerHTML = getText("route");
+    airport.innerHTML = getText("airport");
+    flightNoText.innerHTML = getText("flightNo:");
+    departureInput.innerHTML = getText("departure:");
+    arrivalInput.innerHTML = getText("arrival:");
+    intervalStartInput.innerHTML = getText("intervalStart:");
+    intervalEndInput.innerHTML = getText("intervalEnd:");
+    airportInput.innerHTML = getText("airport:");
+    intervalStartInput2.innerHTML = getText("intervalStart:");
+    intervalEndInput2.innerHTML = getText("intervalEnd:");
+    submit.innerHTML = getText("submit");
+
+    flightNoPHolder.setAttribute('placeholder', getText("flightNo"));
+    departurePHolder.setAttribute('placeholder', getText("departurePlace"));
+    arrivalPHolder.setAttribute('placeholder', getText("arrivalPlace"));
+    intervalStartPHolder.setAttribute('placeholder', getText("date"));
+    intervalEndPHolder.setAttribute('placeholder', getText("date"));
+    intervalStartPHolder2.setAttribute('placeholder', getText("date"));
+    intervalEndPHolder2.setAttribute('placeholder', getText("date"));
+    airportPHolder.setAttribute('placeholder', getText("airport"));
+
+}
+// Call the function to initialize language preferences
+document.addEventListener('DOMContentLoaded', handleLanguageChange);
+
+// Add event listener to the language dropdown to handle language change
+document.getElementById('language').addEventListener('change', handleLanguageChange);
+
 
 
 document.getElementById('searchType').addEventListener('change', function() {
     let selectedOption = this.value;
     let inputFields = document.querySelectorAll('.input-field');
     
-    
-
     inputFields.forEach(function(inputField) {
         if (inputField.id === selectedOption + 'Input') {
             inputField.style.display = 'block';
-                   
         } else {
             inputField.style.display = 'none';
         }
     });
 });
 
-document.querySelector('form').addEventListener('submit', function(event) {
+document.querySelector('form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent default form submission
 
     let selectedOption = document.getElementById('searchType').value;
 
-    if (selectedOption === 'flightNo') 
-    {
-        let flightNo = document.getElementById('flightNo').value;
-        window.location.href = `/cs308_proje/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&flightNo=${flightNo}`;
-
+    if (selectedOption === 'flightNo') {
+        let flightNo = document.getElementById('flightNoPHolder').value;
+        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&flightNo=${flightNo}`;
     } 
-    else if (selectedOption === 'route') 
-    {
+    else if (selectedOption === 'route') {
         let departure = document.getElementById('departure').value;
         let arrival = document.getElementById('arrival').value;
-        let depDate = document.getElementById('depDate').value;
-        window.location.href = `/cs308_proje/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&departure=${departure}&arrival=${arrival}&depDate=${depDate}`;
+        let startDate = document.getElementById('startDate').value;
+        let endDate = document.getElementById('endDate').value;
         
-    }
-    else if (selectedOption === 'airportAndDate')
-    {
+        
+        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&departure=${departure}&arrival=${arrival}&startDate=${startDate}&endDate=${endDate}`;
+    } 
+    else if (selectedOption === 'airport') {
         let airport = document.getElementById('airport').value;
-        let depDate2 = document.getElementById('depDate').value;
-        window.location.href = `/cs308_proje/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&airport=${airport}&depDate2=${depDate2}`;
-    }
-    
-});
-
-/*
-document.addEventListener("DOMContentLoaded", function() {
-    let helpButton = document.getElementById("helpButton");
-    helpButton.addEventListener("click", function(event) {
-        event.preventDefault();
-
-        alert("This is a help pop-up!"); 
+        let startDate = document.getElementById('startDate2').value;
+        let endDate = document.getElementById('endDate2').value;
         
-       
-    });
-});*/
+        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&airport=${airport}&startDate2=${startDate}&endDate2=${endDate}`;
+    }
+});
 
 document.addEventListener('DOMContentLoaded', (event) => {
     var helpButton = document.getElementById('helpButton');

@@ -51,8 +51,8 @@ const dictionary = {
     },
     "filteringFlightsInfo":
     {
-        [languages.turkish]: "Tablodaki parametrelere göre uçuşları filtrelemek için giriş alanlarını kullanın. Filtreleri uygulamak için \"UYGULA\" düğmesine tıklayın.",
-        [languages.english]: "Use the input fields to filter flights by parameters in the table. Click the \"APPLY\" button to apply the filters.",
+        [languages.turkish]: "Tablodaki parametrelere göre uçuşları filtrelemek için giriş alanlarını kullanın. Filtreleri uygulamak için \"Uygula\" düğmesine tıklayın.",
+        [languages.english]: "Use the input fields to filter flights by parameters in the table. Click the \"Apply\" button to apply the filters.",
     },
     "tableDisplay":
     {

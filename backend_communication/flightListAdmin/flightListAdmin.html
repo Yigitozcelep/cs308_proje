@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title id="air308FlightsAdmin">AIR308 Flights Admin
+            
+        </title>
+        <link rel="stylesheet" href="flightListAdmin.css">
+    </head>
+
+    <body>
+
+        <div class="top-bar">
+            <div class="logo" id="brandName">
+                AIR308 Airlines
+            </div>
+            <div class="language-select">
+                <select id="language" name="language">
+                    <option value="english">EN</option>
+                    <option value="turkish">TR</option>
+                </select>
+            </div>
+            <a href="#" class="top-bar-item" id="helpButton">Help</a>
+            <div id="helpPopup" class="help-popup" style="display: none;">
+                <div class="help-content">
+                  <span class="close">&times;</span>
+                    <h2 id="flightList">Welcome to Flights List Help</h2>
+                    <p id="flightListAdmin">In the "Flights List" page, you can browse and filter available flights for administration purposes.</p>
+                    <h3 id="filteringFlights">Filtering Flights</h3>
+                    <p id="filteringFlightsInfo">Use the input fields to filter flights by parameters in the table. Click the "APPLY" button to apply the filters.</p>
+                    <h3 id="tableDisplay">Table Display</h3>
+                    <p id="adminTableDisplayInfo">The table displays available flights with columns for Flight No, Plane ID, Departure Date, Departure Place, Departure Airport, Arrival Date, Arrival Place, Arrival Airport and Vehicle Type. You can click on the column headers to sort the table.</p>
+                    <h3 id="flightManagement">Flight Management</h3>
+                    <p id="flightManagementInfo">To manage flights, you can add a new flight or update an existing one by clicking on the respective buttons provided.</p>
+                    <h3 id="flightSelection">Flight Selection</h3>
+                    <p id="flightSelectionInfo">To select a flight for further actions, such as editing and viewing detailed info, click on the "Select" button next to the corresponding row in the table.</p>
+                    <h3 id="flightDeletion">Flight Deletion</h3>
+                    <p id="flightDeletionInfo">To delete a flight, click on the "Delete" button next to the corresponding row in the table.</p>
+                </div>
+              </div>
+            <a href="signout.php" class="top-bar-item" id="signOut">Sign Out</a>
+        </div>
+
+        <div class="main-container">
+            <div class="left">
+
+                <div class="filters-container">
+                    <div>
+                    <div id="filterBy">Filter by:</div>
+                    <input id="flightNo-search" class="name-search" type="text" placeholder="Flight No">
+                    <input id="planeId-search" class="input-search" type="text" placeholder="Plane Id">
+                    <input id="departureDate-search" class="input-search" type="text" placeholder="Departure Date">
+                    <input id="departurePlace-search" class="input-search" type="text" placeholder="Departure Place">
+                    <input id="departureAirport-search" class="input-search" type="text" placeholder="Departure Airport">
+                    <input id="arrivalDate-search" class="input-search" type="text" placeholder="Arrival Date">
+                    <input id="arrivalPlace-search" class="input-search" type="text" placeholder="Arrival Place">
+                    <input id="arrivalAirport-search" class="input-search" type="text" placeholder="Arrival Airport">
+                    <input id="vehicleType-search" class="input-search" type="text" placeholder="Vehicle Type">
+                    <button id="apply" class="apply" type="submit">APPLY</button>
+                    </div>
+                
+                </div>
+
+            </div>
+
+            <div class="middle">
+                
+                <div class="table-container" id="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th data-column="FlightNo" data-order="desc" id="flightNo"></th>
+                            <th data-column="PlaneId" data-order="desc" id="planeId"></th>
+                            <th data-column="DepartureDate" data-order="desc" id="departureDate"></th>
+                            <th data-column="DeparturePlace" data-order="desc" id="departurePlace"></th>
+                            <th data-column="DepartureAirport" data-order="desc" id="departureAirport"></th>
+                            <th data-column="ArrivalDate" data-order="desc" id="arrivalDate"></th>
+                            <th data-column="ArrivalPlace" data-order="desc" id="arrivalPlace"></th>
+                            <th data-column="ArrivalAirport" data-order="desc" id="arrivalAirport"></th>
+                            <th data-column="VehicleType" data-order="desc" id="vehicleType"></th>                                                                                                            
+                        </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <script type = "module" src="flightListAdmin.js"></script>
+                            <script type="module" src="../dictionary.js"></script>                 
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="page-container">
+                    <div id="page-wrapper"></div>
+                </div>
+
+                
+
+                
+
+            </div>
+         
+
+            <div class="right"></div>
+
+            <div>
+                <div class="buttons-container">
+                    <button class="button" id="addFlight">Add a Flight</button>
+                    <button class="button" id="updateFlight">Update a Flight</button>
+
+                        
+                </div>
+            </div>
+            
+        </div>
+          
+    </body>
+</html>      

@@ -1,56 +1,114 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var myArray = [
-        { 'BookingNo': 'BK001', 'FlightNo': 'FN001', 'DepartureDate': '2024-05-01', 'DeparturePlace': 'New York', 'ArrivalDate': '2024-05-01', 'ArrivalPlace': 'Los Angeles', 'SeatType': 'First Class', 'SeatNumber': '1A' },
-        { 'BookingNo': 'BK002', 'FlightNo': 'FN002', 'DepartureDate': '2024-05-02', 'DeparturePlace': 'Los Angeles', 'ArrivalDate': '2024-05-02', 'ArrivalPlace': 'Chicago', 'SeatType': 'Business Class', 'SeatNumber': '3B' },
-        { 'BookingNo': 'BK003', 'FlightNo': 'FN003', 'DepartureDate': '2024-05-03', 'DeparturePlace': 'Chicago', 'ArrivalDate': '2024-05-03', 'ArrivalPlace': 'Miami', 'SeatType': 'Economy Class', 'SeatNumber': '15C' },
-        { 'BookingNo': 'BK004', 'FlightNo': 'FN004', 'DepartureDate': '2024-05-04', 'DeparturePlace': 'Miami', 'ArrivalDate': '2024-05-04', 'ArrivalPlace': 'Dallas', 'SeatType': 'First Class', 'SeatNumber': '2A' },
-        { 'BookingNo': 'BK005', 'FlightNo': 'FN005', 'DepartureDate': '2024-05-05', 'DeparturePlace': 'Dallas', 'ArrivalDate': '2024-05-05', 'ArrivalPlace': 'Seattle', 'SeatType': 'Business Class', 'SeatNumber': '4B' },
-        { 'BookingNo': 'BK006', 'FlightNo': 'FN006', 'DepartureDate': '2024-05-06', 'DeparturePlace': 'Seattle', 'ArrivalDate': '2024-05-06', 'ArrivalPlace': 'New York', 'SeatType': 'Economy Class', 'SeatNumber': '16C' },
-        { 'BookingNo': 'BK007', 'FlightNo': 'FN007', 'DepartureDate': '2024-05-07', 'DeparturePlace': 'New York', 'ArrivalDate': '2024-05-07', 'ArrivalPlace': 'London', 'SeatType': 'First Class', 'SeatNumber': '1A' },
-        { 'BookingNo': 'BK008', 'FlightNo': 'FN008', 'DepartureDate': '2024-05-08', 'DeparturePlace': 'London', 'ArrivalDate': '2024-05-08', 'ArrivalPlace': 'Paris', 'SeatType': 'Business Class', 'SeatNumber': '3B' },
-        { 'BookingNo': 'BK009', 'FlightNo': 'FN009', 'DepartureDate': '2024-05-09', 'DeparturePlace': 'Paris', 'ArrivalDate': '2024-05-09', 'ArrivalPlace': 'Rome', 'SeatType': 'Economy Class', 'SeatNumber': '15C' },
-        { 'BookingNo': 'BK010', 'FlightNo': 'FN010', 'DepartureDate': '2024-05-10', 'DeparturePlace': 'Rome', 'ArrivalDate': '2024-05-10', 'ArrivalPlace': 'Athens', 'SeatType': 'First Class', 'SeatNumber': '2A' },
-        { 'BookingNo': 'BK011', 'FlightNo': 'FN011', 'DepartureDate': '2024-05-11', 'DeparturePlace': 'Athens', 'ArrivalDate': '2024-05-11', 'ArrivalPlace': 'Tokyo', 'SeatType': 'Business Class', 'SeatNumber': '4B' },
-        { 'BookingNo': 'BK012', 'FlightNo': 'FN012', 'DepartureDate': '2024-05-12', 'DeparturePlace': 'Tokyo', 'ArrivalDate': '2024-05-12', 'ArrivalPlace': 'Sydney', 'SeatType': 'Economy Class', 'SeatNumber': '16C' },
-        { 'BookingNo': 'BK013', 'FlightNo': 'FN013', 'DepartureDate': '2024-05-13', 'DeparturePlace': 'Sydney', 'ArrivalDate': '2024-05-13', 'ArrivalPlace': 'Hong Kong', 'SeatType': 'First Class', 'SeatNumber': '1A' },
-        { 'BookingNo': 'BK014', 'FlightNo': 'FN014', 'DepartureDate': '2024-05-14', 'DeparturePlace': 'Hong Kong', 'ArrivalDate': '2024-05-14', 'ArrivalPlace': 'Dubai', 'SeatType': 'Business Class', 'SeatNumber': '3B' },
-        { 'BookingNo': 'BK015', 'FlightNo': 'FN015', 'DepartureDate': '2024-05-15', 'DeparturePlace': 'Dubai', 'ArrivalDate': '2024-05-15', 'ArrivalPlace': 'Mumbai', 'SeatType': 'Economy Class', 'SeatNumber': '15C' },
-        { 'BookingNo': 'BK016', 'FlightNo': 'FN016', 'DepartureDate': '2024-05-16', 'DeparturePlace': 'Mumbai', 'ArrivalDate': '2024-05-16', 'ArrivalPlace': 'Singapore', 'SeatType': 'First Class', 'SeatNumber': '2A' },
-        { 'BookingNo': 'BK017', 'FlightNo': 'FN017', 'DepartureDate': '2024-05-17', 'DeparturePlace': 'Singapore', 'ArrivalDate': '2024-05-17', 'ArrivalPlace': 'Bangkok', 'SeatType': 'Business Class', 'SeatNumber': '4B' },
-        { 'BookingNo': 'BK018', 'FlightNo': 'FN018', 'DepartureDate': '2024-05-18', 'DeparturePlace': 'Bangkok', 'ArrivalDate': '2024-05-18', 'ArrivalPlace': 'Seoul', 'SeatType': 'Economy Class', 'SeatNumber': '16C' },
-        { 'BookingNo': 'BK019', 'FlightNo': 'FN019', 'DepartureDate': '2024-05-19', 'DeparturePlace': 'Seoul', 'ArrivalDate': '2024-05-19', 'ArrivalPlace': 'Beijing', 'SeatType': 'First Class', 'SeatNumber': '1A' },
-        { 'BookingNo': 'BK020', 'FlightNo': 'FN020', 'DepartureDate': '2024-05-20', 'DeparturePlace': 'Beijing', 'ArrivalDate': '2024-05-20', 'ArrivalPlace': 'Shanghai', 'SeatType': 'Business Class', 'SeatNumber': '3B' },
-        { 'BookingNo': 'BK021', 'FlightNo': 'FN021', 'DepartureDate': '2024-05-21', 'DeparturePlace': 'Shanghai', 'ArrivalDate': '2024-05-21', 'ArrivalPlace': 'Hong Kong', 'SeatType': 'Economy Class', 'SeatNumber': '15C' },
-        { 'BookingNo': 'BK022', 'FlightNo': 'FN022', 'DepartureDate': '2024-05-22', 'DeparturePlace': 'Hong Kong', 'ArrivalDate': '2024-05-22', 'ArrivalPlace': 'Tokyo', 'SeatType': 'First Class', 'SeatNumber': '2A' },
-        { 'BookingNo': 'BK023', 'FlightNo': 'FN023', 'DepartureDate': '2024-05-23', 'DeparturePlace': 'Tokyo', 'ArrivalDate': '2024-05-23', 'ArrivalPlace': 'Sydney', 'SeatType': 'Business Class', 'SeatNumber': '4B' },
-        { 'BookingNo': 'BK024', 'FlightNo': 'FN024', 'DepartureDate': '2024-05-24', 'DeparturePlace': 'Sydney', 'ArrivalDate': '2024-05-24', 'ArrivalPlace': 'Hong Kong', 'SeatType': 'Economy Class', 'SeatNumber': '16C' },
-        { 'BookingNo': 'BK025', 'FlightNo': 'FN025', 'DepartureDate': '2024-05-25', 'DeparturePlace': 'Hong Kong', 'ArrivalDate': '2024-05-25', 'ArrivalPlace': 'Singapore', 'SeatType': 'First Class', 'SeatNumber': '1A' },
-        { 'BookingNo': 'BK026', 'FlightNo': 'FN026', 'DepartureDate': '2024-05-26', 'DeparturePlace': 'Singapore', 'ArrivalDate': '2024-05-26', 'ArrivalPlace': 'Bangkok', 'SeatType': 'Business Class', 'SeatNumber': '3B' },
-        { 'BookingNo': 'BK027', 'FlightNo': 'FN027', 'DepartureDate': '2024-05-27', 'DeparturePlace': 'Bangkok', 'ArrivalDate': '2024-05-27', 'ArrivalPlace': 'Seoul', 'SeatType': 'Economy Class', 'SeatNumber': '15C' },
-        { 'BookingNo': 'BK028', 'FlightNo': 'FN028', 'DepartureDate': '2024-05-28', 'DeparturePlace': 'Seoul', 'ArrivalDate': '2024-05-28', 'ArrivalPlace': 'Beijing', 'SeatType': 'First Class', 'SeatNumber': '2A' },
-        { 'BookingNo': 'BK029', 'FlightNo': 'FN029', 'DepartureDate': '2024-05-29', 'DeparturePlace': 'Beijing', 'ArrivalDate': '2024-05-29', 'ArrivalPlace': 'Shanghai', 'SeatType': 'Business Class', 'SeatNumber': '4B' },
-        { 'BookingNo': 'BK030', 'FlightNo': 'FN030', 'DepartureDate': '2024-05-30', 'DeparturePlace': 'Shanghai', 'ArrivalDate': '2024-05-30', 'ArrivalPlace': 'Hong Kong', 'SeatType': 'Economy Class', 'SeatNumber': '16C' }
-    
-    ];
+import { UserCommunication } from "../backend_communication/users/users_communication.js";
 
+import { dummyUsers } from "../backend_communication/dummy_data.js";
+
+import { getText } from "../dictionary.js";
+
+
+
+
+
+function handleLanguageChange() {
+    let lang = document.getElementById('language').value;
+    localStorage.setItem("language", lang);
+    
+    const air308myFlights = document.getElementById('air308myFlights');
+    const brandName = document.getElementById('brandName');
+    const apply = document.getElementById('apply');
+    const helpButton = document.getElementById('helpButton');
+    const myFlightsWelcomeHeader = document.getElementById('myFlightsWelcomeHeader');
+    const myFlightsBookingInfo = document.getElementById('myFlightsBookingInfo');
+    const filteringFlights = document.getElementById('filteringFlights');
+    const filteringFlightsInfo = document.getElementById('filteringFlightsInfo');
+    const tableDisplay = document.getElementById('tableDisplay');
+    const myFlightsTableDisplayInfo = document.getElementById('myFlightsTableDisplayInfo');
+    const cancellingFlights = document.getElementById('cancellingFlights');
+    const myFlightsCancellingFlightsInfo = document.getElementById('myFlightsCancellingFlightsInfo');
+    const signOut = document.getElementById('signOut');
+    const filterBy = document.getElementById('filterBy');
+    const bookingNo_search = document.getElementById('bookingNo-search');
+    const flightNo_search = document.getElementById('flightNo-search');
+    const departureDate_search = document.getElementById('departureDate-search');
+    const departurePlace_search = document.getElementById('departurePlace-search');
+    const departureAirport_search = document.getElementById('departureAirport-search');
+    const arrivalDate_search = document.getElementById('arrivalDate-search');
+    const arrivalPlace_search = document.getElementById('arrivalPlace-search');
+    const arrivalAirport_search = document.getElementById('arrivalAirport-search');
+    const seatType_search = document.getElementById('seatType-search');
+    const seatNumber_search = document.getElementById('seatNumber-search');
+    const bookingNo = document.getElementById('bookingNo'); 
+    const flightNo =  document.getElementById('flightNo');
+    const departureDate = document.getElementById('departureDate');
+    const departurePlace = document.getElementById('departurePlace');
+    const departureAirport = document.getElementById('departureAirport');
+    const arrivalDate =  document.getElementById('arrivalDate');
+    const arrivalPlace =  document.getElementById('arrivalPlace');
+    const arrivalAirport =  document.getElementById('arrivalAirport');
+    const seatType = document.getElementById('seatType');
+    const seatNumber = document.getElementById('seatNumber');
+    const cancelButtons = document.getElementsByClassName('delete-row');
+    
+    
+    brandName.innerHTML = getText("brandName");
+    air308myFlights.innerHTML = getText("air308myFlights");
+    apply.innerHTML = getText("apply");
+    for(let item of cancelButtons)
+        item.innerHTML = getText("cancelButton");
+
+    helpButton.innerHTML = getText("helpButton");
+    myFlightsWelcomeHeader.innerHTML = getText("myFlightsHelp");
+    myFlightsBookingInfo.innerHTML = getText("myFlightsBookingInfo");
+    filteringFlights.innerHTML = getText("filteringFlights");
+    filteringFlightsInfo.innerHTML = getText("filteringFlightsInfo");
+    tableDisplay.innerHTML = getText("tableDisplay");
+    myFlightsTableDisplayInfo.innerHTML = getText("myFlightsTableDisplayInfo");
+    cancellingFlights.innerHTML = getText("cancellingFlights");
+    myFlightsCancellingFlightsInfo.innerHTML = getText("myFlightsCancellingFlightsInfo");
+    signOut.innerHTML = getText("signOut");
+    filterBy.innerHTML = getText("filterBy");
+    bookingNo.innerHTML = getText("bookingNo");
+    flightNo.innerHTML = getText("flightNo");
+    departureDate.innerHTML = getText("departureDate");
+    departurePlace.innerHTML = getText("departurePlace");
+    departureAirport.innerHTML = getText("departureAirport");
+    arrivalDate.innerHTML = getText("arrivalDate");
+    arrivalPlace.innerHTML = getText("arrivalPlace");
+    arrivalAirport.innerHTML = getText("arrivalAirport");
+    seatType.innerHTML = getText("seatType");
+    seatNumber.innerHTML = getText("seatNumber");
+    bookingNo_search.setAttribute('placeholder', getText("bookingNo"));
+    flightNo_search.setAttribute('placeholder', getText("flightNo"));
+    departureDate_search.setAttribute('placeholder', getText("departureDate"));
+    departurePlace_search.setAttribute('placeholder', getText("departurePlace"));
+    departureAirport_search.setAttribute('placeholder', getText("departureAirport"));
+    arrivalDate_search.setAttribute('placeholder', getText("arrivalDate"));
+    arrivalPlace_search.setAttribute('placeholder', getText("arrivalPlace"));
+    arrivalAirport_search.setAttribute('placeholder', getText("arrivalAirport"));
+    seatType_search.setAttribute('placeholder', getText("seatType"));
+    seatNumber_search.setAttribute('placeholder', getText("seatNumber"));
+}
+// Call the function to initialize language preferences
+document.addEventListener('DOMContentLoaded', handleLanguageChange);
+
+// Add event listener to the language dropdown to handle language change
+document.getElementById('language').addEventListener('change', handleLanguageChange);
+
+document.addEventListener('DOMContentLoaded', async function () {
+    
+    
+
+    const currUser = dummyUsers[1];
+    let myFlights = currUser.flights;
+    
     var state = {
 
-        'querySet': myArray,
+        'querySet': myFlights,
 
         'page': 1,
         'rows':10,
 
     }
-    function deleteRow(bookingNo) {
-        // Remove the corresponding data from myArray
-        myArray = myArray.filter(flight => flight.BookingNo !== bookingNo);
-        
-        // Update localStorage to reflect the changes
-        localStorage.setItem('myArray', JSON.stringify(myArray));
-
-        // Update state.querySet to reflect the changes
-        state.querySet = myArray.slice((state.page - 1) * state.rows, state.page * state.rows);
-    }
+    
 
     buildTable()
 
@@ -85,45 +143,101 @@ document.addEventListener('DOMContentLoaded', function () {
             wrapper.appendChild(button);
         }
     }
-    function deleteRow(index) {
-        myArray.splice(index, 1);
-    }
+    
     function buildTable() {
         var data = pagination(state.querySet, state.page, state.rows);
         var tableBody = document.getElementById('table-body');
         tableBody.innerHTML = '';  
 
         data.querySet.forEach(function(item) {
+            console.log(item);
+            let i = 0;
+            const date = new Date(item.flightData.getDepartureTime());
+            let formattedDateDeparture = date.toString().replace(/\sGMT\+\d{4}\s.*/, '');
+            formattedDateDeparture = formattedDateDeparture.slice(0, -3);
+            const date2 = new Date(item.flightData.getLandingTime());
+            let formattedDateArrival = date2.toString().replace(/\sGMT\+\d{4}\s.*/, '');
+            formattedDateArrival = formattedDateArrival.slice(0, -3);     
             var row = `<tr>
-                <td>${item.BookingNo}</td>
-                <td>${item.FlightNo}</td>
-                <td>${item.DepartureDate}</td>
-                <td>${item.DeparturePlace}</td>
-                <td>${item.ArrivalDate}</td>
-                <td>${item.ArrivalPlace}</td>
-                <td>${item.SeatType}</td>
-                <td>${item.SeatNumber}</td>
-                <td><button class="delete-row">Delete</button></td>
+               <td>${item.purchaseId}</td>
+                <td>${item.flightData.getFlightId()}</td> 
+                <td>${formattedDateDeparture}</td>
+                <td>${item.flightData.getFrom()}</td>
+                <td>${item.flightData.getDedepartureAirport().airportName}</td>
+                <td>${formattedDateArrival}</td>
+                <td>${item.flightData.getGoto()}</td>
+                <td>${item.flightData.getLandingAirport().airportName }</td>
+                <td>${item.userSeat.getSeatType()}</td>
+                <td>${item.userSeat.getSeatPosition()}</td>
+                <td><button class="delete-row" data-item="${item}">Cancel</button></td>
             </tr>`;
             tableBody.innerHTML += row;
+            i++;
+            
         });
 
         pageButtons(data.pages);
 
-        document.querySelectorAll('.delete-row').forEach((button, index) => {
-            button.addEventListener('click', function() {
-                var row = this.closest('tr');
-                var rowIndex = Array.from(row.parentNode.children).indexOf(row);
-                deleteRow(rowIndex); // Pass rowIndex to the deleteRow function
-                row.remove();
+        document.querySelectorAll('.delete-row').forEach(button => {
+            button.addEventListener('click', async function() {
+                const item = this.dataset.item;
+                await UserCommunication.refundSeat(item);
+                // Remove the row from the table
+                this.closest('tr').remove();
             });
-        }); 
+        });
     }
 
     function compareValues(key, order = 'asc') {
         return function innerSort(a, b) {
-            const varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
-            const varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
+            let varA;
+            let varB;
+            if(key == "FlightNo"){ 
+                varA = a.flightData.getFlightId().substring(2);              
+                varB = b.flightData.getFlightId().substring(2);
+                
+             }
+            else if(key == "BookingNo"){ 
+                varA = a.purchaseId;
+                varB = b.purchaseId;
+            }
+            else if(key == "DepartureDate"){ 
+                const date = new Date(a.flightData.getDepartureTime());             
+                varA = date;
+                const date2 = new Date(b.flightData.getDepartureTime());
+                varB = date2;
+            }
+            else if(key == "DeparturePlace"){ 
+                varA = a.flightData.getFrom();
+                varB = b.flightData.getFrom();
+            }
+            else if(key == "DepartureAirport"){ 
+                varA = a.flightData.getDedepartureAirport().airportName;
+                varB = b.flightData.getDedepartureAirport().airportName;
+            }
+            else if(key == "ArrivalDate"){
+                const date = new Date(a.flightData.getLandingTime());              
+                varA = date;
+                const date2 = new Date(b.flightData.getLandingTime());                    
+                varB = date2;
+
+             }
+            else if(key == "ArrivalPlace"){ 
+                varA = a.flightData.getGoto();
+                varB = b.flightData.getGoto();
+            }
+            else if(key == "ArrivalAirport"){ 
+                varA = a.flightData.getLandingAirport().airportName;
+                varB = b.flightData.getLandingAirport().airportName;
+            }
+            else if(key == "SeatType"){ 
+                varA = a.userSeat.getSeatType();
+                varB = b.userSeat.getSeatType();  
+            }
+            else if(key == "SeatNumber"){ 
+                varA = a.userSeat.getSeatPosition();
+                varB = b.userSeat.getSeatPosition(); 
+            }
 
             let comparison = 0;
             if (varA > varB) {
@@ -155,15 +269,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function searchTable(filters) {
-        return myArray.filter(item => {
-            return (!filters.BookingNo || item.BookingNo.toLowerCase().includes(filters.BookingNo.toLowerCase())) &&
-                (!filters.FlightNo || item.FlightNo.toLowerCase().includes(filters.FlightNo.toLowerCase())) &&
-                (!filters.DepartureDate|| item.DepartureDate.toLowerCase().includes(filters.DepartureDate.toLowerCase())) &&
-                (!filters.DeparturePlace || item.DeparturePlace.toString() === filters.DeparturePlace) &&
-                (!filters.ArrivalDate || item.ArrivalDate.toLowerCase() === filters.ArrivalDate.toLowerCase()) &&
-                (!filters.ArrivalPlace || item.ArrivalPlace.toLowerCase().includes(filters.ArrivalPlace.toLowerCase())) &&
-                (!filters.SeatType || item.SeatType.toLowerCase().includes(filters.SeatType.toLowerCase())) &&
-                (!filters.SeatNumber || item.SeatNumber.toLowerCase().includes(filters.SeatNumber.toLowerCase()));
+        return myFlights.filter(item => {
+            const date = new Date(item.flightData.getDepartureTime());
+            let formattedDateDeparture = date.toString().replace(/\sGMT\+\d{4}\s.*/, '');
+            formattedDateDeparture = formattedDateDeparture.slice(0, -3);
+            const date2 = new Date(item.flightData.getLandingTime());
+            let formattedDateArrival = date2.toString().replace(/\sGMT\+\d{4}\s.*/, '');
+            formattedDateArrival = formattedDateArrival.slice(0, -3);  
+
+            return (!filters.BookingNo || item.purchaseId.toLowerCase().includes(filters.BookingNo.toLowerCase())) &&
+                (!filters.FlightNo || item.flightData.getFlightId().toLowerCase().includes(filters.FlightNo.toLowerCase())) &&
+                (!filters.DepartureDate|| formattedDateDeparture.toLowerCase().includes(filters.DepartureDate.toLowerCase())) &&
+                (!filters.DeparturePlace || item.flightData.getFrom().toString() === filters.DeparturePlace) &&
+                (!filters.DepartureAirport || item.flightData.getDedepartureAirport().airportName.toString() === filters.DepartureAirport) && 
+                (!filters.ArrivalDate || formattedDateArrival.toLowerCase() === filters.ArrivalDate.toLowerCase()) &&
+                (!filters.ArrivalPlace || item.flightData.getGoto().toLowerCase().includes(filters.ArrivalPlace.toLowerCase())) &&
+                (!filters.ArrivalAirport || item.flightData.getLandingAirport().airportName.toString() === filters.ArrivalAirport) && 
+                (!filters.SeatType || item.userSeat.getSeatType().toLowerCase().includes(filters.SeatType.toLowerCase())) &&
+                (!filters.SeatNumber || item.userSeat.getSeatPosition().toLowerCase().includes(filters.SeatNumber.toLowerCase()));
         });
     }
 
@@ -174,8 +297,10 @@ document.addEventListener('DOMContentLoaded', function () {
             FlightNo: document.getElementById('flightNo-search').value,
             DepartureDate: document.getElementById('departureDate-search').value,
             DeparturePlace: document.getElementById('departurePlace-search').value,
+            DepartureAirport: document.getElementById('departureAirport-search').value,
             ArrivalDate: document.getElementById('arrivalDate-search').value,
             ArrivalPlace: document.getElementById('arrivalPlace-search').value,
+            ArrivalAirport: document.getElementById('arrivalAirport-search').value,
             SeatType: document.getElementById('seatType-search').value,
             SeatNumber: document.getElementById('seatNumber-search').value,
         };
@@ -195,10 +320,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var helpButton = document.getElementById('helpButton');
     var helpPopup = document.getElementById('helpPopup');
     var closeSpan = document.getElementsByClassName('close')[0];
-
+    
     // When the help button is clicked, show the pop-up
     helpButton.onclick = function() {
         helpPopup.style.display = "flex";
+        
+        console.log(getText("myFlightsHelp"));
     }
 
     // When the close button (x) inside the pop-up is clicked, hide the pop-up

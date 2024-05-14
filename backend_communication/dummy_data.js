@@ -76,7 +76,7 @@ const createDummyFlightData = () => {
         const r1 = Math.floor(Math.random() * 10);
         let r2 = Math.floor(Math.random() * 10);
         if (r2 == r1) r2 = (r1 + 1) % 10;
-        
+        let planeTypeId = i % 10;
         let r3 = Math.floor(Math.random() * 10);
         let r4 = Math.floor(Math.random() * 10);
         if (r3 == r4) r3 = (r4 + 1) % 10;
@@ -87,11 +87,11 @@ const createDummyFlightData = () => {
         const landingAirport    = airports[r4];
         const departureTime     = getRandomFutureDate();
         const landingTime       = new Date(departureTime.getTime() + (2 + i) * 60 * 60 * 1000);
-        const planeType         = planeTypes[i];
+        const planeType         = planeTypes[planeTypeId];
         const flightTime        = new Date(0, 0, 0, 2 + i);
         const airlineCompany    = airlineCompanies[i % 10];
         const flightId          = "TK" + i;
-        const plaineId          = i;
+        const planeId          = i;
         dummyFlightData.push(new flights.FlightData(from, goTo, departureAirport, landingAirport, departureTime, landingTime, planeType, flightTime, airlineCompany, flightId, i));
     }
     return dummyFlightData;

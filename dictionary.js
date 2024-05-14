@@ -41,7 +41,7 @@ const dictionary = {
     },
     "myFlightsBookingInfo":
     {
-        [languages.turkish]: "\"Uçuşlarım\" sayfasında, rezerve ettiğiniz uçuşlarınızı görüntüleyebilir ve yönetebilirsiniz.",
+        [languages.turkish]: "\"Uçuşlarım\" Sayfasında, rezerve ettiğiniz uçuşlarınızı görüntüleyebilir ve yönetebilirsiniz.",
         [languages.english]: "In the \"My Flights\" page, you can view and manage your booked flights.",
     },
     "filteringFlights":

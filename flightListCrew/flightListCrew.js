@@ -42,6 +42,7 @@ function handleLanguageChange() {
     const seatType = document.getElementById('seatType');
     const seatNumber = document.getElementById('seatNumber');
     const selectButtons = document.getElementsByClassName('select-row');
+    const refuseButtons = document.getElementsByClassName('refuse-row');
     
     
     brandName.innerHTML = getText("brandName");
@@ -49,7 +50,8 @@ function handleLanguageChange() {
     apply.innerHTML = getText("apply");
     for(let item of selectButtons)
         item.innerHTML = getText("selectButton");
-
+    for(let item of refuseButtons)
+        item.innerHTML = getText("refuseButton");
     helpButton.innerHTML = getText("helpButton");
     flightList.innerHTML = getText("flightList");
     flightListCrewInfo.innerHTML = getText("flightListCrewInfo");
@@ -164,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${item.userSeat.getSeatType()}</td>
                 <td>${item.userSeat.getSeatPosition()}</td>
                 <td><button class="select-row" data-flight-id="${item.flightData.getFlightId()}">Select</button></td>
+                <td><button class="refuse-row" data-flight-id="${item.flightData.getFlightId()}">Refuse</button></td>
             </tr>`;
             tableBody.innerHTML += row;
         });

@@ -2,58 +2,58 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>308 Airlines</title>    
+    <title id="air308FlightSelection"></title>    
     <link href="flightSelection.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 
     <div class="top-bar">
-        <div class="logo">
-            AIR308 Airlines
+        <div class="logo" id="brandName">
+            
         </div>
-        <a href="/cs308_proje/myFlightsPassenger/myFlightsPassenger.html" class="top-bar-item">My Flights</a>
+        <a href="/myFlightsPassenger/myFlightsPassenger.html" class="top-bar-item" id="myFlights"></a>
         
         <div class="language-select">
             <select id="language" name="language">
-                <option value="EN">EN</option>
-                <option value="TR">TR</option>
+                <option value="english" selected>EN</option>
+                <option value="turkish">TR</option>
             </select>
         </div>
-        <a href="#" class="top-bar-item" id="helpButton">Help</a>
+        <a href="#" class="top-bar-item" id="helpButton"></a>
         <div id="helpPopup" class="help-popup" style="display: none;">
             <div class="help-content">
               <span class="close">&times;</span>
-                <h2>Welcome to Flight Selection Help</h2>
-                <p>Here's some helpful information:</p>
-                <h3>Search Options</h3>
-                <p>Choose your preferred search method:</p>
+                <h2 id="flightSelectionHelp"></h2>
+                <p id="helpInfo"></p>
+                <h3 id="searchOptions"></h3>
+                <p id="flightSelectionSearchMethod"></p>
                 <ul>
-                    <li><strong>Flight Number:</strong> Search for a specific flight by its flight number.</li>
-                    <li><strong>Route:</strong> Enter departure and arrival destinations along with the date to search for flights on that route.</li>
-                    <li><strong>Airport and Date:</strong> Search for flights departing from or arriving at a specific airport on a particular date.</li>
+                    <li id="flightNumberInfo"></li>
+                    <li id="routeInfo"></li>
+                    <li id="airportInfo"></li>
                 </ul>
-                <h3>Filling Out the Form</h3>
-                <p>Ensure the accuracy of the information you provide:</p>
+                <h3 id="fillingForm"></h3>
+                <p id="ensureAccuracy"></p>
                 <ul>
-                    <li>Double-check flight numbers, airport codes, and dates to avoid errors.</li>
+                    <li id="doubleCheck"></li>
                 </ul>
-                <h3>Viewing Booked Flights</h3>
-                <p>Click on "My Flights" to view your booked flights and manage your bookings.</p>
+                <h3 id="viewBookedFlights"></h3>
+                <p id="viewBookedFlightsInfo"></p>
             </div>
           </div>
-        <a href="signout.php" class="top-bar-item">Sign Out</a>
+        <a href="signout.php" class="top-bar-item" id="signOut"></a>
     </div>
     
     <div id="form">
         <form>
-            <h2>FLIGHT SELECTION</h2>
+            <h2 id="flightSelectionTable"></h2>
             <div>
-                <label for="searchType">Search By:</label>
+                <label for="searchType" id="searchBy:"></label>
                 <select id="searchType" name="searchType">
-                    <option value="flightNo" selected>Flight No</option>
-                    <option value="route">Route</option>
-                    <option value="airportAndDate">Airport and Date</option>
+                    <option value="flightNo" selected id="flightNo"></option>
+                    <option value="route" id="routeDropDown"></option>
+                    <option value="airport" id="airportDropDown"></option>
                 </select>
             </div>
             
@@ -61,25 +61,31 @@
         
             
             <div id="flightNoInput" class="input-field" style="display:none;">
-                <label for="flightNo">Flight No:</label>
-                <input type="text" id="flightNo" name="flightNo" placeholder="Flight No.">
+                <label for="flightNo" id="flightNo:"></label>
+                <input type="text" id="flightNoPHolder" name="flightNo" placeholder="Flight No">
             </div>
             
             <div id="routeInput" class="input-field" style="display:none;">
-                <label for="departure">Departure:</label>
+                <label for="departure" id="departureInput"></label>
                 <input type="text" id="departure" name="departure" placeholder="Departure">
-                <label for="arrival">Arrival:</label>
+                <label for="arrival" id="arrivalInput"></label>
                 <input type="text" id="arrival" name="arrival" placeholder="Arrival">
-                <label for="depDate">Date:</label>
-                <input type="text" id="depDate" name="depDate" placeholder="Date">
+                <label for="startDate" id="intervalStartInput"></label>
+                <input type="text" id="startDate" name="startDate" placeholder="Date">
+                <label for="endDate" id="intervalEndInput"></label>
+                <input type="text" id="endDate" name="endDate" placeholder="Date">
             </div>
             
-            <div id="airportAndDateInput" class="input-field" style="display:none;">
-                <label for="airport">Airport:</label>
+            <div id="airportInput" class="input-field" style="display:none;">
+                <label for="airport" id="airportText1"></label>
                 <input type="text" id="airport" name="airport" placeholder="Airport">
-                <label for="date">Date:</label>
-                <input type="text" id="depDate" name="depDate" placeholder="Date">
+                <label for="startDate2" id="intervalStartInput2"></label>
+                <input type="text" id="startDate2" name="startDate2" placeholder="Date">
+                <label for="endDate2" id="intervalEndInput2"></label>
+                <input type="text" id="endDate2" name="endDate2" placeholder="Date">
             </div>
+
+            
                         
             <br>
             
@@ -89,6 +95,7 @@
         
         </form>
     </div>
-    <script src="flightSelection.js"></script>
+    <script type="module" src="flightSelection.js"></script>
+    <script type="module" src="../dictionary.js"></script>  
 </body>
 </html>

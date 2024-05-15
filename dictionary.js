@@ -40,6 +40,21 @@ const dictionary = {
     "age": {
         [languages.turkish]: "yaş",
         [languages.english]: "age",
+    },
+
+    "type": {
+        [languages.turkish]: "tip",
+        [languages.english]: "type",
+    },
+
+    "The transaction was completed successfully": {
+        [languages.turkish]: "İşlem başarıyla gerçekleştirildi",
+        [languages.english]: "The transaction was completed successfully",
+    },
+
+    "buySeat": {
+        [languages.turkish]: "Satın al",
+        [languages.english]: "Buy Seat"
     }
 
 }

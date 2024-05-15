@@ -25,13 +25,43 @@ const idEntry             = document.getElementById("idEntry");
 const userInfoTable       = document.getElementById("UserInfoTable");
 const flightCrewInfoTable = document.getElementById("FlightCrewTable");
 
-name.innerHTML            = capitalizeFirstLetter(getText("name"));
-surname.innerHTML         = capitalizeFirstLetter(getText("surname"));
-age.innerHTML             = capitalizeFirstLetter(getText("age"));
-gender.innerHTML          = capitalizeFirstLetter(getText("gender"));
-nationality.innerHTML     = capitalizeFirstLetter(getText("nationality"));
+const buySeatButton       = document.getElementById("buySeatButton");
+
+const Flightname        = document.getElementById("FlightCrewName");
+const Flightsurname     = document.getElementById("FlightCrewSurname");
+const Flightage         = document.getElementById("FlightCrewAge");
+const Flightgender      = document.getElementById("FlightCrewGender");
+const Flightnationality = document.getElementById("FlightCrewNationality");
+const FlightType        = document.getElementById("FlightCrewType");
+
+const initializeNames = () => {
+    const res = document.getElementById("language").value;
+    if (res == "EN") localStorage.setItem("language", "english");
+    else localStorage.setItem("language", "turkish");
+    console.log(res);
+
+    Flightname.innerHTML        = capitalizeFirstLetter(getText("name"));
+    Flightsurname.innerHTML     = capitalizeFirstLetter(getText("surname"));
+    Flightage.innerHTML         = capitalizeFirstLetter(getText("age"));
+    Flightgender.innerHTML      = capitalizeFirstLetter(getText("gender"));
+    Flightnationality.innerHTML = capitalizeFirstLetter(getText("nationality"));
+    FlightType.innerHTML        = capitalizeFirstLetter(getText("type"));
+
+    name.innerHTML            = capitalizeFirstLetter(getText("name"));
+    surname.innerHTML         = capitalizeFirstLetter(getText("surname"));
+    age.innerHTML             = capitalizeFirstLetter(getText("age"));
+    gender.innerHTML          = capitalizeFirstLetter(getText("gender"));
+    nationality.innerHTML     = capitalizeFirstLetter(getText("nationality"));
+
+    buySeatButton.innerHTML   = capitalizeFirstLetter(getText("buySeat"));
+}
+initializeNames()
+document.getElementById("language").addEventListener("change", initializeNames);
 
 const mainDiv = document.getElementById("seats");
+
+let handlers = [];
+let seatCounter = 0;
 
 const getMaxSeatNum = (seatData) => {
     let maxSeatNum = 0;
@@ -44,7 +74,8 @@ const getMaxSeatNum = (seatData) => {
 const displayFlightCrewData = async () => {
 
     const cabinCrew = await FligtsCommunication.getFlightCrew(window.currentFlight);
-    console.log(cabinCrew);
+    flightCrewInfoTable.style.visibility = "visible";
+
     for (const el of cabinCrew) {
         const newRow           = flightCrewInfoTable.insertRow();
         const ageCell          = newRow.insertCell(0);
@@ -65,10 +96,16 @@ const displayFlightCrewData = async () => {
     }
 }
 
+function selectSeatListener(div) {
+    if (div.classList.contains("selectedSeat")) div.classList.remove("selectedSeat");
+    else div.classList.add("selectedSeat");
+}
+
 const initializeFlightImg = async () => {
     const res = await FligtsCommunication.getSeatsData(window.currentFlight);
     let maxSeatNum = getMaxSeatNum(res);
-    if (window.currentUser.isUserAdmin() || true) displayFlightCrewData();
+    if (window.currentUser.isUserAdmin()) displayFlightCrewData();
+    else buySeatButton.style.visibility = "visible";
     const airPlaineWidth  = 800;
     const airPlaineHeight = 200;
     const bussinessHeight = airPlaineHeight / (res.getRowCount() * res.getBussinessConsecutiveSeat() + res.getRowCount() - 1);
@@ -80,9 +117,8 @@ const initializeFlightImg = async () => {
         const column = seat.getSeatNumber() - "1";
         const img = document.createElement("img");
         
-        if (window.currentUser.isUserAdmin() || true
-    ) {
-            img.className = "seat";
+        if (window.currentUser.isUserAdmin()) {
+            img.className = "adminSeat";
             img.addEventListener("click", async e => {
                 const seatUser = await UserCommunication.getUserById(seat.getUserId());
                 nameEntry.innerHTML         = seatUser.name;
@@ -94,11 +130,17 @@ const initializeFlightImg = async () => {
                 userInfoTable.style.visibility = "visible";
             })
         }
-        else if (seat.isSeatAvaliable()) {
 
+        else if (seat.isSeatAvaliable()) {
+            img.className = "passangerSeat";
+            const func = selectSeatListener.bind(this, img);
+            
+            img.seatCounter = seatCounter;
+            handlers.push(func);
+            seatCounter++;
+            img.addEventListener("click", func)
         }
         
-
         if (seat.isSeatBussiness()) {
             img.src = (seat.isSeatAvaliable()) ? "svgs/bussinessSeatAvaliable.svg" : "svgs/bussinessSeatUnAvaliable.svg"
             img.style.height = bussinessHeight + "px";
@@ -115,9 +157,24 @@ const initializeFlightImg = async () => {
             img.style.position = "absolute";
             img.style.left = (airPlaineLeft + width * 1.8 * column) + "px";
         }
-        
+        img.seatData = seat;
         mainDiv.appendChild(img);
     }
+}
+
+buySeatButton.onclick = async (e) => {
+    const selectedSeats = document.getElementsByClassName("selectedSeat");
+    Array.from(selectedSeats).forEach(el => {
+        UserCommunication.buySeat(el.seatData);
+        el.classList.remove("selectedSeat");
+        if (el.seatData.isSeatBussiness()) el.src = "svgs/bussinessSeatUnAvaliable.svg";
+        else el.src = "svgs/normalSeatUnAvaliable.svg";
+        el.removeEventListener("click", handlers[el.seatCounter], false)
+        el.classList.remove("passangerSeat");
+    })
+
+    alert(getText("The transaction was completed successfully"));
+        
 }
 
 initializeFlightImg();

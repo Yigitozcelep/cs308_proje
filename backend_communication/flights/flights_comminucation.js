@@ -23,15 +23,24 @@ const FligtsCommunication = {
         return data;
     },
 
-    async deleteFlight() {
+    /**
+     * @param {FlightData} flight 
+     */
+    async deleteFlight(flight) {
 
     },
 
-    async addFlight() {
+    /**
+     * @param {FlightData} flight 
+     */
+    async addFlight(flight) {
 
     },
 
-    async updateFlight() {
+    /**
+     * @param {FlightData} flight 
+     */
+    async updateFlight(flight) {
 
     },
 

@@ -7,6 +7,34 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="top-bar">
+        <div class="logo">
+            AIR308 Airlines
+        </div>
+        <div class="language-select">
+            <select id="language" name="language">
+                <option value="EN">EN</option>
+                <option value="TR">TR</option>
+            </select>
+        </div>
+        <a href="#" class="top-bar-item" id="helpButton">Help</a>
+        <div id="helpPopup" class="help-popup" style="display: none;">
+            <div class="help-content">
+              <span class="close">&times;</span>
+              <h2>Welcome to Flights List Help</h2>
+              <p>In the "Flights List" page, you can browse and filter available flights to book.</p>
+              <h3>Filtering Flights</h3>
+              <p>Use the input fields to filter flights by flight number, plane ID, departure/arrival dates, departure/arrival places, and vehicle type. Click the "APPLY" button to apply the filters.</p>
+              <h3>Table Display</h3>
+              <p>The table displays available flights with columns for Flight No, Plane ID, Departure Date, Departure Place, Arrival Date, Arrival Place, and Vehicle Type. You can click on the column headers to sort the table.</p>
+              <h3>Booking Flights</h3>
+              <p>To book a flight, click on the "Book" button next to the corresponding row in the table. You will be directed to the booking page for that flight.</p>
+                
+            </div>
+          </div>
+        <a href="signout.php" class="top-bar-item">Sign Out</a>
+    </div>
+
     <img src="./svgs/airplaine.svg" id="airplaine">
     <div id="seats"> </div>
     <table id="UserInfoTable">
@@ -56,6 +84,8 @@
             </tr>
         </tbody>
     </table>
+
+    <button id="buySeatButton"> BuySeat </button>
 
 </body>
     <script src="plaineView.js" type="module"></script>               

@@ -1,5 +1,5 @@
 import { getText } from "../dictionary.js";
-import { FligtsCommunication } from "../backend_communication/flights/flights_comminucation.js";
+import { FlightsCommunication } from "../backend_communication/flights/flights_comminucation.js";
 import { dummyFlights, dummyUsers, seats } from "../backend_communication/dummy_data.js";
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
 
@@ -38,7 +38,6 @@ const initializeNames = () => {
     const res = document.getElementById("language").value;
     if (res == "EN") localStorage.setItem("language", "english");
     else localStorage.setItem("language", "turkish");
-    console.log(res);
 
     Flightname.innerHTML        = capitalizeFirstLetter(getText("name"));
     Flightsurname.innerHTML     = capitalizeFirstLetter(getText("surname"));
@@ -73,7 +72,7 @@ const getMaxSeatNum = (seatData) => {
 
 const displayFlightCrewData = async () => {
 
-    const cabinCrew = await FligtsCommunication.getFlightCrew(window.currentFlight);
+    const cabinCrew = await FlightsCommunication.getFlightCrew(window.currentFlight);
     flightCrewInfoTable.style.visibility = "visible";
 
     for (const el of cabinCrew) {
@@ -102,7 +101,7 @@ function selectSeatListener(div) {
 }
 
 const initializeFlightImg = async () => {
-    const res = await FligtsCommunication.getSeatsData(window.currentFlight);
+    const res = await FlightsCommunication.getSeatsData(window.currentFlight);
     let maxSeatNum = getMaxSeatNum(res);
     if (window.currentUser.isUserAdmin()) displayFlightCrewData();
     else buySeatButton.style.visibility = "visible";

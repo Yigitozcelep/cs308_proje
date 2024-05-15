@@ -105,7 +105,7 @@ const FlightsCommunication = {
     async getFlightByPlaineId(plaineId) {
         await new Promise(resolve => setTimeout(resolve, 50));
         for (let i = 0; i < dummyData.dummyFlights.length; i++) {
-            if (dummyData.dummyFlights[i].getPlaneId() == planeId) return dummyData.dummyFlights[i];
+            if (dummyData.dummyFlights[i].getPlaineId() == plaineId) return dummyData.dummyFlights[i];
         }
     },
 

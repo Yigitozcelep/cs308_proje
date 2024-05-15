@@ -10,7 +10,7 @@ const UserCommunication = {
      * @returns {Promise<Boolean>}
      */
     async isValidUser(email, password) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         for (let i = 0; i < dummyData.dummyUsers.length; i++) {
             if (dummyData.dummyUsers[i].userName == userName && dummyData.dummyUsers[i] == password) return true;
         }
@@ -24,7 +24,7 @@ const UserCommunication = {
      */
     async getUserData(email, password) {
         
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         for (let i = 0; i < dummyData.dummyUsers.length; i++) {
             if (dummyData.dummyUsers[i].email == email && dummyData.dummyUsers[i].password == password) return dummyData.dummyUsers[i];
         }
@@ -35,7 +35,7 @@ const UserCommunication = {
      * @returns {Promise<UserData>}
      */
     async getUserDataByEmail(email) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         for (let i = 0; i < dummyData.dummyUsers.length; i++) {
             if (dummyData.dummyUsers[i].email == email) return dummyData.dummyUsers[i];
         }
@@ -45,7 +45,7 @@ const UserCommunication = {
      * @param {UserData} user 
      */
     async deleteUser(user) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         for (let i = 0; i < dummyData.dummyUsers.length; i++) {
             if (dummyData.dummyUsers[i].email == user.email && dummyData.dummyUsers[i].password == user.password) {
                 delete dummyData.dummyUsers[i];
@@ -60,7 +60,7 @@ const UserCommunication = {
      * @param {Seat} seat 
      */
     async buySeat(userData, flight, seat) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
 
     },
     
@@ -68,14 +68,25 @@ const UserCommunication = {
      * @param {UserFlightData} userFlight 
      */
     async refundSeat(userFlight) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
     },
 
     /**
      * @param {UserData} user
      */
     async updateUser(user) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
+    },
+
+    /**
+     * @param {String} id 
+     * @returns {Promise<UserData>}
+     */
+    async getUserById(id) {
+        await new Promise(resolve => setTimeout(resolve, 50));
+        for (let el of dummyData.dummyUsers) {
+            if (el.Id == id) { return el; }
+        }
     }
 }
 

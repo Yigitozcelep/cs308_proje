@@ -1,6 +1,13 @@
 import * as flights from "./flights/flights.js";
 import * as users from "./users/users.js";
 
+const UserTypes = {
+    passanger:   "Passsanger",
+    cabinCrew:   "CabinCrew",
+    pilotCrew:   "PilotCrew",
+    admin:       "Admin",
+}
+
 const createDummyAirlineCompanies = () => {
     return [ "American Airlines", "Delta Air Lines", "United Airlines", "Southwest Airlines", "Air Canada", "British Airways", "Lufthansa", "Emirates", "Qatar Airways", "Singapore Airlines" ];
 }
@@ -92,11 +99,10 @@ const createDummyFlightData = () => {
         const airlineCompany    = airlineCompanies[i % 10];
         const flightId          = "TK" + i;
         const plaineId          = i;
-        dummyFlightData.push(new flights.FlightData(from, goTo, departureAirport, landingAirport, departureTime, landingTime, planeType, flightTime, airlineCompany, flightId, i));
+        dummyFlightData.push(new flights.FlightData(from, goTo, departureAirport, landingAirport, departureTime, landingTime, planeType, flightTime, airlineCompany, flightId, i, i));
     }
     return dummyFlightData;
 }
-
 
 const getStatus = () => {
     if (Math.random() < 0.5) return flights.SeatStatus.avaliable;
@@ -105,7 +111,7 @@ const getStatus = () => {
 
 const createDummySeatData = () => {
     const seads = [];
-    let seadCount = Math.floor(Math.random() * 300 + 130);
+    let seadCount = Math.floor(Math.random() * 100 + 100);
     const rowCount  = Math.floor(Math.random() * 2) + 2;
     const bussinessConsecutiveSeat = Math.floor(Math.random() * 2) + 2;
     let ecenomyConsecutiveSeat   = Math.floor(Math.random() * 2) + 2;
@@ -119,7 +125,7 @@ const createDummySeatData = () => {
     for (let row = 0; row < rowCount; row++) {
         for (let i = 1; i <= bussinessRowSeadCount; i++) {
             for (let j = 0; j < bussinessConsecutiveSeat; j++) {
-                const userId = Math.floor(Math.random() * 19);
+                const userId = Math.floor(Math.random() * 10) * 2;
                 const char = String(i) + String.fromCharCode(65 + row * bussinessConsecutiveSeat + j);
                 seads.push(new flights.Seat(char, flights.SeatTypes.bussiness, getStatus(), userId));
             }
@@ -132,7 +138,7 @@ const createDummySeatData = () => {
         for (let i = 1 + bussinessRowSeadCount; i <= ecenomyRowSeadCount; i++) {
             for (let j = 0; j < ecenomyConsecutiveSeat; j++) {
                 const char = String(i) + String.fromCharCode(65 + row * ecenomyConsecutiveSeat + j);
-                const userId = Math.floor(Math.random() * 19);
+                const userId = Math.floor(Math.random() * 10) * 2;
                 seads.push(new flights.Seat(char, flights.SeatTypes.ecenomy, getStatus(), userId));
             }
         }
@@ -144,11 +150,21 @@ const createDummySeatData = () => {
 const seats      = []
 const dummyUsers = []
 const dummyFlights = createDummyFlightData();
+const crewData = []
 
+for (let i = 0; i < 500; i++) { }
 for (let i = 0; i < 500; i++) seats.push(createDummySeatData())
 for (let i = 0; i < 20; i += 2) dummyUsers.push(createDummyUser(dummyFlights, i, i + 1, seats[i], seats[i + 1]));
+for (let i = 0; i < 500; i++) {
+    crewData.push([]);
+    for (let j = 0; j < 10; j++) {
+        const cloneUser = dummyUsers[j];
+        cloneUser.userType = (j < 2) ?  UserTypes.pilotCrew : UserTypes.cabinCrew;
+        crewData[crewData.length - 1].push(cloneUser);
+    }
+}
 
 window.currentUser = dummyUsers[0];
 window.currentFlight = dummyFlights[5];
 
-export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyAirPort, createDummyUser, createDummyFlightData, createDummySeatData, seats, dummyUsers, dummyFlights}
+export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyAirPort, createDummyUser, createDummyFlightData, createDummySeatData, seats, dummyUsers, dummyFlights, crewData}

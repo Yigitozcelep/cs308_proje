@@ -1,6 +1,33 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: orange;
+}
+
 #airplaine {
     position: absolute;
     left: 200px;
     top: 50px;
-    background-color: red;
+}
+
+.seat:hover { cursor: pointer; }
+
+#UserInfoTable {
+    visibility: hidden;
+    position: absolute;
+    left: 50px;
+    top: 100px;
+    background-color: brown;
+    border-spacing: 15px; 
+    font-size: 20px;
+}
+
+#FlightCrewTable {
+    background-color: brown;
+    position: absolute;
+    top: 560px;
+    border-spacing: 6px;
+    left: 50px
 }

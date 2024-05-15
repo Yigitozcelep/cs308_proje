@@ -17,10 +17,31 @@ const dictionary = {
         [languages.english]: "password",
     },
 
-    "ask": {
-        [languages.turkish]: "sormak",
-        [languages.english]: "ask",
+    "name": {
+        [languages.turkish]: "isim",
+        [languages.english]: "name",
+    },
+
+    "gender": {
+        [languages.turkish]: "cinsiyet",
+        [languages.english]: "gender",
+    },
+
+    "nationality": {
+        [languages.turkish]: "ulus",
+        [languages.english]: "nationality"
+    },
+
+    "surname": {
+        [languages.turkish]: "soyad",
+        [languages.english]: "surname",
+    },
+
+    "age": {
+        [languages.turkish]: "yaş",
+        [languages.english]: "age",
     }
+
 }
 
 const getText = (text) => {

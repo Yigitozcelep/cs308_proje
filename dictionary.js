@@ -430,24 +430,45 @@ const dictionary = {
         [languages.english]: "Update a Flight",
     },
 
+    "name": {
+        [languages.turkish]: "isim",
+        [languages.english]: "name",
+    },
 
+    "gender": {
+        [languages.turkish]: "cinsiyet",
+        [languages.english]: "gender",
+    },
 
+    "nationality": {
+        [languages.turkish]: "ulus",
+        [languages.english]: "nationality"
+    },
 
+    "surname": {
+        [languages.turkish]: "soyad",
+        [languages.english]: "surname",
+    },
 
+    "age": {
+        [languages.turkish]: "yaş",
+        [languages.english]: "age",
+    },
 
+    "type": {
+        [languages.turkish]: "tip",
+        [languages.english]: "type",
+    },
 
+    "The transaction was completed successfully": {
+        [languages.turkish]: "İşlem başarıyla gerçekleştirildi",
+        [languages.english]: "The transaction was completed successfully",
+    },
 
-
-
-    
-
-
-
-
-
-    
-
-
+    "buySeat": {
+        [languages.turkish]: "Satın al",
+        [languages.english]: "Buy Seat"
+    }
 }
 
 const getText = (text) => {

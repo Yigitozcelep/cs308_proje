@@ -96,8 +96,9 @@ document.getElementById('language').addEventListener('change', handleLanguageCha
 document.addEventListener('DOMContentLoaded', async function () {
     
     
-
-    const currUser = dummyUsers[1];
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    let currUser = await UserCommunication.getUserById(userId); 
     let myFlights = currUser.flights;
     
     var state = {

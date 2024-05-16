@@ -86,9 +86,9 @@ document.getElementById('language').addEventListener('change', handleLanguageCha
 
 document.addEventListener('DOMContentLoaded', async function () {
     
-    
         const urlParams = new URLSearchParams(window.location.search);
         const searchType = urlParams.get('searchType');
+        const userId = urlParams.get('userId');
         let flights;
         if (searchType === 'route') 
         {
@@ -194,12 +194,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                  document.querySelectorAll('.book-row').forEach(button => {
                     button.addEventListener('click', function() {
                         const flightId = this.dataset.flightId;
-                        const selectedFlight = state.querySet.find(flight => flight.getFlightId() === flightId);
-                        console.log(selectedFlight);
-                        if (selectedFlight) {
-                            window.currentFlight = selectedFlight;
-        
-                        }
+                        console.log(flightId);
+                        window.location.href = `../plaineView/plaineView.html?flightId=${flightId}&userId=${userId}`;
                     });
                 });
 

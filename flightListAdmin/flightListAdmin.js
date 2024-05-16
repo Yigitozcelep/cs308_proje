@@ -101,6 +101,9 @@ document.getElementById('language').addEventListener('change', handleLanguageCha
 
 document.addEventListener('DOMContentLoaded', async function () {
     
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    console.log(userId);
     let flights = await FlightsCommunication.getAllFlights();
     var state = {
 

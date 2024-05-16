@@ -1,41 +1,3 @@
-/*document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("personal-info-form");
-    const emailField = document.getElementById("email");
-    const availabilitySection = document.getElementById("availability-section");
-
-    // Mock function to get user role based on email
-    function getUserRoleByEmail(email) {
-        const roles = {
-            "cabin@example.com": "Cabin Crew",
-            "cockpit@example.com": "Cockpit Crew",
-            "other@example.com": "Other",
-        };
-        return roles[email] || "Other";
-    }
-
-    function updateAvailability() {
-        const role = getUserRoleByEmail(emailField.value);
-        if (role === "Cabin Crew" || role === "Cockpit Crew") {
-            availabilitySection.classList.remove("hidden");
-        } else {
-            availabilitySection.classList.add("hidden");
-            alert("Unauthorized");
-        }
-    }
-
-    emailField.addEventListener("change", updateAvailability);
-
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        console.log("Submitted data:", data);
-
-        // Add your form submission logic here
-    });
-
-    updateAvailability(); // Initialize on page load
-*/
 document.addEventListener('DOMContentLoaded', (event) => {
     // Help button functionality
     var helpButton = document.getElementById('helpButton');
@@ -57,5 +19,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (event.target == helpPopup) {
             helpPopup.style.display = "none";
         }
+    }
+
+    // Redirect to index.html in start_screen folder on Sign Out
+    document.getElementById('signOutButton').onclick = function() {
+        window.location.href = '../start_screen/index.html';
     }
 });

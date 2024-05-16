@@ -7,6 +7,182 @@ if (!localStorage.getItem("language")) localStorage.setItem("language", language
 
 
 const dictionary = {
+    "dreamsText": {
+        [languages.turkish]: "Hayallerinize Uçun...",
+        [languages.english]: "Fly To Your Dreams...",
+    },
+    "rosterText": {
+        [languages.turkish]: "Uçuş Listesi",
+        [languages.english]: "Flight Roster",
+    },
+    "start": {
+        [languages.turkish]: "Başla",
+        [languages.english]: "Start",
+    },
+    "signupTitle": {
+        [languages.turkish]: "Üye Ol",
+        [languages.english]: "Sign Up",
+    },
+    "signupSubtitle": {
+        [languages.turkish]: "E-postanızla ücretsiz bir hesap oluşturun.",
+        [languages.english]: "Create a free account with your email.",
+    },
+    "name": {
+        [languages.turkish]: "İsim",
+        [languages.english]: "Name",
+    },
+    "surname": {
+        [languages.turkish]: "Soyad",
+        [languages.english]: "Surname",
+    },
+    "female": {
+        [languages.turkish]: "Kadın",
+        [languages.english]: "Female",
+    },
+    "male": {
+        [languages.turkish]: "Erkek",
+        [languages.english]: "Male",
+    },
+    "other": {
+        [languages.turkish]: "Diğer",
+        [languages.english]: "Other",
+    },
+    "selectNationality": {
+        [languages.turkish]: "Uyruk Seçin",
+        [languages.english]: "Select Nationality",
+    },
+    "email": {
+        [languages.turkish]: "Eposta",
+        [languages.english]: "Email",
+    },
+    "password": {
+        [languages.turkish]: "Şifre",
+        [languages.english]: "Password",
+    },
+    "role": {
+        [languages.turkish]: "Rol",
+        [languages.english]: "Role",
+    },
+    "cockpitCrew": {
+        [languages.turkish]: "Kokpit ekibi",
+        [languages.english]: "Cockpit Crew",
+    },
+    "cabinCrew": {
+        [languages.turkish]: "Kabin ekibi",
+        [languages.english]: "Cabin Crew",
+    },
+    "passenger": {
+        [languages.turkish]: "Yolcu",
+        [languages.english]: "Passenger",
+    },
+    "admin": {
+        [languages.turkish]: "Yönetici",
+        [languages.english]: "Admin",
+    },
+    "signupButton": {
+        [languages.turkish]: "Üye Ol",
+        [languages.english]: "Sign up",
+    },
+    "haveAccount": {
+        [languages.turkish]: "Hesabınız var mı?",
+        [languages.english]: "Have an account?",
+    },
+    "login": {
+        [languages.turkish]: "Giriş yap",
+        [languages.english]: "Log in",
+    },
+    "helpButton": {
+        [languages.turkish]: "Yardım",
+        [languages.english]: "Help",
+    },
+    "signOut": {
+        [languages.turkish]: "Çıkış Yap",
+        [languages.english]: "Sign Out",
+    },
+    "dutch": {
+        [languages.turkish]: "Hollandalı",
+        [languages.english]: "Dutch",
+    },
+    "english": {
+        [languages.turkish]: "İngiliz",
+        [languages.english]: "English",
+    },
+    "french": {
+        [languages.turkish]: "Fransız",
+        [languages.english]: "French",
+    },
+    "german": {
+        [languages.turkish]: "Alman",
+        [languages.english]: "German",
+    },
+    "italian": {
+        [languages.turkish]: "İtalyan",
+        [languages.english]: "Italian",
+    },
+    "russian": {
+        [languages.turkish]: "Rus",
+        [languages.english]: "Russian",
+    },
+    "swedish": {
+        [languages.turkish]: "İsveçli",
+        [languages.english]: "Swedish",
+    },
+    "turkish": {
+        [languages.turkish]: "Türk",
+        [languages.english]: "Turkish",
+    },
+    "helpText": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+            Lütfen hiçbir kutuyu boş bırakmamaya dikkat edin.
+            "Söylememeyi tercih et" seçeneği cinsiyetini belirtmek istemeyen kişiler için oluşturulmuş bir seçenektir. Kişiler üyelik işleminden sonra tercihlerini değiştirme hakkına sahiptir.
+            Lütfen "Uyruğu Seç" seçeneğine tıklayarak seçim çubuğundan uyruğunuzu seçin.
+            Kayıt olmak için e-posta adresinizi girmelisiniz. Kayıt işlemi başarılı olmazsa lütfen e-posta adresinizi doğru girdiğinizden emin olun.
+            Zaten bir hesabınız varsa, "Giriş yap" seçeneğini tıklayın ve bağlantıdan işleme devam edin.`,
+        [languages.english]: `Here is some helpful information:
+           Please be careful not to leave any boxes blank.
+           The "prefer not to say" option is an option created for people who do not want to specify their gender. People have the right to change their preferences after the membership process.
+           Please select your nationality from the selection bar by clicking on the "Select Nationality".
+           You must enter your e-mail address to sign up. If successful sign up is not achieved, please make sure that you have entered the e-mail address correctly.
+           If you already have an account, click "Log in" and continue the process from the link.`,
+    },
+    "languagesLabel": {
+        [languages.turkish]: "Diller",
+        [languages.english]: "Languages",
+    },
+    "languagesInputPlaceholder": {
+        [languages.turkish]: "Bildiğiniz dilleri girin",
+        [languages.english]: "Enter languages you know",
+    },
+
+    "loginTitle": {
+        [languages.turkish]: "Giriş Yap",
+        [languages.english]: "Login",
+    },
+    "email:": {
+        [languages.turkish]: "Eposta:",
+        [languages.english]: "Email:",
+    },
+    "password:": {
+        [languages.turkish]: "Şifre:",
+        [languages.english]: "Password:",
+    },
+    "loginButton": {
+        [languages.turkish]: "Giriş Yap",
+        [languages.english]: "LOG IN",
+    },
+    "forgotPassword": {
+        [languages.turkish]: "Şifrenizi mi unuttunuz?",
+        [languages.english]: "Forgot Password?",
+    },
+    "helpButton": {
+        [languages.turkish]: "Yardım",
+        [languages.english]: "Help",
+    },
+    "signOut": {
+        [languages.turkish]: "Çıkış Yap",
+        [languages.english]: "Sign Out",
+    },
+
     "login": {
         [languages.turkish]: "giriş",
         [languages.english]: "login",
@@ -432,20 +608,6 @@ const dictionary = {
 
 
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
-    
 
 
 }

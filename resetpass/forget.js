@@ -19,4 +19,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
             helpPopup.style.display = "none";
         }
     }
+
+    // Redirect to index.html in start_screen folder on Sign Out
+    document.getElementById('signOutButton').onclick = function() {
+        window.location.href = '../start_screen/index.html';
+    }
+
+    // Redirect to signup.html in signup folder on Register link click
+    document.getElementsByClassName('register')[0].onclick = function() {
+        window.location.href = '../signup/signup.html';
+    }
 });

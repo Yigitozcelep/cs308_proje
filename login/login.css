@@ -124,23 +124,23 @@ input[type="password"] {
 .forgot-password:hover {
     color: #0066ff8c;
 }
-
+/*
 .remember-me {
     text-align: center; 
     margin-bottom: 20px; 
 }
 
-/* Checkbox ve label'ı tek bir satırda göstermek için */
+/* Checkbox ve label'ı tek bir satırda göstermek için 
 input[type="checkbox"] + label {
-    display: inline-block; /* Yan yana getirir */
+    display: inline-block; /* Yan yana getirir 
 }
 
-/* Checkbox stilini ayarlama */
+/* Checkbox stilini ayarlama 
 input[type="checkbox"] {
-    margin-right: 5px; /* Etiket ile arasına boşluk ekler */
-    vertical-align: middle; /* Dikeyde ortalar */
+    margin-right: 5px; /* Etiket ile arasına boşluk ekler 
+    vertical-align: middle; /* Dikeyde ortalar 
 }
-
+*/
 .top-bar {
     position: fixed;
     top: 0;

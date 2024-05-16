@@ -88,22 +88,6 @@ h2{
     color: #000;
 }
 
-.forget{
-    display: flex;
-    align-items: center;
-    margin: 25px 0 30px 0;
-    color:#000;
-}    
-#remember{
-accent-color: #0066ff;
-}
-.forget label{
-    display: flex;
-    align-items: center;
-}
-.forget p{
-margin-left: 8px;
-}
 .container a{
     color: #fff;
     text-decoration: none;
@@ -123,6 +107,7 @@ button{
     font-size: 16px;
     border: 2px solid transparent;
     transition: 0.3s ease;
+    margin-top: 15px;
 }
 button:hover{
     color:#2b6cb0;

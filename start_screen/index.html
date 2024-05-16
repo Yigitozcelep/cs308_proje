@@ -5,10 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AIR308 Airlines</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> 
   <link rel="stylesheet" href="index.css">
-
   <style>
     .background-image {
       background-image: url('first_background.png');
@@ -18,30 +15,24 @@
   </style>
 </head>
 <body class="background-image">
-  <div class="flex flex-col justify-center items-center h-screen text-white px-4">
-    <div class="absolute top-0 left-0 p-8">
-      <h1 class="text-xl">AIR308 Airlines</h1>
-    </div>
+  <div class="container">
+    <header class="header">
+      <h1>AIR308 Airlines</h1>
+    </header>
     <div class="language-select">
-      <select id="language" name="language" onchange="changeLanguage(this)">
-        <option value="EN">EN</option>
-        <option value="TR">TR</option>
+      <select id="language" name="language">
+        <option value="english">EN</option>
+        <option value="turkish">TR</option>
       </select>
     </div>
-    <div class="text-center">
-      <h2 class="text-6xl font-bold">AIR308</h2>
-      <p class="text-2xl mt-2">Fly To Your Dreams...</p>
-      <p class="text-md mt-4">Flight Roster</p>
-    </div>
-    <button onclick="redirectToFlightRoster()" class="start-btn text-lg text-white py-2 px-8 rounded-full mt-8 focus:outline-none">
-      START
-    </button>
+    <main class="main-content">
+      <h2>AIR308</h2>
+      <p id="dreamsText">Fly To Your Dreams...</p>
+      <p id="rosterText">Flight Roster</p>
+      <a class="start-btn" id="startButton" href="../signup/signup.html">Start</a>
+    </main>
   </div>
-
-  <script src="script.js"></script>
+  <script type="module" src="index.js"></script>
+  <script type="module" src="../dictionary.js"></script>
 </body>
 </html>
-
-
-
-

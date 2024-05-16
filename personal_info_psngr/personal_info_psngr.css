@@ -109,7 +109,7 @@ button {
     font-size: 16px;
     border: 2px solid transparent;
     transition: 0.3s ease;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 button:hover {

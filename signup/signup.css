@@ -4,7 +4,7 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0fcff;
+  background: #f0f8ff;
 }
 
 .logo {
@@ -56,7 +56,6 @@ body, html {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  
 }
   
 .form {

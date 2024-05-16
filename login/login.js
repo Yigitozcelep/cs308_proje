@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', (event) => {
     var helpButton = document.getElementById('helpButton');
     var helpPopup = document.getElementById('helpPopup');
@@ -19,5 +18,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (event.target == helpPopup) {
             helpPopup.style.display = "none";
         }
+    }
+
+    // Redirect to index.html in start_screen folder on Sign Out
+    document.getElementById('signOutButton').onclick = function() {
+        window.location.href = '../start_screen/index.html';
     }
 });

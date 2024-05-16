@@ -171,27 +171,27 @@ const dictionary = {
     },
     "flightManagementInfo":
     {
-        [languages.turkish]: "Tarih",
+        [languages.turkish]: "Uçuşları yönetmek için, ilgili düğmelere tıklayarak yeni bir uçuş ekleyebilir veya mevcut bir uçuşu güncelleyebilirsiniz.",
         [languages.english]: "To manage flights, you can add a new flight or update an existing one by clicking on the respective buttons provided.",
     },
     "flightSelection":
     {
-        [languages.turkish]: "Tarih",
+        [languages.turkish]: "Uçuş Seçimi",
         [languages.english]: "Flight Selection",
     },
     "flightSelectionInfo":
     {
-        [languages.turkish]: "Tarih",
+        [languages.turkish]: "Daha fazla işlem için bir uçuş seçmek için, tablodaki ilgili satırın yanındaki \"Seç\" düğmesine tıklayın.",
         [languages.english]: "To select a flight for further actions, such as editing and viewing detailed info, click on the \"Select\" button next to the corresponding row in the table.",
     },
     "flightDeletion":
     {
-        [languages.turkish]: "Tarih",
+        [languages.turkish]: "Uçuş Silme",
         [languages.english]: "Flight Deletion",
     },
     "flightDeletionInfo":
     {
-        [languages.turkish]: "Tarih",
+        [languages.turkish]: "Bir uçuşu silmek için, tablodaki ilgili satırın yanındaki \"Sil\" düğmesine tıklayın.",
         [languages.english]: "To delete a flight, click on the \"Delete\" button next to the corresponding row in the table.",
     },
 

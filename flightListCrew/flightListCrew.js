@@ -90,11 +90,15 @@ document.addEventListener('DOMContentLoaded', handleLanguageChange);
 // Add event listener to the language dropdown to handle language change
 document.getElementById('language').addEventListener('change', handleLanguageChange);
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     
-    const currUser = dummyUsers[3];
-    console.log(currUser);
-    let myFlights = currUser.flights;
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    
+    let user = await UserCommunication.getUserById(userId);
+    console.log(userId);
+    console.log(user);
+    let myFlights = user.flights;
     
 
     var state = {
@@ -178,12 +182,9 @@ document.addEventListener('DOMContentLoaded', function () {
           button.addEventListener('click', function() {
               const flightId = this.dataset.flightId;
               console.log(flightId);
-              const selectedFlight = state.querySet.find(flight => flight.flightData.getFlightId() === flightId);
-              console.log(selectedFlight.flightData);
-              if (selectedFlight) {
-                  window.currentFlight = selectedFlight.flightData;
+            
+              window.currentFlight = selectedFlight.flightData;
 
-              }
           });
       });
 

@@ -184,11 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
         showTable(tableOrder[nextIndex]);
     });
 
-    showTable('Cabin Crew');
-
-    
-
- 
+    showTable('Cabin Crew'); 
     ;
 })
 

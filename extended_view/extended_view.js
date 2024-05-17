@@ -1,10 +1,10 @@
 import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
 import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js";
 
-let currentFlight = localStorage.getItem("currentFlight");
-console.log(currentFlight);
+
 
 document.addEventListener('DOMContentLoaded', function () {
+   console.log(localStorage.getItem("flightIdView"));
     var state = {
         'querySet': dummyFlights,
         'page': 1,

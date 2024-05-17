@@ -85,24 +85,28 @@ document.addEventListener('DOMContentLoaded', handleLanguageChange);
 document.getElementById('language').addEventListener('change', handleLanguageChange);
 
 document.addEventListener('DOMContentLoaded', async function () {
-    
+
         const urlParams = new URLSearchParams(window.location.search);
         const searchType = urlParams.get('searchType');
-        const userId = urlParams.get('userId');
         let flights;
         if (searchType === 'route') 
         {
             const departure = urlParams.get('departure');
             const arrival = urlParams.get('arrival');
-            const startDate = urlParams.get('startDate');
-            const endDate = urlParams.get('endDate');
+            const startDateURL = urlParams.get('startDate');
+            const startDate = new Date(startDateURL);
+            console.log(startDate);
+            const endDateURL = urlParams.get('endDate');
+            const endDate = new Date(endDateURL);
             flights = await FlightsCommunication.getFlightsDataWithoutAirport(departure, arrival, startDate, endDate);    
         } 
         else if (searchType === 'airport') 
         {
             const airport = urlParams.get('airport');
-            const startDate = urlParams.get('startDate2');
-            const endDate = urlParams.get('endDate2');
+            const startDateURL = urlParams.get('startDate2');
+            const startDate = new Date(startDateURL);
+            const endDateURL = urlParams.get('endDate2');
+            const endDate = new Date(endDateURL);
             flights = await FlightsCommunication.getFlightsDataFromWithoutFromGoto(startDate, endDate, airport);  
         } 
         else if (searchType === 'flightNo') 
@@ -194,8 +198,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                  document.querySelectorAll('.book-row').forEach(button => {
                     button.addEventListener('click', function() {
                         const flightId = this.dataset.flightId;
-                        console.log(flightId);
-                        window.location.href = `../plaineView/plaineView.html?flightId=${flightId}&userId=${userId}`;
+                        localStorage.setItem("flightId", flightId);
+                        window.location.href = `../plaineView/plaineView.html`;
                     });
                 });
 

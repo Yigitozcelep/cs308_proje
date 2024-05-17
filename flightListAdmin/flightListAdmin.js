@@ -1,5 +1,6 @@
 import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js";
 import { getText } from "../dictionary.js";
+
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
@@ -100,7 +101,8 @@ document.addEventListener('DOMContentLoaded', handleLanguageChange);
 document.getElementById('language').addEventListener('change', handleLanguageChange);
 
 document.addEventListener('DOMContentLoaded', async function () {
-    
+    const res = JSON.parse(localStorage.getItem("currentUser"))
+    console.log(res);
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
     console.log(userId);
@@ -149,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
     
-    function buildTable() {
+    async function buildTable() {
         var data = pagination(state.querySet, state.page, state.rows);
         var tableBody = document.getElementById('table-body');
         tableBody.innerHTML = '';  
@@ -181,14 +183,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
          // Attach event listener to "Book" buttons
          document.querySelectorAll('.select-row').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', async function() {
                 const flightId = this.dataset.flightId;
-                
-                console.log(flightId);
-                if (selectedFlight) {
-                    
-                    window.location.href = ``;               
-                }
+                let flightData = state.querySet.find(flight => flight.getFlightId() === flightId);
+                console.log(flightData);
+                localStorage.setItem("currentFlight", JSON.stringify(flightData));
+                showPopup();
             }); 
         });
         document.querySelectorAll('.delete-row').forEach(button => {
@@ -206,6 +206,37 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         
     }
+    function showPopup() {
+        document.getElementById('selectPopup').style.display = 'flex';
+    }
+
+    function hidePopup() {
+        document.getElementById('selectPopup').style.display = 'none';
+    }
+
+    // Close popup when clicking outside of it
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('selectPopup')) {
+            hidePopup();
+        }
+    };
+
+    // Add event listener for the close button in the popup
+    document.querySelector('.close-popup').addEventListener('click', hidePopup);
+
+    // Add event listeners for the popup buttons
+    document.getElementById('button1').addEventListener('click', function() {
+        window.location.href = '../extended_view/extended_view.html'; // Change 'file1.html' to the actual file path
+    });
+
+    document.getElementById('button2').addEventListener('click', function() {
+        window.location.href = '../tabular_view/tabular_view.html'; // Change 'file2.html' to the actual file path
+    });
+
+    document.getElementById('button3').addEventListener('click', function() {
+        window.location.href = '../plaineView/plaineView.html'; // Change 'file3.html' to the actual file path
+    });
+
     
     function redirectToBookingPage(flightNo) {
         // Replace 'https://example.com/booking/' with the URL of your booking page

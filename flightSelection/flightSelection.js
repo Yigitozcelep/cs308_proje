@@ -4,8 +4,6 @@ window.addEventListener('load', function() {
     document.getElementById('searchType').dispatchEvent(new Event('change'));
 });
 
-const urlParams = new URLSearchParams(window.location.search);
-const userId = urlParams.get('userId');
 
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
@@ -120,11 +118,10 @@ document.getElementById('searchType').addEventListener('change', function() {
 document.querySelector('form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent default form submission
     let selectedOption = document.getElementById('searchType').value;
-    console.log(userId);
 
     if (selectedOption === 'flightNo') {
         let flightNo = document.getElementById('flightNoPHolder').value;
-        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&flightNo=${flightNo}&userId=${userId}`;
+        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&flightNo=${flightNo}`;
     } 
     else if (selectedOption === 'route') {
         let departure = document.getElementById('departure').value;
@@ -133,14 +130,14 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         let endDate = document.getElementById('endDate').value;
         
         
-        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&departure=${departure}&arrival=${arrival}&startDate=${startDate}&endDate=${endDate}&userId=${userId}`;
+        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&departure=${departure}&arrival=${arrival}&startDate=${startDate}&endDate=${endDate}`;
     } 
     else if (selectedOption === 'airport') {
         let airport = document.getElementById('airport').value;
         let startDate = document.getElementById('startDate2').value;
         let endDate = document.getElementById('endDate2').value;
         
-        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&airport=${airport}&startDate2=${startDate}&endDate2=${endDate}&userId=${userId}`;
+        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&airport=${airport}&startDate2=${startDate}&endDate2=${endDate}`;
     }
 });
 
@@ -149,9 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add click event listener to the "My Flights" button
     document.getElementById('myFlights').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent the default link behavior
-
         // Redirect to the My Flights page with the user ID as a parameter
-        window.location.href = `/myFlightsPassenger/myFlightsPassenger.html?userId=${userId}`;
+        window.location.href = `/myFlightsPassenger/myFlightsPassenger.html`;
     });
 });
 

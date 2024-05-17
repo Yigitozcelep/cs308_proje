@@ -1,4 +1,4 @@
-import * as flights from "./flights/flights.js";
+import * as flights from  "./flights/flights.js";
 import * as users from "./users/users.js";
 
 const UserTypes = {

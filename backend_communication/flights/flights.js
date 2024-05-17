@@ -54,7 +54,7 @@ class FlightData {
      * @param {String} flightCrewId
      */
     constructor(from, goTo, departureAirport, landingAirport, departureTime, landingTime,
-         planeType, flightTime, airlineCompany, flightId, flightCrewId, plaineId) {
+         planeType, flightTime, airlineCompany, flightId, flightCrewId, planeId) {
         
         this.#from              = from;
         this.#goTo              = goTo;
@@ -67,7 +67,7 @@ class FlightData {
         this.#airlineCompany    = airlineCompany;
         this.#flightId          = flightId;
         this.#flightCrewId      = flightCrewId;
-        this.#planeId          = planeId;
+        this.#planeId           = planeId;
     }
 
     getFrom()               { return this.#from;             }

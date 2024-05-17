@@ -1,4 +1,4 @@
-import * as dummyData from "../dummy_data.js";
+import * as dummyData from "../dummy_data.js"
 import { UserData } from "../users/users.js";
 import { FlightData, Seats, Seat } from "./flights.js";
 

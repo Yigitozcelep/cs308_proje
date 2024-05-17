@@ -1,8 +1,8 @@
-import { FlightsCommunication } from "../backend_communication/flights/flights_comminucation.js";
+import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
 import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js";
 
 let currentFlight = localStorage.getItem("currentFlight");
-currentFlight = dummyFlights[0];
+console.log(currentFlight);
 
 document.addEventListener('DOMContentLoaded', function () {
     var state = {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var data = pagination(state.querySet, state.page, state.rows);
         var tableBody = document.querySelector(`#${state.currentTable.toLowerCase().replace(' ', '-')}-table tbody`);
         tableBody.innerHTML = '';
-        
+
         data.querySet.forEach(function (item) {
             var row = `<tr>
                 <td>${item.Name}</td>

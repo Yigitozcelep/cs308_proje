@@ -3,6 +3,9 @@ import { dummyUsers } from "../backend_communication/dummy_data.js";
 
 import { getText, languages } from "../dictionary.js";
 
+dummyUsers[0].userType = "Admin";
+console.log(dummyUsers);
+
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
@@ -60,7 +63,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
-dummyUsers[0].userType = "passenger";
 document.querySelector('form').addEventListener('submit', async function(event){
     // Prevent the default form submission behavior
     event.preventDefault();
@@ -73,7 +75,7 @@ document.querySelector('form').addEventListener('submit', async function(event){
             const userData = await UserCommunication.getUserData(email, password);
             console.log(userData);
             const userId = userData.Id;  
-            
+            localStorage.setItem("currentUser", JSON.stringify(userData))
             if(userData.isUserAdmin())
             {
                 window.location.href  = `../flightListAdmin/flightListAdmin.html?userId=${userId}`;

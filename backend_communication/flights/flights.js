@@ -36,7 +36,7 @@ class FlightData {
     #flightTime
     #airlineCompany
     #flightId
-    #plaineId
+    #planeId
     #flightCrewId
     /**
      * 
@@ -50,7 +50,7 @@ class FlightData {
      * @param {Date} flightTime 
      * @param {String} airlineCompany 
      * @param {String} flightId 
-     * @param {string} plaineId
+     * @param {string} planeId
      * @param {String} flightCrewId
      */
     constructor(from, goTo, departureAirport, landingAirport, departureTime, landingTime,
@@ -67,7 +67,7 @@ class FlightData {
         this.#airlineCompany    = airlineCompany;
         this.#flightId          = flightId;
         this.#flightCrewId      = flightCrewId;
-        this.#plaineId          = plaineId;
+        this.#planeId          = planeId;
     }
 
     getFrom()               { return this.#from;             }
@@ -79,7 +79,7 @@ class FlightData {
     getPlaneType()          { return this.#planeType;        }
     getFlightTime()         { return this.#flightTime;       }
     getFlightId()           { return this.#flightId;         }
-    getPlaineId()           { return this.#plaineId          }
+    getPlaneId()           { return this.#planeId          }
     getFlightCrewId()       { return this.#flightCrewId      }
 }   
 

@@ -100,12 +100,7 @@ document.addEventListener('DOMContentLoaded', handleLanguageChange);
 // Add event listener to the language dropdown to handle language change
 document.getElementById('language').addEventListener('change', handleLanguageChange);
 
-document.addEventListener('DOMContentLoaded', async function () {
-    const res = JSON.parse(localStorage.getItem("currentUser"))
-    console.log(res);
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('userId');
-    console.log(userId);
+document.addEventListener('DOMContentLoaded', async function () {    
     let flights = await FlightsCommunication.getAllFlights();
     var state = {
 
@@ -185,14 +180,13 @@ document.addEventListener('DOMContentLoaded', async function () {
          document.querySelectorAll('.select-row').forEach(button => {
             button.addEventListener('click', async function() {
                 const flightId = this.dataset.flightId;
-                let flightData = state.querySet.find(flight => flight.getFlightId() === flightId);
-                console.log(flightData);
-                localStorage.setItem("currentFlight", JSON.stringify(flightData));
+                localStorage.setItem("flightIdView", flightId);   
                 showPopup();
             }); 
         });
         document.querySelectorAll('.delete-row').forEach(button => {
             button.addEventListener('click', async function() {
+                
                 const flightId = this.dataset.flightId;
                 const flightToDelete = state.querySet.find(flight => flight.getFlightId() === flightId);
                 console.log(flightToDelete);
@@ -201,9 +195,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
             });
         });
-            
-
-
+        
         
     }
     function showPopup() {
@@ -385,3 +377,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 });
+

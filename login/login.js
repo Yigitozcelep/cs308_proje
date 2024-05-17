@@ -3,9 +3,6 @@ import { dummyUsers } from "../backend_communication/dummy_data.js";
 
 import { getText, languages } from "../dictionary.js";
 
-dummyUsers[0].userType = "Admin";
-console.log(dummyUsers);
-
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
@@ -63,6 +60,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
+
+dummyUsers[0].userType = "passenger";
 document.querySelector('form').addEventListener('submit', async function(event){
     // Prevent the default form submission behavior
     event.preventDefault();
@@ -73,24 +72,25 @@ document.querySelector('form').addEventListener('submit', async function(event){
     if(await UserCommunication.isValidUser(email, password))
         {
             const userData = await UserCommunication.getUserData(email, password);
-            console.log(userData);
-            const userId = userData.Id;  
-            localStorage.setItem("currentUser", JSON.stringify(userData))
+            const userId = userData.Id;
+            console.log(userId);
+            localStorage.setItem("userId", userId);
+
             if(userData.isUserAdmin())
             {
-                window.location.href  = `../flightListAdmin/flightListAdmin.html?userId=${userId}`;
+                window.location.href  = `../flightListAdmin/flightListAdmin.html`;
             }
             else if(userData.isUserCabinCrew())
             {
-                window.location.href  = `../flightListCrew/flightListCrew.html?userId=${userId}`;
+                 window.location.href  = `../flightListCrew/flightListCrew.html`;
             }
             else if(userData.isUserPilotCrew())
             {
-                window.location.href  = `../flightListCrew/flightListCrew.html?userId=${userId}`;
+                window.location.href  = `../flightListCrew/flightListCrew.html`;
             }
             else
             {
-                window.location.href  = `../flightSelection/flightSelection.html?userId=${userId}`;
+                window.location.href  = `../flightSelection/flightSelection.html`;
             }
         }
     // For example, you can also clear the form fields after submission

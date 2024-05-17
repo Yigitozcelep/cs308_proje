@@ -1,44 +1,26 @@
-/*document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("personal-info-form");
-    const emailField = document.getElementById("email");
-    const availabilitySection = document.getElementById("availability-section");
+import { getText, languages } from "../dictionary.js";
 
-    // Mock function to get user role based on email
-    function getUserRoleByEmail(email) {
-        const roles = {
-            "cabin@example.com": "Cabin Crew",
-            "cockpit@example.com": "Cockpit Crew",
-            "other@example.com": "Other",
-        };
-        return roles[email] || "Other";
-    }
+function handleLanguageChange() {
+    let lang = document.getElementById('language').value;
+    localStorage.setItem("language", lang);
 
-    function updateAvailability() {
-        const role = getUserRoleByEmail(emailField.value);
-        if (role === "Cabin Crew" || role === "Cockpit Crew") {
-            availabilitySection.classList.remove("hidden");
-        } else {
-            availabilitySection.classList.add("hidden");
-            alert("Unauthorized");
-        }
-    }
+    document.getElementById('personalP_Title').innerHTML = getText("personalP_Title");
+    document.getElementById('personalP_lastname').innerHTML = getText("personalP_lastname");
+    document.getElementById('personalP_password').innerHTML = getText("personalP_password");
+    document.getElementById('personalP_save').innerHTML = getText("personalP_save");
+    document.getElementById('personalP_helpButton').innerHTML = getText("personalP_helpButton");
+    document.getElementById('personalP_signOut').innerHTML = getText("personalP_signOut");
+    document.getElementById('personalP_helpText').innerHTML = getText("personalP_helpText");
+}
 
-    emailField.addEventListener("change", updateAvailability);
+// Call the function to initialize language preferences
+document.addEventListener('DOMContentLoaded', handleLanguageChange);
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        console.log("Submitted data:", data);
+// Add event listener to the language dropdown to handle language change
+document.getElementById('language').addEventListener('change', handleLanguageChange);
 
-        // Add your form submission logic here
-    });
-
-    updateAvailability(); // Initialize on page load
-*/
 document.addEventListener('DOMContentLoaded', (event) => {
-    // Help button functionality
-    var helpButton = document.getElementById('helpButton');
+    var helpButton = document.getElementById('personalP_helpButton');
     var helpPopup = document.getElementById('helpPopup');
     var closeSpan = document.getElementsByClassName('close')[0];
 
@@ -57,5 +39,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (event.target == helpPopup) {
             helpPopup.style.display = "none";
         }
+    }
+
+    // Redirect to index.html in start_screen folder on Sign Out
+    document.getElementById('personalP_signOut').onclick = function() {
+        window.location.href = '../start_screen/index.html';
     }
 });

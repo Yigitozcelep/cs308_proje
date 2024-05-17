@@ -468,7 +468,50 @@ const dictionary = {
     "buySeat": {
         [languages.turkish]: "Satın al",
         [languages.english]: "Buy Seat"
-    }
+    },
+
+    "name-search":{
+        [languages.turkish]: "İsim",
+        [languages.english]: "Name"
+    },
+
+    "surname-search":{
+        [languages.turkish]: "Soyisim",
+        [languages.english]: "Surname"
+    },
+    "id-search":{
+        [languages.turkish]: "Kişi No",
+        [languages.english]: "ID"
+    },
+    "age-search":{
+        [languages.turkish]: "Yaş",
+        [languages.english]: "Age"
+    },
+
+    "gender-search":{
+        [languages.turkish]: "Cinsiyet",
+        [languages.english]: "Gender"
+    },
+
+    "nationality-search":{
+        [languages.turkish]: "Ulus",
+        [languages.english]: "Nationality"
+    },
+
+    "seniority-search":{
+        [languages.turkish]: "Kıdem",
+        [languages.english]: "Seniority"
+    },
+
+    "seat-search":{
+        [languages.turkish]: "Koltuk No",
+        [languages.english]: "Seat Number"
+    },
+
+    "viewing-for":{
+        [languages.turkish]: "Gösterilen: ",
+        [languages.english]: "Viewing For: "
+    },
 }
 
 const getText = (text) => {

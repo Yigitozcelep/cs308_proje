@@ -4,7 +4,6 @@
         <title>Extended View
         </title>
         <link rel="stylesheet" href="extended_view.css">
-        <script src="extended_view.js" defer></script>               
     </head>
 
     <body>
@@ -60,9 +59,9 @@
                     <table>
                         <thead>
                         <tr>
-                            <th data-column="Name" data-order="desc">Name</th>
-                            <th data-column="Surname" data-order="desc">Surname</th>
-                            <th data-column="CrewID" data-order="desc">Crew ID </th>
+                            <th id="name" data-column="Name" data-order="desc">Name</th>
+                            <th id="surname" data-column="Surname" data-order="desc">Surname</th>
+                            <th id=""data-column="CrewID" data-order="desc">Crew ID </th>
                             <th data-column="Age" data-order="desc">Age</th>
                             <th data-column="Gender" data-order="desc">Gender</th>
                             <th data-column="Nationality" data-order="desc">Nationality</th>
@@ -159,6 +158,9 @@
             </div>
         
         </div>
-          
+        <script type="module" src="../dictionary.js"></script>  
+        <script src="extended_view.js" type="module"></script>               
+
     </body>
+    
 </html>      

@@ -53,6 +53,22 @@ const FlightsCommunication = {
         return dummyData.crewData[flightData.getPlaineId() - "0"]
     },
 
+
+    /**
+     * @param {FlightData} flightData 
+     * @returns {Promise<UserData[]>} 
+     */
+    async getPassangerData(flightData) {
+        return dummyData.dummyUsers;
+    },
+    /**
+     * @param {FlightData} flightData 
+     * @returns {Promise<UserData[]>}
+     */
+    async getPilotData(flightData) {
+        return dummyData.dummyUsers;
+    },
+
     /**
      * @param {Date} intervalStart 
      * @param {Date} intervalEnd 

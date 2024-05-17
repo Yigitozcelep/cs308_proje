@@ -1,32 +1,12 @@
+import { FlightsCommunication } from "../backend_communication/flights/flights_comminucation.js";
+import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js";
+
+let currentFlight = localStorage.getItem("currentFlight");
+currentFlight = dummyFlights[0];
 
 document.addEventListener('DOMContentLoaded', function () {
-    var myArray = [
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'Age': '36', 'Gender': 'Male', 'Nationality': 'American', 'Email': 'mryan@gmail.com', 'Seniority': 'Junior', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Age': '45', 'Gender': 'Female', 'Nationality': 'American', 'Email': 'j.adams@gmail.com', 'Seniority': 'Senior', 'SeatNum': 'BA' },
-        { 'Name': 'Marianne', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'Age': '36', 'Gender': 'Male', 'Nationality': 'American', 'Email': 'mryan@gmail.com', 'Seniority': 'Junior', 'SeatNum': 'AA' },
-        { 'Name': 'Logan', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Age': '45', 'Gender': 'Female', 'Nationality': 'American', 'Email': 'j.adams@gmail.com', 'Seniority': 'Senior', 'SeatNum': 'BA' },
-        { 'Name': 'Matthew', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'Age': '36', 'Gender': 'Male', 'Nationality': 'American', 'Email': 'mryan@gmail.com', 'Seniority': 'Junior', 'SeatNum': 'AA' },
-        { 'Name': 'Emily', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Age': '45', 'Gender': 'Female', 'Nationality': 'American', 'Email': 'j.adams@gmail.com', 'Seniority': 'Senior', 'SeatNum': 'BA' },
-        { 'Name': 'Emma', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'Age': '36', 'Gender': 'Male', 'Nationality': 'American', 'Email': 'mryan@gmail.com', 'Seniority': 'Junior', 'SeatNum': 'AA' },
-        { 'Name': 'Jake', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Age': '45', 'Gender': 'Female', 'Nationality': 'American', 'Email': 'j.adams@gmail.com', 'Seniority': 'Senior', 'SeatNum': 'BA' },
-        { 'Name': 'Dirk', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'Age': '36', 'Gender': 'Male', 'Nationality': 'American', 'Email': 'mryan@gmail.com', 'Seniority': 'Junior', 'SeatNum': 'AA' },
-        { 'Name': 'John', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Age': '45', 'Gender': 'Female', 'Nationality': 'American', 'Email': 'j.adams@gmail.com', 'Seniority': 'Senior', 'SeatNum': 'BA' },
-        { 'Name': 'Bob', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'Age': '36', 'Gender': 'Male', 'Nationality': 'American', 'Email': 'mryan@gmail.com', 'Seniority': 'Junior', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Age': '45', 'Gender': 'Female', 'Nationality': 'American', 'Email': 'j.adams@gmail.com', 'Seniority': 'Senior', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'Age': '36', 'Gender': 'Male', 'Nationality': 'American', 'Email': 'mryan@gmail.com', 'Seniority': 'Junior', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Age': '45', 'Gender': 'Female', 'Nationality': 'American', 'Email': 'j.adams@gmail.com', 'Seniority': 'Senior', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'Age': '36', 'Gender': 'Male', 'Nationality': 'American', 'Email': 'mryan@gmail.com', 'Seniority': 'Junior', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Age': '45', 'Gender': 'Female', 'Nationality': 'American', 'Email': 'j.adams@gmail.com', 'Seniority': 'Senior', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'Age': '36', 'Gender': 'Male', 'Nationality': 'American', 'Email': 'mryan@gmail.com', 'Seniority': 'Junior', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Age': '45', 'Gender': 'Female', 'Nationality': 'American', 'Email': 'j.adams@gmail.com', 'Seniority': 'Senior', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'Age': '36', 'Gender': 'Male', 'Nationality': 'American', 'Email': 'mryan@gmail.com', 'Seniority': 'Junior', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'Age': '45', 'Gender': 'Female', 'Nationality': 'American', 'Email': 'j.adams@gmail.com', 'Seniority': 'Senior', 'SeatNum': 'BA' }
-    ];
-
-
-
     var state = {
-        'querySet': myArray,
+        'querySet': dummyFlights,
         'page': 1,
         'rows': 5,
         'currentTable': 'Cabin Crew'
@@ -36,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var data = pagination(state.querySet, state.page, state.rows);
         var tableBody = document.querySelector(`#${state.currentTable.toLowerCase().replace(' ', '-')}-table tbody`);
         tableBody.innerHTML = '';
-
+        
         data.querySet.forEach(function (item) {
             var row = `<tr>
                 <td>${item.Name}</td>
@@ -113,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    function searchTable(filters) {
-        return myArray.filter(item => {
+    function searchTable(filters, data) {
+        return data.filter(item => {
             return (!filters.name || item.Name.toLowerCase().includes(filters.name.toLowerCase())) &&
                 (!filters.surname || item.Surname.toLowerCase().includes(filters.surname.toLowerCase())) &&
                 (!filters.id || item.CrewID.toLowerCase().includes(filters.id.toLowerCase())) &&
@@ -139,7 +119,12 @@ document.addEventListener('DOMContentLoaded', function () {
             seniority: document.getElementById('seniority-search').value,
             seatNum: document.getElementById('seat-search').value
         };
-        var filteredData = searchTable(filters);
+        const currentState = document.getElementById("table-type").innerHTML;
+        let currentData;
+        if (currentState === "Pilot Crew") currentData = FlightsCommunication.getPilotData(currentFlight)
+        else if (currentState === "Passenger") currentData = FlightsCommunication.getPassangerData(currentFlight)
+        else if (currentState === "Cabin Crew") currentData = FlightsCommunication.getFlightCrew(currentFlight);
+        var filteredData = searchTable(filters, currentData);
         state.querySet = filteredData;
         state.page = 1;
         buildTable();
@@ -202,13 +187,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var closeBtn = popup.querySelector(".close");
 
     openPopupBtn.addEventListener("click", function () {
-        const mainDiv = document.getElementById("myMainDiv")
+        const mainDiv = document.getElementById("myMainDiv");
         const myDiv = document.createElement("div");
         myDiv.style.width = "100vw";
-        //gitmyDiv.style.backgroundColor = "blue"
-        myDiv.style.height = "100vh"
-        myDiv.style.position = "absolute"
-        myDiv.style.zIndex = 5000;
+        myDiv.classList.add("randomDiv")
+        myDiv.style.height = "100vh";
+        myDiv.style.position = "absolute";
+        myDiv.style.zIndex = 100;
         mainDiv.appendChild(myDiv);
 
         popup.style.display = "block";
@@ -216,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     closeBtn.addEventListener("click", function () {
         popup.style.display = "none";
+        for (const el of document.getElementsByClassName("randomDiv")) el.parentNode.removeChild(el)
     });
 
     window.addEventListener("click", function (event) {

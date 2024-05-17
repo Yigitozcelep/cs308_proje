@@ -7,7 +7,6 @@ function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
 
-    document.getElementById('log_rosterTitle').innerHTML = getText("log_rosterTitle");
     document.getElementById('loginTitle').innerHTML = getText("loginTitle");
     document.getElementById('log_email').innerHTML = getText("log_email");
     document.getElementById('log_password').innerHTML = getText("log_password");
@@ -57,7 +56,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     document.getElementById('log_forgotPassword').addEventListener('click', redirectToResetPass);
 });
-
+dummyUsers[0].userType = "passenger";
 document.querySelector('form').addEventListener('submit', async function(event){
     // Prevent the default form submission behavior
     event.preventDefault();

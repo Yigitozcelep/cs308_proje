@@ -1,4 +1,5 @@
 import { getText, languages } from "../dictionary.js";
+import { UserCommunication } from "../backend_communication/users/users_communication.js";
 
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
@@ -54,31 +55,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 // Şifre sıfırlama ve güncelleme işlemi
-document.getElementById('reset_sendEmailButton').addEventListener('click', async (event) => {
+document.getElementById('resetPasswordForm').addEventListener('submit', async (event) => {
     event.preventDefault(); // Formun varsayılan gönderme işlemini durdurun
 
     const email = document.getElementById('reset_email').value;
     const newPassword = document.getElementById('reset_password').value;
 
-    // Kullanıcıları yerel depolamadan alın
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    let userFound = false;
+    let user = await UserCommunication.getUserDataByEmail(email);
+    user.password = newPassword;
+    console.log(user);
 
-    // Kullanıcıyı bul ve şifresini güncelle
-    for (let user of users) {
-        if (user.email === email) {
-            user.password = newPassword;
-            userFound = true;
-            break;
-        }
-    }
-
-    if (userFound) {
-        localStorage.setItem('users', JSON.stringify(users));
-        alert('Password changed successfully');
-    } else {
-        alert('Password could not be changed');
-    }
+    // Redirect to login.html in login folder
+    window.location.href = '../login/login.html';
 });
 
 function redirectToSignUp() {

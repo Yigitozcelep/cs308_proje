@@ -1,4 +1,5 @@
-import { UserData, UserFlightData } from "../path/to/users.js"; // UserData ve UserFlightData sınıflarının doğru yolunu belirtin
+import { UserCommunication} from "../backend_communication/users/users_communication.js";
+import { UserData } from "../backend_communication/users/users.js";
 import { getText, languages } from "../dictionary.js"; // dictionary.js'yi içe aktarıyoruz
 
 function handleLanguageChange() {
@@ -105,6 +106,8 @@ document.getElementById('signupButton').addEventListener('click', async (event) 
         null // Bekleyen uçuş bilgisi (başlangıçta null)
     );
 
+
+
     // Kullanıcıyı yerel depolamaya kaydedin
     const users = JSON.parse(localStorage.getItem('users')) || [];
     users.push(newUser);
@@ -114,3 +117,4 @@ document.getElementById('signupButton').addEventListener('click', async (event) 
     alert('Kayıt başarılı!');
     window.location.href = '../login/login.html'; // Giriş sayfasına yönlendirin
 });
+

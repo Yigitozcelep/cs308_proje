@@ -1,9 +1,10 @@
 import { FlightData } from "../flights/flights.js";
 
 const UserTypes = {
-    passanger:   "passsanger",
-    cabinCrew:   "cabinCrew",
-    pilotCrew:   "pilotCrew",
+    passanger:   "Passsanger",
+    cabinCrew:   "CabinCrew",
+    pilotCrew:   "PilotCrew",
+    admin:       "Admin",
 }
 
 class UserFlightData {
@@ -50,6 +51,10 @@ class UserData {
         this.canRejectFlight = canRejectFlight;
         this.pendingFlight   = pendingFlight;
     }
+    isUserAdmin()     { return this.userType == UserTypes.admin     }
+    isUserCabinCrew() { return this.userType == UserTypes.cabinCrew }
+    isUserPilotCrew() { return this.userType == UserTypes.pilotCrew }
+    isUserAdmin()     { return this.userType == UserTypes.admin     }
 }
 
 export {UserData, UserFlightData}

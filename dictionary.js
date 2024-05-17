@@ -7,6 +7,7 @@ if (!localStorage.getItem("language")) localStorage.setItem("language", language
 
 
 const dictionary = {
+    
     "dreamsText": {
         [languages.turkish]: "Hayallerinize Uçun...",
         [languages.english]: "Fly To Your Dreams...",
@@ -15,10 +16,12 @@ const dictionary = {
         [languages.turkish]: "Uçuş Listesi",
         [languages.english]: "Flight Roster",
     },
-    "start": {
+    "startButton": {
         [languages.turkish]: "Başla",
         [languages.english]: "Start",
     },
+
+
     "signupTitle": {
         [languages.turkish]: "Üye Ol",
         [languages.english]: "Sign Up",
@@ -27,11 +30,11 @@ const dictionary = {
         [languages.turkish]: "E-postanızla ücretsiz bir hesap oluşturun.",
         [languages.english]: "Create a free account with your email.",
     },
-    "name": {
+    "sign_name": {
         [languages.turkish]: "İsim",
         [languages.english]: "Name",
     },
-    "surname": {
+    "sign_surname": {
         [languages.turkish]: "Soyad",
         [languages.english]: "Surname",
     },
@@ -47,38 +50,24 @@ const dictionary = {
         [languages.turkish]: "Diğer",
         [languages.english]: "Other",
     },
-    "selectNationality": {
+    "sign_age": {
+        [languages.turkish]: "Yaş:",
+        [languages.english]: "Age:",
+    },
+    "sign_nationality": {
         [languages.turkish]: "Uyruk Seçin",
         [languages.english]: "Select Nationality",
     },
-    "email": {
+    "sign_email": {
         [languages.turkish]: "Eposta",
         [languages.english]: "Email",
     },
-    "password": {
+    "sign_password": {
         [languages.turkish]: "Şifre",
         [languages.english]: "Password",
     },
-    "role": {
-        [languages.turkish]: "Rol",
-        [languages.english]: "Role",
-    },
-    "cockpitCrew": {
-        [languages.turkish]: "Kokpit ekibi",
-        [languages.english]: "Cockpit Crew",
-    },
-    "cabinCrew": {
-        [languages.turkish]: "Kabin ekibi",
-        [languages.english]: "Cabin Crew",
-    },
-    "passenger": {
-        [languages.turkish]: "Yolcu",
-        [languages.english]: "Passenger",
-    },
-    "admin": {
-        [languages.turkish]: "Yönetici",
-        [languages.english]: "Admin",
-    },
+
+
     "signupButton": {
         [languages.turkish]: "Üye Ol",
         [languages.english]: "Sign up",
@@ -87,15 +76,15 @@ const dictionary = {
         [languages.turkish]: "Hesabınız var mı?",
         [languages.english]: "Have an account?",
     },
-    "login": {
+    "sign_login": {
         [languages.turkish]: "Giriş yap",
         [languages.english]: "Log in",
     },
-    "helpButton": {
+    "sign_helpButton": {
         [languages.turkish]: "Yardım",
         [languages.english]: "Help",
     },
-    "signOut": {
+    "sign_signOut": {
         [languages.turkish]: "Çıkış Yap",
         [languages.english]: "Sign Out",
     },
@@ -145,24 +134,17 @@ const dictionary = {
            You must enter your e-mail address to sign up. If successful sign up is not achieved, please make sure that you have entered the e-mail address correctly.
            If you already have an account, click "Log in" and continue the process from the link.`,
     },
-    "languagesLabel": {
-        [languages.turkish]: "Diller",
-        [languages.english]: "Languages",
-    },
-    "languagesInputPlaceholder": {
-        [languages.turkish]: "Bildiğiniz dilleri girin",
-        [languages.english]: "Enter languages you know",
-    },
+    
 
     "loginTitle": {
         [languages.turkish]: "Giriş Yap",
         [languages.english]: "Login",
     },
-    "email:": {
+    "log_email": {
         [languages.turkish]: "Eposta:",
         [languages.english]: "Email:",
     },
-    "password:": {
+    "log_password": {
         [languages.turkish]: "Şifre:",
         [languages.english]: "Password:",
     },
@@ -170,19 +152,148 @@ const dictionary = {
         [languages.turkish]: "Giriş Yap",
         [languages.english]: "LOG IN",
     },
-    "forgotPassword": {
+    "log_forgotPassword": {
         [languages.turkish]: "Şifrenizi mi unuttunuz?",
         [languages.english]: "Forgot Password?",
     },
-    "helpButton": {
+    "log_helpButton": {
         [languages.turkish]: "Yardım",
         [languages.english]: "Help",
     },
-    "signOut": {
+    "log_signOut": {
         [languages.turkish]: "Çıkış Yap",
         [languages.english]: "Sign Out",
     },
+    "log_helpText": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+        Lütfen rolünüzü seçiniz (Yolcular yolcu seçeneğiyle devam etmelidir, çalışan iseniz lütfen size uygun kabin veya kokpit seçeneğini seçiniz).
+        Giriş yapabilmek için e-posta adresinizi girmelisiniz. Başarılı giriş sağlanamadıysa lütfen e-posta adresinizi doğru girdiğinizden emin olun veya sistemde kayıtlı değilseniz kayıt ekranına dönüp işlemleri tamamlayın. kayıt işlemi.
+        Şifrenizi unuttuysanız "Şifrenizi mi unuttunuz?" seçeneğine tıklayın. Bağlantıdan şifre yenileme işlemini tamamlayın.`,
+        [languages.english]: `Here is some helpful information:
+        Please select your role (passengers should continue with the passenger option, if you are an employee, please choose the cabin or cockpit option that suits you).
+        You must enter your e-mail address to log in. If successful login is not achieved, please make sure that you have entered the e-mail address correctly, or if you are not registered in the system, return to the registration screen and complete the registration process.
+        If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.`,
+    },
 
+
+    "reset_helpButton": {
+        [languages.turkish]: "Yardım",
+        [languages.english]: "Help",
+    },
+    "reset_helpText": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+        Şifrenizi sıfırlamak için e-posta adresinizi girmeniz gerekmektedir. Başarılı bir sıfırlama gerçekleşmezse, lütfen e-posta adresini doğru girdiğinizden emin olun veya bu e-postayla bir hesabınız olup olmadığını kontrol edin.
+        Hesabınız yoksa "Kayıt Ol"a tıklayın ve bağlantıdan işleme devam edin.`,
+        [languages.english]: `Here is some helpful information:
+        You must enter your e-mail address to reset your password. If successful reset is not achieved, please make sure that you have entered the e-mail address correctly or check if you have an account with this email.
+        If you do not have an account, click "Register" and continue the process from the link.`,
+    },
+    "reset_signOut": {
+        [languages.turkish]: "Çıkış Yap",
+        [languages.english]: "Sign Out",
+    },
+    "forgetTitle": {
+        [languages.turkish]: "Şifreyi Unut",
+        [languages.english]: "Forget Password",
+    },
+    "reset_email": {
+        [languages.turkish]: "E-postanızı giriniz",
+        [languages.english]: "Enter Your Email",
+    },
+    "reset_password": {
+        [languages.turkish]: "Yeni Şifreyi Girin",
+        [languages.english]: "Enter New Password",
+    },
+    "reset_sendEmailButton": {
+        [languages.turkish]: "Eposta gönder",
+        [languages.english]: "Send Email",
+    },
+    "reset_haveNoAccount": {
+        [languages.turkish]: "Hesabınız yok mu?",
+        [languages.english]: "Don't have an account?",
+    },
+    "reset_register": {
+        [languages.turkish]: "Kayıt ol",
+        [languages.english]: "Register",
+    },
+
+
+    "personalP_helpButton": {
+        [languages.turkish]: "Yardım",
+        [languages.english]: "Help",
+    },
+    "personalP_helpText": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+        Soyadınızı, e-posta adresinizi ve şifrenizi istediğiniz zaman değiştirebilirsiniz.
+        Bu bilgiler dışındaki bilgilerinizi değiştirmek isterseniz,
+        lütfen yetkili kişiyle iletişime geçin. (Yetkili e-posta adresi: 308airlines@gmail.com)
+        Değişiklik yapmak için "Kaydet" butonuna basmanız gerekmektedir, aksi halde değişiklikleriniz yapılmayacaktır.`,
+        [languages.english]: `Here is some helpful information:
+        You can change your surname, e-mail address, and password at any time. 
+        If you would like to change your information other than this information, 
+        please contact the authorized person. (Authorized e-mail address: 308airlines@gmail.com)
+        To make changes, you must press the "Save" button, otherwise your changes will not be made.`,
+    },
+    "personalP_signOut": {
+        [languages.turkish]: "Çıkış Yap",
+        [languages.english]: "Sign Out",
+    },
+    "personalP_Title": {
+        [languages.turkish]: "Kişisel bilgi",
+        [languages.english]: "Personal Information",
+    },
+    "personalP_lastname": {
+        [languages.turkish]: "Soyad:",
+        [languages.english]: "Last Name:",
+    },
+    "personalP_password": {
+        [languages.turkish]: "Şifre:",
+        [languages.english]: "Password:",
+    },
+    "personalP_save": {
+        [languages.turkish]: "Kaydet",
+        [languages.english]: "Save",
+    },
+
+
+    "personal_helpButton": {
+        [languages.turkish]: "Yardım",
+        [languages.english]: "Help",
+    },
+    "personal_helpText": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+        Soyadınızı, e-posta adresinizi ve şifrenizi istediğiniz zaman değiştirebilirsiniz.
+        Bu bilgiler dışındaki bilgilerinizi değiştirmek isterseniz,
+        lütfen yetkili kişiyle iletişime geçin. (Yetkili e-posta adresi: 308airlines@gmail.com)
+        Değişiklik yapmak için "Kaydet" butonuna basmanız gerekmektedir, aksi halde değişiklikleriniz yapılmayacaktır.`,
+        [languages.english]: `Here is some helpful information:
+        You can change your surname, e-mail address, and password at any time. 
+        If you would like to change your information other than this information, 
+        please contact the authorized person. (Authorized e-mail address: 308airlines@gmail.com)
+        To make changes, you must press the "Save" button, otherwise your changes will not be made.`,
+    },
+    "personal_signOut": {
+        [languages.turkish]: "Çıkış Yap",
+        [languages.english]: "Sign Out",
+    },
+    "personal_Title": {
+        [languages.turkish]: "Kişisel bilgi",
+        [languages.english]: "Personal Information",
+    },
+    "personal_lastname": {
+        [languages.turkish]: "Soyad:",
+        [languages.english]: "Last Name:",
+    },
+    "personal_password": {
+        [languages.turkish]: "Şifre:",
+        [languages.english]: "Password:",
+    },
+    "personal_save": {
+        [languages.turkish]: "Kaydet",
+        [languages.english]: "Save",
+    },
+
+  ////////////////
     "login": {
         [languages.turkish]: "giriş",
         [languages.english]: "login",
@@ -347,27 +458,27 @@ const dictionary = {
     },
     "flightManagementInfo":
     {
-        [languages.turkish]: "Tarih",
+        [languages.turkish]: "Uçuşları yönetmek için, ilgili düğmelere tıklayarak yeni bir uçuş ekleyebilir veya mevcut bir uçuşu güncelleyebilirsiniz.",
         [languages.english]: "To manage flights, you can add a new flight or update an existing one by clicking on the respective buttons provided.",
     },
     "flightSelection":
     {
-        [languages.turkish]: "Tarih",
+        [languages.turkish]: "Uçuş Seçimi",
         [languages.english]: "Flight Selection",
     },
     "flightSelectionInfo":
     {
-        [languages.turkish]: "Tarih",
+        [languages.turkish]: "Daha fazla işlem için bir uçuş seçmek için, tablodaki ilgili satırın yanındaki \"Seç\" düğmesine tıklayın.",
         [languages.english]: "To select a flight for further actions, such as editing and viewing detailed info, click on the \"Select\" button next to the corresponding row in the table.",
     },
     "flightDeletion":
     {
-        [languages.turkish]: "Tarih",
+        [languages.turkish]: "Uçuş Silme",
         [languages.english]: "Flight Deletion",
     },
     "flightDeletionInfo":
     {
-        [languages.turkish]: "Tarih",
+        [languages.turkish]: "Bir uçuşu silmek için, tablodaki ilgili satırın yanındaki \"Sil\" düğmesine tıklayın.",
         [languages.english]: "To delete a flight, click on the \"Delete\" button next to the corresponding row in the table.",
     },
 
@@ -606,10 +717,45 @@ const dictionary = {
         [languages.english]: "Update a Flight",
     },
 
+    "name": {
+        [languages.turkish]: "isim",
+        [languages.english]: "name",
+    },
 
+    "gender": {
+        [languages.turkish]: "cinsiyet",
+        [languages.english]: "gender",
+    },
 
+    "nationality": {
+        [languages.turkish]: "ulus",
+        [languages.english]: "nationality"
+    },
 
+    "surname": {
+        [languages.turkish]: "soyad",
+        [languages.english]: "surname",
+    },
 
+    "age": {
+        [languages.turkish]: "yaş",
+        [languages.english]: "age",
+    },
+
+    "type": {
+        [languages.turkish]: "tip",
+        [languages.english]: "type",
+    },
+
+    "The transaction was completed successfully": {
+        [languages.turkish]: "İşlem başarıyla gerçekleştirildi",
+        [languages.english]: "The transaction was completed successfully",
+    },
+
+    "buySeat": {
+        [languages.turkish]: "Satın al",
+        [languages.english]: "Buy Seat"
+    }
 }
 
 const getText = (text) => {

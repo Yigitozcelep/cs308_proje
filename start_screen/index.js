@@ -6,11 +6,11 @@ function handleLanguageChange() {
 
   const dreamsText = document.getElementById('dreamsText');
   const rosterText = document.getElementById('rosterText');
-  const button = document.getElementById('startButton');
+  const startButton = document.getElementById('startButton');
 
   dreamsText.innerHTML = getText("dreamsText");
   rosterText.innerHTML = getText("rosterText");
-  button.innerHTML = getText("start");
+  startButton.innerHTML = getText("startButton");
 }
 
 // Call the function to initialize language preferences

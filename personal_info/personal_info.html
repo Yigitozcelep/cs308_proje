@@ -18,37 +18,36 @@
                 <option value="turkish">TR</option>
             </select>
         </div>
-        <a href="#" class="top-bar-item" id="helpButton">Help</a>
+        <a href="#" class="top-bar-item" id="personal_helpButton">Help</a>
         <div id="helpPopup" class="help-popup" style="display: none;">
             <div class="help-content">
                 <span class="close">&times;</span>
-                <p>Here is some helpful information:</p>
-                <p>You can change your surname, e-mail address, and password at any time. 
+                <p id="personal_helpText">Here is some helpful information:
+                   You can change your surname, e-mail address, and password at any time. 
                    If you would like to change your information other than this information, 
-                   please contact the authorized person. (Authorized e-mail address: 308airlines@gmail.com)</p>
-                <p>To make changes, you must press the "Save" button, otherwise your changes will not be made.</p>
+                   please contact the authorized person. (Authorized e-mail address: 308airlines@gmail.com)
+                   To make changes, you must press the "Save" button, otherwise your changes will not be made.</p>
             </div>
         </div>
-        <a href="#" class="top-bar-item" id="signOutButton">Sign Out</a>
+        <a href="#" class="top-bar-item" id="personal_signOut">Sign Out</a>
     </div>
       
     <div class="container">
         <form action="#">
-            <h2>Personal Information</h2>
+            <h2 id="personal_Title">Personal Information</h2>
             <div class="input-text">
-                <label for="last-name">Last Name:</label>
-                <input type="text" id="last-name" name="last-name">
+                <label for="last-name" id="personal_lastname">Last Name:</label>
+                <input type="text" id="personal_last-name" name="last-name">
             
-                <!-- <label for="email">Email:</label>
-                <input type="email" id="email" name="email"> -->
-            
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password">
+                <label for="password" id="personal_password">Password:</label>
+                <input type="password" id="personal_pass" name="password">
             </div>
         
-            <button type="submit">Save</button>
+            <button type="submit" id="personal_save">Save</button>
         </form>
     </div>
-    <script src="personal_info.js"></script>
+    
+    <script type="module" src="personal_info.js"></script>
+    <script type="module" src="../dictionary.js"></script>  
 </body>
 </html>

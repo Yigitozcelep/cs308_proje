@@ -1,11 +1,31 @@
+import { getText, languages } from "../dictionary.js";
+
+function handleLanguageChange() {
+    let lang = document.getElementById('language').value;
+    localStorage.setItem("language", lang);
+
+    document.getElementById('personal_Title').innerHTML = getText("personal_Title");
+    document.getElementById('personal_lastname').innerHTML = getText("personal_lastname");
+    document.getElementById('personal_password').innerHTML = getText("personal_password");
+    document.getElementById('personal_save').innerHTML = getText("personal_save");
+    document.getElementById('personal_helpButton').innerHTML = getText("personal_helpButton");
+    document.getElementById('personal_signOut').innerHTML = getText("personal_signOut");
+    document.getElementById('personal_helpText').innerHTML = getText("personal_helpText");
+}
+
+// Call the function to initialize language preferences
+document.addEventListener('DOMContentLoaded', handleLanguageChange);
+
+// Add event listener to the language dropdown to handle language change
+document.getElementById('language').addEventListener('change', handleLanguageChange);
+
 document.addEventListener('DOMContentLoaded', (event) => {
-    // Help button functionality
-    var helpButton = document.getElementById('helpButton');
+    var personal_helpButton = document.getElementById('personal_helpButton');
     var helpPopup = document.getElementById('helpPopup');
     var closeSpan = document.getElementsByClassName('close')[0];
 
     // When the help button is clicked, show the pop-up
-    helpButton.onclick = function() {
+    personal_helpButton.onclick = function() {
         helpPopup.style.display = "flex";
     }
 
@@ -22,7 +42,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     // Redirect to index.html in start_screen folder on Sign Out
-    document.getElementById('signOutButton').onclick = function() {
+    document.getElementById('personal_signOut').onclick = function() {
         window.location.href = '../start_screen/index.html';
     }
 });

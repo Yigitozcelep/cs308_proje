@@ -18,35 +18,38 @@
                 <option value="turkish">TR</option>
             </select>
         </div>
-        <a href="#" class="top-bar-item" id="helpButton">Help</a>
+        <a href="#" class="top-bar-item" id="log_helpButton">Help</a>
         <div id="helpPopup" class="help-popup" style="display: none;">
             <div class="help-content">
                 <span class="close">&times;</span>
-                <p>Here is some helpful information:</p>
-                <p>Please select your role (passengers should continue with the passenger option, if you are an employee, please choose the cabin or cockpit option that suits you).</p>
-                <p>You must enter your e-mail address to log in. If successful login is not achieved, please make sure that you have entered the e-mail address correctly, or if you are not registered in the system, return to the registration screen and complete the registration process.</p>
-                <p>If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.</p>
+                <p id="log_helpText"> Here is some helpful information:
+                   Please select your role (passengers should continue with the passenger option, if you are an employee, please choose the cabin or cockpit option that suits you).
+                   You must enter your e-mail address to log in. If successful login is not achieved, please make sure that you have entered the e-mail address correctly, or if you are not registered in the system, return to the registration screen and complete the registration process.
+                   If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.</p>
             </div>
         </div>
-        <a href="#" class="top-bar-item" id="signOutButton">Sign Out</a>
+        <a href="#" class="top-bar-item" id="log_signOut">Sign Out</a>
     </div>
 
     <div class="container">
         <img src="308_air.png" alt="AIR308" class="airplane-image">
-        <h1>Login</h1>
+        <h1 id="loginTitle">Login</h1>
         <form>
             <div class="input-group">
-                <label for="email">Email:</label>
+                <label for="email" id="log_email">Email:</label>
                 <input type="text" id="email" name="email" required>
             </div>
             <div class="input-group">
-                <label for="password">Password:</label>
+                <label for="password" id="log_password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit" class="login-button">LOG IN</button>
-            <a href="reset_password.html" class="forgot-password">Forgot Password?</a>
+            <button type="submit" class="login-button" id="loginButton">LOG IN</button>
+            
+            <p class="forgot-password" id="log_forgotPassword">Forgot Password? <a href="#" onclick="redirectToResetPass()" </a></p>
+            
         </form>
     </div>
-    <script src="login.js"></script>
+    <script type="module" src="login.js"></script>
+    <script type="module" src="../dictionary.js"></script>
 </body>
 </html>

@@ -7,6 +7,293 @@ if (!localStorage.getItem("language")) localStorage.setItem("language", language
 
 
 const dictionary = {
+    
+    "dreamsText": {
+        [languages.turkish]: "Hayallerinize Uçun...",
+        [languages.english]: "Fly To Your Dreams...",
+    },
+    "rosterText": {
+        [languages.turkish]: "Uçuş Listesi",
+        [languages.english]: "Flight Roster",
+    },
+    "startButton": {
+        [languages.turkish]: "Başla",
+        [languages.english]: "Start",
+    },
+
+
+    "signupTitle": {
+        [languages.turkish]: "Üye Ol",
+        [languages.english]: "Sign Up",
+    },
+    "signupSubtitle": {
+        [languages.turkish]: "E-postanızla ücretsiz bir hesap oluşturun.",
+        [languages.english]: "Create a free account with your email.",
+    },
+    "sign_name": {
+        [languages.turkish]: "İsim",
+        [languages.english]: "Name",
+    },
+    "sign_surname": {
+        [languages.turkish]: "Soyad",
+        [languages.english]: "Surname",
+    },
+    "female": {
+        [languages.turkish]: "Kadın",
+        [languages.english]: "Female",
+    },
+    "male": {
+        [languages.turkish]: "Erkek",
+        [languages.english]: "Male",
+    },
+    "other": {
+        [languages.turkish]: "Diğer",
+        [languages.english]: "Other",
+    },
+    "sign_age": {
+        [languages.turkish]: "Yaş:",
+        [languages.english]: "Age:",
+    },
+    "sign_nationality": {
+        [languages.turkish]: "Uyruk Seçin",
+        [languages.english]: "Select Nationality",
+    },
+    "sign_email": {
+        [languages.turkish]: "Eposta",
+        [languages.english]: "Email",
+    },
+    "sign_password": {
+        [languages.turkish]: "Şifre",
+        [languages.english]: "Password",
+    },
+
+
+    "signupButton": {
+        [languages.turkish]: "Üye Ol",
+        [languages.english]: "Sign up",
+    },
+    "haveAccount": {
+        [languages.turkish]: "Hesabınız var mı?",
+        [languages.english]: "Have an account?",
+    },
+    "sign_login": {
+        [languages.turkish]: "Giriş yap",
+        [languages.english]: "Log in",
+    },
+    "sign_helpButton": {
+        [languages.turkish]: "Yardım",
+        [languages.english]: "Help",
+    },
+    "sign_signOut": {
+        [languages.turkish]: "Çıkış Yap",
+        [languages.english]: "Sign Out",
+    },
+    "dutch": {
+        [languages.turkish]: "Hollandalı",
+        [languages.english]: "Dutch",
+    },
+    "english": {
+        [languages.turkish]: "İngiliz",
+        [languages.english]: "English",
+    },
+    "french": {
+        [languages.turkish]: "Fransız",
+        [languages.english]: "French",
+    },
+    "german": {
+        [languages.turkish]: "Alman",
+        [languages.english]: "German",
+    },
+    "italian": {
+        [languages.turkish]: "İtalyan",
+        [languages.english]: "Italian",
+    },
+    "russian": {
+        [languages.turkish]: "Rus",
+        [languages.english]: "Russian",
+    },
+    "swedish": {
+        [languages.turkish]: "İsveçli",
+        [languages.english]: "Swedish",
+    },
+    "turkish": {
+        [languages.turkish]: "Türk",
+        [languages.english]: "Turkish",
+    },
+    "helpText": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+            Lütfen hiçbir kutuyu boş bırakmamaya dikkat edin.
+            "Söylememeyi tercih et" seçeneği cinsiyetini belirtmek istemeyen kişiler için oluşturulmuş bir seçenektir. Kişiler üyelik işleminden sonra tercihlerini değiştirme hakkına sahiptir.
+            Lütfen "Uyruğu Seç" seçeneğine tıklayarak seçim çubuğundan uyruğunuzu seçin.
+            Kayıt olmak için e-posta adresinizi girmelisiniz. Kayıt işlemi başarılı olmazsa lütfen e-posta adresinizi doğru girdiğinizden emin olun.
+            Zaten bir hesabınız varsa, "Giriş yap" seçeneğini tıklayın ve bağlantıdan işleme devam edin.`,
+        [languages.english]: `Here is some helpful information:
+           Please be careful not to leave any boxes blank.
+           The "prefer not to say" option is an option created for people who do not want to specify their gender. People have the right to change their preferences after the membership process.
+           Please select your nationality from the selection bar by clicking on the "Select Nationality".
+           You must enter your e-mail address to sign up. If successful sign up is not achieved, please make sure that you have entered the e-mail address correctly.
+           If you already have an account, click "Log in" and continue the process from the link.`,
+    },
+    
+
+    "loginTitle": {
+        [languages.turkish]: "Giriş Yap",
+        [languages.english]: "Login",
+    },
+    "log_email": {
+        [languages.turkish]: "Eposta:",
+        [languages.english]: "Email:",
+    },
+    "log_password": {
+        [languages.turkish]: "Şifre:",
+        [languages.english]: "Password:",
+    },
+    "loginButton": {
+        [languages.turkish]: "Giriş Yap",
+        [languages.english]: "LOG IN",
+    },
+    "log_forgotPassword": {
+        [languages.turkish]: "Şifrenizi mi unuttunuz?",
+        [languages.english]: "Forgot Password?",
+    },
+    "log_helpButton": {
+        [languages.turkish]: "Yardım",
+        [languages.english]: "Help",
+    },
+    "log_signOut": {
+        [languages.turkish]: "Çıkış Yap",
+        [languages.english]: "Sign Out",
+    },
+    "log_helpText": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+        Lütfen rolünüzü seçiniz (Yolcular yolcu seçeneğiyle devam etmelidir, çalışan iseniz lütfen size uygun kabin veya kokpit seçeneğini seçiniz).
+        Giriş yapabilmek için e-posta adresinizi girmelisiniz. Başarılı giriş sağlanamadıysa lütfen e-posta adresinizi doğru girdiğinizden emin olun veya sistemde kayıtlı değilseniz kayıt ekranına dönüp işlemleri tamamlayın. kayıt işlemi.
+        Şifrenizi unuttuysanız "Şifrenizi mi unuttunuz?" seçeneğine tıklayın. Bağlantıdan şifre yenileme işlemini tamamlayın.`,
+        [languages.english]: `Here is some helpful information:
+        Please select your role (passengers should continue with the passenger option, if you are an employee, please choose the cabin or cockpit option that suits you).
+        You must enter your e-mail address to log in. If successful login is not achieved, please make sure that you have entered the e-mail address correctly, or if you are not registered in the system, return to the registration screen and complete the registration process.
+        If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.`,
+    },
+
+
+    "reset_helpButton": {
+        [languages.turkish]: "Yardım",
+        [languages.english]: "Help",
+    },
+    "reset_helpText": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+        Şifrenizi sıfırlamak için e-posta adresinizi girmeniz gerekmektedir. Başarılı bir sıfırlama gerçekleşmezse, lütfen e-posta adresini doğru girdiğinizden emin olun veya bu e-postayla bir hesabınız olup olmadığını kontrol edin.
+        Hesabınız yoksa "Kayıt Ol"a tıklayın ve bağlantıdan işleme devam edin.`,
+        [languages.english]: `Here is some helpful information:
+        You must enter your e-mail address to reset your password. If successful reset is not achieved, please make sure that you have entered the e-mail address correctly or check if you have an account with this email.
+        If you do not have an account, click "Register" and continue the process from the link.`,
+    },
+    "reset_signOut": {
+        [languages.turkish]: "Çıkış Yap",
+        [languages.english]: "Sign Out",
+    },
+    "forgetTitle": {
+        [languages.turkish]: "Şifreyi Unut",
+        [languages.english]: "Forget Password",
+    },
+    "reset_email": {
+        [languages.turkish]: "E-postanızı giriniz",
+        [languages.english]: "Enter Your Email",
+    },
+    "reset_password": {
+        [languages.turkish]: "Yeni Şifreyi Girin",
+        [languages.english]: "Enter New Password",
+    },
+    "reset_sendEmailButton": {
+        [languages.turkish]: "Eposta gönder",
+        [languages.english]: "Send Email",
+    },
+    "reset_haveNoAccount": {
+        [languages.turkish]: "Hesabınız yok mu?",
+        [languages.english]: "Don't have an account?",
+    },
+    "reset_register": {
+        [languages.turkish]: "Kayıt ol",
+        [languages.english]: "Register",
+    },
+
+
+    "personalP_helpButton": {
+        [languages.turkish]: "Yardım",
+        [languages.english]: "Help",
+    },
+    "personalP_helpText": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+        Soyadınızı, e-posta adresinizi ve şifrenizi istediğiniz zaman değiştirebilirsiniz.
+        Bu bilgiler dışındaki bilgilerinizi değiştirmek isterseniz,
+        lütfen yetkili kişiyle iletişime geçin. (Yetkili e-posta adresi: 308airlines@gmail.com)
+        Değişiklik yapmak için "Kaydet" butonuna basmanız gerekmektedir, aksi halde değişiklikleriniz yapılmayacaktır.`,
+        [languages.english]: `Here is some helpful information:
+        You can change your surname, e-mail address, and password at any time. 
+        If you would like to change your information other than this information, 
+        please contact the authorized person. (Authorized e-mail address: 308airlines@gmail.com)
+        To make changes, you must press the "Save" button, otherwise your changes will not be made.`,
+    },
+    "personalP_signOut": {
+        [languages.turkish]: "Çıkış Yap",
+        [languages.english]: "Sign Out",
+    },
+    "personalP_Title": {
+        [languages.turkish]: "Kişisel bilgi",
+        [languages.english]: "Personal Information",
+    },
+    "personalP_lastname": {
+        [languages.turkish]: "Soyad:",
+        [languages.english]: "Last Name:",
+    },
+    "personalP_password": {
+        [languages.turkish]: "Şifre:",
+        [languages.english]: "Password:",
+    },
+    "personalP_save": {
+        [languages.turkish]: "Kaydet",
+        [languages.english]: "Save",
+    },
+
+
+    "personal_helpButton": {
+        [languages.turkish]: "Yardım",
+        [languages.english]: "Help",
+    },
+    "personal_helpText": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+        Soyadınızı, e-posta adresinizi ve şifrenizi istediğiniz zaman değiştirebilirsiniz.
+        Bu bilgiler dışındaki bilgilerinizi değiştirmek isterseniz,
+        lütfen yetkili kişiyle iletişime geçin. (Yetkili e-posta adresi: 308airlines@gmail.com)
+        Değişiklik yapmak için "Kaydet" butonuna basmanız gerekmektedir, aksi halde değişiklikleriniz yapılmayacaktır.`,
+        [languages.english]: `Here is some helpful information:
+        You can change your surname, e-mail address, and password at any time. 
+        If you would like to change your information other than this information, 
+        please contact the authorized person. (Authorized e-mail address: 308airlines@gmail.com)
+        To make changes, you must press the "Save" button, otherwise your changes will not be made.`,
+    },
+    "personal_signOut": {
+        [languages.turkish]: "Çıkış Yap",
+        [languages.english]: "Sign Out",
+    },
+    "personal_Title": {
+        [languages.turkish]: "Kişisel bilgi",
+        [languages.english]: "Personal Information",
+    },
+    "personal_lastname": {
+        [languages.turkish]: "Soyad:",
+        [languages.english]: "Last Name:",
+    },
+    "personal_password": {
+        [languages.turkish]: "Şifre:",
+        [languages.english]: "Password:",
+    },
+    "personal_save": {
+        [languages.turkish]: "Kaydet",
+        [languages.english]: "Save",
+    },
+
+  ////////////////
     "login": {
         [languages.turkish]: "giriş",
         [languages.english]: "login",

@@ -101,6 +101,9 @@ document.getElementById('language').addEventListener('change', handleLanguageCha
 
 document.addEventListener('DOMContentLoaded', async function () {
     
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    console.log(userId);
     let flights = await FlightsCommunication.getAllFlights();
     var state = {
 
@@ -169,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.getLandingAirport().airportName }</td>
                 <td>${item.getPlaneType()}</td>
                 <td><button class="select-row" data-flight-id="${item.getFlightId()}">Select</button></td>
-                <td><button class="delete-row">Delete</button></td>
+                <td><button class="delete-row" data-flight-id="${item.getFlightId()}">Delete</button></td>
             </tr>`;
             tableBody.innerHTML += row;
         });
@@ -180,13 +183,25 @@ document.addEventListener('DOMContentLoaded', async function () {
          document.querySelectorAll('.select-row').forEach(button => {
             button.addEventListener('click', function() {
                 const flightId = this.dataset.flightId;
-                const selectedFlight = state.querySet.find(flight => flight.getFlightId() === flightId);
-                console.log(selectedFlight);
+                
+                console.log(flightId);
                 if (selectedFlight) {
-                    window.currentFlight = selectedFlight;                
+                    
+                    window.location.href = ``;               
+                }
+            }); 
+        });
+        document.querySelectorAll('.delete-row').forEach(button => {
+            button.addEventListener('click', async function() {
+                const flightId = this.dataset.flightId;
+                const flightToDelete = state.querySet.find(flight => flight.getFlightId() === flightId);
+                console.log(flightToDelete);
+                if (flightToDelete) {
+                    await FlightsCommunication.deleteFlight(flightToDelete);
                 }
             });
         });
+            
 
 
         

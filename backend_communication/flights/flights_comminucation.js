@@ -1,5 +1,6 @@
 import * as dummyData from "../dummy_data.js";
-import { FlightData } from "./flights.js";
+import { UserData } from "../users/users.js";
+import { FlightData, Seats, Seat } from "./flights.js";
 
 const FlightsCommunication = {
 
@@ -11,9 +12,8 @@ const FlightsCommunication = {
      * @param {Date} intervalEnd 
      * @returns {Promise<FlightData[]>}
      */
-
     async getFlightsDataFrom(from, goTo, intervalStart, intervalEnd, airportName) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         const data = []
         for (let i = 0; i < dummyData.dummyFlights.length; i++) {
             if (dummyData.dummyFlights[i].getLandingTime() >= intervalStart && dummyData.dummyFlights[i].getDepartureTime() <= intervalEnd && dummyData.dummyFlights[i].getFrom() == from && dummyData.dummyFlights[i].getGoto() == goTo && dummyData.dummyFlights[i].getDedepartureAirport().airportName == airportName) {
@@ -24,13 +24,43 @@ const FlightsCommunication = {
     },
 
     /**
+     * @param {FlightData} flight 
+     */
+    async deleteFlight(flight) {
+
+    },
+
+    /**
+     * @param {FlightData} flight 
+     */
+    async addFlight(flight) {
+
+    },
+
+    /**
+     * @param {FlightData} flight 
+     */
+    async updateFlight(flight) {
+
+    },
+
+    /**
+     * @param {FlightData} flightData 
+     * @returns {Promise<UserData[]>}
+     */
+    async getFlightCrew(flightData) {
+        
+        return dummyData.crewData[flightData.getPlaineId() - "0"]
+    },
+
+    /**
      * @param {Date} intervalStart 
      * @param {Date} intervalEnd 
      * @param {Date} airportName 
      * @returns {Promise<FlightData[]>}
      */
     async getFlightsDataFromWithoutFromGoto(intervalStart, intervalEnd, airportName) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         const data = []
         for (let i = 0; i < dummyData.dummyFlights.length; i++) {
             if (dummyData.dummyFlights[i].getLandingTime() >= intervalStart && dummyData.dummyFlights[i].getDepartureTime() <= intervalEnd && dummyData.dummyFlights[i].getDedepartureAirport().airportName == airportName) {
@@ -48,7 +78,7 @@ const FlightsCommunication = {
      * @returns {Promise<FlightData[]>}
      */
     async getFlightsDataWithoutAirport(from, goTo, intervalStart, intervalEnd) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         const data = []
         for (let i = 0; i < dummyData.dummyFlights.length; i++) {
             if (dummyData.dummyFlights[i].getLandingTime() >= intervalStart && dummyData.dummyFlights[i].getDepartureTime() <= intervalEnd && dummyData.dummyFlights[i].getFrom() == from && dummyData.dummyFlights[i].getGoto() == goTo) {
@@ -62,7 +92,7 @@ const FlightsCommunication = {
      * @returns {Promise<FlightData>}
      */
     async getFlightByFlightId(id) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         for (let i = 0; i < dummyData.dummyFlights.length; i++) {
             if (dummyData.dummyFlights[i].getFlightId() == id) return dummyData.dummyFlights[i];
         }
@@ -72,10 +102,10 @@ const FlightsCommunication = {
      * @param {String} planeId 
      * @returns {Promise<FlightData>}
      */
-    async getFlightByPlaneId(planeId) {
-        await new Promise(resolve => setTimeout(resolve, 200));
+    async getFlightByPlaineId(plaineId) {
+        await new Promise(resolve => setTimeout(resolve, 50));
         for (let i = 0; i < dummyData.dummyFlights.length; i++) {
-            if (dummyData.dummyFlights[i].getPlaneId() == planeId) return dummyData.dummyFlights[i];
+            if (dummyData.dummyFlights[i].getPlaineId() == plaineId) return dummyData.dummyFlights[i];
         }
     },
 
@@ -90,7 +120,7 @@ const FlightsCommunication = {
      * @returns {Promise<String[]>}
      */
     async getAirlineCompaniesNames() {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         return dummyData.dummyDatas.createDummyAirlineCompanies();
     },
     
@@ -98,16 +128,16 @@ const FlightsCommunication = {
      * @returns {Promise<String[]>}
      */
     async getAirPortsNames() {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 50));
         return dummyData.dummyDatas.createDummyAirPort();
     },
     
     /**
      * @param {FlightData} flight 
-     * @returns {Promoise<Seats>}
+     * @returns {Promise<Seats>}
      */
     async getSeatsData(flight) {
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => setTimeout(resolve, 50));
         return dummyData.seats[flight.getFlightId().slice(2) - "0"];
     }
 }

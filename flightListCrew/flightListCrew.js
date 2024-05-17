@@ -92,9 +92,7 @@ document.getElementById('language').addEventListener('change', handleLanguageCha
 
 document.addEventListener('DOMContentLoaded', async function () {
     
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('userId');
-    
+    const userId = JSON.parse(localStorage.getItem("userId"))
     let user = await UserCommunication.getUserById(userId);
     console.log(userId);
     console.log(user);
@@ -181,9 +179,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.querySelectorAll('.select-row').forEach(button => {
           button.addEventListener('click', function() {
               const flightId = this.dataset.flightId;
-              console.log(flightId);
-            
-              window.currentFlight = selectedFlight.flightData;
+              localStorage.setItem("flightId", flightId);
+              window.location.href = `../tabular_view/tabular_view.html`;
 
           });
       });

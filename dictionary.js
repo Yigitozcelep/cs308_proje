@@ -241,12 +241,32 @@ const dictionary = {
     "personalP_Title": {
         [languages.turkish]: "Kişisel bilgi",
         [languages.english]: "Personal Information",
+    }, 
+    "personalP_nameLabel": {
+        [languages.turkish]: "Ad:",
+        [languages.english]: "Name:",
     },
-    "personalP_lastname": {
+    "personalP_surnameLabel": {
         [languages.turkish]: "Soyad:",
         [languages.english]: "Last Name:",
     },
-    "personalP_password": {
+    "personalP_genderLabel": {
+        [languages.turkish]: "Cinsiyet:",
+        [languages.english]: "Gender:",
+    }, 
+    "personalP_ageLabel": {
+        [languages.turkish]: "Yaş:",
+        [languages.english]: "Age:",
+    },
+    "personalP_nationalityLabel": {
+        [languages.turkish]: "Uyruk:",
+        [languages.english]: "Nationality:",
+    },
+    "personalP_emailLabel": {
+        [languages.turkish]: "Eposta:",
+        [languages.english]: "Email:",
+    },
+    "personalP_passwordLabel": {
         [languages.turkish]: "Şifre:",
         [languages.english]: "Password:",
     },
@@ -256,7 +276,7 @@ const dictionary = {
     },
 
 
-    "personal_helpButton": {
+    /*"personal_helpButton": {
         [languages.turkish]: "Yardım",
         [languages.english]: "Help",
     },
@@ -291,7 +311,7 @@ const dictionary = {
     "personal_save": {
         [languages.turkish]: "Kaydet",
         [languages.english]: "Save",
-    },
+    },*/
 
   ////////////////
     "login": {

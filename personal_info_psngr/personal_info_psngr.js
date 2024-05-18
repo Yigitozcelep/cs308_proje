@@ -1,6 +1,6 @@
 import { getText, languages } from "../dictionary.js";
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
-
+let userData;
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
     const userId = localStorage.getItem('userId');
     if (userId) {
-        const userData = await UserCommunication.getUserById(userId);
+        userData = await UserCommunication.getUserById(userId);
         if (userData) {
             document.getElementById('personalP_name').value = userData.name;
             document.getElementById('personalP_surname').value = userData.surname;
@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             if (password) updatedUser.password = password;
 
             await UserCommunication.updateUser(updatedUser);
+            console.log(updatedUser);
             alert('Information updated successfully!');
         }
     });

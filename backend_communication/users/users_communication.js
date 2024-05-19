@@ -1,5 +1,5 @@
 import * as dummyData from "../dummy_data.js";
-import { Seat } from "../flights/flights.js";
+import { FlightData, Seat } from "../flights/flights.js";
 import { UserData, UserFlightData } from "./users.js";
 
 
@@ -89,6 +89,14 @@ const UserCommunication = {
         for (let el of dummyData.dummyUsers) {
             if (el.Id == id) { return el; }
         }
+    },
+
+    /**
+     * @param {UserData} user 
+     * @param {FlightData} flight 
+     */
+    async refuseFlight(user, flight) {
+        await new Promise(resolve => setTimeout(resolve, 50));
     }
 }
 

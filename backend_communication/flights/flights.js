@@ -79,8 +79,20 @@ class FlightData {
     getPlaneType()          { return this.#planeType;        }
     getFlightTime()         { return this.#flightTime;       }
     getFlightId()           { return this.#flightId;         }
-    getPlaneId()           { return this.#planeId          }
+    getPlaneId()            { return this.#planeId           }
     getFlightCrewId()       { return this.#flightCrewId      }
+
+    setFrom(val)               {  this.#from             = val }
+    setGoto(val)               {  this.#goTo             = val }
+    setDedepartureAirport(val) {  this.#departureAirport = val }
+    setLandingAirport(val)     {  this.#landingAirport   = val }
+    setDepartureTime(val)      {  this.#departureTime    = val }
+    setLandingTime(val)        {  this.#landingTime      = val }
+    setPlaneType(val)          {  this.#planeType        = val }
+    setFlightTime(val)         {  this.#flightTime       = val }
+    setFlightId(val)           {  this.#flightId         = val }
+    setPlaneId(val)            {  this.#planeId          = val }
+    setFlightCrewId(val)       {  this.#flightCrewId     = val }
 }   
 
 class Seat {

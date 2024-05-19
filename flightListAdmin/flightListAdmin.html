@@ -37,7 +37,7 @@
                     <p id="flightDeletionInfo"></p>
                 </div>
               </div>
-            <a href="signout.php" class="top-bar-item" id="signOut"></a>
+            <a href="/start_screen/index.html" class="top-bar-item" id="signOut"></a>
         </div>
 
         <div class="main-container">
@@ -80,8 +80,7 @@
                         </tr>
                         </thead>
                         <tbody id="table-body">
-                            <script type ="module" src="flightListAdmin.js"></script>
-                            <script type="module" src="../dictionary.js"></script>                 
+               
                         </tbody>
                     </table>
                 </div>
@@ -95,30 +94,76 @@
                 
 
             </div>
-         
-
-            <div class="right"></div>
-
+            
             <div>
                 <div class="buttons-container">
                     <button class="button" id="addFlight"></button>
-                    <button class="button" id="updateFlight"></button>
-
-                        
                 </div>
             </div>
             
         </div>
-        <!-- Pop-up Structure -->
     <div id="selectPopup" class="popup">
         <div class="popup-content">
             <span class="close-popup">&times;</span>
-            <p>Choose an action:</p>
-            <button id="button1">Extended View</button>
-            <button id="button2">Tabular View</button>
-            <button id="button3">Plane View</button>
+            <p id="chooseAction"></p>
+            <button id="button1"></button>
+            <button id="button2"></button>
+            <button id="button3"></button>
+            <button id="button4"></button>
+    </div>
+    <div id="updatePopup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2 id="0"></h2>
+            <form id="updateForm">
+                <label id="1" for="flightId"></label>
+                <input type="text" id="flightId" name="flightId" readonly><br><br>
+    
+                <label id="2" for="newPlaneId"></label>
+                <input type="text" id="newPlaneId" name="newPlaneId"><br><br>
+    
+                <label id="3" for="newDepartureDate"></label>
+                <input type="date" id="newDepartureDate" name="newDepartureDate"><br><br>
+    
+                <label id="4" for="newDepartureTime"></label>
+                <input type="time" id="newDepartureTime" name="newDepartureTime"><br><br>
+    
+                <label id="5" for="newDeparturePlace"></label>
+                <input type="text" id="newDeparturePlace" name="newDeparturePlace"><br><br>
+    
+                <label id="6" for="newDepartureAirport"></label>
+                <input type="text" id="newDepartureAirport" name="newDepartureAirport"><br><br>
+    
+                <label id="7" for="newArrivalDate"></label>
+                <input type="date" id="newArrivalDate" name="newArrivalDate"><br><br>
+    
+                <label id="8" for="newArrivalTime"></label>
+                <input type="time" id="newArrivalTime" name="newArrivalTime"><br><br>
+    
+                <label id="9" for="newArrivalPlace"></label>
+                <input type="text" id="newArrivalPlace" name="newArrivalPlace"><br><br>
+    
+                <label id="10" for="newArrivalAirport"></label>
+                <input type="text" id="newArrivalAirport" name="newArrivalAirport"><br><br>
+    
+                <label id="11" for="newVehicleType"></label>
+                <input type="text" id="newVehicleType" name="newVehicleType"><br><br>
+    
+                <button id="12" type="submit"></button>
+            </form>
+        </div>
+    </div>
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="confirmationText"></p>
+            <button id="confirmCancel" class="confirm-button"></button>
+            <button id="cancelAction" class="cancel-button"></button>
+        </div>
     </div>
     
 </div>
+<script type ="module" src="flightListAdmin.js"></script>
+<script type="module" src="../dictionary.js"></script>  
     </body>
 </html>      

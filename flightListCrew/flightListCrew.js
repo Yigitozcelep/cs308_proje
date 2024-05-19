@@ -1,7 +1,6 @@
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
-
-import { dummyUsers } from "../backend_communication/dummy_data.js";
 import { getText } from "../dictionary.js";
+import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js";
 
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
@@ -10,6 +9,9 @@ function handleLanguageChange() {
     const air308FlightsCrew = document.getElementById('air308FlightsCrew');
     const brandName = document.getElementById('brandName');
     const apply = document.getElementById('apply');
+    const confirmText = document.getElementById('confirmationText');
+    const confirmCancel = document.getElementById('confirmCancel');
+    const cancelAction = document.getElementById('cancelAction');
     const helpButton = document.getElementById('helpButton');
     const flightList = document.getElementById('flightList');
     const flightListCrewInfo = document.getElementById('flightListCrewInfo');
@@ -46,6 +48,9 @@ function handleLanguageChange() {
     
     
     brandName.innerHTML = getText("brandName");
+    confirmText.innerHTML = getText("confirmFlightDelete");
+    confirmCancel.innerHTML = getText("confirm");
+    cancelAction.innerHTML = getText("cancelButton");
     air308FlightsCrew.innerHTML = getText("air308FlightsCrew");
     apply.innerHTML = getText("apply");
     for(let item of selectButtons)
@@ -94,8 +99,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     
     const userId = JSON.parse(localStorage.getItem("userId"))
     let user = await UserCommunication.getUserById(userId);
-    console.log(userId);
-    console.log(user);
     let myFlights = user.flights;
     
 
@@ -184,11 +187,48 @@ document.addEventListener('DOMContentLoaded', async function () {
 
           });
       });
+      document.querySelectorAll('.refuse-row').forEach(button => {
+        button.addEventListener('click', async function() {
+            const purchaseId = this.dataset.flightId;
+            showModal(purchaseId);
+        });
+    });
+      
 
 
         
 }
+function showModal(flightId) {
+    const modal = document.getElementById('confirmationModal');
+    const confirmButton = document.getElementById('confirmCancel');
+    const cancelButton = document.getElementById('cancelAction');
+    const closeSpan = document.querySelector('#confirmationModal .close');
+
+    modal.style.display = 'block';
+
+    confirmButton.onclick = async function() {
+        const userData = await UserCommunication.getUserById(localStorage.getItem("userId"));
+        const flightData = await FlightsCommunication.getFlightByFlightId(flightId);
     
+        await UserCommunication.refuseFlight(userData, flightData);
+        document.querySelector(`button[data-flight-id="${flightId}"]`).closest('tr').remove();
+        modal.style.display = 'none';
+    }
+
+    cancelButton.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    closeSpan.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+}
 
 
     function compareValues(key, order = 'asc') {

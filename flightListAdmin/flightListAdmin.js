@@ -8,7 +8,26 @@ function handleLanguageChange() {
     const air308FlightsAdmin = document.getElementById('air308FlightsAdmin');
     const brandName = document.getElementById('brandName');
     const apply = document.getElementById('apply');
+    const chooseAction = document.getElementById('chooseAction');
+    const extendedButton = document.getElementById('button1');
+    const tabularButton = document.getElementById('button2');
+    const planeButton  = document.getElementById('button3');
+    const updateFlight = document.getElementById('button4');
     const helpButton = document.getElementById('helpButton');
+    const updateFlightHeader = document.getElementById('0');
+    const updateFlightflightId = document.getElementById('1');
+    const updateFlightplaneId = document.getElementById('2');
+    const updateFlightdepartureDate = document.getElementById('3');
+    const updateFlighdepartureTime = document.getElementById('4');
+    const updateFlightdeparturePlace = document.getElementById('5');
+    const updateFlightdepartureAirport = document.getElementById('6');
+    const updateFlightarrivalDate = document.getElementById('7');
+    const updateFlightarrivalTime = document.getElementById('8');
+    const updateFlightarrivalPlace = document.getElementById('9');
+    const updateFlightarrivalAirport = document.getElementById('10');
+    const updateFlightvehiclyeType = document.getElementById('11');
+    const updateFlightsubmit = document.getElementById('12');
+
     const flightList = document.getElementById('flightList');
     const flightListAdmin = document.getElementById('flightListAdmin');
     const filteringFlights = document.getElementById('filteringFlights');
@@ -42,11 +61,28 @@ function handleLanguageChange() {
     const arrivalAirport =  document.getElementById('arrivalAirport');
     const vehicleType = document.getElementById('vehicleType');
     const addFlight = document.getElementById('addFlight');
-    const updateFlight = document.getElementById('updateFlight');
     const selectButtons = document.getElementsByClassName('select-row');
     const deleteButtons = document.getElementsByClassName('delete-row');
     
     
+    updateFlightHeader.innerHTML = getText("updateFlight");
+    updateFlightarrivalAirport.innerHTML = getText("arrivalAirport");
+    updateFlighdepartureTime.innerHTML = getText("departureTime");
+    updateFlightarrivalTime.innerHTML = getText("arrivalTime");
+    updateFlightarrivalDate.innerHTML = getText("arrivalDate");
+    updateFlightarrivalPlace.innerHTML = getText("arrivalPlace");
+    updateFlightdepartureAirport.innerHTML = getText("departureAirport");
+    updateFlightdepartureDate.innerHTML = getText("departureDate");
+    updateFlightdeparturePlace.innerHTML = getText("departurePlace");
+    updateFlightflightId.innerHTML = getText("flightNo");
+    updateFlightplaneId.innerHTML = getText("planeId");
+    updateFlightsubmit.innerHTML = getText("submit");
+    updateFlightvehiclyeType.innerHTML = getText("airplaneType");
+    updateFlight.innerHTML = getText("updateFlight");
+    chooseAction.innerHTML = getText("chooseAction:");
+    extendedButton.innerHTML = getText("extendedView");
+    tabularButton.innerHTML = getText("tabularView");
+    planeButton.innerHTML = getText("planeView");
     addFlight.innerHTML = getText("addFlight");
     updateFlight.innerHTML = getText("updateFlight");
     brandName.innerHTML = getText("brandName");
@@ -58,6 +94,7 @@ function handleLanguageChange() {
         item.innerHTML = getText("deleteButton");
 
     helpButton.innerHTML = getText("helpButton");
+
     flightList.innerHTML = getText("flightList");
     flightListAdmin.innerHTML = getText("flightListPassengerInfo");
     filteringFlights.innerHTML = getText("filteringFlights");
@@ -100,7 +137,13 @@ document.addEventListener('DOMContentLoaded', handleLanguageChange);
 // Add event listener to the language dropdown to handle language change
 document.getElementById('language').addEventListener('change', handleLanguageChange);
 
+function hideUpdatePopup() {
+    document.getElementById('updatePopup').style.display = 'none';
+}
+
+
 document.addEventListener('DOMContentLoaded', async function () {    
+    
     let flights = await FlightsCommunication.getAllFlights();
     var state = {
 
@@ -168,73 +211,95 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.getGoto()}</td>
                 <td>${item.getLandingAirport().airportName }</td>
                 <td>${item.getPlaneType()}</td>
-                <td><button class="select-row" data-flight-id="${item.getFlightId()}">Select</button></td>
-                <td><button class="delete-row" data-flight-id="${item.getFlightId()}">Delete</button></td>
+                <td><button class="select-row" select-flight-id="${item.getFlightId()}">Select</button></td>
+                <td><button class="delete-row" delete-flight-id="${item.getFlightId()}">Delete</button></td>
             </tr>`;
             tableBody.innerHTML += row;
         });
 
         pageButtons(data.pages);
-
-         // Attach event listener to "Book" buttons
-         document.querySelectorAll('.select-row').forEach(button => {
-            button.addEventListener('click', async function() {
-                const flightId = this.dataset.flightId;
-                localStorage.setItem("flightIdView", flightId);   
-                showPopup();
-            }); 
-        });
-        document.querySelectorAll('.delete-row').forEach(button => {
-            button.addEventListener('click', async function() {
-                
-                const flightId = this.dataset.flightId;
-                const flightToDelete = state.querySet.find(flight => flight.getFlightId() === flightId);
-                console.log(flightToDelete);
-                if (flightToDelete) {
-                    await FlightsCommunication.deleteFlight(flightToDelete);
-                }
-            });
-        });
-        
-        
     }
-    function showPopup() {
-        document.getElementById('selectPopup').style.display = 'flex';
-    }
-
-    function hidePopup() {
-        document.getElementById('selectPopup').style.display = 'none';
-    }
-
-    // Close popup when clicking outside of it
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('selectPopup')) {
-            hidePopup();
+    document.getElementById('table-body').addEventListener('click', function(event) {
+        if (event.target.classList.contains('delete-row')) {
+            const flightId = event.target.getAttribute('delete-flight-id');
+            showModal(flightId);
+        } else if (event.target.classList.contains('select-row')) {
+            const flightId = event.target.getAttribute('select-flight-id');
+            localStorage.setItem("flightIdView", flightId);
+            showPopup();
         }
-    };
+    });
+    
 
-    // Add event listener for the close button in the popup
+    document.getElementById('addFlight').addEventListener('click', function() {
+        window.location.href = 'add_flight.html';
+    });
     document.querySelector('.close-popup').addEventListener('click', hidePopup);
 
-    // Add event listeners for the popup buttons
     document.getElementById('button1').addEventListener('click', function() {
-        window.location.href = '../extended_view/extended_view.html'; // Change 'file1.html' to the actual file path
+        window.location.href = '../extended_view/extended_view.html'; 
     });
 
     document.getElementById('button2').addEventListener('click', function() {
-        window.location.href = '../tabular_view/tabular_view.html'; // Change 'file2.html' to the actual file path
+        window.location.href = '../tabular_view/tabular_view.html'; 
     });
 
     document.getElementById('button3').addEventListener('click', function() {
-        window.location.href = '../plaineView/plaineView.html'; // Change 'file3.html' to the actual file path
+        window.location.href = '../plaineView/plaineView.html'; 
+    });
+    document.getElementById('button4').addEventListener('click', function() {
+        showUpdatePopup();
+        const flightIdToUpdate = localStorage.getItem("flightIdView");
+        document.getElementById('flightId').value = flightIdToUpdate;
+
+    });
+    document.getElementById('updateForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+    
+        const newPlaneId = document.getElementById('newPlaneId').value;
+    
+        // Get departure date and time
+        const newDepartureDateinp = document.getElementById('newDepartureDate').value;
+        const newDepartureTimeinp = document.getElementById('newDepartureTime').value;
+        const newDepartureDateTime = new Date(`${newDepartureDateinp}T${newDepartureTimeinp}`);
+    
+        const newDeparturePlace = document.getElementById('newDeparturePlace').value;
+        const newDepartureAirport = document.getElementById('newDepartureAirport').value;
+    
+        // Get arrival date and time
+        const newArrivalDateinp = document.getElementById('newArrivalDate').value;
+        const newArrivalTimeinp = document.getElementById('newArrivalTime').value;
+        const newArrivalDateTime = new Date(`${newArrivalDateinp}T${newArrivalTimeinp}`);
+    
+        const newArrivalPlace = document.getElementById('newArrivalPlace').value;
+        const newArrivalAirport = document.getElementById('newArrivalAirport').value;
+        const newVehicleType = document.getElementById('newVehicleType').value;
+        const flightIdToUpdate = localStorage.getItem("flightIdView");
+    
+        try {
+            let flightData = await FlightsCommunication.getFlightByFlightId(flightIdToUpdate);
+            flightData.setFrom(newDeparturePlace);
+            flightData.setGoto(newArrivalPlace);
+            flightData.setDedepartureAirport(newDepartureAirport);
+            flightData.setLandingAirport(newArrivalAirport);
+            flightData.setDepartureTime(newDepartureDateTime);
+            flightData.setPlaneType(newVehicleType);
+            flightData.setLandingTime(newArrivalDateTime);
+            flightData.setPlaneId(newPlaneId);
+
+            await FlightsCommunication.updateFlight(flightData);
+            console.log(flightData);
+    
+            console.log("Flight data updated successfully!");
+    
+            hideUpdatePopup();
+        } catch (error) {
+            console.error("Error updating flight data:", error);
+        }
+        hideUpdatePopup();
+        buildTable();
     });
 
-    
-    function redirectToBookingPage(flightNo) {
-        // Replace 'https://example.com/booking/' with the URL of your booking page
-        var bookingUrl = 'https://example.com/booking/' + flightNo;
-        window.location.href = bookingUrl;
-    }
 
     function compareValues(key, order = 'asc') {
         return function innerSort(a, b) {
@@ -354,7 +419,46 @@ document.addEventListener('DOMContentLoaded', async function () {
     
 
 });
+function showModal(flightId) {
+        
+    const modal = document.getElementById('confirmationModal');
+    const confirmButton = document.getElementById('confirmCancel');
+    const cancelButton = document.getElementById('cancelAction');
+    const closeSpan = document.querySelector('#confirmationModal .close');
 
+    modal.style.display = 'block';
+
+    confirmButton.onclick = async function() {
+        await FlightsCommunication.deleteFlight(flightId);
+        document.querySelector(`button[delete-flight-id="${flightId}"]`).closest('tr').remove();
+        modal.style.display = 'none';
+    }
+
+    cancelButton.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    closeSpan.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+}
+function showPopup() {
+    const popup = document.getElementById('selectPopup');
+    popup.style.display = 'flex';
+}
+
+function hidePopup() {
+    document.getElementById('selectPopup').style.display = 'none';
+}
+function showUpdatePopup() {
+    document.getElementById('updatePopup').style.display = 'flex';
+}
 document.addEventListener('DOMContentLoaded', (event) => {
     var helpButton = document.getElementById('helpButton');
     var helpPopup = document.getElementById('helpPopup');
@@ -376,5 +480,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
             helpPopup.style.display = "none";
         }
     }
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('selectPopup')) {
+            hidePopup();
+        }
+    };
+
+    
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const closePopupButtons = document.querySelectorAll('.close-popup');
+    closePopupButtons.forEach(button => {
+        button.addEventListener('click', hideUpdatePopup);
+    });
 });
 

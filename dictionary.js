@@ -460,6 +460,16 @@ const dictionary = {
         [languages.turkish]: "Çıkış",
         [languages.english]: "Sign Out",
     },
+    "departureTime":
+    {
+        [languages.turkish]: "Kalkış Saati",
+        [languages.english]: "Departure Time",
+    },
+    "arrivalTime":
+    {
+        [languages.turkish]: "Varış Saati",
+        [languages.english]: "Arrival Time",
+    },
     "filterBy":
     {
         [languages.turkish]: "Filtreleme Ölçütleri:",

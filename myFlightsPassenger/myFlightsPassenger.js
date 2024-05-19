@@ -13,6 +13,9 @@ function handleLanguageChange() {
     localStorage.setItem("language", lang);
     
     const air308myFlights = document.getElementById('air308myFlights');
+    const confirmText = document.getElementById('confirmationText');
+    const confirmCancel = document.getElementById('confirmCancel');
+    const cancelAction = document.getElementById('cancelAction');
     const brandName = document.getElementById('brandName');
     const apply = document.getElementById('apply');
     const helpButton = document.getElementById('helpButton');
@@ -50,6 +53,9 @@ function handleLanguageChange() {
     
     
     brandName.innerHTML = getText("brandName");
+    confirmText.innerHTML = getText("confirmFlightDelete");
+    confirmCancel.innerHTML = getText("confirm");
+    cancelAction.innerHTML = getText("cancelButton");
     air308myFlights.innerHTML = getText("air308myFlights");
     apply.innerHTML = getText("apply");
     for(let item of cancelButtons)
@@ -148,7 +154,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         tableBody.innerHTML = '';  
 
         data.querySet.forEach(function(item) {
-            console.log(item);
             let i = 0;
             const date = new Date(item.flightData.getDepartureTime());
             let formattedDateDeparture = date.toString().replace(/\sGMT\+\d{4}\s.*/, '');
@@ -178,12 +183,39 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         document.querySelectorAll('.delete-row').forEach(button => {
             button.addEventListener('click', async function() {
-                const item = this.dataset.item;
-                await UserCommunication.refundSeat(item);
-                // Remove the row from the table
-                this.closest('tr').remove();
+                const purchaseId = this.dataset.item;
+                showModal(purchaseId);
             });
         });
+    }
+    function showModal(purchaseId) {
+        const modal = document.getElementById('confirmationModal');
+        const confirmButton = document.getElementById('confirmCancel');
+        const cancelButton = document.getElementById('cancelAction');
+        const closeSpan = document.querySelector('#confirmationModal .close');
+
+        modal.style.display = 'block';
+
+        confirmButton.onclick = async function() {
+            await UserCommunication.refundSeat(purchaseId);
+            // Remove the row from the table
+            document.querySelector(`button[data-item="${purchaseId}"]`).closest('tr').remove();
+            modal.style.display = 'none';
+        }
+
+        cancelButton.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        closeSpan.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
     }
 
     function compareValues(key, order = 'asc') {

@@ -95,7 +95,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             const arrival = urlParams.get('arrival');
             const startDateURL = urlParams.get('startDate');
             const startDate = new Date(startDateURL);
-            console.log(startDate);
             const endDateURL = urlParams.get('endDate');
             const endDate = new Date(endDateURL);
             flights = await FlightsCommunication.getFlightsDataWithoutAirport(departure, arrival, startDate, endDate);    
@@ -124,7 +123,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 'rows':10,
         
             }
-            console.log(state.querySet);
            
         
             buildTable()

@@ -134,7 +134,10 @@ const dictionary = {
            You must enter your e-mail address to sign up. If successful sign up is not achieved, please make sure that you have entered the e-mail address correctly.
            If you already have an account, click "Log in" and continue the process from the link.`,
     },
-    
+    "confirm": {
+        [languages.turkish]: "Onayla",
+        [languages.english]: "Confirm",
+    },
 
     "loginTitle": {
         [languages.turkish]: "Giriş Yap",
@@ -386,6 +389,27 @@ const dictionary = {
         [languages.turkish]: "Uçuş Seçimi",
         [languages.english]: "Selecting Flights",
     },
+    "chooseAction:":
+    {
+        [languages.turkish]: "Seçim Yapın:",
+        [languages.english]: "Choose an action:",
+    },
+    "extendedView":
+    {
+        [languages.turkish]: "Detaylı Görünüm",
+        [languages.english]: "Extended View",
+    },
+    "tabularView":
+    {
+        [languages.turkish]: "Tablo Görünümü",
+        [languages.english]: "Tabular View",
+    },
+    
+    "planeView":
+    {
+        [languages.turkish]: "Uçak Görünümü",
+        [languages.english]: "Plane View",
+    },
     "selectingFlightsInfo":
     {
         [languages.turkish]: "Uçuş seçmek için, tablodaki ilgili satırın yanındaki \"Seç\" düğmesine tıklayın. Ardından seçilen uçuşla ilgili detaylı bilgileri görüntüleyebilirsiniz.",
@@ -421,6 +445,11 @@ const dictionary = {
         [languages.turkish]: "İptal",
         [languages.english]: "Cancel",
     },
+    "confirmFlightDelete":
+    {
+        [languages.turkish]: "Bu uçuşu silmek istediğinizden emin misiniz?",
+        [languages.english]: "Are you sure you want to cancel this flight?",
+    },
     "bookButton":
     {
         [languages.turkish]: "Satın Al",
@@ -435,6 +464,15 @@ const dictionary = {
     {
         [languages.turkish]: "Filtreleme Ölçütleri:",
         [languages.english]: "Filter By:",
+    },
+    "arrivalTime":
+    {
+        [languages.turkish]: "Varış Saati",
+        [languages.english]: "Arrival Time",
+    },"departureTime":
+    {
+        [languages.turkish]: "Kalkış Saati",
+        [languages.english]: "Departure Time",
     },
     "bookingNo":
     {
@@ -615,6 +653,11 @@ const dictionary = {
     {
         [languages.turkish]: "Uçuş No:",
         [languages.english]: "Flight No:",
+    },
+    "helpTextAddFlight":
+    {
+        [languages.turkish]: "Bu sayfada yeni uçuş tanımlayabilirsiniz",
+        [languages.english]: "In this page you can create a new flight",
     },
     "airport:":
     {

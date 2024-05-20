@@ -1,35 +1,14 @@
+import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
+import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js";
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
-    var myArray = [
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'SeatNum': 'BA' },
-        { 'Name': 'Michael', 'Surname': 'Ryan', 'CrewID': 'CI2894563', 'SeatNum': 'AA' },
-        { 'Name': 'Julia', 'Surname': 'Adams', 'CrewID': 'CI2894573', 'SeatNum': 'BA' }
-    ];
-
-
-
-
+   console.log(localStorage.getItem("flightIdView"));
     var state = {
-        'querySet': myArray,
+        'querySet': dummyFlights,
         'page': 1,
-        'rows': 5,
+        'rows': 20,
         'currentTable': 'Cabin Crew'
     };
 
@@ -43,8 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${item.Name}</td>
                 <td>${item.Surname}</td>
                 <td>${item.CrewID}</td>
+            
                 <td>${item.Email}</td>
                 <td>${item.SeatNum}</td>
+              
             </tr>`;
             tableBody.innerHTML += row;
         });
@@ -106,12 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    function searchTable(filters) {
-        return myArray.filter(item => {
+    function searchTable(filters, data) {
+        return data.filter(item => {
             return (!filters.name || item.Name.toLowerCase().includes(filters.name.toLowerCase())) &&
                 (!filters.surname || item.Surname.toLowerCase().includes(filters.surname.toLowerCase())) &&
                 (!filters.id || item.CrewID.toLowerCase().includes(filters.id.toLowerCase())) &&
-                (!filters.age || item.Age.toString() === filters.age) &&
                 (!filters.email || item.Email.toLowerCase().includes(filters.email.toLowerCase())) &&
                 (!filters.seatNum || item.SeatNum.toLowerCase().includes(filters.seatNum.toLowerCase()));
         });
@@ -122,14 +102,15 @@ document.addEventListener('DOMContentLoaded', function () {
             name: document.getElementById('name-search').value,
             surname: document.getElementById('surname-search').value,
             id: document.getElementById('id-search').value,
-            age: document.getElementById('age-search').value,
-            gender: document.getElementById('gender-search').value,
-            nationality: document.getElementById('nationality-search').value,
             email: document.getElementById('email-search').value,
-            seniority: document.getElementById('seniority-search').value,
             seatNum: document.getElementById('seat-search').value
         };
-        var filteredData = searchTable(filters);
+        const currentState = document.getElementById("table-type").innerHTML;
+        let currentData;
+        if (currentState === "Pilot Crew") currentData = FlightsCommunication.getPilotData(currentFlight)
+        else if (currentState === "Passenger") currentData = FlightsCommunication.getPassangerData(currentFlight)
+        else if (currentState === "Cabin Crew") currentData = FlightsCommunication.getFlightCrew(currentFlight);
+        var filteredData = searchTable(filters, currentData);
         state.querySet = filteredData;
         state.page = 1;
         buildTable();
@@ -160,17 +141,9 @@ document.addEventListener('DOMContentLoaded', function () {
         state.currentTable = tableName;
         tableType.textContent = tableName;
         buildTable();
-        updateButtons(tableName);
     }
 
-    function updateButtons(currentTable) {
-        const currentIndex = tableOrder.indexOf(currentTable);
-        const prevIndex = (currentIndex - 1 + tableOrder.length) % tableOrder.length;
-        const nextIndex = (currentIndex + 1) % tableOrder.length;
 
-        prevButton.textContent = `< ${tableOrder[prevIndex]}`;
-        nextButton.textContent = `${tableOrder[nextIndex]} >`;
-    }
 
     prevButton.addEventListener('click', function () {
         const currentIndex = tableOrder.indexOf(state.currentTable);
@@ -184,7 +157,10 @@ document.addEventListener('DOMContentLoaded', function () {
         showTable(tableOrder[nextIndex]);
     });
 
-    showTable('Cabin Crew'); 
-    ;
+    showTable('Cabin Crew');
+
+
+
+   
 })
 

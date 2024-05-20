@@ -219,11 +219,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         pageButtons(data.pages);
     }
-    document.getElementById('table-body').addEventListener('click', function(event) {
+    document.getElementById('table-body').addEventListener('click', async function(event) {
         if (event.target.classList.contains('delete-row')) {
             const flightId = event.target.getAttribute('delete-flight-id');
-            showModal(flightId);
-        } else if (event.target.classList.contains('select-row')) {
+            await FlightsCommunication.deleteFlight(flightId);
+            document.querySelector(`button[delete-flight-id="${flightId}"]`).closest('tr').remove();
+        } 
+        else if (event.target.classList.contains('select-row')) 
+        {
             const flightId = event.target.getAttribute('select-flight-id');
             localStorage.setItem("flightIdView", flightId);
             showPopup();
@@ -419,35 +422,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     
 
 });
-function showModal(flightId) {
-        
-    const modal = document.getElementById('confirmationModal');
-    const confirmButton = document.getElementById('confirmCancel');
-    const cancelButton = document.getElementById('cancelAction');
-    const closeSpan = document.querySelector('#confirmationModal .close');
 
-    modal.style.display = 'block';
-
-    confirmButton.onclick = async function() {
-        await FlightsCommunication.deleteFlight(flightId);
-        document.querySelector(`button[delete-flight-id="${flightId}"]`).closest('tr').remove();
-        modal.style.display = 'none';
-    }
-
-    cancelButton.onclick = function() {
-        modal.style.display = 'none';
-    }
-
-    closeSpan.onclick = function() {
-        modal.style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    }
-}
 function showPopup() {
     const popup = document.getElementById('selectPopup');
     popup.style.display = 'flex';

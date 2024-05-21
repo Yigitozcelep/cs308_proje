@@ -438,6 +438,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var helpButton = document.getElementById('helpButton');
     var helpPopup = document.getElementById('helpPopup');
     var closeSpan = document.getElementsByClassName('close')[0];
+    var closePopUp = document.getElementsByClassName('close-popup')[1];
 
     // When the help button is clicked, show the pop-up
     helpButton.onclick = function() {
@@ -448,20 +449,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     closeSpan.onclick = function() {
         helpPopup.style.display = "none";
     }
-
-    // When the user clicks anywhere outside of the pop-up, close it
-    window.onclick = function(event) {
-        if (event.target == helpPopup) {
-            helpPopup.style.display = "none";
-        }
+    closePopUp.onclick = function()
+    {
+        hideUpdatePopup();
     }
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('selectPopup')) {
-            hidePopup();
-        }
-    };
 
-    
 });
 document.addEventListener('DOMContentLoaded', function() {
     const closePopupButtons = document.querySelectorAll('.close-popup');

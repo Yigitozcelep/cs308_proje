@@ -64,32 +64,7 @@ class FlightListAdminTests(unittest.TestCase):
             
             final_row_count = len(self.driver.find_elements(By.TAG_NAME, "tr"))
             self.assertEqual(final_row_count, initial_row_count - 1, "Row count did not decrease after deletion")
-    def test_update_flight(self):
-        # Test the update flight functionality
-        select_buttons = self.driver.find_elements(By.CLASS_NAME, "select-row")
-    
-        # Click on the first select button
-        select_buttons[0].click()
-    
-        # Wait for the select popup to appear
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.ID, "selectPopup")))
-    
-        # Click on the update button in the select popup
-        update_button_in_popup = self.driver.find_element(By.ID, "button4")
-        update_button_in_popup.click()
-    
-        # Wait for the update popup to appear
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.ID, "updatePopup")))
-    
-        # Simulate updating flight details (e.g., changing Plane ID)
-        new_plane_id = "ABC123"  # Replace with the new Plane ID
-        plane_id_input = self.driver.find_element(By.ID, "newPlaneId")
-        plane_id_input.clear()
-        plane_id_input.send_keys(new_plane_id)
-    
-        # Click on the save/update button
-        save_button = self.driver.find_element(By.ID, "saveButton")  # Adjust this ID based on your HTML
-        save_button.click()
+   
     def test_sorting_by_flight_id(self):
         # Click on the FlightNo table header to sort by Flight ID
         flight_no_header = self.driver.find_element(By.ID, "flightNo")
@@ -139,8 +114,8 @@ class FlightListAdminTests(unittest.TestCase):
         # Step 7: Wait for the update popup to close
         WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located((By.ID, "updatePopup")))
 
-        # Step 8: Verify the update was successful (this might involve checking the updated row in the table)
-        # Refresh the table and verify the updated values
+        # Step 8: Verify the update was successful
+
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.ID, "table-body")))
         time.sleep(4)
 

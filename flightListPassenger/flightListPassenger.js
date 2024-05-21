@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const urlParams = new URLSearchParams(window.location.search);
         const searchType = urlParams.get('searchType');
         let flights;
+        console.log(flights);
         if (searchType === 'route') 
         {
             const departure = urlParams.get('departure');

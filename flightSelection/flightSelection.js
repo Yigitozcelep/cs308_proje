@@ -1,4 +1,5 @@
 import { getText } from "../dictionary.js";
+import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js";
 window.addEventListener('load', function() {
 
     document.getElementById('searchType').dispatchEvent(new Event('change'));
@@ -100,7 +101,20 @@ document.addEventListener('DOMContentLoaded', handleLanguageChange)
 // Add event listener to the language dropdown to handle language change
 document.getElementById('language').addEventListener('change', handleLanguageChange);
 
+document.getElementById('searchType').addEventListener('change', function() {
+    let selectedOption = this.value;
+    let inputFields = document.querySelectorAll('.input-field');
 
+    inputFields.forEach(function(inputField) {
+        if (inputField.id === selectedOption + 'Input') {
+            inputField.style.display = 'block';
+            inputField.querySelector('input').setAttribute('required', true); // Make the input field required
+        } else {
+            inputField.style.display = 'none';
+            inputField.querySelector('input').removeAttribute('required'); // Remove the required attribute
+        }
+    });
+});
 
 document.getElementById('searchType').addEventListener('change', function() {
     let selectedOption = this.value;
@@ -117,28 +131,52 @@ document.getElementById('searchType').addEventListener('change', function() {
 
 document.querySelector('form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent default form submission
+    let lang = document.getElementById('language').value;
     let selectedOption = document.getElementById('searchType').value;
-
+    let flightData = [];
+    let flightNo
+    let departure
+    let arrival
+    let airport
+    let startDate
+    let endDate
     if (selectedOption === 'flightNo') {
-        let flightNo = document.getElementById('flightNoPHolder').value;
-        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&flightNo=${flightNo}`;
-    } 
-    else if (selectedOption === 'route') {
-        let departure = document.getElementById('departure').value;
-        let arrival = document.getElementById('arrival').value;
-        let startDate = document.getElementById('startDate').value;
-        let endDate = document.getElementById('endDate').value;
-        
-        
-        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&departure=${departure}&arrival=${arrival}&startDate=${startDate}&endDate=${endDate}`;
-    } 
-    else if (selectedOption === 'airport') {
-        let airport = document.getElementById('airport').value;
-        let startDate = document.getElementById('startDate2').value;
-        let endDate = document.getElementById('endDate2').value;
-        
-        window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&airport=${airport}&startDate2=${startDate}&endDate2=${endDate}`;
+        flightNo = document.getElementById('flightNoPHolder').value;
+        flightData = await FlightsCommunication.getFlightByFlightId(flightNo);
+    } else if (selectedOption === 'route') {
+        departure = document.getElementById('departure').value;
+        arrival = document.getElementById('arrival').value;
+        startDate = new Date(document.getElementById('startDate').value);
+        endDate = new Date(document.getElementById('endDate').value);
+        flightData = await FlightsCommunication.getFlightsDataWithoutAirport(departure, arrival, startDate, endDate);
+    } else if (selectedOption === 'airport') {
+        airport = document.getElementById('airport').value;
+        startDate = new Date(document.getElementById('startDate2').value);
+        endDate = new Date(document.getElementById('endDate2').value);
+        flightData = await FlightsCommunication.getFlightsDataFromWithoutFromGoto(startDate, endDate, airport);
     }
+    console.log(flightData)
+    if (flightData === undefined || flightData.length === 0) {
+        if(lang == "turkish")
+        {
+            alert("Verilen kriterlere uygun uçuş bulunamadı.")
+        }
+        else
+        {
+            alert("No flights found for the given criteria.")
+        }
+    } 
+    else 
+    {
+        if (selectedOption === 'flightNo') {
+            window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&flightNo=${flightNo}`;
+        } else if (selectedOption === 'route') {
+            window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&departure=${departure}&arrival=${arrival}&startDate=${startDate}&endDate=${endDate}`;
+        } else if (selectedOption === 'airport') {
+            window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&airport=${airport}&startDate2=${startDate}&endDate2=${endDate}`;
+        }
+    }
+    
 });
 
 

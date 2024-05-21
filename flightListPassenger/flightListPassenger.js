@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                  document.querySelectorAll('.book-row').forEach(button => {
                     button.addEventListener('click', function() {
                         const flightId = this.dataset.flightId;
-                        localStorage.setItem("flightId", flightId);
+                        localStorage.setItem("flightIdView", flightId);
                         window.location.href = `../plaineView/plaineView.html`;
                     });
                 });

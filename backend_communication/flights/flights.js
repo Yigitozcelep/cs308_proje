@@ -37,7 +37,7 @@ class FlightData {
     #airlineCompany
     #flightId
     #planeId
-    #flightCrewId
+    #sharedFlight
     /**
      * 
      * @param {String} from 
@@ -52,9 +52,10 @@ class FlightData {
      * @param {String} flightId 
      * @param {string} planeId
      * @param {String} flightCrewId
+     * @param {bool} sharedFlight
      */
     constructor(from, goTo, departureAirport, landingAirport, departureTime, landingTime,
-         planeType, flightTime, airlineCompany, flightId, flightCrewId, planeId) {
+         planeType, flightTime, airlineCompany, flightId, sharedFlight, planeId) {
         
         this.#from              = from;
         this.#goTo              = goTo;
@@ -66,7 +67,7 @@ class FlightData {
         this.#flightTime        = flightTime;
         this.#airlineCompany    = airlineCompany;
         this.#flightId          = flightId;
-        this.#flightCrewId      = flightCrewId;
+        this.#sharedFlight      = sharedFlight;
         this.#planeId           = planeId;
     }
 
@@ -80,7 +81,6 @@ class FlightData {
     getFlightTime()         { return this.#flightTime;       }
     getFlightId()           { return this.#flightId;         }
     getPlaneId()            { return this.#planeId           }
-    getFlightCrewId()       { return this.#flightCrewId      }
 
     setFrom(val)               {  this.#from             = val }
     setGoto(val)               {  this.#goTo             = val }
@@ -92,7 +92,6 @@ class FlightData {
     setFlightTime(val)         {  this.#flightTime       = val }
     setFlightId(val)           {  this.#flightId         = val }
     setPlaneId(val)            {  this.#planeId          = val }
-    setFlightCrewId(val)       {  this.#flightCrewId     = val }
 }   
 
 class Seat {

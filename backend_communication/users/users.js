@@ -34,10 +34,9 @@ class UserData {
      * @param {String} nationality 
      * @param {String} userType 
      * @param {UserFlightData[]} flights 
-     * @param {Bool} canRejectFlight 
-     * @param {FlightData} pendingFlight 
+     * @param {String} seniority
      */
-    constructor(email, password, name, surname, Id, age, gender, nationality, userType, flights, canRejectFlight, pendingFlight, languages) {
+    constructor(email, password, name, surname, Id, age, gender, nationality, userType, flights, seniority, languages) {
         this.email           = email;
         this.password        = password;
         this.name            = name;
@@ -48,8 +47,7 @@ class UserData {
         this.nationality     = nationality;
         this.userType        = userType;
         this.flights         = flights;
-        this.canRejectFlight = canRejectFlight;
-        this.pendingFlight   = pendingFlight;
+        this.seniority       = seniority
         this.languages       = languages;
     }
     

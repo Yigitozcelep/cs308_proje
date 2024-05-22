@@ -49,7 +49,6 @@ const FlightsCommunication = {
      * @returns {Promise<UserData[]>}
      */
     async getFlightCrew(flightData) {
-        
         return dummyData.crewData[flightData.getPlaneId() - "0"]
     },
 

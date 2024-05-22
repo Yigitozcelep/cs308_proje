@@ -33,11 +33,9 @@ class FlightData {
     #departureTime 
     #landingTime 
     #planeType 
-    #flightTime
     #airlineCompany
     #flightId
     #planeId
-    #sharedFlight
     /**
      * 
      * @param {String} from 
@@ -47,15 +45,12 @@ class FlightData {
      * @param {Date} departureTime 
      * @param {Date} landingTime 
      * @param {String} planeType 
-     * @param {Date} flightTime 
      * @param {String} airlineCompany 
      * @param {String} flightId 
      * @param {string} planeId
-     * @param {String} flightCrewId
-     * @param {bool} sharedFlight
      */
     constructor(from, goTo, departureAirport, landingAirport, departureTime, landingTime,
-         planeType, flightTime, airlineCompany, flightId, sharedFlight, planeId) {
+         planeType, airlineCompany, flightId, planeId) {
         
         this.#from              = from;
         this.#goTo              = goTo;
@@ -64,10 +59,8 @@ class FlightData {
         this.#departureTime     = departureTime;
         this.#landingTime       = landingTime;
         this.#planeType         = planeType;
-        this.#flightTime        = flightTime;
         this.#airlineCompany    = airlineCompany;
         this.#flightId          = flightId;
-        this.#sharedFlight      = sharedFlight;
         this.#planeId           = planeId;
     }
 
@@ -75,10 +68,10 @@ class FlightData {
     getGoto()               { return this.#goTo;             }
     getDedepartureAirport() { return this.#departureAirport; }
     getLandingAirport()     { return this.#landingAirport;   }
+    getAirlineCompany()     { return this.#airlineCompany;   }
     getDepartureTime()      { return this.#departureTime;    }
     getLandingTime()        { return this.#landingTime;      }
     getPlaneType()          { return this.#planeType;        }
-    getFlightTime()         { return this.#flightTime;       }
     getFlightId()           { return this.#flightId;         }
     getPlaneId()            { return this.#planeId           }
 
@@ -86,10 +79,10 @@ class FlightData {
     setGoto(val)               {  this.#goTo             = val }
     setDedepartureAirport(val) {  this.#departureAirport = val }
     setLandingAirport(val)     {  this.#landingAirport   = val }
+    setAirlineCompany(val)     {  this.#airlineCompany   = val }
     setDepartureTime(val)      {  this.#departureTime    = val }
     setLandingTime(val)        {  this.#landingTime      = val }
     setPlaneType(val)          {  this.#planeType        = val }
-    setFlightTime(val)         {  this.#flightTime       = val }
     setFlightId(val)           {  this.#flightId         = val }
     setPlaneId(val)            {  this.#planeId          = val }
 }   

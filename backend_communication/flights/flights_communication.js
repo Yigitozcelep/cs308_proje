@@ -154,7 +154,23 @@ const FlightsCommunication = {
     async getSeatsData(flight) {
         await new Promise(resolve => setTimeout(resolve, 50));
         return dummyData.seats[flight.getFlightId().slice(2) - "0"];
-    }
+    },
+
+
+    /**
+     * @param {UserData} userData 
+     * @param {FlightData} flightData 
+     */
+    async addMembertoFlight(userData, flightData) {
+
+     },
+     
+    /**
+     * @returns {promise<UserData[]>}
+     */
+     async getAvailableMembers() {
+        return dummyData.dummyUsers[0];
+     }
 }
 
 export { FlightsCommunication }

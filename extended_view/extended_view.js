@@ -1,14 +1,59 @@
 import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
 import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js";
+import { UserData } from "../backend_communication/users/users.js";
+import { getText } from "../dictionary.js";
 
 
+function handleLanguageChange() {
+    let lang = document.getElementById('language').value;
+    localStorage.setItem("language", lang);
 
-document.addEventListener('DOMContentLoaded', function () {
-   console.log(localStorage.getItem("flightIdView"));
+      
+    const logo = document.getElementById('logo');
+    const apply = document.getElementById('apply');
+
+    apply.innerHTML = getText("apply");
+    logo.innerHTML=getText("AIR308 Airlines")
+
+    name_search.setAttribute('placeholder', getText("name_search"));
+    surname_search.setAttribute('placeholder', getText("surname_search"));
+    id_search.setAttribute('placeholder', getText("id_search"));
+    age_search.setAttribute('placeholder', getText("age_search"));
+    nationality_search.setAttribute('placeholder', getText("nationality_search"));
+    seniority_search.setAttribute('placeholder', getText("seniority_search"));
+    seat_search.setAttribute('placeholder', getText("seat_search"));
+    email_search.setAttribute('placeholder', getText("email_search"));
+    gender_search.setAttribute('placeholder', getText("gender_search"));
+
+
+}
+
+document.addEventListener('DOMContentLoaded', handleLanguageChange);
+
+// Add event listener to the language dropdown to handle language change
+document.getElementById('language').addEventListener('change', handleLanguageChange);
+
+function hideUpdatePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
+console.log(dummyUsers);
+document.addEventListener('DOMContentLoaded', async function () {
+
+    hideUpdatePopup();
+
+    const currentState = document.getElementById("table-type").innerHTML;
+        let currentData;
+        if (currentState === "Pilot Crew") currentData = await FlightsCommunication.getPilotData(currentFlight);
+        else if (currentState === "Passenger") currentData = await FlightsCommunication.getPassangerData(currentFlight);
+        else if (currentState === "Cabin Crew") currentData = await FlightsCommunication.getFlightCrew(currentFlight);
+        console.log(currentData);
+
+
     var state = {
-        'querySet': dummyFlights,
+        'querySet': currentData,
         'page': 1,
-        'rows': 5,
+        'rows': 20,
         'currentTable': 'Cabin Crew'
     };
 
@@ -19,15 +64,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         data.querySet.forEach(function (item) {
             var row = `<tr>
-                <td>${item.Name}</td>
-                <td>${item.Surname}</td>
-                <td>${item.CrewID}</td>
-                <td>${item.Age}</td>
-                <td>${item.Gender}</td>
-                <td>${item.Nationality}</td>
-                <td>${item.Email}</td>
-                <td>${item.Seniority}</td>
-                <td>${item.SeatNum}</td>
+                <td>${item.name}</td>
+                <td>${item.surname}</td>
+                <td>${item.id}</td>
+                <td>${item.age}</ td>
+                <td>${item.gender}</td>
+                <td>${item.nationality}</td>
+                <td>${item.email}</td>
+                <td>${item.seniority}</td>
+                <td>${item.seatNum}</td>
                 <td>
                     <button>Update</button>
                     <button>Delete</button>
@@ -119,19 +164,16 @@ document.addEventListener('DOMContentLoaded', function () {
             seniority: document.getElementById('seniority-search').value,
             seatNum: document.getElementById('seat-search').value
         };
-        const currentState = document.getElementById("table-type").innerHTML;
-        let currentData;
-        if (currentState === "Pilot Crew") currentData = FlightsCommunication.getPilotData(currentFlight)
-        else if (currentState === "Passenger") currentData = FlightsCommunication.getPassangerData(currentFlight)
-        else if (currentState === "Cabin Crew") currentData = FlightsCommunication.getFlightCrew(currentFlight);
         var filteredData = searchTable(filters, currentData);
         state.querySet = filteredData;
         state.page = 1;
         buildTable();
+        
     }
 
     document.getElementById('apply').addEventListener('click', applyFilters);
 
+    
     // Table navigation
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');

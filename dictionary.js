@@ -830,48 +830,74 @@ const dictionary = {
         [languages.english]: "Buy Seat"
     },
 
-    "name-search":{
+    "name_search":{
         [languages.turkish]: "İsim",
         [languages.english]: "Name"
     },
 
-    "surname-search":{
+    "surname_search":{
         [languages.turkish]: "Soyisim",
         [languages.english]: "Surname"
     },
-    "id-search":{
+    "id_search":{
         [languages.turkish]: "Kişi No",
         [languages.english]: "ID"
     },
-    "age-search":{
+    "age_search":{
         [languages.turkish]: "Yaş",
         [languages.english]: "Age"
     },
 
-    "gender-search":{
+    "gender_search":{
         [languages.turkish]: "Cinsiyet",
         [languages.english]: "Gender"
     },
 
-    "nationality-search":{
+    "nationality_search":{
         [languages.turkish]: "Ulus",
         [languages.english]: "Nationality"
     },
 
-    "seniority-search":{
+    "seniority_search":{
         [languages.turkish]: "Kıdem",
         [languages.english]: "Seniority"
     },
 
-    "seat-search":{
+    "seat_search":{
         [languages.turkish]: "Koltuk No",
         [languages.english]: "Seat Number"
     },
 
-    "viewing-for":{
+    "email_search":{
+        [languages.turkish]: "Mail Adresi",
+        [languages.english]: "Email"
+    },
+
+    "viewing_for":{
         [languages.turkish]: "Gösterilen: ",
         [languages.english]: "Viewing For: "
     },
+
+    "AIR308 Airlines":
+    {
+        [languages.turkish]: "AIR308 Havayolları",
+        [languages.english]: "AIR308 Airlines",
+    },
+
+    
+    "Create Member":
+    {
+        [languages.turkish]: "Personel Ekle",
+        [languages.english]: "Create Member",
+    },
+
+    "sign_id":
+    {
+        [languages.turkish]: "Kişi No",
+        [languages.english]: "ID",
+    },
+
+    
 }
 
 const getText = (text) => {

@@ -6,7 +6,7 @@ import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js
 document.addEventListener('DOMContentLoaded', function () {
    console.log(localStorage.getItem("flightIdView"));
     var state = {
-        'querySet': dummyFlights,
+        'querySet': currentData.getFl,
         'page': 1,
         'rows': 20,
         'currentTable': 'Cabin Crew'

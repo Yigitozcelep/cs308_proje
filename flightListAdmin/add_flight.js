@@ -64,7 +64,7 @@ document.getElementById('addFlightForm').addEventListener("submit", async (event
         null,  // airlineCompany
         null,  // flightCrewId
         flightNo,
-        null,  // flightId
+        null,  // flightTime
         planeId,
     );
 

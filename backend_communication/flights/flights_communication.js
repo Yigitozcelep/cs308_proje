@@ -50,7 +50,7 @@ const FlightsCommunication = {
      */
     async getFlightCrew(flightData) {
         
-        return dummyData.crewData[flightData.getPlaineId() - "0"]
+        return dummyData.crewData[flightData.getPlaneId() - "0"]
     },
 
 

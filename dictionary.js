@@ -20,8 +20,15 @@ const dictionary = {
         [languages.turkish]: "Başla",
         [languages.english]: "Start",
     },
+    "sharedAirlineCompany": {
+        [languages.turkish]: "Ortak Havayolu Şirketi",
+        [languages.english]: "Shared Airline Company",
+    },
 
-
+    "startButton": {
+        [languages.turkish]: "Başla",
+        [languages.english]: "Start",
+    },
     "signupTitle": {
         [languages.turkish]: "Üye Ol",
         [languages.english]: "Sign Up",

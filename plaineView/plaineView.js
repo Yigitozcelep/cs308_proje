@@ -1,6 +1,5 @@
 import { getText } from "../dictionary.js";
 import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
-import { dummyFlights, dummyUsers, seats } from "../backend_communication/dummy_data.js";
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
 
 
@@ -14,10 +13,7 @@ const changeHelp = async () => {
     const userId  = localStorage.getItem("userId");
     const curUser = await UserCommunication.getUserById(userId);
     if (curUser.isUserAdmin()) helpDiv.innerHTML = getText("plaineViewHelpAdmin");
-    else {
-        console.log(getText("plaineViewHelpPassanger"));
-        helpDiv.innerHTML = getText("plaineViewHelpPassanger");
-    }
+    else helpDiv.innerHTML = getText("plaineViewHelpPassanger");
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -148,7 +144,6 @@ const initializeFlightImg = async () => {
     const userId = localStorage.getItem("userId");
     const curUser = await UserCommunication.getUserById(userId);
     const res = await FlightsCommunication.getSeatsData(curFlight);
-    
     let maxSeatNum = getMaxSeatNum(res);
     if (curUser.isUserAdmin()) displayFlightCrewData(curFlight);
     else buySeatButton.style.visibility = "visible";

@@ -3,6 +3,7 @@ import { dummyUsers } from "../backend_communication/dummy_data.js";
 
 import { getText, languages } from "../dictionary.js";
 
+
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);

@@ -7,20 +7,23 @@ function handleLanguageChange() {
     localStorage.setItem("language", lang);
 
     document.getElementById('pageTitle').innerHTML = getText("addFlight");
-    document.getElementById('flightNoLabel').innerHTML = getText("planeId");
+    document.getElementById('flightNoLabel').innerHTML = getText("flightNo");
+    document.getElementById('planeIdLabel').innerHTML = getText("planeId");
     document.getElementById('departureDateLabel').innerHTML = getText("departureDate");
     document.getElementById('departureTimeLabel').innerHTML = getText("departureTime");
-    document.getElementById('departureAirportLabel').innerHTML = getText("departurePlace");
-    document.getElementById('arrivalDateLabel').innerHTML = getText("departureAirport");
-    document.getElementById('arrivalTimeLabel').innerHTML = getText("arrivalDate");
-    document.getElementById('arrivalPlaceLabel').innerHTML = getText("arrivalTime");
-    document.getElementById('arrivalAirportLabel').innerHTML = getText("arrivalPlace");
+    document.getElementById('departureAirportLabel').innerHTML = getText("departureAirport");
+    document.getElementById('arrivalDateLabel').innerHTML = getText("arrivalDate");
+    document.getElementById('arrivalTimeLabel').innerHTML = getText("arrivalTime");
+    document.getElementById('arrivalPlaceLabel').innerHTML = getText("arrivalPlace");
+    document.getElementById('arrivalAirportLabel').innerHTML = getText("arrivalAirport");
+    document.getElementById('departurePlaceLabel').innerHTML = getText("departurePlace");
     document.getElementById('vehicleTypeLabel').innerHTML = getText("airplaneType");
     document.getElementById('submit').innerHTML = getText("addFlight");
     document.getElementById('brandName').innerHTML = getText("brandName");
     document.getElementById('helpButton').innerHTML = getText("helpButton");
     document.getElementById('signOut').innerHTML = getText("signOut");
     document.getElementById('helpText').innerHTML = getText("helpTextAddFlight");
+    document.getElementById('sharedAirlineCompanyLabel').innerHTML = getText("sharedAirlineCompany");
     
 }
 
@@ -46,13 +49,11 @@ document.getElementById('addFlightForm').addEventListener("submit", async (event
     const arrivalPlace = document.getElementById("arrivalPlace").value;
     const arrivalAirport = document.getElementById("arrivalAirport").value;
     const vehicleType = document.getElementById("vehicleType").value;
+    const sharedAirlineCompany = document.getElementById("sharedAirlineCompany").value;
 
-    // Combine date and time for departure and arrival
     const departureDateTime = new Date(`${departureDate}T${departureTime}:00`);
     const arrivalDateTime = new Date(`${arrivalDate}T${arrivalTime}:00`);
-    console.log(departureDateTime);
-    console.log(arrivalDateTime);
-    // Create FlightData object
+    
     const flightData = new FlightData(
         departurePlace,
         arrivalPlace,
@@ -61,10 +62,8 @@ document.getElementById('addFlightForm').addEventListener("submit", async (event
         departureDateTime,
         arrivalDateTime,
         vehicleType,
-        null,  // airlineCompany
-        null,  // flightCrewId
+        sharedAirlineCompany,  
         flightNo,
-        null,  // flightId
         planeId,
     );
 

@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add click event listener to the "My Flights" button
     document.getElementById('myFlights').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent the default link behavior
-        // Redirect to the My Flights page with the user ID as a parameter
+        
         window.location.href = `/myFlightsPassenger/myFlightsPassenger.html`;
     });
 });

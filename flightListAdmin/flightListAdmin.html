@@ -37,7 +37,7 @@
                     <p id="flightDeletionInfo"></p>
                 </div>
               </div>
-            <a href="/start_screen/index.html" class="top-bar-item" id="signOut"></a>
+            <a href="../start_screen/index.html" class="top-bar-item" id="signOut"></a>
         </div>
 
         <div class="main-container">
@@ -55,6 +55,8 @@
                     <input id="arrivalPlace-search" class="input-search" type="text" placeholder="Arrival Place">
                     <input id="arrivalAirport-search" class="input-search" type="text" placeholder="Arrival Airport">
                     <input id="vehicleType-search" class="input-search" type="text" placeholder="Vehicle Type">
+                    <input id="sharedAirlineCompany-search" class="input-search" type="text" placeholder="Shared Airline Company">
+
                     <button id="apply" class="apply" type="submit">APPLY</button>
                     </div>
                 
@@ -76,7 +78,9 @@
                             <th data-column="ArrivalDate" data-order="desc" id="arrivalDate"></th>
                             <th data-column="ArrivalPlace" data-order="desc" id="arrivalPlace"></th>
                             <th data-column="ArrivalAirport" data-order="desc" id="arrivalAirport"></th>
-                            <th data-column="VehicleType" data-order="desc" id="vehicleType"></th>                                                                                                            
+                            <th data-column="VehicleType" data-order="desc" id="vehicleType"></th> 
+                            <th data-column="SharedAirlineCompany" data-order="desc" id="sharedAirlineCompany"></th>                                                                                                           
+                                                                                                           
                         </tr>
                         </thead>
                         <tbody id="table-body">
@@ -123,31 +127,34 @@
                 <input type="text" id="newPlaneId" name="newPlaneId"><br><br>
     
                 <label id="3" for="newDepartureDate"></label>
-                <input type="date" id="newDepartureDate" name="newDepartureDate"><br><br>
+                <input type="date" id="newDepartureDate" name="newDepartureDate" required><br><br>
     
                 <label id="4" for="newDepartureTime"></label>
-                <input type="time" id="newDepartureTime" name="newDepartureTime"><br><br>
+                <input type="time" id="newDepartureTime" name="newDepartureTime" required><br><br>
     
                 <label id="5" for="newDeparturePlace"></label>
-                <input type="text" id="newDeparturePlace" name="newDeparturePlace"><br><br>
+                <input type="text" id="newDeparturePlace" name="newDeparturePlace" required><br><br>
     
                 <label id="6" for="newDepartureAirport"></label>
-                <input type="text" id="newDepartureAirport" name="newDepartureAirport"><br><br>
+                <input type="text" id="newDepartureAirport" name="newDepartureAirport" required><br><br>
     
                 <label id="7" for="newArrivalDate"></label>
-                <input type="date" id="newArrivalDate" name="newArrivalDate"><br><br>
+                <input type="date" id="newArrivalDate" name="newArrivalDate" required><br><br>
     
                 <label id="8" for="newArrivalTime"></label>
-                <input type="time" id="newArrivalTime" name="newArrivalTime"><br><br>
+                <input type="time" id="newArrivalTime" name="newArrivalTime" required><br><br>
     
                 <label id="9" for="newArrivalPlace"></label>
-                <input type="text" id="newArrivalPlace" name="newArrivalPlace"><br><br>
+                <input type="text" id="newArrivalPlace" name="newArrivalPlace" required><br><br>
     
                 <label id="10" for="newArrivalAirport"></label>
-                <input type="text" id="newArrivalAirport" name="newArrivalAirport"><br><br>
+                <input type="text" id="newArrivalAirport" name="newArrivalAirport" required><br><br>
     
                 <label id="11" for="newVehicleType"></label>
-                <input type="text" id="newVehicleType" name="newVehicleType"><br><br>
+                <input type="text" id="newVehicleType" name="newVehicleType" required><br><br>
+
+                <label id="13" for="newSharedAirlineCompany"></label>
+                <input type="text" id="newSharedAirlineCompany" name="newSharedAirlineCompany" required><br><br>
     
                 <button id="12" type="submit"></button>
             </form>

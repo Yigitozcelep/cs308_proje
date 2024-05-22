@@ -64,7 +64,7 @@ class FlightListAdminTests(unittest.TestCase):
             
             final_row_count = len(self.driver.find_elements(By.TAG_NAME, "tr"))
             self.assertEqual(final_row_count, initial_row_count - 1, "Row count did not decrease after deletion")
-   
+
     def test_sorting_by_flight_id(self):
         # Click on the FlightNo table header to sort by Flight ID
         flight_no_header = self.driver.find_element(By.ID, "flightNo")
@@ -77,9 +77,13 @@ class FlightListAdminTests(unittest.TestCase):
         first_row_flight_id = self.driver.find_element(By.XPATH, "//tbody/tr[1]/td[1]").text
         # Get the second row after sorting
         second_row_flight_id = self.driver.find_element(By.XPATH, "//tbody/tr[2]/td[1]").text
-        # Assert that the first row has a smaller Flight ID than the second row, indicating sorting
-        time.sleep(5)
-        self.assertLess(first_row_flight_id, second_row_flight_id)
+    
+        # Extract numeric parts of the Flight IDs
+        first_row_numeric_part = int(first_row_flight_id[2:])
+        second_row_numeric_part = int(second_row_flight_id[2:])
+    
+        # Assert that the first row has a smaller Flight ID than the second row, ignoring the first two characters
+        self.assertLess(first_row_numeric_part, second_row_numeric_part)
     def test_update_flight(self):
         # Step 1: Click the first select button to choose a flight
         select_buttons = self.driver.find_elements(By.CLASS_NAME, "select-row")
@@ -115,7 +119,6 @@ class FlightListAdminTests(unittest.TestCase):
         WebDriverWait(self.driver, 10).until(EC.invisibility_of_element_located((By.ID, "updatePopup")))
 
         # Step 8: Verify the update was successful
-
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.ID, "table-body")))
         time.sleep(4)
 

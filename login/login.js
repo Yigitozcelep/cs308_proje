@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-dummyUsers[0].userType = "passenger";
 document.querySelector('form').addEventListener('submit', async function(event){
     // Prevent the default form submission behavior
     event.preventDefault();

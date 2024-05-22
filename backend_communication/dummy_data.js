@@ -164,7 +164,4 @@ for (let i = 0; i < 500; i++) {
     }
 }
 
-window.currentUser = dummyUsers[0];
-window.currentFlight = dummyFlights[5];
-
 export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyAirPort, createDummyUser, createDummyFlightData, createDummySeatData, seats, dummyUsers, dummyFlights, crewData}

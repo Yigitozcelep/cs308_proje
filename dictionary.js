@@ -72,8 +72,19 @@ const dictionary = {
     "sign_password": {
         [languages.turkish]: "Şifre",
         [languages.english]: "Password",
+    }, 
+    "crewlabel": {
+        [languages.turkish]: "Mürettebat Tipi:",
+        [languages.english]: "Crew Type:",
     },
-
+    "cabinc": {
+        [languages.turkish]: "Kabin Ekibi",
+        [languages.english]: "Cabin Crew",
+    },
+    "flightc": {
+        [languages.turkish]: "Uçuş Ekibi",
+        [languages.english]: "Pilot Crew",
+    },
 
     "signupButton": {
         [languages.turkish]: "Üye Ol",
@@ -138,6 +149,16 @@ const dictionary = {
            The "prefer not to say" option is an option created for people who do not want to specify their gender. People have the right to change their preferences after the membership process.
            You must enter your e-mail address to sign up. If successful sign up is not achieved, please make sure that you have entered the e-mail address correctly.
            If you already have an account, click "Log in" and continue the process from the link.`,
+    },
+    "member_helpText": {
+        [languages.turkish]: `Here is some helpful information:
+        Please be careful not to leave any boxes blank.
+        The "prefer not to say" option is an option created for people who do not want to specify their gender. 
+        You must enter the e-mail address to create member.`,
+        [languages.english]: `Here is some helpful information:
+        Please be careful not to leave any boxes blank.
+        The "prefer not to say" option is an option created for people who do not want to specify their gender. 
+        You must enter the e-mail address to create member.`,
     },
     "confirm": {
         [languages.turkish]: "Onayla",
@@ -251,8 +272,8 @@ const dictionary = {
         [languages.english]: "Personal Information",
     }, 
     "personalP_allowedRangeLabel": {
-        [languages.turkish]: "İzin Verilen Menzil:",
-        [languages.english]: "Allowed Range:",
+        [languages.turkish]: "İzin Verilen Menzil (km):",
+        [languages.english]: "Allowed Range (km):",
     }, 
     "personalP_languagesLabel": {
         [languages.turkish]: "Diller:",
@@ -913,7 +934,18 @@ const dictionary = {
         [languages.english]: "Create Member",
     },
 
-    "sign_id":
+    "sign_seniority":
+    {
+        [languages.turkish]: "Kıdem",
+        [languages.english]: "Seniority",
+    }, 
+    "sign_age_label":
+    {
+        [languages.turkish]: "Yaş:",
+        [languages.english]: "Age:",
+    },
+
+    "sign_id": 
     {
         [languages.turkish]: "Kişi No",
         [languages.english]: "ID",

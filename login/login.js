@@ -14,7 +14,7 @@ function handleLanguageChange() {
     document.getElementById('loginButton').innerHTML = getText("loginButton");
     document.getElementById('log_forgotPassword').innerHTML = getText("log_forgotPassword");
     document.getElementById('log_helpButton').innerHTML = getText("log_helpButton");
-    document.getElementById('log_signOut').innerHTML = getText("log_signOut");
+    document.getElementById('log_back').innerHTML = getText("log_back");
     document.getElementById('log_helpText').innerHTML = getText("log_helpText");
 }
 
@@ -51,18 +51,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     // Redirect to index.html in start_screen folder on Sign Out
-    document.getElementById('log_signOut').onclick = function() {
+    document.getElementById('log_back').onclick = function() {
         window.location.href = '../start_screen/index.html';
     }
 
     document.getElementById('log_forgotPassword').addEventListener('click', redirectToResetPass);
-    document.getElementById('signOutButton').onclick = function() {
+    document.getElementById('log_back').onclick = function() {
         window.location.href = '../start_screen/index.html';
     }
 });
 
 
-dummyUsers[0].userType = "passenger";
+dummyUsers[0].userType = "CabinCrew";
 document.querySelector('form').addEventListener('submit', async function(event){
     // Prevent the default form submission behavior
     event.preventDefault();

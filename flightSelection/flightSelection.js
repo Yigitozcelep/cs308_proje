@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('myFlights').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent the default link behavior
         
-        window.location.href = `/myFlightsPassenger/myFlightsPassenger.html`;
+        window.location.href = `../myFlightsPassenger/myFlightsPassenger.html`;
     });
 });
 

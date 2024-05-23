@@ -12,6 +12,10 @@ const dictionary = {
         [languages.turkish]: "Hayallerinize Uçun...",
         [languages.english]: "Fly To Your Dreams...",
     },
+    "foodMenu": {
+        [languages.turkish]: "Yemek Menüsü",
+        [languages.english]: "Food Menu",
+    },
     "rosterText": {
         [languages.turkish]: "Uçuş Listesi",
         [languages.english]: "Flight Roster",

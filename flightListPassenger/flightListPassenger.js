@@ -26,8 +26,10 @@ function handleLanguageChange() {
     const arrivalDate_search = document.getElementById('arrivalDate-search');
     const arrivalPlace_search = document.getElementById('arrivalPlace-search');
     const arrivalAirport_search = document.getElementById('arrivalAirport-search');
-    const sharedAirlineCompany_search = document.getElementById('sharedCompany-search');
+    const sharedAirlineCompany_search = document.getElementById('sharedAirlineCompany-search');
     const vehicleType_search = document.getElementById('vehicleType-search');
+    const foodMenu_search = document.getElementById('foodMenu-search');
+    const foodMenu = document.getElementById('foodMenu');
     const planeId = document.getElementById('planeId'); 
     const flightNo =  document.getElementById('flightNo');
     const departureDate = document.getElementById('departureDate');
@@ -40,7 +42,7 @@ function handleLanguageChange() {
     const bookButtons = document.getElementsByClassName('book-row');
     const sharedAirlineCompany = document.getElementById('sharedAirlineCompany');
     
-    
+    foodMenu.innerHTML = getText("foodMenu");
     brandName.innerHTML = getText("brandName");
     air308FlightsPassenger.innerHTML = getText("air308FlightsPassenger");
     apply.innerHTML = getText("apply");
@@ -69,6 +71,7 @@ function handleLanguageChange() {
     vehicleType.innerHTML = getText("airplaneType");
     sharedAirlineCompany.innerHTML = getText("sharedAirlineCompany");
     
+    foodMenu_search.setAttribute('placeholder', getText("foodMenu"));
     sharedAirlineCompany_search.setAttribute('placeholder', getText("sharedAirlineCompany"));
     planeId_search.setAttribute('placeholder', getText("planeId"));
     flightNo_search.setAttribute('placeholder', getText("flightNo"));
@@ -187,6 +190,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                         <td>${item.getLandingAirport().airportName }</td>
                         <td>${item.getPlaneType()}</td>
                         <td>${item.getAirlineCompany()}</td>
+                        <td>${item.getMenu()}</td>
+
                         <td><button class="book-row" data-flight-id="${item.getFlightId()}">Book</button></td>
                     </tr>`;
                     tableBody.innerHTML += row;
@@ -257,6 +262,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                         varA = a.getAirlineCompany();
                         varB = b.getAirlineCompany(); 
                     }
+                    else if(key == "FoodMenu"){ 
+                        varA = a.getMenu();
+                        varB = b.getMenu(); 
+                    }
                     
                 
         
@@ -308,6 +317,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         (!filters.DepartureAirport || item.getDedepartureAirport().airportName.toString() === filters.DepartureAirport) && 
                         (!filters.ArrivalDate || formattedDateArrival.toLowerCase() === filters.ArrivalDate.toLowerCase()) &&
                         (!filters.ArrivalPlace || item.getGoto().toLowerCase().includes(filters.ArrivalPlace.toLowerCase())) &&
+                        (!filters.FoodMenu || item.getMenu().toLowerCase().includes(filters.FoodMenu.toLowerCase())) &&
                         (!filters.SharedAirlineCompany || item.getAirlineCompany().toLowerCase().includes(filters.SharedAirlineCompany.toLowerCase())) &&
                         (!filters.ArrivalAirport || item.getLandingAirport().airportName.toString() === filters.ArrivalAirport) && 
                         (!filters.VehicleType || item.getPlaneType() .toLowerCase().includes(filters.VehicleType.toLowerCase()));
@@ -326,8 +336,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     ArrivalPlace: document.getElementById('arrivalPlace-search').value,
                     ArrivalAirport: document.getElementById('arrivalAirport-search').value,
                     VehicleType: document.getElementById('vehicleType-search').value,
-                    SharedAirlineCompany: document.getElementById('sharedAirlineCompany-search').value,
-        
+                    FoodMenu: document.getElementById('foodMenu-search').value,
+                    SharedAirlineCompany: document.getElementById('sharedAirlineCompany-search').value,    
                 };
                 var filteredData = searchTable(filters);
                 state.querySet = filteredData;  
@@ -336,9 +346,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         
             document.getElementById('apply').addEventListener('click', applyFilters);
-            
+          
             // Use the fetched flight data as needed
-
+        
         } catch (error) {
             console.error('Error fetching flights data:', error);
         }

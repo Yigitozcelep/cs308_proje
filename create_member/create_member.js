@@ -1,5 +1,3 @@
-import { UserCommunication } from "../backend_communication/users/users_communication.js";
-import { UserData } from "../backend_communication/users/users.js";
 import { getText, languages } from "../dictionary.js"; // dictionary.js'yi içe aktarıyoruz
 
 function handleLanguageChange() {
@@ -9,30 +7,28 @@ function handleLanguageChange() {
     document.getElementById('createMemberTitle').innerHTML = getText("createMemberTitle");
     document.getElementById('sign_name').placeholder = getText("sign_name");
     document.getElementById('sign_surname').placeholder = getText("sign_surname");
-    document.getElementById('labelFemale').innerHTML = getText("female");
-    document.getElementById('labelMale').innerHTML = getText("male");
-    document.getElementById('labelOther').innerHTML = getText("other");
-    document.getElementById('sign_age').innerHTML = getText("sign_age");
-    document.getElementById('sign_nationality').children[0].innerHTML = getText("sign_nationality");
+    document.getElementById('sign_id').placeholder = getText("sign_id");
+    document.getElementById('sign_seniority').placeholder = getText("sign_seniority");
+    document.getElementById('sign_age_label').innerHTML = getText("sign_age_label");
+    document.getElementById('sign_nationality').placeholder = getText("sign_nationality");
     document.getElementById('sign_email').placeholder = getText("sign_email");
     document.getElementById('sign_password').placeholder = getText("sign_password");
+    document.getElementById('crewlabel').innerHTML = getText("crewlabel");
+    document.getElementById('cabinc').innerHTML = getText("cabinc");
+    document.getElementById('flightc').innerHTML = getText("flightc");
+    document.getElementById('personalP_recipeLabel').placeholder = getText("personalP_recipeLabel");
+    document.getElementById('personalP_allowedRangeLabel').placeholder = getText("personalP_allowedRangeLabel");
+    document.getElementById('personalP_languagesLabel').placeholder = getText("personalP_languagesLabel");
     document.getElementById('createMemberButton').innerHTML = getText("createMemberButton");
     document.getElementById('sign_helpButton').innerHTML = getText("sign_helpButton");
     document.getElementById('signOut').innerHTML = getText("signOut");
 
-    // Update nationality options
-    let nationalityOptions = document.getElementById('sign_nationality').options;
-    nationalityOptions[1].innerHTML = getText("dutch");
-    nationalityOptions[2].innerHTML = getText("english");
-    nationalityOptions[3].innerHTML = getText("french");
-    nationalityOptions[4].innerHTML = getText("german");
-    nationalityOptions[5].innerHTML = getText("italian");
-    nationalityOptions[6].innerHTML = getText("russian");
-    nationalityOptions[7].innerHTML = getText("swedish");
-    nationalityOptions[8].innerHTML = getText("turkish");
+    document.getElementById('labelFemale').innerHTML = getText("female");
+    document.getElementById('labelMale').innerHTML = getText("male");
+    document.getElementById('labelOther').innerHTML = getText("other");
 
     // Update help text
-    document.getElementById('helpText').innerHTML = getText("helpText");
+    document.getElementById('member_helpText').innerHTML = getText("member_helpText");
 }
 
 // Call the function to initialize language preferences
@@ -106,7 +102,6 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
     let favoriteRecipe = null;
     let allowedRange = null;
     let languages = null;
-
 
     if (userType === 'cabinCrew') {
         favoriteRecipe = document.getElementById('Recipe').value;

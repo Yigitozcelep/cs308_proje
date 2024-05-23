@@ -1,6 +1,7 @@
 import { getText, languages } from "../dictionary.js";
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
 let userData;
+
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
@@ -17,6 +18,11 @@ function handleLanguageChange() {
     document.getElementById('personalP_helpButton').innerHTML = getText("personalP_helpButton");
     document.getElementById('personalP_signOut').innerHTML = getText("personalP_signOut");
     document.getElementById('personalP_helpText').innerHTML = getText("personalP_helpText");
+
+    
+    document.getElementById('personalP_languagesLabel').innerHTML = getText("personalP_languagesLabel");
+    document.getElementById('personalP_recipeLabel').innerHTML = getText("personalP_recipeLabel");
+    document.getElementById('personalP_allowedRangeLabel').innerHTML = getText("personalP_allowedRangeLabel");
 }
 
 document.addEventListener('DOMContentLoaded', handleLanguageChange);
@@ -55,6 +61,19 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             document.getElementById('personalP_age').value = userData.age;
             document.getElementById('personalP_nationality').value = userData.nationality;
             document.getElementById('personalP_email').value = userData.email;
+
+            
+            if (userData.userType === 'CabinCrew') {
+                document.getElementById('languageGroup').style.display = 'block';
+                document.getElementById('recipeGroup').style.display = 'block';
+                document.getElementById('personalP_languages').value = userData.languages;
+                document.getElementById('personalP_recipe').value = userData.recipe;
+            } else if (userData.userType === 'PilotCrew') {
+                document.getElementById('languageGroup').style.display = 'block';
+                document.getElementById('allowedRangeGroup').style.display = 'block';
+                document.getElementById('personalP_languages').value = userData.languages;
+                document.getElementById('personalP_allowedRange').value = userData.allowedRange;
+            }
         }
     }
 
@@ -69,7 +88,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             if (password) updatedUser.password = password;
 
             await UserCommunication.updateUser(updatedUser);
-            console.log(updatedUser);
             alert('Information updated successfully!');
         }
     });

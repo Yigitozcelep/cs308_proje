@@ -66,8 +66,8 @@ const dictionary = {
         [languages.english]: "Age:",
     },
     "sign_nationality": {
-        [languages.turkish]: "Uyruk Seçin",
-        [languages.english]: "Select Nationality",
+        [languages.turkish]: "Uyruk Girin",
+        [languages.english]: "Enter Nationality",
     },
     "sign_email": {
         [languages.turkish]: "Eposta",
@@ -95,9 +95,9 @@ const dictionary = {
         [languages.turkish]: "Yardım",
         [languages.english]: "Help",
     },
-    "sign_signOut": {
-        [languages.turkish]: "Çıkış Yap",
-        [languages.english]: "Sign Out",
+    "sign_back": {
+        [languages.turkish]: "Geri",
+        [languages.english]: "Back",
     },
     "dutch": {
         [languages.turkish]: "Hollandalı",
@@ -135,13 +135,11 @@ const dictionary = {
         [languages.turkish]: `İşte bazı yararlı bilgiler:
             Lütfen hiçbir kutuyu boş bırakmamaya dikkat edin.
             "Söylememeyi tercih et" seçeneği cinsiyetini belirtmek istemeyen kişiler için oluşturulmuş bir seçenektir. Kişiler üyelik işleminden sonra tercihlerini değiştirme hakkına sahiptir.
-            Lütfen "Uyruğu Seç" seçeneğine tıklayarak seçim çubuğundan uyruğunuzu seçin.
             Kayıt olmak için e-posta adresinizi girmelisiniz. Kayıt işlemi başarılı olmazsa lütfen e-posta adresinizi doğru girdiğinizden emin olun.
             Zaten bir hesabınız varsa, "Giriş yap" seçeneğini tıklayın ve bağlantıdan işleme devam edin.`,
         [languages.english]: `Here is some helpful information:
            Please be careful not to leave any boxes blank.
            The "prefer not to say" option is an option created for people who do not want to specify their gender. People have the right to change their preferences after the membership process.
-           Please select your nationality from the selection bar by clicking on the "Select Nationality".
            You must enter your e-mail address to sign up. If successful sign up is not achieved, please make sure that you have entered the e-mail address correctly.
            If you already have an account, click "Log in" and continue the process from the link.`,
     },
@@ -174,9 +172,9 @@ const dictionary = {
         [languages.turkish]: "Yardım",
         [languages.english]: "Help",
     },
-    "log_signOut": {
-        [languages.turkish]: "Çıkış Yap",
-        [languages.english]: "Sign Out",
+    "log_back": {
+        [languages.turkish]: "Geri",
+        [languages.english]: "Back",
     },
     "log_helpText": {
         [languages.turkish]: `İşte bazı yararlı bilgiler:
@@ -202,9 +200,9 @@ const dictionary = {
         You must enter your e-mail address to reset your password. If successful reset is not achieved, please make sure that you have entered the e-mail address correctly or check if you have an account with this email.
         If you do not have an account, click "Register" and continue the process from the link.`,
     },
-    "reset_signOut": {
-        [languages.turkish]: "Çıkış Yap",
-        [languages.english]: "Sign Out",
+    "reset_back": {
+        [languages.turkish]: "Geri",
+        [languages.english]: "Back",
     },
     "forgetTitle": {
         [languages.turkish]: "Şifreyi Unut",
@@ -256,6 +254,18 @@ const dictionary = {
         [languages.turkish]: "Kişisel bilgi",
         [languages.english]: "Personal Information",
     }, 
+    "personalP_allowedRangeLabel": {
+        [languages.turkish]: "İzin Verilen Menzil:",
+        [languages.english]: "Allowed Range:",
+    }, 
+    "personalP_languagesLabel": {
+        [languages.turkish]: "Diller:",
+        [languages.english]: "Languages:",
+    },
+    "personalP_recipeLabel": {
+        [languages.turkish]: "Yemek:",
+        [languages.english]: "Recipe:",
+    },
     "personalP_nameLabel": {
         [languages.turkish]: "Ad:",
         [languages.english]: "Name:",
@@ -896,7 +906,12 @@ const dictionary = {
     },
 
     
-    "Create Member":
+    "createMemberTitle":
+    {
+        [languages.turkish]: "Personel Ekle",
+        [languages.english]: "Create Member",
+    }, 
+    "createMemberButton":
     {
         [languages.turkish]: "Personel Ekle",
         [languages.english]: "Create Member",

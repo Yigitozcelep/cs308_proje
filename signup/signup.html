@@ -23,16 +23,15 @@
         <p id="helpText">Here is some helpful information:
            Please be careful not to leave any boxes blank.
            The "prefer not to say" option is an option created for people who do not want to specify their gender. People have the right to change their preferences after the membership process.
-           Please select your nationality from the selection bar by clicking on the "Select Nationality".
            You must enter your e-mail address to sign up. If successful sign up is not achieved, please make sure that you have entered the e-mail address correctly.
            If you already have an account, click "Log in" and continue the process from the link.</p>
       </div>
     </div>
-    <a href="#" class="top-bar-item" id="sign_signOut">Sign Out</a>
+    <a href="#" class="top-bar-item" id="sign_back">Back</a>
   </div>
   <div class="form-box">
     <img src="308_air.png" alt="AIR308" class="airplane-image">
-    <form class="form">
+    <form class="form" id="signupForm">
         <span class="title" id="signupTitle">Sign Up</span>
         <span class="subtitle" id="signupSubtitle">Create a free account with your email.</span>
         <div class="form-container">
@@ -50,20 +49,11 @@
           
           <div class="age">
             <label for="sign_age" class="age-label" id="sign_age">Age:</label>
-            <input type="date" class="input" id="sign_selectBirth" placeholder="Select Birth Date">
+            <input type="number" class="input" id="sign_age" min="0" max="150">
           </div>
 
-          <select name="sign_nationality" class="input" id="sign_nationality">
-            <option value="selectNationality">Select Nationality</option>
-            <option value="dutch">Dutch</option>
-            <option value="english">English</option>
-            <option value="french">French</option>
-            <option value="german">German</option>
-            <option value="italian">Italian</option>
-            <option value="russian">Russian</option>
-            <option value="swedish">Swedish</option>
-            <option value="turkish">Turkish</option>
-          </select>
+          <input type="text" class="input" placeholder="Nationality" id="sign_nationality">
+
           <input type="email" class="input" placeholder="Email" id="sign_email">
           <input type="password" class="input" placeholder="Password" id="sign_password">
         </div>

@@ -12,6 +12,7 @@ function handleLanguageChange() {
     document.getElementById('departureDateLabel').innerHTML = getText("departureDate");
     document.getElementById('departureTimeLabel').innerHTML = getText("departureTime");
     document.getElementById('departureAirportLabel').innerHTML = getText("departureAirport");
+    document.getElementById('foodMenuLabel').innerHTML = getText("foodMenu");
     document.getElementById('arrivalDateLabel').innerHTML = getText("arrivalDate");
     document.getElementById('arrivalTimeLabel').innerHTML = getText("arrivalTime");
     document.getElementById('arrivalPlaceLabel').innerHTML = getText("arrivalPlace");
@@ -50,6 +51,7 @@ document.getElementById('addFlightForm').addEventListener("submit", async (event
     const arrivalAirport = document.getElementById("arrivalAirport").value;
     const vehicleType = document.getElementById("vehicleType").value;
     const sharedAirlineCompany = document.getElementById("sharedAirlineCompany").value;
+    const foodMenu = document.getElementById("foodMenu").value;
 
     const departureDateTime = new Date(`${departureDate}T${departureTime}:00`);
     const arrivalDateTime = new Date(`${arrivalDate}T${arrivalTime}:00`);
@@ -65,6 +67,7 @@ document.getElementById('addFlightForm').addEventListener("submit", async (event
         sharedAirlineCompany,  
         flightNo,
         planeId,
+        foodMenu,
     );
 
     console.log(flightData);
@@ -73,7 +76,7 @@ document.getElementById('addFlightForm').addEventListener("submit", async (event
         await FlightsCommunication.addFlight(flightData);
         document.getElementById('addFlightForm').reset();
        
-        window.location.href = "flightListAdmin.html";
+        //window.location.href = "flightListAdmin.html";
     } catch (error) {
         
         alert("An error occurred while adding the flight. Please try again later.");

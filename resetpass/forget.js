@@ -7,7 +7,7 @@ function handleLanguageChange() {
 
     document.getElementById('reset_helpButton').innerHTML = getText("reset_helpButton");
     document.getElementById('reset_helpText').innerHTML = getText("reset_helpText");
-    document.getElementById('reset_signOut').innerHTML = getText("reset_signOut");
+    document.getElementById('reset_back').innerHTML = getText("reset_back");
     document.getElementById('forgetTitle').innerHTML = getText("forgetTitle");
     document.getElementById('reset_email').placeholder = getText("reset_email");
     document.getElementById('reset_password').placeholder = getText("reset_password");
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     // Redirect to index.html in start_screen folder on Sign Out
-    document.getElementById('reset_signOut').onclick = function() {
+    document.getElementById('reset_back').onclick = function() {
         window.location.href = '../start_screen/index.html';
     }
 

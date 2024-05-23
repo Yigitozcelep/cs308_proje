@@ -38,8 +38,9 @@ class UserData {
      * @param {UserFlightData[]} flights 
      * @param {String} seniority
      * @param {String} languages
+     * @param {String} allowedRange
      */
-    constructor(email, password, name, surname, Id, age, gender, nationality, userType, flights, seniority, languages) {
+    constructor(email, password, name, surname, Id, age, gender, nationality, userType, flights, seniority, languages, allowedRange) {
         this.email           = email;
         this.password        = password;
         this.name            = name;
@@ -52,6 +53,7 @@ class UserData {
         this.flights         = flights;
         this.seniority       = seniority
         this.languages       = languages;
+        this.allowedRange       = allowedRange;
     }
     
     isUserAdmin()     { return this.userType == UserTypes.admin     }

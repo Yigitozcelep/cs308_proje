@@ -7,7 +7,6 @@ function handleLanguageChange() {
     localStorage.setItem("language", lang);
 
     document.getElementById('createMemberTitle').innerHTML = getText("createMemberTitle");
-    document.getElementById('signupSubtitle').innerHTML = getText("signupSubtitle");
     document.getElementById('sign_name').placeholder = getText("sign_name");
     document.getElementById('sign_surname').placeholder = getText("sign_surname");
     document.getElementById('labelFemale').innerHTML = getText("female");
@@ -19,7 +18,7 @@ function handleLanguageChange() {
     document.getElementById('sign_password').placeholder = getText("sign_password");
     document.getElementById('createMemberButton').innerHTML = getText("createMemberButton");
     document.getElementById('sign_helpButton').innerHTML = getText("sign_helpButton");
-    document.getElementById('sign_signOut').innerHTML = getText("sign_signOut");
+    document.getElementById('signOut').innerHTML = getText("signOut");
 
     // Update nationality options
     let nationalityOptions = document.getElementById('sign_nationality').options;
@@ -69,7 +68,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     // Redirect to index.html in start_screen folder on Sign Out
-    document.getElementById('sign_signOut').onclick = function() {
+    document.getElementById('signOut').onclick = function() {
         window.location.href = '../start_screen/index.html';
     }
 

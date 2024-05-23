@@ -2,6 +2,7 @@ import { FlightsCommunication } from "../backend_communication/flights/flights_c
 import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js";
 import { UserData } from "../backend_communication/users/users.js";
 import { getText } from "../dictionary.js";
+import { FlightData } from "../backend_communication/flights/flights.js";
 
 
 function handleLanguageChange() {
@@ -23,8 +24,6 @@ function handleLanguageChange() {
     seniority_search.setAttribute('placeholder', getText("seniority_search"));
     seat_search.setAttribute('placeholder', getText("seat_search"));
     email_search.setAttribute('placeholder', getText("email_search"));
-    gender_search.setAttribute('placeholder', getText("gender_search"));
-
 
 }
 
@@ -37,21 +36,21 @@ function hideUpdatePopup() {
     document.getElementById('popup').style.display = 'none';
 }
 
-console.log(dummyUsers);
+console.log(localStorage.getItem("flightIdView"));
 document.addEventListener('DOMContentLoaded', async function () {
 
     hideUpdatePopup();
 
     const currentState = document.getElementById("table-type").innerHTML;
-        let currentData;
-        if (currentState === "Pilot Crew") currentData = await FlightsCommunication.getPilotData(currentFlight);
-        else if (currentState === "Passenger") currentData = await FlightsCommunication.getPassangerData(currentFlight);
-        else if (currentState === "Cabin Crew") currentData = await FlightsCommunication.getFlightCrew(currentFlight);
+        let UserData;
+        if (currentState === "Pilot Crew") currentData = await FlightsCommunication.getPilotData(FlightData);
+        else if (currentState === "Passenger") currentData = await FlightsCommunication.getPassangerData(FlightData);
+        else if (currentState === "Cabin Crew") currentData = await FlightsCommunication.getFlightCrew(FlightData);
         console.log(currentData);
 
 
     var state = {
-        'querySet': currentData,
+        'querySet': UserData,
         'page': 1,
         'rows': 20,
         'currentTable': 'Cabin Crew'

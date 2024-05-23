@@ -1,7 +1,40 @@
 import { getText } from "../dictionary.js";
-import { FlightsCommunication } from "../backend_communication/flights/flights_comminucation.js";
-import { dummyFlights, dummyUsers, seats } from "../backend_communication/dummy_data.js";
+import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
+
+
+const helpDiv    = document.getElementById("helpDiv");
+const helpButton = document.getElementById("helpButton");
+const signOut    = document.getElementById("signOut");
+const title      = document.getElementById("myTitle");
+const brandName  = document.getElementById("brandName");
+
+const changeHelp = async () => {
+    const userId  = localStorage.getItem("userId");
+    const curUser = await UserCommunication.getUserById(userId);
+    if (curUser.isUserAdmin()) helpDiv.innerHTML = getText("plaineViewHelpAdmin");
+    else helpDiv.innerHTML = getText("plaineViewHelpPassanger");
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    var helpButton = document.getElementById('helpButton');
+    var helpPopup = document.getElementById('helpPopup');
+    var closeSpan = document.getElementsByClassName('close')[0];
+    // When the help button is clicked, show the pop-up
+    helpButton.onclick = function() {
+        helpPopup.style.display = "flex";
+    }
+    // When the close button (x) inside the pop-up is clicked, hide the pop-up
+    closeSpan.onclick = function() {
+        helpPopup.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the pop-up, close it
+    window.onclick = function(event) {
+        if (event.target == helpPopup) {
+            helpPopup.style.display = "none";
+        }
+    }
+});
 
 const airPlaineDiv = document.getElementById("airplaine");
 const airPlaineLeft = 280;
@@ -51,8 +84,13 @@ const initializeNames = () => {
     age.innerHTML             = capitalizeFirstLetter(getText("age"));
     gender.innerHTML          = capitalizeFirstLetter(getText("gender"));
     nationality.innerHTML     = capitalizeFirstLetter(getText("nationality"));
-
+    helpButton.innerHTML      = capitalizeFirstLetter(getText("helpButton"));
+    signOut.innerHTML         = capitalizeFirstLetter(getText("signOut"));
     buySeatButton.innerHTML   = capitalizeFirstLetter(getText("buySeat"));
+    brandName.innerHTML       = capitalizeFirstLetter(getText("brandName"));
+    title.innerHTML           = capitalizeFirstLetter(getText("plaineViewTitle"));
+
+    changeHelp();
 }
 initializeNames()
 document.getElementById("language").addEventListener("change", initializeNames);
@@ -70,9 +108,9 @@ const getMaxSeatNum = (seatData) => {
     return maxSeatNum;
 }
 
-const displayFlightCrewData = async () => {
+const displayFlightCrewData = async (curFlight) => {
 
-    const cabinCrew = await FlightsCommunication.getFlightCrew(window.currentFlight);
+    const cabinCrew = await FlightsCommunication.getFlightCrew(curFlight);
     flightCrewInfoTable.style.visibility = "visible";
 
     for (const el of cabinCrew) {
@@ -101,9 +139,13 @@ function selectSeatListener(div) {
 }
 
 const initializeFlightImg = async () => {
-    const res = await FlightsCommunication.getSeatsData(window.currentFlight);
+    const flightId  = localStorage.getItem("flightIdView");
+    const curFlight = await FlightsCommunication.getFlightByFlightId(flightId);
+    const userId = localStorage.getItem("userId");
+    const curUser = await UserCommunication.getUserById(userId);
+    const res = await FlightsCommunication.getSeatsData(curFlight);
     let maxSeatNum = getMaxSeatNum(res);
-    if (window.currentUser.isUserAdmin()) displayFlightCrewData();
+    if (curUser.isUserAdmin()) displayFlightCrewData(curFlight);
     else buySeatButton.style.visibility = "visible";
     const airPlaineWidth  = 800;
     const airPlaineHeight = 200;
@@ -116,7 +158,7 @@ const initializeFlightImg = async () => {
         const column = seat.getSeatNumber() - "1";
         const img = document.createElement("img");
         
-        if (window.currentUser.isUserAdmin()) {
+        if (curUser.isUserAdmin()) {
             img.className = "adminSeat";
             img.addEventListener("click", async e => {
                 const seatUser = await UserCommunication.getUserById(seat.getUserId());

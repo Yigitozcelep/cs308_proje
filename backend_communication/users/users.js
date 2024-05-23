@@ -12,13 +12,15 @@ class UserFlightData {
      * @param {flights.FlightData} flightData 
      * @param {Seat} userSeat 
      * @param {Date} boughtTime 
-     * @param {Number} purchaseId 
+     * @param {Number} purchaseId
+     * @param {String} role  
      */
-    constructor(flightData, seat, boughtTime, purchaseId) {
+    constructor(flightData, seat, boughtTime, purchaseId, role) {
         this.flightData     = flightData;
         this.userSeat       = seat;
         this.boughtTime     = boughtTime;
         this.purchaseId     = purchaseId;
+        this.role           = role;
     }
 }
 
@@ -34,10 +36,10 @@ class UserData {
      * @param {String} nationality 
      * @param {String} userType 
      * @param {UserFlightData[]} flights 
-     * @param {Bool} canRejectFlight 
-     * @param {FlightData} pendingFlight 
+     * @param {String} seniority
+     * @param {String} languages
      */
-    constructor(email, password, name, surname, Id, age, gender, nationality, userType, flights, canRejectFlight, pendingFlight, languages) {
+    constructor(email, password, name, surname, Id, age, gender, nationality, userType, flights, seniority, languages) {
         this.email           = email;
         this.password        = password;
         this.name            = name;
@@ -48,8 +50,7 @@ class UserData {
         this.nationality     = nationality;
         this.userType        = userType;
         this.flights         = flights;
-        this.canRejectFlight = canRejectFlight;
-        this.pendingFlight   = pendingFlight;
+        this.seniority       = seniority
         this.languages       = languages;
     }
     

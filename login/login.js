@@ -3,6 +3,7 @@ import { dummyUsers } from "../backend_communication/dummy_data.js";
 
 import { getText, languages } from "../dictionary.js";
 
+
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
@@ -61,7 +62,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-dummyUsers[0].userType = "PilotCrew";
 document.querySelector('form').addEventListener('submit', async function(event){
     // Prevent the default form submission behavior
     event.preventDefault();

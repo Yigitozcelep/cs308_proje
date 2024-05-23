@@ -20,8 +20,15 @@ const dictionary = {
         [languages.turkish]: "Başla",
         [languages.english]: "Start",
     },
+    "sharedAirlineCompany": {
+        [languages.turkish]: "Ortak Havayolu Şirketi",
+        [languages.english]: "Shared Airline Company",
+    },
 
-
+    "startButton": {
+        [languages.turkish]: "Başla",
+        [languages.english]: "Start",
+    },
     "signupTitle": {
         [languages.turkish]: "Üye Ol",
         [languages.english]: "Sign Up",
@@ -326,7 +333,7 @@ const dictionary = {
         [languages.turkish]: "şifre",
         [languages.english]: "password",
     },
-
+    
     "myFlightsHelp":
     {
         [languages.turkish]: "Uçuşlarım Yardım Sayfasına Hoşgeldiniz",
@@ -897,6 +904,104 @@ const dictionary = {
         [languages.english]: "ID",
     },
 
+
+    "plaineViewHelpAdmin": {
+        [languages.english]: ` <h1>AIR308 Airlines Seat Management System - Help Guide</h1> <p><strong>Welcome to the AIR308 Airlines Seat Management System!</strong> This guide will help you understand how to use the system to view passenger and crew member details.</p> <h2>Features:</h2> <h3>1. Interactive Seat Map:</h3> <ul> <li><strong>View Passenger Details:</strong> Click on any seat in the airplane layout to display the passenger's details seated there. The details will appear in the white box above the airplane layout, showing the following information: <ul> <li><strong>Age:</strong> The passenger's age.</li> <li><strong>Nationality:</strong> The passenger's nationality.</li> <li><strong>Name:</strong> The passenger's name.</li> <li><strong>Surname:</strong> The passenger's surname.</li> <li><strong>Gender:</strong> The passenger's gender.</li> <li><strong>Id:</strong> The unique ID assigned to the passenger.</li> </ul> </li> </ul> <h3>2. Crew Member List:</h3> <ul> <li><strong>View Crew Details:</strong> Below the airplane layout, a table displays the list of crew members. The table includes the following details for each crew member: <ul> <li><strong>Age:</strong> The crew member's age.</li> <li><strong>Nationality:</strong> The crew member's nationality.</li> <li><strong>Name:</strong> The crew member's name.</li> <li><strong>Surname:</strong> The crew member's surname.</li> <li><strong>Gender:</strong> The crew member's gender.</li> <li><strong>Id:</strong> The unique ID assigned to the crew member.</li> <li><strong>Type:</strong> The role of the crew member (e.g., Admin, PilotCrew, CabinCrew).</li> </ul> </li> </ul> `,
+        [languages.turkish]: ` <h1>AIR308 Havayolları Koltuk Yönetim Sistemi - Yardım Kılavuzu</h1> <p><strong>AIR308 Havayolları Koltuk Yönetim Sistemine hoş geldiniz!</strong> Bu kılavuz, sistemin nasıl kullanılacağını ve yolcu ile mürettebat üyesi bilgilerini nasıl görüntüleyeceğinizi anlamanıza yardımcı olacaktır.</p> <h2>Özellikler:</h2> <h3>1. Etkileşimli Koltuk Haritası:</h3> <ul> <li><strong>Yolcu Bilgilerini Görüntüleme:</strong> Uçak düzeninde herhangi bir koltuğa tıklayarak orada oturan yolcunun bilgilerini görüntüleyebilirsiniz. Bilgiler, uçak düzeninin üstündeki beyaz kutuda şu şekilde görünecektir: <ul> <li><strong>Yaş:</strong> Yolcunun yaşı.</li> <li><strong>Milliyet:</strong> Yolcunun milliyeti.</li> <li><strong>Ad:</strong> Yolcunun adı.</li> <li><strong>Soyad:</strong> Yolcunun soyadı.</li> <li><strong>Cinsiyet:</strong> Yolcunun cinsiyeti.</li> <li><strong>Id:</strong> Yolcuya atanan benzersiz ID.</li> </ul> </li> </ul> <h3>2. Mürettebat Üyesi Listesi:</h3> <ul> <li><strong>Mürettebat Bilgilerini Görüntüleme:</strong> Uçak düzeninin altında, mürettebat üyelerinin listesini gösteren bir tablo bulunmaktadır. Tabloda her mürettebat üyesi için şu bilgiler yer alır: <ul> <li><strong>Yaş:</strong> Mürettebat üyesinin yaşı.</li> <li><strong>Milliyet:</strong> Mürettebat üyesinin milliyeti.</li> <li><strong>Ad:</strong> Mürettebat üyesinin adı.</li> <li><strong>Soyad:</strong> Mürettebat üyesinin soyadı.</li> <li><strong>Cinsiyet:</strong> Mürettebat üyesinin cinsiyeti.</li> <li><strong>Id:</strong> Mürettebat üyesine atanan benzersiz ID.</li> <li><strong>Tür:</strong> Mürettebat üyesinin rolü (örneğin, Admin, PilotCrew, CabinCrew).</li> </ul> </li> </ul> `
+    },
+    "plaineViewHelpPassanger": {
+        [languages.english]: `    <h1>AIR308 Airlines Seat Management System - Passenger Help Guide</h1>
+        <p><strong>Welcome to the AIR308 Airlines Seat Management System!</strong> This guide will help you understand how to use the system and complete seat purchase transactions.</p>
+        
+        <h2>Features:</h2>
+        <h3>1. Seat Selection and Purchase:</h3>
+        <ul>
+            <li><strong>Seat Selection:</strong>
+                <ul>
+                    <li>You can select any seat on the airplane layout by clicking on it. The selected seat will be highlighted in blue.</li>
+                </ul>
+            </li>
+            <li><strong>Seat Purchase:</strong>
+                <ul>
+                    <li>After selecting a seat, click the "Buy Seat" button located at the bottom right corner of the screen.</li>
+                    <li>You will receive a notification confirming the transaction. The notification will state "The transaction was completed successfully".</li>
+                </ul>
+            </li>
+        </ul>
+    
+        <h2>How to Use:</h2>
+        <h3>1. Seat Selection:</h3>
+        <ul>
+            <li>Click on an available seat in the airplane layout. The selected seat will be marked in blue.</li>
+            <li>You can select multiple seats, but you must complete a separate purchase transaction for each seat.</li>
+        </ul>
+    
+        <h3>2. Seat Purchase:</h3>
+        <ul>
+            <li>After selecting a seat, click the "Buy Seat" button at the bottom right corner.</li>
+            <li>Once the transaction is complete, you will see a successful transaction notification on the screen.</li>
+        </ul>
+    
+        <h2>Tips:</h2>
+        <ul>
+            <li><strong>Seat Color Codes:</strong>
+                <ul>
+                    <li>Red seats indicate they are occupied, while green seats indicate they are available.</li>
+                    <li>Blue seats indicate your current selection.</li>
+                </ul>
+            </li>
+        </ul>
+        <p>Thank you for using the AIR308 Airlines Seat Management System!</p>`,
+
+        [languages.turkish]: `    <h1>AIR308 Havayolları Koltuk Yönetim Sistemi - Yolcu Yardım Kılavuzu</h1>
+        <p><strong>AIR308 Havayolları Koltuk Yönetim Sistemine hoş geldiniz!</strong> Bu kılavuz, sistemin nasıl kullanılacağını ve koltuk satın alma işlemlerini nasıl gerçekleştireceğinizi anlamanıza yardımcı olacaktır.</p>
+        
+        <h2>Özellikler:</h2>
+        <h3>1. Koltuk Seçimi ve Satın Alma:</h3>
+        <ul>
+            <li><strong>Koltuk Seçimi:</strong>
+                <ul>
+                    <li>Uçak düzeninde herhangi bir koltuğa tıklayarak koltuğu seçebilirsiniz. Seçtiğiniz koltuk mavi renkle vurgulanacaktır.</li>
+                </ul>
+            </li>
+            <li><strong>Koltuk Satın Alma:</strong>
+                <ul>
+                    <li>Koltuk seçtikten sonra, ekranın sağ alt köşesinde bulunan "Buy Seat" (Koltuk Satın Al) düğmesine tıklayın.</li>
+                    <li>İşlemin tamamlandığını belirten bir bildirim alacaksınız. Bu bildirimde "The transaction was completed successfully" (İşlem başarıyla tamamlandı) yazacaktır.</li>
+                </ul>
+            </li>
+        </ul>
+    
+        <h2>Nasıl Kullanılır:</h2>
+        <h3>1. Koltuk Seçimi:</h3>
+        <ul>
+            <li>Uçak düzeninde uygun bir koltuğa tıklayın. Seçtiğiniz koltuk mavi renkle işaretlenecektir.</li>
+            <li>Birden fazla koltuk seçebilirsiniz, ancak her bir koltuk için ayrı bir satın alma işlemi yapmanız gerekmektedir.</li>
+        </ul>
+    
+        <h3>2. Koltuk Satın Alma:</h3>
+        <ul>
+            <li>Koltuk seçimini yaptıktan sonra sağ alt köşede bulunan "Buy Seat" düğmesine tıklayın.</li>
+            <li>İşlem tamamlandıktan sonra ekranda başarılı bir işlem bildirimi göreceksiniz.</li>
+        </ul>
+    
+        <h2>İpuçları:</h2>
+        <ul>
+            <li><strong>Koltuk Renk Kodları:</strong>
+                <ul>
+                    <li>Kırmızı koltuklar dolu olduğunu, yeşil koltuklar ise boş olduğunu belirtir.</li>
+                    <li>Mavi koltuklar sizin seçiminizi belirtir.</li>
+                </ul>
+            </li>
+        </ul>
+    
+        <p>AIR308 Havayolları Koltuk Yönetim Sistemini kullandığınız için teşekkür ederiz!</p>`
+    },
+
+    "plaineViewTitle": {
+        [languages.turkish]: "AIR308 Uçak Görünümü",
+        [languages.english]: "AIR308 Plaine View"
+    }
     
 }
 

@@ -49,7 +49,9 @@ const FlightsCommunication = {
      * @returns {Promise<UserData[]>}
      */
     async getFlightCrew(flightData) {
+
         
+
         return dummyData.crewData[flightData.getPlaneId() - "0"]
     },
 
@@ -118,10 +120,10 @@ const FlightsCommunication = {
      * @param {String} planeId 
      * @returns {Promise<FlightData>}
      */
-    async getFlightByPlaineId(plaineId) {
+    async getFlightByPlaneId(planeId) {
         await new Promise(resolve => setTimeout(resolve, 50));
         for (let i = 0; i < dummyData.dummyFlights.length; i++) {
-            if (dummyData.dummyFlights[i].getPlaineId() == plaineId) return dummyData.dummyFlights[i];
+            if (dummyData.dummyFlights[i].getPlaneId() == planeId) return dummyData.dummyFlights[i];
         }
     },
 
@@ -159,4 +161,3 @@ const FlightsCommunication = {
 }
 
 export { FlightsCommunication }
-

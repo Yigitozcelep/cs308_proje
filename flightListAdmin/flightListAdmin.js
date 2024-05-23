@@ -27,6 +27,8 @@ function handleLanguageChange() {
     const updateFlightarrivalAirport = document.getElementById('10');
     const updateFlightvehiclyeType = document.getElementById('11');
     const updateFlightsubmit = document.getElementById('12');
+    const updateSharedAirlineCompany = document.getElementById('13');
+    const sharedAirlineCompany = document.getElementById('sharedAirlineCompany');
 
     const flightList = document.getElementById('flightList');
     const flightListAdmin = document.getElementById('flightListAdmin');
@@ -50,6 +52,7 @@ function handleLanguageChange() {
     const arrivalDate_search = document.getElementById('arrivalDate-search');
     const arrivalPlace_search = document.getElementById('arrivalPlace-search');
     const arrivalAirport_search = document.getElementById('arrivalAirport-search');
+    const sharedAirlineCompany_search = document.getElementById('sharedAirlineCompany-search');
     const vehicleType_search = document.getElementById('vehicleType-search');
     const planeId = document.getElementById('planeId'); 
     const flightNo =  document.getElementById('flightNo');
@@ -75,6 +78,7 @@ function handleLanguageChange() {
     updateFlightdepartureDate.innerHTML = getText("departureDate");
     updateFlightdeparturePlace.innerHTML = getText("departurePlace");
     updateFlightflightId.innerHTML = getText("flightNo");
+    updateSharedAirlineCompany.innerHTML = getText("sharedAirlineCompany");
     updateFlightplaneId.innerHTML = getText("planeId");
     updateFlightsubmit.innerHTML = getText("submit");
     updateFlightvehiclyeType.innerHTML = getText("airplaneType");
@@ -107,6 +111,7 @@ function handleLanguageChange() {
     flightManagementInfo.innerHTML = getText("flightManagementInfo");
     flightDeletion.innerHTML = getText("flightDeletion");
     flightDeletionInfo.innerHTML = getText("flightDeletionInfo");
+    sharedAirlineCompany.innerHTML = getText("sharedAirlineCompany");
     signOut.innerHTML = getText("signOut");
     filterBy.innerHTML = getText("filterBy");
     planeId.innerHTML = getText("planeId");
@@ -119,7 +124,7 @@ function handleLanguageChange() {
     arrivalAirport.innerHTML = getText("arrivalAirport");
     vehicleType.innerHTML = getText("airplaneType");
     
-
+    sharedAirlineCompany_search.setAttribute('placeholder', getText("sharedAirlineCompany"));
     planeId_search.setAttribute('placeholder', getText("planeId"));
     flightNo_search.setAttribute('placeholder', getText("flightNo"));
     departureDate_search.setAttribute('placeholder', getText("departureDate"));
@@ -211,6 +216,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.getGoto()}</td>
                 <td>${item.getLandingAirport().airportName }</td>
                 <td>${item.getPlaneType()}</td>
+                <td>${item.getAirlineCompany()}</td>
                 <td><button class="select-row" select-flight-id="${item.getFlightId()}">Select</button></td>
                 <td><button class="delete-row" delete-flight-id="${item.getFlightId()}">Delete</button></td>
             </tr>`;
@@ -219,11 +225,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         pageButtons(data.pages);
     }
-    document.getElementById('table-body').addEventListener('click', function(event) {
+    document.getElementById('table-body').addEventListener('click', async function(event) {
         if (event.target.classList.contains('delete-row')) {
             const flightId = event.target.getAttribute('delete-flight-id');
-            showModal(flightId);
-        } else if (event.target.classList.contains('select-row')) {
+            await FlightsCommunication.deleteFlight(flightId);
+            document.querySelector(`button[delete-flight-id="${flightId}"]`).closest('tr').remove();
+        } 
+        else if (event.target.classList.contains('select-row')) 
+        {
             const flightId = event.target.getAttribute('select-flight-id');
             localStorage.setItem("flightIdView", flightId);
             showPopup();
@@ -275,6 +284,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const newArrivalAirport = document.getElementById('newArrivalAirport').value;
         const newVehicleType = document.getElementById('newVehicleType').value;
         const flightIdToUpdate = localStorage.getItem("flightIdView");
+        const newSharedAirlineCompany = document.getElementById('newSharedAirlineCompany').value
     
         try {
             let flightData = await FlightsCommunication.getFlightByFlightId(flightIdToUpdate);
@@ -286,6 +296,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             flightData.setPlaneType(newVehicleType);
             flightData.setLandingTime(newArrivalDateTime);
             flightData.setPlaneId(newPlaneId);
+            flightData.setAirlineCompany(newSharedAirlineCompany);
 
             await FlightsCommunication.updateFlight(flightData);
             console.log(flightData);
@@ -306,8 +317,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             let varA;
             let varB;
             if(key == "FlightNo"){ 
-                varA = a.getFlightId().substring(2);              
-                varB = b.getFlightId().substring(2);
+                varA = parseInt(a.getFlightId().substring(2), 10);
+                varB = parseInt(b.getFlightId().substring(2), 10);
                 
              }
             else if(key == "PlaneId"){ 
@@ -344,6 +355,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             else if(key == "VehicleType"){ 
                 varA = a.getPlaneType();
                 varB = b.getPlaneType(); 
+            }
+            else if(key == "SharedAirlineCompany"){ 
+                varA = a.getAirlineCompany();
+                varB = b.getAirlineCompany(); 
             }
 
             let comparison = 0;
@@ -391,6 +406,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             (!filters.DepartureAirport || item.getDedepartureAirport().airportName.toString() === filters.DepartureAirport) && 
             (!filters.ArrivalDate || formattedDateArrival.toLowerCase() === filters.ArrivalDate.toLowerCase()) &&
             (!filters.ArrivalPlace || item.getGoto().toLowerCase().includes(filters.ArrivalPlace.toLowerCase())) &&
+            (!filters.SharedAirlineCompany || item.getAirlineCompany().toLowerCase().includes(filters.SharedAirlineCompany.toLowerCase())) &&
             (!filters.ArrivalAirport || item.getLandingAirport().airportName.toString() === filters.ArrivalAirport) && 
             (!filters.VehicleType || item.getPlaneType() .toLowerCase().includes(filters.VehicleType.toLowerCase()));
     });
@@ -406,6 +422,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             ArrivalDate: document.getElementById('arrivalDate-search').value,
             ArrivalPlace: document.getElementById('arrivalPlace-search').value,
             VehicleType: document.getElementById('vehicleType-search').value,
+            SharedAirlineCompany: document.getElementById('sharedAirlineCompany-search').value,
 
         };
         var filteredData = searchTable(filters);
@@ -419,35 +436,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     
 
 });
-function showModal(flightId) {
-        
-    const modal = document.getElementById('confirmationModal');
-    const confirmButton = document.getElementById('confirmCancel');
-    const cancelButton = document.getElementById('cancelAction');
-    const closeSpan = document.querySelector('#confirmationModal .close');
 
-    modal.style.display = 'block';
-
-    confirmButton.onclick = async function() {
-        await FlightsCommunication.deleteFlight(flightId);
-        document.querySelector(`button[delete-flight-id="${flightId}"]`).closest('tr').remove();
-        modal.style.display = 'none';
-    }
-
-    cancelButton.onclick = function() {
-        modal.style.display = 'none';
-    }
-
-    closeSpan.onclick = function() {
-        modal.style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    }
-}
 function showPopup() {
     const popup = document.getElementById('selectPopup');
     popup.style.display = 'flex';
@@ -463,6 +452,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var helpButton = document.getElementById('helpButton');
     var helpPopup = document.getElementById('helpPopup');
     var closeSpan = document.getElementsByClassName('close')[0];
+    var closePopUp = document.getElementsByClassName('close-popup')[1];
 
     // When the help button is clicked, show the pop-up
     helpButton.onclick = function() {
@@ -473,20 +463,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     closeSpan.onclick = function() {
         helpPopup.style.display = "none";
     }
-
-    // When the user clicks anywhere outside of the pop-up, close it
-    window.onclick = function(event) {
-        if (event.target == helpPopup) {
-            helpPopup.style.display = "none";
-        }
+    closePopUp.onclick = function()
+    {
+        hideUpdatePopup();
     }
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('selectPopup')) {
-            hidePopup();
-        }
-    };
 
-    
 });
 document.addEventListener('DOMContentLoaded', function() {
     const closePopupButtons = document.querySelectorAll('.close-popup');

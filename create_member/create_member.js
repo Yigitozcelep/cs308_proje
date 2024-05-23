@@ -18,7 +18,6 @@ function handleLanguageChange() {
     document.getElementById('sign_email').placeholder = getText("sign_email");
     document.getElementById('sign_password').placeholder = getText("sign_password");
     document.getElementById('createMemberButton').innerHTML = getText("createMemberButton");
-    document.getElementById('haveAccountText').innerHTML = `${getText("haveAccount")} <a href="#" onclick="redirectToSignIn()" id="sign_login">${getText("sign_login")}</a>`;
     document.getElementById('sign_helpButton').innerHTML = getText("sign_helpButton");
     document.getElementById('sign_signOut').innerHTML = getText("sign_signOut");
 
@@ -104,19 +103,19 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
     const nationality = document.getElementById('sign_nationality').value;
     const email = document.getElementById('sign_email').value;
     const password = document.getElementById('sign_password').value;
-    const crewType = document.querySelector('input[name="crewType"]:checked').value;
+    const userType = document.querySelector('input[name="userType"]:checked').value;
     let favoriteRecipe = null;
     let allowedRange = null;
     let languages = null;
-    let userType;
 
-    if (crewType === 'cabin') {
+
+    if (userType === 'cabinCrew') {
         favoriteRecipe = document.getElementById('Recipe').value;
-        userType = UserTypes.cabinCrew;
-    } else if (crewType === 'flight') {
+        userType = userType.cabinCrew;
+    } else if (userType === 'flightCrew') {
         allowedRange = document.getElementById('allowedRange').value;
         languages = document.getElementById('languages').value;
-        userType = UserTypes.pilotCrew;
+        userType = userType.pilotCrew;
     }
 
     // Yeni bir kullanıcı oluşturun

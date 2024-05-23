@@ -3,7 +3,7 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: orange;
+    background-color: rgb(16, 231, 255);
 }
 
 #airplaine {
@@ -20,14 +20,14 @@ body {
     position: absolute;
     left: 50px;
     top: 100px;
-    background-color: brown;
+    background-color: white;
     border-spacing: 15px; 
     font-size: 20px;
 }
 
 #FlightCrewTable {
     visibility: hidden;
-    background-color: brown;
+    background-color: white;
     position: absolute;
     top: 560px;
     border-spacing: 6px;
@@ -40,6 +40,15 @@ body {
     left: 1100px;
     top: 750px;
     font-size: 30px;
+    background-color: #0066ff;
+    color: #fff;
+    border: 0;
+    border-radius: 24px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .3s ease;
 }
 
 .selectedSeat { background-color: blue; }

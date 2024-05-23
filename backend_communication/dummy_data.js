@@ -98,8 +98,8 @@ const createDummyFlightData = () => {
         const flightTime        = new Date(0, 0, 0, 2 + i);
         const airlineCompany    = airlineCompanies[i % 10];
         const flightId          = "TK" + i;
-        const plaineId          = i;
-        dummyFlightData.push(new flights.FlightData(from, goTo, departureAirport, landingAirport, departureTime, landingTime, planeType, flightTime, airlineCompany, flightId, i, i));
+        const planeId          = i;
+        dummyFlightData.push(new flights.FlightData(from, goTo, departureAirport, landingAirport, departureTime, landingTime, planeType, airlineCompany, flightId, i));
     }
     return dummyFlightData;
 }

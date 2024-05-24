@@ -151,6 +151,7 @@ document.querySelector('form').addEventListener('submit', async function(event) 
         startDate = new Date(document.getElementById('startDate').value);
         endDate = new Date(document.getElementById('endDate').value);
         flightData = await FlightsCommunication.getFlightsDataWithoutAirport(departure, arrival, startDate, endDate);
+        console.log(flightData);
     } else if (selectedOption === 'airport') {
         airport = document.getElementById('airport').value;
         startDate = new Date(document.getElementById('startDate2').value);

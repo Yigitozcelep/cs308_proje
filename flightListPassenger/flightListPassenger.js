@@ -184,10 +184,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                         <td>${item.getPlaneId()}</td>
                         <td>${formattedDateDeparture}</td>
                         <td>${item.getFrom()}</td>
-                        <td>${item.getDedepartureAirport().airportName}</td>
+                        <td>${item.getDedepartureAirport()}</td>
                         <td>${formattedDateArrival}</td>
                         <td>${item.getGoto()}</td>
-                        <td>${item.getLandingAirport().airportName }</td>
+                        <td>${item.getLandingAirport() }</td>
                         <td>${item.getPlaneType()}</td>
                         <td>${item.getAirlineCompany()}</td>
                         <td>${item.getMenu()}</td>
@@ -236,8 +236,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                         varB = b.getFrom();
                     }
                     else if(key == "DepartureAirport"){ 
-                        varA = a.getDedepartureAirport().airportName;
-                        varB = b.getDedepartureAirport().airportName;
+                        varA = a.getDedepartureAirport();
+                        varB = b.getDedepartureAirport();
                     }
                     else if(key == "ArrivalDate"){
                         const date = new Date(a.getLandingTime());              
@@ -251,8 +251,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                         varB = b.getGoto();
                     }
                     else if(key == "ArrivalAirport"){ 
-                        varA = a.getLandingAirport().airportName;
-                        varB = b.getLandingAirport().airportName;
+                        varA = a.getLandingAirport();
+                        varB = b.getLandingAirport();
                     }
                     else if(key == "VehicleType"){ 
                         varA = a.getPlaneType();
@@ -314,12 +314,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                         (!filters.FlightNo || item.getFlightId().toLowerCase().includes(filters.FlightNo.toLowerCase())) &&
                         (!filters.DepartureDate || formattedDateDeparture.toLowerCase().includes(filters.DepartureDate.toLowerCase())) &&
                         (!filters.DeparturePlace || item.getFrom().toString() === filters.DeparturePlace) &&
-                        (!filters.DepartureAirport || item.getDedepartureAirport().airportName.toString() === filters.DepartureAirport) && 
+                        (!filters.DepartureAirport || item.getDedepartureAirport().toString() === filters.DepartureAirport) && 
                         (!filters.ArrivalDate || formattedDateArrival.toLowerCase() === filters.ArrivalDate.toLowerCase()) &&
                         (!filters.ArrivalPlace || item.getGoto().toLowerCase().includes(filters.ArrivalPlace.toLowerCase())) &&
                         (!filters.FoodMenu || item.getMenu().toLowerCase().includes(filters.FoodMenu.toLowerCase())) &&
                         (!filters.SharedAirlineCompany || item.getAirlineCompany().toLowerCase().includes(filters.SharedAirlineCompany.toLowerCase())) &&
-                        (!filters.ArrivalAirport || item.getLandingAirport().airportName.toString() === filters.ArrivalAirport) && 
+                        (!filters.ArrivalAirport || item.getLandingAirport().toString() === filters.ArrivalAirport) && 
                         (!filters.VehicleType || item.getPlaneType() .toLowerCase().includes(filters.VehicleType.toLowerCase()));
                 });
             }

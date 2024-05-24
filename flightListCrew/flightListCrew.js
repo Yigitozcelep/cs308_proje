@@ -174,10 +174,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.flightData.getPlaneId()}</td> 
                 <td>${formattedDateDeparture}</td>
                 <td>${item.flightData.getFrom()}</td>
-                <td>${item.flightData.getDedepartureAirport().airportName}</td>
+                <td>${item.flightData.getDedepartureAirport()}</td>
                 <td>${formattedDateArrival}</td>
                 <td>${item.flightData.getGoto()}</td>
-                <td>${item.flightData.getLandingAirport().airportName }</td>
+                <td>${item.flightData.getLandingAirport() }</td>
                 <td>${item.userSeat.getSeatType()}</td>
                 <td>${item.userSeat.getSeatPosition()}</td>
                 <td>${item.flightData.getAirlineCompany()}</td>
@@ -269,8 +269,8 @@ function showModal(flightId) {
                 varB = b.flightData.getFrom();
             }
             else if(key == "DepartureAirport"){ 
-                varA = a.flightData.getDedepartureAirport().airportName;
-                varB = b.flightData.getDedepartureAirport().airportName;
+                varA = a.flightData.getDedepartureAirport();
+                varB = b.flightData.getDedepartureAirport();
             }
             else if(key == "ArrivalDate"){
                 const date = new Date(a.flightData.getLandingTime());              
@@ -284,8 +284,8 @@ function showModal(flightId) {
                 varB = b.flightData.getGoto();
             }
             else if(key == "ArrivalAirport"){ 
-                varA = a.flightData.getLandingAirport().airportName;
-                varB = b.flightData.getLandingAirport().airportName;
+                varA = a.flightData.getLandingAirport();
+                varB = b.flightData.getLandingAirport();
             }
             else if(key == "SeatType"){ 
                 varA = a.userSeat.getSeatType();
@@ -348,12 +348,12 @@ function showModal(flightId) {
                 (!filters.FlightNo || item.flightData.getFlightId().toLowerCase().includes(filters.FlightNo.toLowerCase())) &&
                 (!filters.DepartureDate|| formattedDateDeparture.toLowerCase().includes(filters.DepartureDate.toLowerCase())) &&
                 (!filters.DeparturePlace || item.flightData.getFrom().toString() === filters.DeparturePlace) &&
-                (!filters.DepartureAirport || item.flightData.getDedepartureAirport().airportName.toString() === filters.DepartureAirport) && 
+                (!filters.DepartureAirport || item.flightData.getDedepartureAirport().toString() === filters.DepartureAirport) && 
                 (!filters.ArrivalDate || formattedDateArrival.toLowerCase() === filters.ArrivalDate.toLowerCase()) &&
                 (!filters.ArrivalPlace || item.flightData.getGoto().toLowerCase().includes(filters.ArrivalPlace.toLowerCase())) &&
                 (!filters.FoodMenu || item.flightData.getMenu().toLowerCase().includes(filters.FoodMenu.toLowerCase())) &&
                 (!filters.SharedAirlineCompany || item.flightData.getAirlineCompany().toLowerCase().includes(filters.SharedAirlineCompany.toLowerCase())) &&
-                (!filters.ArrivalAirport || item.flightData.getLandingAirport().airportName.toString() === filters.ArrivalAirport) && 
+                (!filters.ArrivalAirport || item.flightData.getLandingAirport().toString() === filters.ArrivalAirport) && 
                 (!filters.SeatType || item.userSeat.getSeatType().toLowerCase().includes(filters.SeatType.toLowerCase())) &&
                 (!filters.SeatNumber || item.userSeat.getSeatPosition().toLowerCase().includes(filters.SeatNumber.toLowerCase()));
         });

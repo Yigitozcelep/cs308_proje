@@ -97,7 +97,7 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
     const name = document.getElementById('sign_name').value;
     const surname = document.getElementById('sign_surname').value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
-    const age = document.getElementById('sign_selectBirth').value;
+    const age = document.getElementById('sign_age').value;
     const nationality = document.getElementById('sign_nationality').value;
     const email = document.getElementById('sign_email').value;
     const password = document.getElementById('sign_password').value;

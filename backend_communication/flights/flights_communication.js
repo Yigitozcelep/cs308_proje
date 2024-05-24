@@ -24,11 +24,23 @@ const FlightsCommunication = {
     },
 
     /**
-     * @param {FlightData} flight 
+     * @param {String} flightId
      */
-    async deleteFlight(flight) {
-       
-    },
+    async deleteFlight(flightId) {
+        let headers = new Headers();
+
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        await fetch("http://localhost:8080/api/flights/deleteFlightByNumber?flightNumber=" + flightId, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'DELETE',
+            headers: headers,
+            body: JSON.stringify({flightNumber: flightId})
+        });
+
+},
 
     /**
      * @param {FlightData} flight 
@@ -147,13 +159,13 @@ const FlightsCommunication = {
         let flightDatas = []
         for (let item of res) {
             console.log(item.departureTime);
-            let currentFlight = new FlightData(item.from, item.goTo, item.departureAirport, item.landingAirport, new Date(item.departureTime), item.landingTime, item.planeType, item.airlineCompany, item.flightId, item.planeId, item.menu);
+            let currentFlight = new FlightData(item.from, item.goTo, item.departureAirport, item.landingAirport, new Date(item.departureTime), new Date(item.landingTime), item.planeType, item.airlineCompany, item.flightId, item.planeId, item.menu);
             flightDatas.push(currentFlight)
         }
         console.log(flightDatas);
         return flightDatas;
     },
-    
+
 
     /**
      * @returns {Promise<String[]>}

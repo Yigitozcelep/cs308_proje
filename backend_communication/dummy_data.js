@@ -20,20 +20,7 @@ const createDummyPlaneTypes = () => {
     return [ "Boeing 737", "Airbus A320", "Embraer E190", "Bombardier CRJ200", "Cessna Citation X", "Gulfstream G650", "Airbus A380", "Boeing 777", "Learjet 45", "ATR 72" ];
 }
 
-const createDummyAirPort = () => {
-    return [
-        new flights.AirPort("New York", "John F. Kennedy International Airport", "USA"),
-        new flights.AirPort("London", "Heathrow Airport", "United Kingdom"),
-        new flights.AirPort("Tokyo", "Tokyo International Airport (Haneda)", "Japan"),
-        new flights.AirPort("Paris", "Charles de Gaulle Airport", "France"),
-        new flights.AirPort("Dubai", "Dubai International Airport", "UAE"),
-        new flights.AirPort("Sydney", "Sydney Kingsford Smith Airport", "Australia"),
-        new flights.AirPort("Berlin", "Berlin Brandenburg Airport", "Germany"),
-        new flights.AirPort("Moscow", "Sheremetyevo International Airport", "Russia"),
-        new flights.AirPort("Beijing", "Beijing Capital International Airport", "China"),
-        new flights.AirPort("Singapore", "Singapore Changi Airport", "Singapore")
-    ];
-}
+
 
 
 const createDummyUser = (dummyFlights, purchaseId1, purchaseId2, seats1, seats2) => {
@@ -75,7 +62,6 @@ const getRandomFutureDate = () => {
 const createDummyFlightData = () => {
     const dummyFlightData = [];
     const cities = createDummyCities();
-    const airports = createDummyAirPort();
     const planeTypes = createDummyPlaneTypes();
     const airlineCompanies = createDummyAirlineCompanies();
 
@@ -90,8 +76,8 @@ const createDummyFlightData = () => {
         
         const from              = cities[r1];
         const goTo              = cities[r2];
-        const departureAirport  = airports[r3];
-        const landingAirport    = airports[r4];
+        const departureAirport  = i;
+        const landingAirport    =  i;
         const departureTime     = getRandomFutureDate();
         const landingTime       = new Date(departureTime.getTime() + (2 + i) * 60 * 60 * 1000);
         const planeType         = planeTypes[i % 10];
@@ -167,4 +153,4 @@ for (let i = 0; i < 500; i++) {
 window.currentUser = dummyUsers[0];
 window.currentFlight = dummyFlights[5];
 
-export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyAirPort, createDummyUser, createDummyFlightData, createDummySeatData, seats, dummyUsers, dummyFlights, crewData}
+export {createDummyAirlineCompanies, createDummyCities, createDummyPlaneTypes, createDummyUser, createDummyFlightData, createDummySeatData, seats, dummyUsers, dummyFlights, crewData}

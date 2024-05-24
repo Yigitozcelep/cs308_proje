@@ -147,4 +147,4 @@ class Seats {
     getAvaliableBussinesSeats()         { return new Seats(this.#seats.filter(seat => seat.isSeatBussiness() && seat.isSeatAvaliable()), this.#rowCount, this.#bussinessConsecutiveSeat, this.#ecenomyConsecutiveSeat)        }
 }
 
-export {SeatStatus, SeatTypes, FlightData, Seat, Seats, AirPort}
+export {SeatStatus, SeatTypes, FlightData, Seat, Seats}

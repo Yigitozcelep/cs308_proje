@@ -242,10 +242,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
             else
             {
-                alert("An error occurred while adding the flight. Please try again later.");
-            }
-
-            
+                alert("An error occurred while deleting the flight. Please try again later.");
+            }            
         } 
         else if (event.target.classList.contains('select-row')) 
         {

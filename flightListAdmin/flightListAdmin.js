@@ -235,8 +235,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.getElementById('table-body').addEventListener('click', async function(event) {
         if (event.target.classList.contains('delete-row')) {
             const flightId = event.target.getAttribute('delete-flight-id');
-            await FlightsCommunication.deleteFlight(flightId);
-            document.querySelector(`button[delete-flight-id="${flightId}"]`).closest('tr').remove();
+            const status = await FlightsCommunication.deleteFlight(flightId);
+            if(status)
+            {
+                document.querySelector(`button[delete-flight-id="${flightId}"]`).closest('tr').remove();
+            }
+            else
+            {
+                alert("An error occurred while deleting the flight. Please try again later.");
+            }            
         } 
         else if (event.target.classList.contains('select-row')) 
         {

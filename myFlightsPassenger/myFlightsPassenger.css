@@ -331,6 +331,14 @@
                 padding: 5px;
                 cursor: pointer;
             }
+
+            .top-bar-icon {
+                width: 24px;
+                height: 24px;
+                margin-right: 10px;
+                cursor: pointer;
+                margin-left: 15px;
+            }
             
 
 

@@ -1,10 +1,12 @@
 import { getText } from "../dictionary.js";
 import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js";
+import { UserCommunication } from "../backend_communication/users/users_communication.js";
 window.addEventListener('load', function() {
 
     document.getElementById('searchType').dispatchEvent(new Event('change'));
 });
 
+FlightsCommunication.getAllFlights();
 
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;

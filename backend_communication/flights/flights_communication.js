@@ -131,7 +131,27 @@ const FlightsCommunication = {
      * @returns {Promise<FlightData[]>}
      */
     async getAllFlights() {
-        return dummyData.dummyFlights;
+        let headers = new Headers();
+
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        let res = await fetch("http://localhost:8080/api/flights/", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+            headers: headers,
+
+        })
+        res = await res.json();
+        let flightDatas = []
+        for (let item of res) {
+            console.log(item.departureTime);
+            let currentFlight = new FlightData(item.from, item.goTo, item.departureAirport, item.landingAirport, new Date(item.departureTime), item.landingTime, item.planeType, item.airlineCompany, item.flightId, item.planeId, item.menu);
+            flightDatas.push(currentFlight)
+        }
+        console.log(flightDatas);
+        return flightDatas;
     },
 
     /**

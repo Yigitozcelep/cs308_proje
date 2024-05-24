@@ -41,7 +41,7 @@ const UserCommunication = {
         var requestOptions = {
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
               },
         method: 'POST',
         redirect: 'follow',

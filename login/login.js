@@ -2,6 +2,7 @@ import { UserCommunication } from "../backend_communication/users/users_communic
 import { dummyUsers } from "../backend_communication/dummy_data.js";
 
 import { getText, languages } from "../dictionary.js";
+import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js";
 
 
 function handleLanguageChange() {
@@ -78,7 +79,8 @@ document.querySelector('form').addEventListener('submit', async function(event){
             const userId = userData.Id;
             console.log(userId);
             localStorage.setItem("userId", userId);
-
+            FlightsCommunication.getAllFlights();
+            
             if(userData.isUserAdmin())
             {
                 window.location.href  = `../flightListAdmin/flightListAdmin.html`;

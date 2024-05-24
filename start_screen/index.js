@@ -1,4 +1,7 @@
+import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js";
+import { UserCommunication } from "../backend_communication/users/users_communication.js";
 import { getText } from "../dictionary.js";
+
 
 function handleLanguageChange() {
   let lang = document.getElementById('language').value;

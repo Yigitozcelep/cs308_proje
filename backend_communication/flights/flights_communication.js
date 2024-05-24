@@ -32,15 +32,16 @@ const FlightsCommunication = {
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        await fetch("http://localhost:8080/api/flights/deleteFlightByNumber?flightNumber=" + flightId, {
+        let res = await fetch("http://localhost:8080/api/flights/deleteFlightByNumber?flightNumber=" + flightId, {
             mode: 'cors',
             credentials: 'include',
             method: 'DELETE',
             headers: headers,
             body: JSON.stringify({flightNumber: flightId})
         });
-
-},
+        res = await res.json();
+        return res.status == 200;
+    },
 
     /**
      * @param {FlightData} flight 

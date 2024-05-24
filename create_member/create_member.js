@@ -136,6 +136,13 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 
-    // Kayıt başarılı mesajını gösterin veya başka bir sayfaya yönlendirin
-    alert('Kayıt başarılı!');
+    
+    if(lang == "turkish")
+        {
+            alert("Kayıt başarılı!")
+        }
+        else
+        {
+            alert("Registration Successful!")
+        }
 });

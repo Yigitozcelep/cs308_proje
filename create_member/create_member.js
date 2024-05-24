@@ -1,4 +1,7 @@
+import { UserCommunication } from "../backend_communication/users/users_communication.js";
+import { UserData } from "../backend_communication/users/users.js";
 import { getText, languages } from "../dictionary.js"; // dictionary.js'yi içe aktarıyoruz
+
 
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
@@ -118,7 +121,7 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
         password,
         name,
         surname,
-        Date.now().toString(), // Kullanıcı ID'si için benzersiz bir değer
+        null, // Kullanıcı ID'si için benzersiz bir değer
         new Date(birthDate),
         gender,
         nationality,
@@ -127,14 +130,11 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
         true, // Uçuşları reddedebilme durumu
         null, // Bekleyen uçuş bilgisi (başlangıçta null)
         Recipe,
-       // allowedRange,
+        allowedRange,
         languages
     );
-
-    // Kullanıcıyı yerel depolamaya kaydedin
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
+    
+    UserCommunication.createUser(newUser);
 
     
     if(lang == "turkish")

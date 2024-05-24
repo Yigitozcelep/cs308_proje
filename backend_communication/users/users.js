@@ -31,7 +31,7 @@ class UserData {
      * @param {String} name 
      * @param {String} surname 
      * @param {String} Id 
-     * @param {Date} age 
+     * @param {int} age 
      * @param {String} gender 
      * @param {String} nationality 
      * @param {String} userType 

@@ -153,6 +153,7 @@ const FlightsCommunication = {
         console.log(flightDatas);
         return flightDatas;
     },
+    
 
     /**
      * @returns {Promise<String[]>}

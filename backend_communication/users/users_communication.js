@@ -1,6 +1,6 @@
 import * as dummyData from "../dummy_data.js";
 import { FlightData, Seat } from "../flights/flights.js";
-import { UserData, UserFlightData } from "./users.js";
+import { UserData, UserFlightData, UserTypes } from "./users.js";
 
 
 
@@ -132,24 +132,28 @@ const UserCommunication = {
      * @param {UserData} userData 
      */
     async createUser(userData) {
-        console.log("currentUser: ", userData);
-        var requestOptions = {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-        method: 'POST',
-        redirect: 'follow',
-        body: JSON.stringify({firstName: userData.name, lastName: userData.surname, username: userData.email, password: userData.password, age: userData.age, gender: userData.gender, nationality: userData.nationality})
-    };
-
-        let response = await fetch("http://localhost:8080/auth/register", requestOptions);
-        response = await response.json()
-        console.log(response)
-        return user;
-
+        if (userData.userType == UserTypes.passanger) {
+            console.log("currentUser: ", userData);
+            var requestOptions = {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+            method: 'POST',
+            redirect: 'follow',
+            body: JSON.stringify({firstName: userData.name, lastName: userData.surname, username: userData.email, password: userData.password, age: userData.age, gender: userData.gender, nationality: userData.nationality})
+        };  
         
-    }
+            let response = await fetch("http://localhost:8080/auth/register", requestOptions);
+            response = await response.json()
+            console.log(response)
+            return user;
+        }
+        else if (userData.userType == UserTypes.pilotCrew) {
+            console.log("bumbum");
+            console.log(userData);
+        }
+    },
 }
 
 export { UserCommunication }

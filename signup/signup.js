@@ -74,7 +74,8 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
     const name = document.getElementById('sign_name').value;
     const surname = document.getElementById('sign_surname').value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
-    const age = parseInt(document.getElementById('sign_age').value, 10);
+    const age = parseInt(document.getElementById('sign_age_input').value, 10);
+
     const nationality = document.getElementById('sign_nationality').value;
     const email = document.getElementById('sign_email').value;
     const password = document.getElementById('sign_password').value;
@@ -84,28 +85,23 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
         alert('Please enter a valid age between 0 and 150.');
         return;
     }
-
+    
     // Yeni bir kullanıcı oluşturun
     const newUser = new UserData(
         email,
         password,
         name,
         surname,
-        Date.now().toString(), // Kullanıcı ID'si için benzersiz bir değer
+        "",
         age, // Yaşı integer olarak kaydedin
         gender,
         nationality,
-        'Passanger', // Varsayılan olarak kullanıcı türü yolcu
+        'Passsenger', // Varsayılan olarak kullanıcı türü yolcu
         [], // Kullanıcının uçuş bilgileri (başlangıçta boş)
         true, // Uçuşları reddedebilme durumu
         null // Bekleyen uçuş bilgisi (başlangıçta null)
     );
-
-    // Kullanıcıyı yerel depolamaya kaydedin
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-
+    await UserCommunication.createUser(newUser);
     // Kayıt başarılı mesajını gösterin veya başka bir sayfaya yönlendirin
     alert('Kayıt başarılı!');
     window.location.href = '../login/login.html'; // Giriş sayfasına yönlendirin

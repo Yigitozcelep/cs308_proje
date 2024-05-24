@@ -70,6 +70,8 @@ document.querySelector('form').addEventListener('submit', async function(event){
     // Get the values of the email and password fields
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const res = await UserCommunication.isValidUser(email, password);
+    console.log("isValidUser: ", res);
     if(await UserCommunication.isValidUser(email, password))
         {
             const userData = await UserCommunication.getUserData(email, password);

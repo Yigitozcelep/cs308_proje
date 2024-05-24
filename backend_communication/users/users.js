@@ -1,7 +1,7 @@
 import { FlightData } from "../flights/flights.js";
 
 const UserTypes = {
-    passanger:   "Passsanger",
+    passanger:   "Passsenger",
     cabinCrew:   "CabinCrew",
     pilotCrew:   "PilotCrew",
     admin:       "Admin",

@@ -3,6 +3,8 @@ import { FlightData, Seat } from "../flights/flights.js";
 import { UserData, UserFlightData } from "./users.js";
 
 
+
+
 const UserCommunication = {
     /**
      * @param {String} email 
@@ -10,11 +12,21 @@ const UserCommunication = {
      * @returns {Promise<Boolean>}
      */
     async isValidUser(email, password) {
-        await new Promise(resolve => setTimeout(resolve, 50));
-        for (let i = 0; i < dummyData.dummyUsers.length; i++) {
-            if (dummyData.dummyUsers[i].email == email && dummyData.dummyUsers[i].password == password) return true;
-        }
-        return false;
+        console.log(email, password)
+        var myHeaders = new Headers();
+        // josh_flight@gmail.com
+        // pswrd4321
+        var requestOptions = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+        method: 'POST',
+        redirect: 'follow',
+        body: JSON.stringify({username: email, password: password})
+    };
+        const response = await fetch("http://localhost:8080/auth/login", requestOptions);
+        return response.status == 200;
     },
     
     /**
@@ -23,11 +35,28 @@ const UserCommunication = {
      * @returns {Promise<UserData>}
      */
     async getUserData(email, password) {
-        
-        await new Promise(resolve => setTimeout(resolve, 50));
-        for (let i = 0; i < dummyData.dummyUsers.length; i++) {
-            if (dummyData.dummyUsers[i].email == email && dummyData.dummyUsers[i].password == password) return dummyData.dummyUsers[i];
-        }
+        // josh_flight@gmail.com
+        // pswrd4321
+
+        var requestOptions = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+        method: 'POST',
+        redirect: 'follow',
+        body: JSON.stringify({username: email, password: password})
+    };
+        let response = await fetch("http://localhost:8080/auth/login", requestOptions);
+        response = await response.json()
+        console.log(response)
+        localStorage.setItem("token", response.jwt);
+        let user = new UserData();
+        user.Id = response.user.id
+        user.email = response.user.username;
+        user.password = response.user.password;
+        user.userType = response.user.authorities[0].authority;
+        return user;
     },
 
     /**
@@ -97,6 +126,29 @@ const UserCommunication = {
      */
     async refuseFlight(user, flight) {
         await new Promise(resolve => setTimeout(resolve, 50));
+    },
+    
+    /**
+     * @param {UserData} userData 
+     */
+    async createUser(userData) {
+        console.log("currentUser: ", userData);
+        var requestOptions = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+        method: 'POST',
+        redirect: 'follow',
+        body: JSON.stringify({firstName: userData.name, lastName: userData.surname, username: userData.email, password: userData.password, age: userData.age, gender: userData.gender, nationality: userData.nationality})
+    };
+
+        let response = await fetch("http://localhost:8080/auth/register", requestOptions);
+        response = await response.json()
+        console.log(response)
+        return user;
+
+        
     }
 }
 

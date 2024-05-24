@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     const userId = localStorage.getItem('userId');
     if (userId) {
         userData = await UserCommunication.getUserById(userId);
-        userData.userType = "PilotCrew";
+        userData.userType = "CabinCrew";
         console.log(userData);
         if (userData) {
             document.getElementById('personalP_name').value = userData.name;
@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             if (userData.userType === 'CabinCrew') {
                 document.getElementById('languageGroup').style.display = 'block';
                 document.getElementById('personalP_languages').value = userData.languages;
+                document.getElementById("recipeGroup").style.display = "block"
+                document.getElementById('personalP_recipe').value = userData.recipe;
             } else if (userData.userType === 'PilotCrew') {
                 document.getElementById('languageGroup').style.display = 'block';
                 document.getElementById('allowedRangeGroup').style.display = 'block';

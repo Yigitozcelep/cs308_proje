@@ -102,7 +102,14 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
         null // Bekleyen uçuş bilgisi (başlangıçta null)
     );
     await UserCommunication.createUser(newUser);
-    // Kayıt başarılı mesajını gösterin veya başka bir sayfaya yönlendirin
-    alert('Kayıt başarılı!');
+    
+    if(lang == "turkish")
+        {
+            alert("Kayıt başarılı!")
+        }
+        else
+        {
+            alert("Registration Successful!")
+        }
     window.location.href = '../login/login.html'; // Giriş sayfasına yönlendirin
 });

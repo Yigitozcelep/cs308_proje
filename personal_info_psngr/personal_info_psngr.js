@@ -90,7 +90,15 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             if (password) updatedUser.password = password;
 
             await UserCommunication.updateUser(updatedUser);
-            alert('Information updated successfully!');
+    
+            if(lang == "turkish")
+        {
+            alert("Bilgiler başarıyla güncellendi!")
+        }
+        else
+        {
+            alert("Information updated successfully!")
+        }
         }
     });
 });

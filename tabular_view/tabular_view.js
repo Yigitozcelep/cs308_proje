@@ -12,20 +12,30 @@ function handleLanguageChange() {
     const logo = document.querySelector('.logo');
     const apply = document.getElementById('apply');
     const helpButton = document.getElementById('helpButton');
-   // const signOutButton = document.querySelector('.top-bar-item[href="signout.php"]');
+    const signOutLink = document.getElementById('signOutLink');
 
     apply.innerHTML = getText("apply");
     logo.innerHTML = getText("AIR308 Airlines");
     helpButton.innerHTML = getText("helpButton");
-    //signOutButton.innerHTML = getText("signOutLink");
+    signOutLink.innerHTML = getText("signOutLink");
 
-    /*document.getElementById('name-search').setAttribute('placeholder', getText("name-search"));
-    document.getElementById('surname-search').setAttribute('placeholder', getText("surname-search"));
-    document.getElementById('id-search').setAttribute('placeholder', getText("id-search"));
-    document.getElementById('email-search').setAttribute('placeholder', getText("email-search"));
-    document.getElementById('seat-search').setAttribute('placeholder', getText("seat-search"));
-    document.getElementById('name-tabular').setAttribute('placeholder', getText("name-tabular"));
-    */
+    document.getElementById('name_search').setAttribute('placeholder', getText('name_search'));
+    document.getElementById('surname_search').setAttribute('placeholder', getText('surname_search'));
+    document.getElementById('id_search').setAttribute('placeholder', getText('id_search'));
+    document.getElementById('email_search').setAttribute('placeholder', getText('email_search'));
+    document.getElementById('seat_search').setAttribute('placeholder', getText('seat_search'));
+    document.getElementById('name').setAttribute('placeholder', getText('name'));
+    document.getElementById('surname').setAttribute('placeholder', getText('surname'));
+
+    document.getElementById('name').innerHTML = getText('name');
+    document.getElementById('surname').innerHTML = getText('surname');
+    document.getElementById('id').innerHTML = getText('id');
+    document.getElementById('email').innerHTML = getText('email');
+    document.getElementById('seatnum').innerHTML = getText('seatnum');
+
+
+    document.querySelector('.filters-container div div').innerHTML = getText('filter_by');
+    document.querySelector('.table-name').innerHTML = getText('viewing-for');
 }
 
 document.addEventListener('DOMContentLoaded', handleLanguageChange);
@@ -39,10 +49,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (currentState === "Pilot Crew") currentData = await FlightsCommunication.getPilotData(FlightData);
     else if (currentState === "Passenger") currentData = await FlightsCommunication.getPassangerData(FlightData);
     else if (currentState === "Cabin Crew") currentData = await FlightsCommunication.getFlightCrew(FlightData);
-
+    //.log(currentData);
     console.log(localStorage.getItem("flightIdView"));
     let flightData = await FlightsCommunication.getFlightByFlightId(localStorage.getItem("flightIdView"));
-    console.log(flightData);
+    //console.log(flightData);
     let userData = await FlightsCommunication.getFlightCrew(flightData);
     const x = await FlightsCommunication.getPassangerData(flightData);
 
@@ -86,7 +96,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             let seatNo = '';
             if (item.flights && item.flights.length > 0) {
                 for (let item1 of item.flights) {
+                    //console.log(item1);
                     const flightData = item1.flightData;
+                  //  console.log(flightData);
+                   // console.log(flightData.getFlightId());
                     if (flightData.getFlightId() == localStorage.getItem("flightIdView")) {
                         seatNo = item1.userSeat.getSeatPosition();
                         break;
@@ -99,7 +112,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.surname}</td>
                 <td>${item.Id}</td>
                 <td>${item.email}</td>
-                <td>${seatNo ? seatNo : 'N/A'}</td>
+                <td>${seatNo}</td>
             </tr>`;
             tableBody.innerHTML += row;
         });
@@ -133,8 +146,39 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function compareValues(key, order = 'asc') {
         return function innerSort(a, b) {
-            const varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
-            const varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
+            let varA;
+            let varB;
+            if(key == "Name"){ 
+                varA = a.name;
+                varB = b.name;
+                
+             }
+            else if(key == "Surname"){ 
+                varA = a.surname;
+                varB = b.surname;
+                
+             }
+            else if(key == "Email"){ 
+                varA = a.email;
+                varB = b.email;
+                
+             }
+            else if(key == "CrewID"){ 
+                varA = a.Id;
+                varB = b.Id;
+                
+             }
+             else if(key == "ID"){ 
+                varA = a.Id;
+                varB = b.Id;
+                
+             }
+             else if(key == "Seat Number"){ 
+                varA = a.getSeatPosition();
+                varB = b.getSeatPosition();
+                
+             }
+
 
             let comparison = 0;
             if (varA > varB) {
@@ -162,27 +206,45 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     });
 
-    function searchTable(filters, data) {
+     function searchTable(filters, data) {
+
+
+    
         return data.filter(item => {
+            console.log(item);
+            let seatNo = '';
+            if (item.flights && item.flights.length > 0) {
+                for (let item1 of item.flights) {
+                    console.log(item1);
+                    const flightData = item1.flightData;
+                    console.log(flightData);
+                    console.log(flightData.getFlightId());
+                    if (flightData.getFlightId() == localStorage.getItem("flightIdView")) {
+                        seatNo = item1.userSeat.getSeatPosition();
+                        break;
+                    }
+                }
+            }
             return (!filters.name || item.name.toLowerCase().includes(filters.name.toLowerCase())) &&
                 (!filters.surname || item.surname.toLowerCase().includes(filters.surname.toLowerCase())) &&
-                (!filters.id || item.Id.toLowerCase().includes(filters.id.toLowerCase())) &&
+                (!filters.id || item.Id.toString().includes(filters.id.toString())) &&
                 (!filters.email || item.email.toLowerCase().includes(filters.email.toLowerCase())) &&
-                (!filters.seatNum || item.seatNum.toLowerCase().includes(filters.seatNum.toLowerCase()));
+                (!filters.seatNum || seatNo.toLowerCase().includes(filters.seatNum.toLowerCase()));
+                
         });
     }
 
     function applyFilters() {
         var filters = {
-            name: document.getElementById('name-search').value,
-            surname: document.getElementById('surname-search').value,
-            id: document.getElementById('id-search').value,
-            email: document.getElementById('email-search').value,
-            seatNum: document.getElementById('seat-search').value
+            name: document.getElementById('name_search').value,
+            surname: document.getElementById('surname_search').value,
+            id: document.getElementById('id_search').value,
+            email: document.getElementById('email_search').value,
+            seatNum: document.getElementById('seat_search').value
         };
-        const currentState = document.getElementById("table-type").innerHTML;
+       // const currentState = document.getElementById("table-type").innerHTML;
 
-        let currentData;
+        /*let currentData;
         if (currentState === "Pilot Crew") {
             currentData = FlightsCommunication.getFlightCrew()
             currentData = filterByUserType(currentState, userData);
@@ -190,12 +252,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             currentData = filterByUserType(currentState, userData);
         } else if (currentState === "Cabin Crew") {
             currentData = filterByUserType(currentState, userData);
-        }
+        }yigit kisim*/ 
 
         var filteredData = searchTable(filters, currentData);
         state.querySet = filteredData;
         state.page = 1;
         buildTable();
+
     }
 
     document.getElementById('apply').addEventListener('click', applyFilters);
@@ -213,8 +276,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('passenger-table').style.display = 'none';
         document.getElementById('pilot-crew-table').style.display = 'none';
         if (tableName === 'Passenger') {
-            console.log(userData)
-            state.querySet = filterByUserType("Passsanger", userData);
+          //  console.log(userData)
+            state.querySet = filterByUserType("Passenger", userData);
         } else if (tableName === 'Cabin Crew') {
             state.querySet = filterByUserType("CabinCrew", userData);
         } else if (tableName === 'Pilot Crew') {

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Extended View</title>
+    <link rel="stylesheet" href="assignCrew.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div id="logo" class="logo">AIR308 Airlines</div>
+        <div class="language-select">
+            <select id="language" name="language">
+                <option value="english">EN</option>
+                <option value="turkish">TR</option>
+            </select>
+        </div>
+        <a href="#" class="top-bar-item" id="helpButton">Help</a>
+        <div id="helpPopup" class="help-popup" style="display: none;">
+            <div class="help-content">
+                <span class="close">&times;</span>
+                <p id="tab_helptext">Here is some helpful information:
+                    Please select your role(passengers should continue with the passenger option, if you are an employee, please choose the cabin or cockpit option that suits you).
+                    You must enter your e-mail address to log in. If successful login is not achieved, please make sure that you have entered the e-mail address correctly, or if you are not registered in the system, return to the registration screen and complete the registration process.
+                    If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.
+                </p>
+            </div>
+        </div>
+        <a href="signout.php" class="top-bar-item">Sign Out</a>
+    </div>
+
+    <div class="main-container" id="myMainDiv">
+        <div class="left">
+            <div class="filters-container">
+                <div>
+                    <div>Filter by:</div>
+                    <input id="name_search" class="name-search" type="text" placeholder="Name">
+                    <input id="surname_search" class="input-search" type="text" placeholder="Surname">
+                    <input id="id_search" class="input-search" type="text" placeholder="ID">
+                    <input id="age_search" class="input-search" type="text" placeholder="Age">
+                    <input id="gender_search" class="input-search" type="text" placeholder="Gender">
+                    <input id="nationality_search" class="input-search" type="text" placeholder="Nationality">
+                    <input id="email_search" class="input-search" type="text" placeholder="Email Address">
+                    <input id="seniority_search" class="input-search" type="text" placeholder="Seniority">
+                    <input id="seat_search" class="input-search" type="text" placeholder="Seat Number">
+                    <button id="apply" class="apply" type="submit">APPLY</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="middle">
+            <div class="table-container" id="available-members-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>ID</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Nationality</th>
+                        <th>Email</th>
+                        <th>Seniority</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-body-available-members">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="right"></div>
+    </div>
+
+    <script type="module" src="../dictionary.js"></script>
+    <script src="assignCrew.js" type="module"></script>
+</body>
+</html>

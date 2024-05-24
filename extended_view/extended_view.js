@@ -1,9 +1,10 @@
 import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
 import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js";
 import { UserData } from "../backend_communication/users/users.js";
+import {UserTypes} from "../backend_communication/users/users.js"
 import { getText } from "../dictionary.js";
 import { FlightData } from "../backend_communication/flights/flights.js";
-
+import { UserCommunication } from "../backend_communication/users/users_communication.js";
 
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
@@ -32,29 +33,26 @@ document.addEventListener('DOMContentLoaded', handleLanguageChange);
 // Add event listener to the language dropdown to handle language change
 document.getElementById('language').addEventListener('change', handleLanguageChange);
 
-function hideUpdatePopup() {
-    document.getElementById('popup').style.display = 'none';
-}
 
 console.log(localStorage.getItem("flightIdView"));
 document.addEventListener('DOMContentLoaded', async function () {
 
-    hideUpdatePopup();
 
+
+    let FlightData = await FlightsCommunication.getFlightByFlightId(localStorage.getItem("flightIdView"));
     const currentState = document.getElementById("table-type").innerHTML;
-        let UserData;
-        if (currentState === "Pilot Crew") currentData = await FlightsCommunication.getPilotData(FlightData);
-        else if (currentState === "Passenger") currentData = await FlightsCommunication.getPassangerData(FlightData);
-        else if (currentState === "Cabin Crew") currentData = await FlightsCommunication.getFlightCrew(FlightData);
-        console.log(currentData);
+    let currentData;
+    if (currentState === "Pilot Crew") currentData = await FlightsCommunication.getPilotData(FlightData);
+    else if (currentState === "Passenger") currentData = await FlightsCommunication.getPassangerData(FlightData);
+    else if (currentState === "Cabin Crew") currentData = await FlightsCommunication.getFlightCrew(FlightData);
 
 
     var state = {
-        'querySet': UserData,
+        'querySet': currentData,
         'page': 1,
         'rows': 20,
-        'currentTable': 'Cabin Crew'
-    };
+        'currentTable': currentState
+        };
 
     function buildTable() {
         var data = pagination(state.querySet, state.page, state.rows);
@@ -62,27 +60,117 @@ document.addEventListener('DOMContentLoaded', async function () {
         tableBody.innerHTML = '';
 
         data.querySet.forEach(function (item) {
+            let seatNo = '';
+            if (item.flights && item.flights.length > 0) {
+                for (let item1 of item.flights) {
+                    const flightData = item1.flightData;
+                   // console.log('Flight ID:', flightData.getFlightId());
+                    if (flightData.getFlightId() == localStorage.getItem("flightIdView")) {
+                        seatNo = item1.userSeat.getSeatPosition();
+                        console.log('Seat Position:', seatNo);
+                        console.log(user);
+                        break;
+                    }
+                }
+            }
+            
             var row = `<tr>
                 <td>${item.name}</td>
                 <td>${item.surname}</td>
-                <td>${item.id}</td>
-                <td>${item.age}</ td>
+                <td>${item.Id}</td>
+                <td>${item.age}</td>
                 <td>${item.gender}</td>
                 <td>${item.nationality}</td>
                 <td>${item.email}</td>
                 <td>${item.seniority}</td>
-                <td>${item.seatNum}</td>
+                <td>${seatNo ? seatNo : 'N/A'}</td>
+
                 <td>
-                    <button>Update</button>
-                    <button>Delete</button>
+                    <button id="update-user" class="update-user" data-user-id="${item.Id}">Update</button>
+                    <button id="delete-user" class="delete-user" delete-user-id="${item.Id}">Delete</button>
                 </td>
+
             </tr>`;
             tableBody.innerHTML += row;
+          
         });
 
         pageButtons(data.pages);
     }
+    document.getElementById('table-body-cabin-crew').addEventListener('click', async function(event) {
+        if (event.target.classList.contains('delete-user')) {
+            const userId = event.target.getAttribute('data-user-id');
+            console.log(`Deleting user with ID: ${userId}`);  
+            const user = await UserCommunication.getUserById(userId);
+            console.log(`User data for deletion: `, user);  
+            await UserCommunication.deleteUser(user);
+            event.target.closest('tr').remove();
+        } else if (event.target.classList.contains('update-user')) {
+            const userId = event.target.getAttribute('data-user-id');
+            console.log(`Updating user with ID: ${userId}`);  
+            const user = await UserCommunication.getUserById(userId);
+            console.log(`User data for update: `, user);  
+            showUpdateForm(user);
+        }
+    });
 
+    function showUpdateForm(user) {
+        const updateForm = document.createElement('div');
+        updateForm.classList.add('update-form');
+        updateForm.style.position = 'fixed';
+        updateForm.style.top = '50%';
+        updateForm.style.left = '50%';
+        updateForm.style.transform = 'translate(-50%, -50%)';
+        updateForm.style.backgroundColor = 'white';
+        updateForm.style.padding = '20px';
+        updateForm.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+        updateForm.style.zIndex = '1000';
+
+        updateForm.innerHTML = `
+            <h3>Update User</h3>
+            <form id="update-user-form">
+                <label>Name:</label>
+                <input type="text" id="update-name" value="${user.name}">
+                <label>Surname:</label>
+                <input type="text" id="update-surname" value="${user.surname}">
+                <label>Email:</label>
+                <input type="text" id="update-email" value="${user.email}">
+                <label>Age:</label>
+                <input type="number" id="update-age" value="${user.age}">
+                <label>Gender:</label>
+                <input type="text" id="update-gender" value="${user.gender}">
+                <label>Nationality:</label>
+                <input type="text" id="update-nationality" value="${user.nationality}">
+                <label>Seniority:</label>
+                <input type="text" id="update-seniority" value="${user.seniority}">
+                <label>Seat:</label>
+                <button type="button" id="save-update">Save</button>
+                <button type="button" id="cancel-update">Cancel</button>
+            </form>
+        `;
+        document.body.appendChild(updateForm);
+
+        document.getElementById('save-update').addEventListener('click', async function() {
+            user.name = document.getElementById('update-name').value;
+            user.surname = document.getElementById('update-surname').value;
+            user.email = document.getElementById('update-email').value;
+            user.age = document.getElementById('update-age').value;
+            user.gender = document.getElementById('update-gender').value;
+            user.nationality = document.getElementById('update-nationality').value;
+            user.seniority = document.getElementById('update-seniority').value;
+           // seatNo = document.getElementById('update-seatno').value;
+
+            console.log(`Updated user data to save: `, user);  // Debugging line
+            
+            await UserCommunication.updateUser(user);
+            document.body.removeChild(updateForm);
+            buildTable(); // Refresh the table
+        });
+
+        document.getElementById('cancel-update').addEventListener('click', function() {
+            document.body.removeChild(updateForm);
+        });
+    }
     function pagination(querySet, page, rows) {
         var trimStart = (page - 1) * rows;
         var trimEnd = trimStart + rows;
@@ -198,7 +286,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         buildTable();
         updateButtons(tableName);
     }
-
     function updateButtons(currentTable) {
         const currentIndex = tableOrder.indexOf(currentTable);
         const prevIndex = (currentIndex - 1 + tableOrder.length) % tableOrder.length;
@@ -222,7 +309,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     showTable('Cabin Crew');
 
-    // Popup functionality
+    /*Popup functionality
     var openPopupBtn = document.getElementById("open-popup-btn");
     var popup = document.getElementById("popup");
     var closeBtn = popup.querySelector(".close");
@@ -249,6 +336,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (event.target == popup) {
             popup.style.display = "none";
         }
-    });
+    });*/
+    
 })
-

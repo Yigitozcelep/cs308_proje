@@ -99,18 +99,18 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
     const name = document.getElementById('sign_name').value;
     const surname = document.getElementById('sign_surname').value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
-    const birthDate = document.getElementById('sign_selectBirth').value;
+    const age = document.getElementById('sign_selectBirth').value;
     const nationality = document.getElementById('sign_nationality').value;
     const email = document.getElementById('sign_email').value;
     const password = document.getElementById('sign_password').value;
     const userType = document.querySelector('input[name="userType"]:checked').value;
-    let favoriteRecipe = null;
+    let Recipe = null;
     let allowedRange = null;
     let languages = null;
 
 
     if (userType === 'cabinCrew') {
-        favoriteRecipe = document.getElementById('Recipe').value;
+        Recipe = document.getElementById('Recipe').value;
         userType = userType.cabinCrew;
     } else if (userType === 'flightCrew') {
         allowedRange = document.getElementById('allowedRange').value;

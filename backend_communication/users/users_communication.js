@@ -19,7 +19,7 @@ const UserCommunication = {
     
     /**
      * @param {String} email 
-     * @param {String} password 
+     * @param {String} password F
      * @returns {Promise<UserData>}
      */
     async getUserData(email, password) {

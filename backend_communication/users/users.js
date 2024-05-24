@@ -50,7 +50,7 @@ class UserData {
         this.nationality     = nationality;
         this.userType        = userType;
         this.flights         = flights;
-        this.seniority       = seniority
+        this.seniority       = seniority;
         this.languages       = languages;
     }
     
@@ -60,4 +60,4 @@ class UserData {
     isUserAdmin()     { return this.userType == UserTypes.admin     }
 }
 
-export {UserData, UserFlightData}
+export {UserData, UserFlightData, UserTypes}

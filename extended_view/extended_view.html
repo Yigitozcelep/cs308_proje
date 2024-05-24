@@ -61,13 +61,15 @@
                         <tr>
                             <th id="name" data-column="Name" data-order="desc">Name</th>
                             <th id="surname" data-column="Surname" data-order="desc">Surname</th>
-                            <th id=""data-column="CrewID" data-order="desc">Crew ID </th>
+                            <th id="user-id"data-column="CrewID" data-order="desc">Crew ID </th>
                             <th data-column="Age" data-order="desc">Age</th>
                             <th data-column="Gender" data-order="desc">Gender</th>
                             <th data-column="Nationality" data-order="desc">Nationality</th>
                             <th data-column="Email" data-order="desc">Email Address</th>
                             <th data-column="Seniority" data-order="desc">Seniority</th>
                             <th data-column="SeatNum" data-order="desc">Seat Number</th>
+                            <th>Action</th>
+
                         </tr>
                         </thead>
                         <tbody id="table-body-cabin-crew">
@@ -81,12 +83,15 @@
                             <tr>
                                 <th data-column="Name" data-order="desc">Name</th>
                                 <th data-column="Surname" data-order="desc">Surname</th>
-                                <th data-column="ID" data-order="desc">ID</th>
+                                <th data-column="user-id" data-order="desc">ID</th>
                                 <th data-column="Age" data-order="desc">Age</th>
                                 <th data-column="Gender" data-order="desc">Gender</th>
                                 <th data-column="Nationality" data-order="desc">Nationality</th>
                                 <th data-column="Email" data-order="desc">Email Address</th>
+                                <th data-column="HasChild" data-order="desc">Has Child</th>
                                 <th data-column="SeatNumber" data-order="desc">Seat Number</th>
+                                <th>Action</th>
+
                             </tr>
                         </thead>
                         <tbody id="table-body-passenger">
@@ -100,13 +105,14 @@
                                 <tr>
                                     <th data-column="Name" data-order="desc">Name</th>
                                     <th data-column="Surname" data-order="desc">Surname</th>
-                                    <th data-column="CrewID" data-order="desc">Crew ID </th>
+                                    <th data-column="user-id" data-order="desc">Crew ID </th>
                                     <th data-column="Age" data-order="desc">Age</th>
                                     <th data-column="Gender" data-order="desc">Gender</th>
                                     <th data-column="Nationality" data-order="desc">Nationality</th>
                                     <th data-column="Email" data-order="desc">Email Address</th>
                                     <th data-column="Seniority" data-order="desc">Seniority</th>
                                     <th data-column="SeatNum" data-order="desc">Seat Number</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="table-body-pilot-crew">
@@ -114,26 +120,7 @@
                         </table>
                 </div>
 
-                    <button id="open-popup-btn" class="add-btn">Add +</button>
-                    <div id="popup" class="modal">
-                        <div class="modal-header">
-                            <div class="title">Create a Member</div>
-                            <span class="close">&times;</span>
-                        </div>
-                        <form class="form-body">
-                            <input type="text" placeholder="Enter Name">
-                            <input type="text" placeholder="Enter Surname">
-                            <input type="text" placeholder="Enter ID">
-                            <input type="text" placeholder="Enter Age">
-                            <input type="text" placeholder="Enter Gender">
-                            <input type="text" placeholder="Enter Nationality">
-                            <input type="text" placeholder="Enter Email">
-                            <input type="text" placeholder="Enter Seniority">
-                            <input type="text" placeholder="Enter Seat Number">
-    
-                            <button class="create-btn">Create Member</button>
-                        </form>
-                    </div>
+                <button id="add-btn">ADD+</button>
                 
                 <div class="page-container">
                     <div id="page-wrapper"></div>

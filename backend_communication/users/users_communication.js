@@ -150,8 +150,56 @@ const UserCommunication = {
             return user;
         }
         else if (userData.userType == UserTypes.pilotCrew) {
-            console.log("bumbum");
-            console.log(userData);
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');    
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+            let res = await fetch("http://localhost:8080/api/pilots/createPilot" , {
+                mode: 'cors',
+                credentials: 'include',
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({
+                    email: userData.email,
+                    password: userData.password,
+                    firstName: userData.name,
+                    surname: userData.surname,
+                    age: userData.age,
+                    gender: userData.gender,
+                    nationality: userData.nationality,
+                    seniority: userData.seniority,
+                    languages: userData.languages
+                })
+            });
+            res = await res.json();
+        }
+
+
+        else if (userData.userType == UserTypes.cabinCrew) {
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');    
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+            let res = await fetch("http://localhost:8080/api/attendants/createAttendant" , {
+                mode: 'cors',
+                credentials: 'include',
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({
+                    email: userData.email,
+                    password: userData.password,
+                    firstName: userData.name,
+                    surname: userData.surname,
+                    age: userData.age,
+                    gender: userData.gender,
+                    nationality: userData.nationality,
+                    seniority: userData.seniority,
+                    languages: userData.languages,
+                    recipes: userData.recipe
+                })
+            });
+            res = await res.json();
+            console.log("res: ", res);
         }
     },
 }

@@ -105,16 +105,16 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
     let allowedRange = null;
     let languages = null;
     let userType;
-    if (document.getElementById("cabinCrew").value === "cabin") {
+    if (document.getElementById("cabinCrew").checked) {
         Recipe = document.getElementById('personalP_recipeLabel').value;
         languages = document.getElementById('personalP_languagesLabel1').value;
         userType = "CabinCrew";
-    } else if (document.getElementById("flightCrew").value ===  "flight") {
+    } else if (document.getElementById("flightCrew").checked) {
         allowedRange = document.getElementById('personalP_allowedRangeLabel').value;
         languages = document.getElementById('personalP_languagesLabel').value;
         userType = "PilotCrew";
     }
-
+    
     
     const newUser = new UserData(
         email,

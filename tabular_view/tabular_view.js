@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     //console.log(flightData);
     let userData = await FlightsCommunication.getFlightCrew(flightData);
     const x = await FlightsCommunication.getPassangerData(flightData);
-
+    
     userData
     var state = {
         'querySet': userData,

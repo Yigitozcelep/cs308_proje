@@ -24,7 +24,6 @@ function handleLanguageChange() {
     document.getElementById('signOut').innerHTML = getText("signOut");
     document.getElementById('helpText').innerHTML = getText("helpTextAddFlight");
     document.getElementById('sharedAirlineCompanyLabel').innerHTML = getText("sharedAirlineCompany");
-    
 }
 
 // Call the function to initialize language preferences

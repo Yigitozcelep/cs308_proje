@@ -39,8 +39,9 @@ class UserData {
      * @param {String} seniority
      * @param {String} languages
      * @param {String} allowedRange
+     * @param {String} recipe
      */
-    constructor(email, password, name, surname, Id, age, gender, nationality, userType, flights, seniority, languages, allowedRange) {
+    constructor(email, password, name, surname, Id, age, gender, nationality, userType, flights, seniority, languages, allowedRange, recipe) {
         this.email           = email;
         this.password        = password;
         this.name            = name;
@@ -53,7 +54,8 @@ class UserData {
         this.flights         = flights;
         this.seniority       = seniority;
         this.languages       = languages;
-        this.allowedRange       = allowedRange;
+        this.allowedRange    = allowedRange;
+        this.recipe          = recipe;
     }
     
     isUserAdmin()     { return this.userType == UserTypes.admin     }
@@ -63,6 +65,3 @@ class UserData {
 }
 
 export {UserData, UserFlightData, UserTypes}
-
-export {UserData, UserFlightData}
-

@@ -278,6 +278,10 @@ const dictionary = {
     "personalP_allowedRangeLabel": {
         [languages.turkish]: "İzin Verilen Menzil (km):",
         [languages.english]: "Allowed Range (km):",
+    },
+    "personalP_languagesLabel1": {
+        [languages.turkish]: "Diller:",
+        [languages.english]: "Languages:",
     }, 
     "personalP_languagesLabel": {
         [languages.turkish]: "Diller:",

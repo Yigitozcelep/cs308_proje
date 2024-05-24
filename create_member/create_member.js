@@ -2,7 +2,6 @@ import { UserCommunication } from "../backend_communication/users/users_communic
 import { UserData } from "../backend_communication/users/users.js";
 import { getText, languages } from "../dictionary.js"; // dictionary.js'yi içe aktarıyoruz
 
-
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
@@ -21,6 +20,7 @@ function handleLanguageChange() {
     document.getElementById('flightc').innerHTML = getText("flightc");
     document.getElementById('personalP_recipeLabel').placeholder = getText("personalP_recipeLabel");
     document.getElementById('personalP_allowedRangeLabel').placeholder = getText("personalP_allowedRangeLabel");
+    document.getElementById('personalP_languagesLabel1').placeholder = getText("personalP_languagesLabel1");
     document.getElementById('personalP_languagesLabel').placeholder = getText("personalP_languagesLabel");
     document.getElementById('createMemberButton').innerHTML = getText("createMemberButton");
     document.getElementById('sign_helpButton').innerHTML = getText("sign_helpButton");
@@ -40,9 +40,6 @@ document.addEventListener('DOMContentLoaded', handleLanguageChange);
 // Add event listener to the language dropdown to handle language change
 document.getElementById('language').addEventListener('change', handleLanguageChange);
 
-function redirectToSignIn() {
-    window.location.href = '../login/login.html'; 
-}
 
 document.addEventListener('DOMContentLoaded', (event) => {
     var sign_helpButton = document.getElementById('sign_helpButton');
@@ -89,6 +86,7 @@ document.querySelectorAll('input[name="crewType"]').forEach((radio) => {
     });
 });
 
+
 // Yeni kullanıcı oluşturma ve kaydetme işlemi
 document.getElementById('createMemberButton').addEventListener('click', async (event) => {
     event.preventDefault(); // Formun varsayılan gönderme işlemini durdurun
@@ -97,46 +95,48 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
     const name = document.getElementById('sign_name').value;
     const surname = document.getElementById('sign_surname').value;
     const gender = document.querySelector('input[name="gender"]:checked').value;
-    const age = document.getElementById('sign_age').value;
+    const age = document.getElementById('sign_age_mem').value;
+    const seniority = document.getElementById('sign_seniority').value;
     const nationality = document.getElementById('sign_nationality').value;
     const email = document.getElementById('sign_email').value;
     const password = document.getElementById('sign_password').value;
-    const userType = document.querySelector('input[name="userType"]:checked').value;
+
     let Recipe = null;
     let allowedRange = null;
     let languages = null;
-
-    if (userType === 'cabinCrew') {
-        Recipe = document.getElementById('Recipe').value;
-        userType = userType.cabinCrew;
-    } else if (userType === 'flightCrew') {
-        allowedRange = document.getElementById('allowedRange').value;
-        languages = document.getElementById('languages').value;
-        userType = userType.pilotCrew;
+    let userType;
+    if (document.getElementById("cabinCrew").value === "cabin") {
+        Recipe = document.getElementById('personalP_recipeLabel').value;
+        languages = document.getElementById('personalP_languagesLabel1').value;
+        userType = "CabinCrew";
+    } else if (document.getElementById("flightCrew").value ===  "flight") {
+        allowedRange = document.getElementById('personalP_allowedRangeLabel').value;
+        languages = document.getElementById('personalP_languagesLabel').value;
+        userType = "PilotCrew";
     }
 
-    // Yeni bir kullanıcı oluşturun
+    
     const newUser = new UserData(
         email,
         password,
         name,
         surname,
         null, // Kullanıcı ID'si için benzersiz bir değer
-        new Date(birthDate),
+        age,
         gender,
         nationality,
-        userType, // Ekip türünü burada ekleyin
+        userType, 
         [], // Kullanıcının uçuş bilgileri (başlangıçta boş)
-        true, // Uçuşları reddedebilme durumu
+        seniority, 
         null, // Bekleyen uçuş bilgisi (başlangıçta null)
         Recipe,
         allowedRange,
         languages
     );
-    
+    console.log(newUser);
     UserCommunication.createUser(newUser);
 
-    
+    let lang = document.getElementById('language').value;
     if(lang == "turkish")
         {
             alert("Kayıt başarılı!")

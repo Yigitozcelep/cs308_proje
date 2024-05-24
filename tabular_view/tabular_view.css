@@ -1,18 +1,14 @@
-
 body{
     margin: 0;
 }
 
 .name-search{
-
     border-radius: 2px;
     margin-top: 30px;
     margin-bottom: 7px;
-
 }
 
 .input-search{
-
     border-radius: 2px;
     margin-bottom: 7px;
 }
@@ -33,11 +29,9 @@ body{
     padding-bottom: 6px;
     padding-left: 12px;
     padding-right: 12px;
-
 }
 
 .apply{
-
     display: block;
     background-color: blue;
     color: white;
@@ -47,7 +41,6 @@ body{
     height: 30px;
     cursor: pointer;
     margin: 0 auto;
-
 }
 
 .apply:hover {
@@ -64,8 +57,6 @@ body{
     margin-top: 50px;
     margin-right: 40px;
     padding: 40px;
-
-
 }
 
 .button {
@@ -90,27 +81,24 @@ body{
     padding: 10px;
 }
 
-.table-navigation{
+.table-navigation {
     display: flex;
-    justify-content: space-between; 
-    padding-top: 10px; 
+    justify-content: center; 
+    align-items: center;
+    padding-top: 10px;
 }
 
-.table-name{
-
+.table-name {
     display: flex;
     font-style: italic;
     justify-content: center; 
     align-items: center;
     padding-top: 10px; 
-
-
 }
 
-.del-button{
-
+.del-button {
     background-color: white;
-    color: #004A99 ;
+    color: #004A99;
     border-color: #004A99;
     border-radius: 4px;
     padding: 10px 20px; 
@@ -122,31 +110,25 @@ body{
 .del-button:hover {
     background-color: #003366; 
     color: white;
-
 }
 
-.page-container{
+.page-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-top: 10px;
-
 }
 
-.page-btn{
-
+.page-btn {
     border-radius: 12px;
     cursor: pointer;
 }
 
-.viewing{
-
+.viewing {
     font-size: 17px;
-   
 }
 
-.nav-button{
-
+.nav-button {
     height: 25px;
     width: 100px;
     background-color: white;
@@ -155,29 +137,23 @@ body{
     cursor: pointer;
 }
 
-.nav-button:hover{
-    background-color: gray ;
-    
-
-
+.nav-button:hover {
+    background-color: gray;
 }
 
-.table-info{
+.table-info {
     font-size: 25px;
+    margin: 0 20px; /* Adjust margin to center it properly */
 }
 
-.table-container{
-position: relative; /* or the appropriate positioning */
-z-index: 1; /* Lower than the top bar */
-padding-top: 80px; 
-display: flex;
-align-items: flex-end;
-flex-direction: column;
-
-
-
+.table-container {
+    position: relative; /* or the appropriate positioning */
+    z-index: 1; /* Lower than the top bar */
+    padding-top: 80px; 
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
 }
-
 
 table {
     display: inline-block;
@@ -194,14 +170,14 @@ th {
     background-color: #f2f2f2;
 }
 tr:nth-child(even) {
-    background-color: #f9f9f9
+    background-color: #f9f9f9;
 }
 
-.add-btn{
-
+.add-btn {
     margin-top: 10px;
     cursor: pointer;
 }
+
 .modal {
     position: fixed;
     top: 50%;
@@ -222,25 +198,22 @@ tr:nth-child(even) {
     align-items: center;
 }
 
-              
 .close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
+}
 
 .close:hover, .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
+}
 
-.form-body{
+.form-body {
     padding: 10px 15px;
 }
- 
 
 .logo {
     color: #fff;
@@ -272,13 +245,6 @@ tr:nth-child(even) {
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
 }
 
-.close {
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 .top-bar {
     position: fixed;
     top: 0;
@@ -303,6 +269,7 @@ tr:nth-child(even) {
 .top-bar-item:not(:last-child) {
     border-right: 1px solid #ffffff; /* Eğer aralarında ayırıcı çizgi isterseniz */
 }
+
 .language-select {
     margin: 0 10px; /* Adjust the margin as necessary */
 }
@@ -315,7 +282,10 @@ tr:nth-child(even) {
     padding: 5px;
     cursor: pointer;
 }
-
-
-
-
+.top-bar-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+    margin-left: 15px;
+}

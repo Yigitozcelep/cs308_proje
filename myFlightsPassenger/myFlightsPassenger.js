@@ -40,6 +40,8 @@ function handleLanguageChange() {
     const sharedAirlineCompany_search = document.getElementById('sharedAirlineCompany-search');
     const seatType_search = document.getElementById('seatType-search');
     const seatNumber_search = document.getElementById('seatNumber-search');
+    const foodMenu_search = document.getElementById('foodMenu-search');
+    const foodMenu = document.getElementById('foodMenu');
     const bookingNo = document.getElementById('bookingNo'); 
     const flightNo =  document.getElementById('flightNo');
     const departureDate = document.getElementById('departureDate');
@@ -53,7 +55,7 @@ function handleLanguageChange() {
     const cancelButtons = document.getElementsByClassName('delete-row');
     const sharedAirlineCompany = document.getElementById('sharedAirlineCompany');
     
-    
+    foodMenu.innerHTML = getText("foodMenu");
     brandName.innerHTML = getText("brandName");
     confirmText.innerHTML = getText("confirmFlightDelete");
     confirmCancel.innerHTML = getText("confirm");
@@ -65,7 +67,7 @@ function handleLanguageChange() {
 
     helpButton.innerHTML = getText("helpButton");
     myFlightsWelcomeHeader.innerHTML = getText("myFlightsHelp");
-    sharedAirlineCompany.innerHTML = getText("sharedAirlineCompany")
+    sharedAirlineCompany.innerHTML = getText("sharedAirlineCompany");
     myFlightsBookingInfo.innerHTML = getText("myFlightsBookingInfo");
     filteringFlights.innerHTML = getText("filteringFlights");
     filteringFlightsInfo.innerHTML = getText("filteringFlightsInfo");
@@ -86,6 +88,7 @@ function handleLanguageChange() {
     seatType.innerHTML = getText("seatType");
     seatNumber.innerHTML = getText("seatNumber");
 
+    foodMenu_search.setAttribute('placeholder', getText("foodMenu"));
     sharedAirlineCompany_search.setAttribute('placeholder', getText("sharedAirlineCompany"));
     bookingNo_search.setAttribute('placeholder', getText("bookingNo"));
     flightNo_search.setAttribute('placeholder', getText("flightNo"));
@@ -178,6 +181,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.userSeat.getSeatType()}</td>
                 <td>${item.userSeat.getSeatPosition()}</td>
                 <td>${item.flightData.getAirlineCompany()}</td>
+                <td>${item.flightData.getMenu()}</td>
                 <td><button class="delete-row" data-item="${item}">Cancel</button></td>
             </tr>`;
             tableBody.innerHTML += row;
@@ -275,9 +279,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                 varB = b.userSeat.getSeatPosition(); 
             }
             else if(key == "SharedAirlineCompany"){ 
-                varA = a.getAirlineCompany();
-                varB = b.getAirlineCompany(); 
+                varA = a.flightData.getAirlineCompany();
+                varB = b.flightData.getAirlineCompany(); 
             }
+            else if(key == "FoodMenu"){ 
+                varA = a.flightData.getMenu();
+                varB = b.flightData.getMenu(); 
+            }
+
 
             let comparison = 0;
             if (varA > varB) {
@@ -317,6 +326,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             let formattedDateArrival = date2.toString().replace(/\sGMT\+\d{4}\s.*/, '');
             formattedDateArrival = formattedDateArrival.slice(0, -3);  
 
+            
             return (!filters.BookingNo || item.purchaseId.toLowerCase().includes(filters.BookingNo.toLowerCase())) &&
                 (!filters.FlightNo || item.flightData.getFlightId().toLowerCase().includes(filters.FlightNo.toLowerCase())) &&
                 (!filters.DepartureDate|| formattedDateDeparture.toLowerCase().includes(filters.DepartureDate.toLowerCase())) &&
@@ -325,6 +335,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 (!filters.ArrivalDate || formattedDateArrival.toLowerCase() === filters.ArrivalDate.toLowerCase()) &&
                 (!filters.ArrivalPlace || item.flightData.getGoto().toLowerCase().includes(filters.ArrivalPlace.toLowerCase())) &&
                 (!filters.SharedAirlineCompany || item.flightData.getAirlineCompany().toLowerCase().includes(filters.SharedAirlineCompany.toLowerCase())) &&
+                (!filters.FoodMenu || item.flightData.getMenu().toLowerCase().includes(filters.FoodMenu.toLowerCase())) &&
                 (!filters.ArrivalAirport || item.flightData.getLandingAirport().airportName.toString() === filters.ArrivalAirport) && 
                 (!filters.SeatType || item.userSeat.getSeatType().toLowerCase().includes(filters.SeatType.toLowerCase())) &&
                 (!filters.SeatNumber || item.userSeat.getSeatPosition().toLowerCase().includes(filters.SeatNumber.toLowerCase()));
@@ -345,6 +356,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             SeatType: document.getElementById('seatType-search').value,
             SeatNumber: document.getElementById('seatNumber-search').value,
             SharedAirlineCompany: document.getElementById('sharedAirlineCompany-search').value,
+            FoodMenu: document.getElementById('foodMenu-search').value,
 
         };
         var filteredData = searchTable(filters);

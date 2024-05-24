@@ -1,34 +1,110 @@
-import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
+import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js";
 import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js";
+import { UserCommunication } from "../backend_communication/users/users_communication.js";
+import { getText } from "../dictionary.js";
+import { FlightData } from "../backend_communication/flights/flights.js";
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-   console.log(localStorage.getItem("flightIdView"));
+function handleLanguageChange() {
+    let lang = document.getElementById('language').value;
+    localStorage.setItem("language", lang);
+
+    const logo = document.querySelector('.logo');
+    const apply = document.getElementById('apply');
+    const helpButton = document.getElementById('helpButton');
+    const signOutButton = document.querySelector('.top-bar-item[href="signout.php"]');
+
+
+    apply.innerHTML = getText("apply");
+    logo.innerHTML = getText("AIR308 Airlines");
+    helpButton.innerHTML = getText("helpButton");
+    signOutButton.innerHTML = getText("signOutButton");
+
+    document.getElementById('name_search').setAttribute('placeholder', getText("name_search"));
+    document.getElementById('surname_search').setAttribute('placeholder', getText("surname_search"));
+    document.getElementById('id_search').setAttribute('placeholder', getText("id_search"));
+    document.getElementById('email_search').setAttribute('placeholder', getText("email_search"));
+    document.getElementById('seat_search').setAttribute('placeholder', getText("seat_search"));
+    document.getElementById('name-tabular').setAttribute('placeholder', getText("name-tabular"));
+
+}
+
+document.addEventListener('DOMContentLoaded', handleLanguageChange);
+
+// Add event listener to the language dropdown to handle language change
+document.getElementById('language').addEventListener('change', handleLanguageChange);
+
+
+document.addEventListener('DOMContentLoaded', handleLanguageChange);
+
+// Add event listener to the language dropdown to handle language change
+document.getElementById('language').addEventListener('change', handleLanguageChange);
+console.log(localStorage.getItem('flightIdView'));
+//console.log(dummyUsers);
+document.addEventListener('DOMContentLoaded', async function () {
+    console.log(localStorage.getItem("flightIdView"));
+    let flightData = await FlightsCommunication.getFlightByFlightId(localStorage.getItem("flightIdView"));
+    console.log(flightData);
+    let userData = await FlightsCommunication.getFlightCrew(flightData);
     var state = {
-        'querySet': currentData.getFl,
+        'querySet': userData,
         'page': 1,
         'rows': 20,
         'currentTable': 'Cabin Crew'
     };
 
+    async function getUserRole() {
+        const userId = localStorage.getItem("userId");
+        const user = await UserCommunication.getUserById(userId);
+        user.userType = "admin" //datadan dolayı burası dynamically gelmeli
+        console.log(user.userType);
+        return user.userType;
+    }
+
+
+    async function showProfileIcon() {
+        const userRole = await getUserRole();
+        const profileIcon = document.getElementById('profileIcon');
+        if (userRole === 'admin') {
+            profileIcon.style.display = 'none';
+        } else {
+            profileIcon.style.display = 'block';
+        }
+    }
+    
     function buildTable() {
         var data = pagination(state.querySet, state.page, state.rows);
         var tableBody = document.querySelector(`#${state.currentTable.toLowerCase().replace(' ', '-')}-table tbody`);
         tableBody.innerHTML = '';
 
-        data.querySet.forEach(function (item) {
-            var row = `<tr>
-                <td>${item.Name}</td>
-                <td>${item.Surname}</td>
-                <td>${item.CrewID}</td>
-            
-                <td>${item.Email}</td>
-                <td>${item.SeatNum}</td>
-              
-            </tr>`;
-            tableBody.innerHTML += row;
-        });
+
+
+
+            data.querySet.forEach(function (item) {
+                let seatNo = '';
+                if (item.flights && item.flights.length > 0) {
+                    for (let item1 of item.flights) {
+                        const flightData = item1.flightData;
+                       // console.log('Flight ID:', flightData.getFlightId());
+                        if (flightData.getFlightId() == localStorage.getItem("flightIdView")) {
+                            seatNo = item1.userSeat.getSeatPosition();
+                            console.log('Seat Position:', seatNo);
+                            console.log('userData');
+                            break;
+                        }
+                    }
+                }
+                
+                var row = `<tr>
+                    <td>${item.name}</td>
+                    <td>${item.surname}</td>
+                    <td>${item.Id}</td>
+                    <td>${item.email}</td>
+                    <td>${seatNo ? seatNo : 'N/A'}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
 
         pageButtons(data.pages);
     }
@@ -107,8 +183,8 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         const currentState = document.getElementById("table-type").innerHTML;
         let currentData;
-        if (currentState === "Pilot Crew") currentData = FlightsCommunication.getPilotData(currentFlight)
-        else if (currentState === "Passenger") currentData = FlightsCommunication.getPassangerData(currentFlight)
+        if (currentState === "Pilot Crew") currentData = FlightsCommunication.getPilotData(currentFlight);
+        else if (currentState === "Passenger") currentData = FlightsCommunication.getPassangerData(currentFlight);
         else if (currentState === "Cabin Crew") currentData = FlightsCommunication.getFlightCrew(currentFlight);
         var filteredData = searchTable(filters, currentData);
         state.querySet = filteredData;
@@ -118,32 +194,56 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('apply').addEventListener('click', applyFilters);
 
-    // Table navigation
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');
     const tableType = document.getElementById('table-type');
 
     const tableOrder = ['Pilot Crew', 'Cabin Crew', 'Passenger'];
 
-    function showTable(tableName) {
+    async function showTable(tableName) {
+        const userRole = await getUserRole();
+
         document.getElementById('cabin-crew-table').style.display = 'none';
         document.getElementById('passenger-table').style.display = 'none';
         document.getElementById('pilot-crew-table').style.display = 'none';
 
-        if (tableName === 'Cabin Crew') {
-            document.getElementById('cabin-crew-table').style.display = 'block';
-        } else if (tableName === 'Passenger') {
-            document.getElementById('passenger-table').style.display = 'block';
-        } else if (tableName === 'Pilot Crew') {
-            document.getElementById('pilot-crew-table').style.display = 'block';
+        if (userRole === 'admin') {
+            document.getElementById(`${tableName.toLowerCase().replace(' ', '-')}-table`).style.display = 'block';
+        } else if (userRole === 'pilot' && tableName !== 'Passenger') {
+            document.getElementById(`${tableName.toLowerCase().replace(' ', '-')}-table`).style.display = 'block';
+        } else if (userRole === 'cabincrew' && tableName !== 'Pilot Crew') {
+            document.getElementById(`${tableName.toLowerCase().replace(' ', '-')}-table`).style.display = 'block';
+        } else {
+            return; 
         }
 
         state.currentTable = tableName;
         tableType.textContent = tableName;
         buildTable();
+        updateButtons(tableName, userRole);
     }
 
+    function updateButtons(currentTable, userRole) {
+        const currentIndex = tableOrder.indexOf(currentTable);
+        let availableTables = tableOrder;
 
+        if (userRole === 'admin') {
+            prevButton.style.display = 'inline-block';
+            nextButton.style.display = 'inline-block';
+        } else if (userRole === 'pilot') {
+            prevButton.style.display = currentTable === 'Pilot Crew' ? 'none' : 'inline-block';
+            nextButton.style.display = currentTable === 'Cabin Crew' ? 'none' : 'inline-block';
+        } else if (userRole === 'cabincrew') {
+            prevButton.style.display = currentTable === 'Cabin Crew' ? 'none' : 'inline-block';
+            nextButton.style.display = currentTable === 'Passenger' ? 'none' : 'inline-block';
+        }
+
+        const prevIndex = (currentIndex - 1 + availableTables.length) % availableTables.length;
+        const nextIndex = (currentIndex + 1) % availableTables.length;
+
+        prevButton.textContent = `< ${availableTables[prevIndex]}`;
+        nextButton.textContent = `${availableTables[nextIndex]} >`;
+    }
 
     prevButton.addEventListener('click', function () {
         const currentIndex = tableOrder.indexOf(state.currentTable);
@@ -158,9 +258,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     showTable('Cabin Crew');
+    showProfileIcon();
 
 
-
-   
-})
+    document.getElementById('signOutLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        window.location.href = '../start_screen/index.html';
+    });
+});
 

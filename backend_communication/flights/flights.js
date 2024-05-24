@@ -36,6 +36,7 @@ class FlightData {
     #airlineCompany
     #flightId
     #planeId
+    #menu
     /**
      * 
      * @param {String} from 
@@ -47,10 +48,11 @@ class FlightData {
      * @param {String} planeType 
      * @param {String} airlineCompany 
      * @param {String} flightId 
-     * @param {string} planeId
+     * @param {String} planeId
+     * @param {String} menu
      */
     constructor(from, goTo, departureAirport, landingAirport, departureTime, landingTime,
-         planeType, airlineCompany, flightId, planeId) {
+         planeType, airlineCompany, flightId, planeId, menu) {
         
         this.#from              = from;
         this.#goTo              = goTo;
@@ -62,6 +64,7 @@ class FlightData {
         this.#airlineCompany    = airlineCompany;
         this.#flightId          = flightId;
         this.#planeId           = planeId;
+        this.#menu              = menu;
     }
 
     getFrom()               { return this.#from;             }
@@ -74,6 +77,7 @@ class FlightData {
     getPlaneType()          { return this.#planeType;        }
     getFlightId()           { return this.#flightId;         }
     getPlaneId()            { return this.#planeId           }
+    getMenu()               { return this.#menu           }
 
     setFrom(val)               {  this.#from             = val }
     setGoto(val)               {  this.#goTo             = val }
@@ -85,6 +89,7 @@ class FlightData {
     setPlaneType(val)          {  this.#planeType        = val }
     setFlightId(val)           {  this.#flightId         = val }
     setPlaneId(val)            {  this.#planeId          = val }
+    setMenu(val)               {  this.#menu             = val }
 }   
 
 class Seat {

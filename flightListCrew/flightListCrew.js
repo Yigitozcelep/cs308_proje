@@ -31,6 +31,8 @@ function handleLanguageChange() {
     const arrivalDate_search = document.getElementById('arrivalDate-search');
     const arrivalPlace_search = document.getElementById('arrivalPlace-search');
     const arrivalAirport_search = document.getElementById('arrivalAirport-search');
+    const foodMenu_search = document.getElementById('foodMenu-search');
+    const foodMenu = document.getElementById('foodMenu');
     const seatType_search = document.getElementById('seatType-search');
     const seatNumber_search = document.getElementById('seatNumber-search');
     const sharedAirlineCompany_search = document.getElementById('sharedAirlineCompany-search');
@@ -49,7 +51,7 @@ function handleLanguageChange() {
     const refuseButtons = document.getElementsByClassName('refuse-row');
     const sharedAirlineCompany = document.getElementById('sharedAirlineCompany');
     
-    
+    foodMenu.innerHTML = getText("foodMenu");
     brandName.innerHTML = getText("brandName");
     confirmText.innerHTML = getText("confirmFlightDelete");
     confirmCancel.innerHTML = getText("confirm");
@@ -86,6 +88,7 @@ function handleLanguageChange() {
     planeId_search.setAttribute('placeholder', getText("planeId"));
     sharedAirlineCompany_search.setAttribute('placeholder', getText("sharedAirlineCompany"));
 
+    foodMenu_search.setAttribute('placeholder', getText("foodMenu"));
     flightNo_search.setAttribute('placeholder', getText("flightNo"));
     departureDate_search.setAttribute('placeholder', getText("departureDate"));
     departurePlace_search.setAttribute('placeholder', getText("departurePlace"));
@@ -178,6 +181,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.userSeat.getSeatType()}</td>
                 <td>${item.userSeat.getSeatPosition()}</td>
                 <td>${item.flightData.getAirlineCompany()}</td>
+                <td>${item.flightData.getMenu()}</td>
 
                 <td><button class="select-row" data-flight-id="${item.flightData.getFlightId()}">Select</button></td>
                 <td><button class="refuse-row" data-flight-id="${item.flightData.getFlightId()}">Refuse</button></td>
@@ -244,6 +248,7 @@ function showModal(flightId) {
         return function innerSort(a, b) {
             let varA;
             let varB;
+            console.log(key)
             if(key == "FlightNo"){ 
                 varA = parseInt(a.getFlightId().substring(2), 10);
                 varB = parseInt(b.getFlightId().substring(2), 10);
@@ -290,9 +295,14 @@ function showModal(flightId) {
                 varA = a.userSeat.getSeatPosition();
                 varB = b.userSeat.getSeatPosition(); 
             }
+            
             else if(key == "SharedAirlineCompany"){ 
-                varA = a.getAirlineCompany();
-                varB = b.getAirlineCompany(); 
+                varA = a.flightData.getAirlineCompany();
+                varB = b.flightData.getAirlineCompany(); 
+            }
+            else if(key == "FoodMenu"){ 
+                varA = a.flightData.getMenu();
+                varB = b.flightData.getMenu(); 
             }
 
 
@@ -341,6 +351,7 @@ function showModal(flightId) {
                 (!filters.DepartureAirport || item.flightData.getDedepartureAirport().airportName.toString() === filters.DepartureAirport) && 
                 (!filters.ArrivalDate || formattedDateArrival.toLowerCase() === filters.ArrivalDate.toLowerCase()) &&
                 (!filters.ArrivalPlace || item.flightData.getGoto().toLowerCase().includes(filters.ArrivalPlace.toLowerCase())) &&
+                (!filters.FoodMenu || item.flightData.getMenu().toLowerCase().includes(filters.FoodMenu.toLowerCase())) &&
                 (!filters.SharedAirlineCompany || item.flightData.getAirlineCompany().toLowerCase().includes(filters.SharedAirlineCompany.toLowerCase())) &&
                 (!filters.ArrivalAirport || item.flightData.getLandingAirport().airportName.toString() === filters.ArrivalAirport) && 
                 (!filters.SeatType || item.userSeat.getSeatType().toLowerCase().includes(filters.SeatType.toLowerCase())) &&
@@ -362,6 +373,8 @@ function showModal(flightId) {
             SeatType: document.getElementById('seatType-search').value,
             SeatNumber: document.getElementById('seatNumber-search').value,
             SharedAirlineCompany: document.getElementById('sharedAirlineCompany-search').value,
+            FoodMenu: document.getElementById('foodMenu-search').value,
+
 
 
         };

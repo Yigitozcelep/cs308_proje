@@ -1,136 +1,125 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Extended View
-        </title>
-        <link rel="stylesheet" href="tabular_view.css">
-    </head>
+<head>
+    <title>Extended View</title>
+    <link rel="stylesheet" href="tabular_view.css">
+</head>
 
-    <body>
+<body>
 
-        <div class="top-bar">
-            <div class="logo">
-                AIR308 Airlines
-            </div>
-            <div class="language-select">
-                <select id="language" name="language">
-                    <option value="EN">EN</option>
-                    <option value="TR">TR</option>
-                </select>
-            </div>
-            <a href="#" class="top-bar-item" id="helpButton">Help</a>
-            <div id="helpPopup" class="help-popup" style="display: none;">
-                <div class="help-content">
-                  <span class="close">&times;</span>
-                  <p>Here is some helpful information:</p>
-                  <p>Please select your role(passengers should continue with the passenger option, if you are an employee, please choose the cabin or cockpit option that suits you).</p>
-                  <p>You must enter your e-mail address to log in. If successful login is not achieved, please make sure that you have entered the e-mail address correctly, or if you are not registered in the system, return to the registration screen and complete the registration process.</p>
-                  <p>If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.</p>
-                </div>
-              </div>
-            <a href="signout.php" class="top-bar-item">Sign Out</a>
+    <div class="top-bar">
+        <div class="logo">
+            AIR308 Airlines
         </div>
 
-        <div class="main-container" id="myMainDiv">
-            <div class="left">
-
-                <div class="filters-container">
-                    <div>
-                    <div>Filter by:</div>
-                    <input id="name-search" class="name-search" type="text" placeholder="Name">
-                    <input id="surname-search" class="input-search" type="text" placeholder="Surname">
-                    <input id="id-search" class="input-search" type="text" placeholder="ID">
-                    
-                    
-                    <input id="email-search" class="input-search" type="text" placeholder="Email Address">
-                    <input id="seat-search" class="input-search" type="text" placeholder="Seat Number">
-                    <button id="apply" class="apply" type="submit">APPLY</button>
-                    </div>
-                
-                </div>
-
+         <a href="#" class="top-bar-item" id="myFlights"></a>
+        <a href="../personal_info_psngr/personal_info_psngr.html">
+            <img src="profile_icon.png" alt="Profile Icon" class="top-bar-icon" id="profileIcon">
+        </a>
+        
+        <div class="language-select">
+            <select id="language" name="language">
+                <option value="english">EN</option>
+                <option value="turkish">TR</option>
+            </select>
+        </div>
+        <a href="#" class="top-bar-item" id="helpButton">Help</a>
+        <div id="helpPopup" class="help-popup" style="display: none;">
+            <div class="help-content">
+                <span class="close">&times;</span>
+                <p>Here is some helpful information:</p>
+                <p>Please select your role(passengers should continue with the passenger option, if you are an employee, please choose the cabin or cockpit option that suits you).</p>
+                <p>You must enter your e-mail address to log in. If successful login is not achieved, please make sure that you have entered the e-mail address correctly, or if you are not registered in the system, return to the registration screen and complete the registration process.</p>
+                <p>If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.</p>
             </div>
+        </div>
+        <a href="signout.php" class="top-bar-item">Sign Out</a>
+    </div>
 
-            <div class="middle">
-                
-                <div class="table-container" id="cabin-crew-table">
-                    <table>
-                        <thead>
+    <div class="main-container" id="myMainDiv">
+        <div class="left">
+            <div class="filters-container">
+                <div>
+                    <div>Filter by:</div>
+                    <input id="name_search" class="name-search" type="text" placeholder="Name">
+                    <input id="surname_search" class="input-search" type="text" placeholder="Surname">
+                    <input id="id_search" class="input-search" type="text" placeholder="ID">
+                    <input id="email_search" class="input-search" type="text" placeholder="Email Address">
+                    <input id="seat_search" class="input-search" type="text" placeholder="Seat Number">
+                    <button id="apply" class="apply" type="submit">APPLY</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="middle">
+            <div class="table-container" id="cabin-crew-table">
+                <table>
+                    <thead>
                         <tr>
-                            <th data-column="Name" data-order="desc">Name</th>
+                            <th id = "name-tabular" data-column="Name" data-order="desc">Name</th>
                             <th data-column="Surname" data-order="desc">Surname</th>
                             <th data-column="CrewID" data-order="desc">Crew ID </th>
                             <th data-column="Email" data-order="desc">Email Address</th>
                             <th data-column="SeatNum" data-order="desc">Seat Number</th>
                         </tr>
-                        </thead>
-                        <tbody id="table-body-cabin-crew">
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="table-container" id="passenger-table" style="display: none;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th data-column="Name" data-order="desc">Name</th>
-                                <th data-column="Surname" data-order="desc">Surname</th>
-                                <th data-column="ID" data-order="desc">ID</th>
-                                <th data-column="Email" data-order="desc">Email Address</th>
-                                <th data-column="SeatNumber" data-order="desc">Seat Number</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body-passenger">
-                        </tbody>
-                    </table>
-                </div>
-    
-                <div class="table-container" id="pilot-crew-table" style="display: none;">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th data-column="Name" data-order="desc">Name</th>
-                                    <th data-column="Surname" data-order="desc">Surname</th>
-                                    <th data-column="CrewID" data-order="desc">Crew ID </th>
-                                    <th data-column="Email" data-order="desc">Email Address</th>
-                                    <th data-column="SeatNum" data-order="desc">Seat Number</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-body-pilot-crew">
-                            </tbody>
-                        </table>
-                </div>                
-                <div class="page-container">
-                    <div id="page-wrapper"></div>
-                </div>
-
-                <div class="viewing">
-                    <text class="table-name" id="viewing-for">Viewing for:</text>
-                    
-                </div>
-
-                <div class="table-navigation">
-                    <button class="nav-button" id="prev-button">&lt; Pilot Crew</button>
-                    <text class="table-info" id="table-type">Cabin Crew</text>
-                    <button class="nav-button" id="next-button">Passenger &gt;</button>
-                </div>
-
+                    </thead>
+                    <tbody id="table-body-cabin-crew">
+                    </tbody>
+                </table>
             </div>
-         
 
-            <div class="right">
+            <div class="table-container" id="passenger-table" style="display: none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th id = "name-tabular" data-column="Name" data-order="desc">Name</th>
+                            <th data-column="Surname" data-order="desc">Surname</th>
+                            <th data-column="ID" data-order="desc">ID</th>
+                            <th data-column="Email" data-order="desc">Email Address</th>
+                            <th data-column="SeatNumber" data-order="desc">Seat Number</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body-passenger">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-container" id="pilot-crew-table" style="display: none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th id = "name-tabular" data-column="Name" data-order="desc">Name</th>
+                            <th data-column="Surname" data-order="desc">Surname</th>
+                            <th data-column="CrewID" data-order="desc">Crew ID </th>
+                            <th data-column="Email" data-order="desc">Email Address</th>
+                            <th data-column="SeatNum" data-order="desc">Seat Number</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body-pilot-crew">
+                    </tbody>
+                </table>
+            </div>
             
+            <div class="page-container">
+                <div id="page-wrapper"></div>
             </div>
-        
-        </div>
-<<<<<<< HEAD
-          
-=======
-        <script type="module" src="../dictionary.js"></script>   
-        <script type="module"  src="tabular_view.js" 
-        ></script>   
 
-        src="tabular_view.js" 
->>>>>>> a01f987 (mycommit)
-    </body>
-</html>      
+            <div class="viewing">
+                <text class="table-name" id="viewing-for">Viewing for:</text>
+            </div>
+
+            <div class="table-navigation">
+                <button class="nav-button" id="prev-button">&lt; Pilot Crew</button>
+                <div class="table-info" id="table-type">Cabin Crew</div>
+                <button class="nav-button" id="next-button">Passenger &gt;</button>
+                
+            </div>
+        </div>
+
+        <div class="right"></div>
+    </div>
+    
+    <script type="module" src="../dictionary.js"></script>   
+    <script type="module"  src="tabular_view.js"></script>   
+</body>
+</html>

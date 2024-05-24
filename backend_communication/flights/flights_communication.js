@@ -47,7 +47,33 @@ const FlightsCommunication = {
      * @param {FlightData} flight 
      */
     async addFlight(flight) {
+        let headers = new Headers();
 
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        const adminId = localStorage.getItem("userId");
+        let res = await fetch("http://localhost:8080/api/flights/saveFlight/" + adminId, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({
+                from: flight.getFrom(),
+                goTo: flight.getGoto(),
+                departureAirport: flight.getDedepartureAirport(),
+                landingAirport: flight.getLandingAirport(),
+                departureTime: flight.getDepartureTime(),
+                landingTime: flight.getLandingTime(),
+                planeType: flight.getPlaneType(),
+                airlineCompany: flight.getAirlineCompany(),
+                flightId: flight.getFlightId(),
+                planeId: flight.getPlaneId(),
+                menu: flight.getMenu(),
+            })
+        });
+        res = await res.json();
+        
     },
 
     /**

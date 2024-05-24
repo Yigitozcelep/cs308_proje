@@ -5,7 +5,6 @@ import { getText } from "../dictionary.js";
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
-
     document.getElementById('pageTitle').innerHTML = getText("addFlight");
     document.getElementById('flightNoLabel').innerHTML = getText("flightNo");
     document.getElementById('planeIdLabel').innerHTML = getText("planeId");

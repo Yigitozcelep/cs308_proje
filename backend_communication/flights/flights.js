@@ -1,19 +1,6 @@
 import * as dummyDatas from "../dummy_data.js";
 import { UserData } from "../users/users.js";
 
-class AirPort {
-    /**
-     * @param {String} city 
-     * @param {String} airportName 
-     * @param {String} country 
-     */
-    constructor(city, airportName, country) {
-        this.city        = city;
-        this.airportName = airportName; 
-        this.country     = country;
-    }
-}
-
 const SeatStatus = {
     avaliable:   "avaliable",
     unAvaliable: "unavaliable",

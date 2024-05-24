@@ -13,11 +13,11 @@ const FlightsCommunication = {
      * @returns {Promise<FlightData[]>}
      */
     async getFlightsDataFrom(from, goTo, intervalStart, intervalEnd, airportName) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+        const flightData = await FlightsCommunication.getAllFlights();
         const data = []
-        for (let i = 0; i < dummyData.dummyFlights.length; i++) {
-            if (dummyData.dummyFlights[i].getLandingTime() >= intervalStart && dummyData.dummyFlights[i].getDepartureTime() <= intervalEnd && dummyData.dummyFlights[i].getFrom() == from && dummyData.dummyFlights[i].getGoto() == goTo && dummyData.dummyFlights[i].getDedepartureAirport().airportName == airportName) {
-                data.push(dummyData.dummyFlights[i]);
+        for (let i = 0; i < flightData.length; i++) {
+            if (flightData[i].getLandingTime() >= intervalStart && flightData[i].getDepartureTime() <= intervalEnd && flightData[i].getFrom() == from && flightData[i].getGoto() == goTo && flightData[i].getDedepartureAirport().airportName == airportName) {
+                data.push(flightData[i]);
             }
         }
         return data;
@@ -27,7 +27,7 @@ const FlightsCommunication = {
      * @param {FlightData} flight 
      */
     async deleteFlight(flight) {
-
+       
     },
 
     /**
@@ -78,11 +78,11 @@ const FlightsCommunication = {
      * @returns {Promise<FlightData[]>}
      */
     async getFlightsDataFromWithoutFromGoto(intervalStart, intervalEnd, airportName) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+        const flightData = await FlightsCommunication.getAllFlights();
         const data = []
-        for (let i = 0; i < dummyData.dummyFlights.length; i++) {
-            if (dummyData.dummyFlights[i].getLandingTime() >= intervalStart && dummyData.dummyFlights[i].getDepartureTime() <= intervalEnd && dummyData.dummyFlights[i].getDedepartureAirport().airportName == airportName) {
-                data.push(dummyData.dummyFlights[i]);
+        for (let i = 0; i < flightData.length; i++) {
+            if (flightData[i].getLandingTime() >= intervalStart && flightData[i].getDepartureTime() <= intervalEnd && flightData[i].getDedepartureAirport().airportName == airportName) {
+                data.push(flightData[i]);
             }
         }
         return data;
@@ -96,11 +96,11 @@ const FlightsCommunication = {
      * @returns {Promise<FlightData[]>}
      */
     async getFlightsDataWithoutAirport(from, goTo, intervalStart, intervalEnd) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+        const flightData = await FlightsCommunication.getAllFlights();
         const data = []
-        for (let i = 0; i < dummyData.dummyFlights.length; i++) {
-            if (dummyData.dummyFlights[i].getLandingTime() >= intervalStart && dummyData.dummyFlights[i].getDepartureTime() <= intervalEnd && dummyData.dummyFlights[i].getFrom() == from && dummyData.dummyFlights[i].getGoto() == goTo) {
-                data.push(dummyData.dummyFlights[i]);
+        for (let i = 0; i < flightData.length; i++) {
+            if (flightData[i].getLandingTime() >= intervalStart && flightData[i].getDepartureTime() <= intervalEnd && flightData[i].getFrom() == from && flightData[i].getGoto() == goTo) {
+                data.push(flightData[i]);
             }
         }
         return data;
@@ -110,9 +110,9 @@ const FlightsCommunication = {
      * @returns {Promise<FlightData>}
      */
     async getFlightByFlightId(id) {
-        await new Promise(resolve => setTimeout(resolve, 50));
-        for (let i = 0; i < dummyData.dummyFlights.length; i++) {
-            if (dummyData.dummyFlights[i].getFlightId() == id) return dummyData.dummyFlights[i];
+        const flightData = await FlightsCommunication.getAllFlights();
+        for (let i = 0; i < flightData.length; i++) {
+            if (flightData[i].getFlightId() == id) return flightData[i];
         }
     },
     
@@ -121,9 +121,9 @@ const FlightsCommunication = {
      * @returns {Promise<FlightData>}
      */
     async getFlightByPlaneId(planeId) {
-        await new Promise(resolve => setTimeout(resolve, 50));
-        for (let i = 0; i < dummyData.dummyFlights.length; i++) {
-            if (dummyData.dummyFlights[i].getPlaneId() == planeId) return dummyData.dummyFlights[i];
+        const flightData = await FlightsCommunication.getAllFlights();
+        for (let i = 0; i < flightData.length; i++) {
+            if (flightData[i].getPlaneId() == planeId) return flightData[i];
         }
     },
 

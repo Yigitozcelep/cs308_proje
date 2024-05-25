@@ -3,6 +3,8 @@ import { UserCommunication } from "../backend_communication/users/users_communic
 import { getText } from "../dictionary.js";
 
 async function fetchAvailableMembers() {
+
+    console.log(localStorage.getItem("flightIdView"));
     
     // let availableMembers = await UserCommunication.getAvailableMembers();
     // For now, using dummy data
@@ -44,7 +46,9 @@ async function addMemberToFlight(memberId) {
 
 document.addEventListener('DOMContentLoaded', async function () {
     handleLanguageChange();
-    const availableMembers = await fetchAvailableMembers();
+    const availableMembers = await FlightsCommunication.getPilotData();
+    console.log(availableMembers);
+    
     buildTable(availableMembers);
 
     document.querySelector('#table-body-available-members').addEventListener('click', async function (event) {
@@ -90,7 +94,7 @@ document.getElementById('language').addEventListener('change', handleLanguageCha
 function buildTable(members) {
     const tableBody = document.querySelector(`#table-body-available-members`);
     tableBody.innerHTML = '';
-
+    
     members.forEach(member => {
         const row = `<tr>
             <td>${member.name}</td>

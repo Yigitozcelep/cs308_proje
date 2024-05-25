@@ -28,7 +28,7 @@
                      If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.</p>
                 </div>
               </div>
-            <a href="signout.php" class="top-bar-item">Sign Out</a>
+            <a href="../start_screen/index.html" class="top-bar-item">Sign Out</a>
         </div>
 
         <div class="main-container" id="myMainDiv">
@@ -55,24 +55,24 @@
 
             <div class="middle">
                 
-                <div class="table-container" id="cabin-crew-table">
+                <div class="table-container" id="cabincrew-table">
                     <table>
                         <thead>
                         <tr>
                             <th id="name" data-column="Name" data-order="desc">Name</th>
-                            <th id="surname" data-column="Surname" data-order="desc">Surname</th>
-                            <th id="user-id"data-column="CrewID" data-order="desc">Crew ID </th>
-                            <th data-column="Age" data-order="desc">Age</th>
-                            <th data-column="Gender" data-order="desc">Gender</th>
-                            <th data-column="Nationality" data-order="desc">Nationality</th>
-                            <th data-column="Email" data-order="desc">Email Address</th>
-                            <th data-column="Seniority" data-order="desc">Seniority</th>
-                            <th data-column="SeatNum" data-order="desc">Seat Number</th>
+                            <th id="surname"data-column="Surname" data-order="desc">Surname</th>
+                            <th id="id" data-column="user-id" data-order="desc">ID</th>
+                            <th id="age" data-column="Age" data-order="desc">Age</th>
+                            <th id="gender" data-column="Gender" data-order="desc">Gender</th>
+                            <th id="nationality" data-column="Nationality" data-order="desc">Nationality</th>
+                            <th id="email" data-column="Email" data-order="desc">Email Address</th>
+                            <th id="seniority" data-column="seniority" data-order="desc">Seniority</th>
+                            <th id="seatNum" data-column="SeatNumber" data-order="desc">Seat Number</th>
                             <th>Action</th>
 
                         </tr>
                         </thead>
-                        <tbody id="table-body-cabin-crew">
+                        <tbody id="table-body-cabincrew">
                         </tbody>
                     </table>
                 </div>
@@ -81,16 +81,15 @@
                     <table>
                         <thead>
                             <tr>
-                                <th data-column="Name" data-order="desc">Name</th>
-                                <th data-column="Surname" data-order="desc">Surname</th>
-                                <th data-column="user-id" data-order="desc">ID</th>
-                                <th data-column="Age" data-order="desc">Age</th>
-                                <th data-column="Gender" data-order="desc">Gender</th>
-                                <th data-column="Nationality" data-order="desc">Nationality</th>
-                                <th data-column="Email" data-order="desc">Email Address</th>
-                                <th data-column="HasChild" data-order="desc">Has Child</th>
-                                <th data-column="SeatNumber" data-order="desc">Seat Number</th>
-                                <th>Action</th>
+                                <th id="name" data-column="Name" data-order="desc">Name</th>
+                                <th id="surname"data-column="Surname" data-order="desc">Surname</th>
+                                <th id="id" data-column="user-id" data-order="desc">ID</th>
+                                <th id="age" data-column="Age" data-order="desc">Age</th>
+                                <th id="gender" data-column="Gender" data-order="desc">Gender</th>
+                                <th id="nationality" data-column="Nationality" data-order="desc">Nationality</th>
+                                <th id="email" data-column="Email" data-order="desc">Email Address</th>
+                                <th id="hasChild" data-column="HasChild" data-order="desc">Has Child</th>
+                                <th id="seatNum" data-column="SeatNumber" data-order="desc">Seat Number</th>
 
                             </tr>
                         </thead>
@@ -99,28 +98,28 @@
                     </table>
                 </div>
     
-                <div class="table-container" id="pilot-crew-table" style="display: none;">
+                <div class="table-container" id="pilotcrew-table" style="display: none;">
                         <table>
                             <thead>
                                 <tr>
-                                    <th data-column="Name" data-order="desc">Name</th>
-                                    <th data-column="Surname" data-order="desc">Surname</th>
-                                    <th data-column="user-id" data-order="desc">Crew ID </th>
-                                    <th data-column="Age" data-order="desc">Age</th>
-                                    <th data-column="Gender" data-order="desc">Gender</th>
-                                    <th data-column="Nationality" data-order="desc">Nationality</th>
-                                    <th data-column="Email" data-order="desc">Email Address</th>
-                                    <th data-column="Seniority" data-order="desc">Seniority</th>
-                                    <th data-column="SeatNum" data-order="desc">Seat Number</th>
+                                    <th id="name" data-column="Name" data-order="desc">Name</th>
+                                    <th id="surname"data-column="Surname" data-order="desc">Surname</th>
+                                    <th id="id" data-column="user-id" data-order="desc">ID</th>
+                                    <th id="age" data-column="Age" data-order="desc">Age</th>
+                                    <th id="gender" data-column="Gender" data-order="desc">Gender</th>
+                                    <th id="nationality" data-column="Nationality" data-order="desc">Nationality</th>
+                                    <th id="email" data-column="Email" data-order="desc">Email Address</th>
+                                    <th id="seniority" data-column="seniority" data-order="desc">Seniority</th>
+                                    <th id="seatNum" data-column="SeatNumber" data-order="desc">Seat Number</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="table-body-pilot-crew">
+                            <tbody id="table-body-pilotcrew">
                             </tbody>
                         </table>
                 </div>
 
-                <button id="add-btn">ADD+</button>
+                <button href="../assignCrew/assignCrew.html" id="add-btn">ADD+</button>
                 
                 <div class="page-container">
                     <div id="page-wrapper"></div>

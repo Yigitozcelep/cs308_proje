@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Extended View</title>
+    <title>Tabular View</title>
     <link rel="stylesheet" href="tabular_view.css">
 </head>
     <head>
@@ -45,7 +45,7 @@
         <div class="left">
             <div class="filters-container">
                 <div>
-                    <div>Filter by:</div>
+                    <div> Filter by:</div>
                     <input id="name_search" class="name-search" type="text" placeholder="Name">
                     <input id="surname_search" class="input-search" type="text" placeholder="Surname">
                     <input id="id_search" class="input-search" type="text" placeholder="ID">
@@ -57,18 +57,18 @@
         </div>
 
         <div class="middle">
-            <div class="table-container" id="cabin-crew-table">
+            <div class="table-container" id="cabincrew-table">
                 <table>
                     <thead>
                         <tr>
-                            <th id = "name-tabular" data-column="Name" data-order="desc">Name</th>
-                            <th data-column="Surname" data-order="desc">Surname</th>
-                            <th data-column="CrewID" data-order="desc">Crew ID </th>
-                            <th data-column="Email" data-order="desc">Email Address</th>
-                            <th data-column="SeatNum" data-order="desc">Seat Number</th>
+                            <th id = "name" data-column="Name" data-order="desc">Name</th>
+                            <th id = "surname" data-column="Surname" data-order="desc">Surname</th>
+                            <th id ="id" data-column="CrewID" data-order="desc">Crew ID </th>
+                            <th id = "email" data-column="Email" data-order="desc">Email Address</th>
+                            <th id ="seatnum" data-column="SeatNum" data-order="desc">Seat Number</th>
                         </tr>
                     </thead>
-                    <tbody id="table-body-cabin-crew">
+                    <tbody id="table-body-cabincrew">
                     </tbody>
                 </table>
             </div>
@@ -77,11 +77,11 @@
                 <table>
                     <thead>
                         <tr>
-                            <th id = "name-tabular" data-column="Name" data-order="desc">Name</th>
-                            <th data-column="Surname" data-order="desc">Surname</th>
-                            <th data-column="ID" data-order="desc">ID</th>
-                            <th data-column="Email" data-order="desc">Email Address</th>
-                            <th data-column="SeatNumber" data-order="desc">Seat Number</th>
+                            <th id = "name" data-column="Name" data-order="desc">Name</th>
+                            <th id ="surname" data-column="Surname" data-order="desc">Surname</th>
+                            <th id ="id" data-column="ID" data-order="desc">ID</th>
+                            <th id = "email" data-column="Email" data-order="desc">Email Address</th>
+                            <th id ="seatnum" data-column="SeatNumber" data-order="desc">Seat Number</th>
                         </tr>
                     </thead>
                     <tbody id="table-body-passenger">
@@ -89,18 +89,18 @@
                 </table>
             </div>
 
-            <div class="table-container" id="pilot-crew-table" style="display: none;">
+            <div class="table-container" id="pilotcrew-table" style="display: none;">
                 <table>
                     <thead>
                         <tr>
-                            <th id = "name-tabular" data-column="Name" data-order="desc">Name</th>
-                            <th data-column="Surname" data-order="desc">Surname</th>
-                            <th data-column="CrewID" data-order="desc">Crew ID </th>
-                            <th data-column="Email" data-order="desc">Email Address</th>
-                            <th data-column="SeatNum" data-order="desc">Seat Number</th>
+                            <th id = "name" data-column="Name" data-order="desc">Name</th>
+                            <th id = "surname" data-column="Surname" data-order="desc">Surname</th>
+                            <th id = "id" data-column="CrewID" data-order="desc">Crew ID </th>
+                            <th id = "email" data-column="Email" data-order="desc">Email Address</th>
+                            <th id = "seatnum" data-column="SeatNum" data-order="desc">Seat Number</th>
                         </tr>
                     </thead>
-                    <tbody id="table-body-pilot-crew">
+                    <tbody id="table-body-pilotcrew">
                     </tbody>
                 </table>
             </div>

@@ -1,5 +1,5 @@
 import * as dummyData from "../dummy_data.js"
-import { UserData } from "../users/users.js";
+import { UserData, UserFlightData } from "../users/users.js";
 import { FlightData, Seats, Seat } from "./flights.js";
 
 const FlightsCommunication = {
@@ -88,21 +88,12 @@ const FlightsCommunication = {
      * @returns {Promise<UserData[]>}
      */
     async getFlightCrew(flightData) {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');    
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        const adminId = localStorage.getItem("userId");
-        let res = await fetch(`http://localhost:8080/main/flight/${flightData.getFlightId()}/getAttendants`,{
-            mode: 'cors',
-            credentials: 'include',
-            method: 'GET',
-            headers: headers,
-            }
-        );
-        res = await res.json();
-        return res;
+
+        
+
+        return dummyData.crewData[flightData.getPlaneId() - "0"]
     },
+
 
     /**
      * @param {FlightData} flightData 
@@ -116,7 +107,36 @@ const FlightsCommunication = {
      * @returns {Promise<UserData[]>}
      */
     async getPilotData(flightData) {
-        return dummyData.dummyUsers;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        const adminId = localStorage.getItem("userId");
+        let res = await fetch(`http://localhost:8080/main/flight/${flightData.getFlightId()}/getPilots`,{
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+            headers: headers,
+            }
+        );
+        res = await res.json();
+        const data = []
+        console.log("dummyFlights: ", dummyData.dummyUsers);
+        for (const el of res) {
+            let pilotFlightData = [];
+            console.log("xxx: ", el.flights[0].flightData)
+            const currentFlight = el.flights[0].flightData;
+            const currentSeatData = el.flights[0].userSeat;
+
+            const seat = new Seat(currentSeatData.seatPosition, currentSeatData.seatType, currentSeatData.status, currentSeatData.userId)
+            pilotFlightData.push(new UserFlightData(currentFlight, seat, null, null, el.flights[0].role));
+
+            console.log(pilotFlightData)
+            data.push(new UserData(el.email, el.password, el.name, el.surname, el.id, el.age, el.gender, el.nationality, el.userType, pilotFlightData[0], el.seniority, el.languages, null, el.recipe));
+        }
+
+        console.log("res: ", data);
+        return data;
     },
 
     /**
@@ -198,10 +218,9 @@ const FlightsCommunication = {
             let currentFlight = new FlightData(item.from, item.goTo, item.departureAirport, item.landingAirport, new Date(item.departureTime), new Date(item.landingTime), item.planeType, item.airlineCompany, item.flightId, item.planeId, item.menu);
             flightDatas.push(currentFlight)
         }
+        console.log(flightDatas);
         return flightDatas;
     },
-
-    
 
 
     /**

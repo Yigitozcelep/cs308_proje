@@ -68,11 +68,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         var data = pagination(state.querySet, state.page, state.rows);
         var tableBody = document.querySelector(`#table-body-${state.currentTable.replace(" ", "").toLowerCase()}`);
         tableBody.innerHTML = '';
-
         data.querySet.forEach(function (item) {
             let seatNo = '';
             if (item.flights && item.flights.length > 0) {
                 for (let item1 of item.flights) {
+                    console.log("item1: ", item1);
                     const flightData = item1.flightData;
                     if (flightData.getFlightId() == flightId) {
                         seatNo = item1.userSeat.getSeatPosition();
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             console.log("Building table row", tableBody);
-
+            console.log("item: ", item);
             var row = `<tr>
                 <td>${item.name}</td>
                 <td>${item.surname}</td>

@@ -3,7 +3,6 @@ import { UserCommunication } from "../backend_communication/users/users_communic
 import { FlightData } from "../backend_communication/flights/flights.js";
 import { getText } from "../dictionary.js";
 
-const currentState = document.getElementById("table-type").innerHTML;
 
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
@@ -44,31 +43,36 @@ document.getElementById('language').addEventListener('change', handleLanguageCha
 document.addEventListener('DOMContentLoaded', async function () {
 
     let FlightData = await FlightsCommunication.getFlightByFlightId(localStorage.getItem("flightIdView"));
-    const currentState = document.getElementById("table-type").innerHTML;
-    let currentData;
-    if (currentState === "Pilot Crew") currentData = await FlightsCommunication.getPilotData(FlightData);
-    else if (currentState === "Passenger") currentData = await FlightsCommunication.getPassangerData(FlightData);
-    else if (currentState === "Cabin Crew") currentData = await FlightsCommunication.getFlightCrew(FlightData);
+    const currentState = document.getElementById("table-type").innerHTML.replace(' ', '');
+    let userData;
+    if (currentState === "PilotCrew") userData = await FlightsCommunication.getPilotData(FlightData);
+    else if (currentState === "Passenger") {
+        console.log("burauagir");
+        userData = await FlightsCommunication.getPassangerData(FlightData);}
+    else if (currentState === "CabinCrew") {
+        userData = await FlightsCommunication.getFlightCrew(FlightData);
+        console.log(userData);
+    }
+    console.log(currentState);
     //.log(currentData);
     console.log(localStorage.getItem("flightIdView"));
     let flightData = await FlightsCommunication.getFlightByFlightId(localStorage.getItem("flightIdView"));
     //console.log(flightData);
-    let userData = await FlightsCommunication.getFlightCrew(flightData);
     const x = await FlightsCommunication.getPassangerData(flightData);
     
-    userData
     var state = {
         'querySet': userData,
         'page': 1,
         'rows': 20,
         'currentTable': currentState
     };
+
     console.log(userData);
 
     async function getUserRole() {
         const userId = localStorage.getItem("userId");
         const user = await UserCommunication.getUserById(userId);
-        user.userType = "Admin"; // Datadan dolayı burası dynamically gelmeli
+        user.userType = ""; // Datadan dolayı burası dynamically gelmeli
         console.log(user.userType);
         return user.userType;
     }
@@ -84,12 +88,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     function filterByUserType(userType, userData) {
+        console.log(userData);
         return userData.filter(user => user.userType === userType);
     }
 
     function buildTable() {
         var data = pagination(state.querySet, state.page, state.rows);
-        var tableBody = document.querySelector(`#table-body-${state.currentTable.toLowerCase().replace(' ', '-')}`);
+        var tableBody = document.querySelector(`#table-body-${state.currentTable.toLowerCase()}`);
         tableBody.innerHTML = '';
 
         data.querySet.forEach(function (item) {
@@ -242,19 +247,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             email: document.getElementById('email_search').value,
             seatNum: document.getElementById('seat_search').value
         };
-       // const currentState = document.getElementById("table-type").innerHTML;
+    
 
-        /*let currentData;
-        if (currentState === "Pilot Crew") {
-            currentData = FlightsCommunication.getFlightCrew()
-            currentData = filterByUserType(currentState, userData);
-        } else if (currentState === "Passenger") {
-            currentData = filterByUserType(currentState, userData);
-        } else if (currentState === "Cabin Crew") {
-            currentData = filterByUserType(currentState, userData);
-        }yigit kisim*/ 
-
-        var filteredData = searchTable(filters, currentData);
+        var filteredData = searchTable(filters, userData); //currentDataydı degistirdim
         state.querySet = filteredData;
         state.page = 1;
         buildTable();
@@ -267,24 +262,33 @@ document.addEventListener('DOMContentLoaded', async function () {
     const nextButton = document.getElementById('next-button');
     const tableType = document.getElementById('table-type');
 
-    const tableOrder = ['Pilot Crew', 'Cabin Crew', 'Passenger'];
+    const tableOrder = ['PilotCrew', 'CabinCrew', 'Passenger'];
 
     async function showTable(tableName) {
         const userRole = await getUserRole();
 
-        document.getElementById('cabin-crew-table').style.display = 'none';
+        document.getElementById('cabincrew-table').style.display = 'none';
         document.getElementById('passenger-table').style.display = 'none';
-        document.getElementById('pilot-crew-table').style.display = 'none';
+        document.getElementById('pilotcrew-table').style.display = 'none';
         if (tableName === 'Passenger') {
           //  console.log(userData)
-            state.querySet = filterByUserType("Passenger", userData);
-        } else if (tableName === 'Cabin Crew') {
-            state.querySet = filterByUserType("CabinCrew", userData);
-        } else if (tableName === 'Pilot Crew') {
-            state.querySet = filterByUserType("PilotCrew", userData);
-        }
+            //state.querySet = filterByUserType("Passenger", userData);
+            state.querySet = userData = await FlightsCommunication.getPassangerData(FlightData);
+            state.currentTable = "Passenger";
 
-        document.getElementById(`${tableName.toLowerCase().replace(' ', '-')}-table`).style.display = 'block';
+        } 
+        else if (tableName === 'CabinCrew') {
+            //state.querySet = filterByUserType("CabinCrew", userData);
+            state.querySet = userData = await FlightsCommunication.getFlightCrew(FlightData);
+            state.currentTable = "CabinCrew";
+
+        } else if (tableName === 'PilotCrew') {
+         // state.querySet = filterByUserType("PilotCrew", userData);
+            state.querySet = userData = await FlightsCommunication.getPilotData(FlightData);
+            state.currentTable = "PilotCrew";
+        }
+        console.log(state.currentTable.toLowerCase());
+        document.getElementById(`${state.currentTable.toLowerCase()}-table`).style.display = 'block';
         state.currentTable = tableName;
         tableType.textContent = tableName;
         console.log(tableName);
@@ -300,10 +304,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             prevButton.style.display = 'inline-block';
             nextButton.style.display = 'inline-block';
         } else if (userRole === 'pilot') {
-            prevButton.style.display = currentTable === 'Pilot Crew' ? 'none' : 'inline-block';
-            nextButton.style.display = currentTable === 'Cabin Crew' ? 'none' : 'inline-block';
+            prevButton.style.display = currentTable === 'PilotCrew' ? 'none' : 'inline-block';
+            nextButton.style.display = currentTable === 'CabinCrew' ? 'none' : 'inline-block';
         } else if (userRole === 'cabincrew') {
-            prevButton.style.display = currentTable === 'Cabin Crew' ? 'none' : 'inline-block';
+            prevButton.style.display = currentTable === 'CabinCrew' ? 'none' : 'inline-block';
             nextButton.style.display = currentTable === 'Passenger' ? 'none' : 'inline-block';
         }
 
@@ -316,17 +320,30 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     prevButton.addEventListener('click', function () {
         const currentIndex = tableOrder.indexOf(state.currentTable);
-        const prevIndex = (currentIndex - 1 + tableOrder.length) % tableOrder.length;
+        let prevIndex;
+        if(currentIndex === 0)
+            {prevIndex = 2}
+        else if (currentIndex === 1)
+            {prevIndex = 0}
+        else if (currentIndex === 2)
+            {prevIndex = 1}
         showTable(tableOrder[prevIndex]);
+
     });
 
     nextButton.addEventListener('click', function () {
         const currentIndex = tableOrder.indexOf(state.currentTable);
-        const nextIndex = (currentIndex + 1) % tableOrder.length;
+        let nextIndex;
+        if(currentIndex === 0)
+            {nextIndex = 1}
+        else if (currentIndex === 1)
+            {nextIndex = 2}
+        else if (currentIndex === 2)
+            {nextIndex = 0}
         showTable(tableOrder[nextIndex]);
     });
 
-    showTable('Cabin Crew');
+    showTable('CabinCrew');
     showProfileIcon();
     console.log(currentState);
 

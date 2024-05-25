@@ -1,5 +1,6 @@
 import { getText, languages } from "../dictionary.js";
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
+import { UserData } from "../backend_communication/users/users.js";
 
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
@@ -61,10 +62,8 @@ document.getElementById('resetPasswordForm').addEventListener('submit', async (e
     const email = document.getElementById('reset_email').value;
     const newPassword = document.getElementById('reset_password').value;
 
-    let user = await UserCommunication.getUserDataByEmail(email);
-    user.password = newPassword;
-    console.log(user);
-
+    const res = await UserCommunication.forgetPassword(new UserData(email, newPassword));
+    console.log("Res: ", res);
     // Redirect to login.html in login folder
     window.location.href = '../login/login.html';
 });

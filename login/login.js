@@ -77,8 +77,9 @@ document.querySelector('form').addEventListener('submit', async function(event){
         {
             const userData = await UserCommunication.getUserData(email, password);
             const userId = userData.Id;
-            console.log(userId);
             localStorage.setItem("userId", userId);
+            localStorage.setItem("userType", userData.userType);
+            
             FlightsCommunication.getAllFlights();
             
             if(userData.isUserAdmin())

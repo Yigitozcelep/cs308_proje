@@ -5,36 +5,7 @@ import { getText } from "../dictionary.js";
 
 
 function handleLanguageChange() {
-    let lang = document.getElementById('language').value;
-    localStorage.setItem("language", lang);
-
-    const logo = document.querySelector('.logo');
-    const apply = document.getElementById('apply');
-    const helpButton = document.getElementById('helpButton');
-    const signOutLink = document.getElementById('signOutLink');
-
-    apply.innerHTML = getText("apply");
-    logo.innerHTML = getText("AIR308 Airlines");
-    helpButton.innerHTML = getText("helpButton");
-    signOutLink.innerHTML = getText("signOutLink");
-
-    document.getElementById('name_search').setAttribute('placeholder', getText('name_search'));
-    document.getElementById('surname_search').setAttribute('placeholder', getText('surname_search'));
-    document.getElementById('id_search').setAttribute('placeholder', getText('id_search'));
-    document.getElementById('email_search').setAttribute('placeholder', getText('email_search'));
-    document.getElementById('seat_search').setAttribute('placeholder', getText('seat_search'));
-    document.getElementById('name').setAttribute('placeholder', getText('name'));
-    document.getElementById('surname').setAttribute('placeholder', getText('surname'));
-
-    document.getElementById('name').innerHTML = getText('name');
-    document.getElementById('surname').innerHTML = getText('surname');
-    document.getElementById('id').innerHTML = getText('id');
-    document.getElementById('email').innerHTML = getText('email');
-    document.getElementById('seatnum').innerHTML = getText('seatnum');
-
-
-    document.querySelector('.filters-container div div').innerHTML = getText('filter_by');
-    document.querySelector('.table-name').innerHTML = getText('viewing-for');
+ 
 }
 
 document.addEventListener('DOMContentLoaded', handleLanguageChange);
@@ -70,11 +41,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     console.log(userData);
 
     async function getUserRole() {
-        const userId = localStorage.getItem("userId");
-        const user = await UserCommunication.getUserById(userId);
-        user.userType = ""; // Datadan dolayı burası dynamically gelmeli
-        console.log(user.userType);
-        return user.userType;
+        return localStorage.getItem("userType");
     }
 
     async function showProfileIcon() {

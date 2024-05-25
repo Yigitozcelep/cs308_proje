@@ -143,6 +143,7 @@ const initializeFlightImg = async () => {
     const curFlight = await FlightsCommunication.getFlightByFlightId(flightId);
     const userId = localStorage.getItem("userId");
     const curUser = await UserCommunication.getUserById(userId);
+    console.log("CurrentUser: ", curUser);
     const res = await FlightsCommunication.getSeatsData(curFlight);
     let maxSeatNum = getMaxSeatNum(res);
     if (curUser.isUserAdmin()) displayFlightCrewData(curFlight);

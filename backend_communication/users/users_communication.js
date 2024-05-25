@@ -64,33 +64,18 @@ const UserCommunication = {
      * @returns {Promise<bool>}
      */
     async forgetPassword(userData) {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');    
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        let res = await fetch("http://localhost:8080/auth/forgetPassword", {
-            mode: 'cors',
-            credentials: 'include',
-            method: 'DELETE',
-            headers: headers,
-            body: JSON.stringify({username: userData.email, password: userData.password})
-        });
+        var requestOptions = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+        method: 'POST',
+        redirect: 'follow',
+        body: JSON.stringify({username: userData.email, password: userData.password})
+    };
+        let res = await fetch("http://localhost:8080/auth/forgetPassword", requestOptions);
         res = await res.json();
         return res.status == 200;
-    },
-
-
-    /**
-     * @param {UserData} user 
-     */
-    async deleteUser(user) {
-        await new Promise(resolve => setTimeout(resolve, 50));
-        for (let i = 0; i < dummyData.dummyUsers.length; i++) {
-            if (dummyData.dummyUsers[i].email == user.email && dummyData.dummyUsers[i].password == user.password) {
-                delete dummyData.dummyUsers[i];
-                return;
-            }
-        }
     },
 
     /**
@@ -123,11 +108,49 @@ const UserCommunication = {
      * @param {String} id 
      * @returns {Promise<UserData>}
      */
-    async getUserById(id) {
-        await new Promise(resolve => setTimeout(resolve, 50));
-        for (let el of dummyData.dummyUsers) {
-            if (el.Id == id) { return el; }
+
+    async getUserById() {
+        // TODO problem need to construct 
+        const userType = localStorage.getItem("userType");
+        const id       = localStorage.getItem("userId");
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        console.log("userType: ", userType);
+        let res;
+        if (userType == UserTypes.pilotCrew) {
+            res = await fetch(`http://localhost:8080/main/pilot/${id}/getFlights`, {
+                mode: 'cors',
+                credentials: 'include',
+                method: 'GET',
+                headers: headers,
+            });
+            res = await res.json();
+            console.log("deneme123")
+        } 
+        if (userType == UserTypes.cabinCrew) {
+            res = await fetch(`http://localhost:8080/main/attendant/${id}/getFlights`, {
+                mode: 'cors',
+                credentials: 'include',
+                method: 'GET',
+                headers: headers,
+            });
+            res = await res.json();
         }
+
+
+        let pilotFlightData = [];
+        console.log("xxx: ", res.flights[0].flightData)
+        const currentFlight = res.flights[0].flightData;
+        const currentSeatData = res.flights[0].userSeat;
+
+        const seat = new Seat(currentSeatData.seatPosition, currentSeatData.seatType, currentSeatData.status, currentSeatData.userId)
+        pilotFlightData.push(new UserFlightData(currentFlight, seat, null, null, res.flights[0].role));
+
+        const data =  new UserData(res.email, res.password, res.name, res.surname, res.id, res.age, res.gender, res.nationality, res.userType, pilotFlightData[0], res.seniority, res.languages, null, res.recipe);
+        console.log(data)
+        return data;
     },
 
     /**

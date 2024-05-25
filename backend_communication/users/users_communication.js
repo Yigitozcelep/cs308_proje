@@ -139,7 +139,7 @@ const UserCommunication = {
             res = await res.json();
         }
 
-
+        console.log(res)
         let pilotFlightData = [];
         console.log("xxx: ", res.flights[0].flightData)
         const currentFlight = res.flights[0].flightData;
@@ -192,7 +192,7 @@ const UserCommunication = {
      * @param {FlightData} flight 
      */
     async refuseFlight(user, flight) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+        UserCommunication.removeCrewFromFlight(user, flight);
     },
     
     /**
@@ -235,7 +235,8 @@ const UserCommunication = {
                     gender: userData.gender,
                     nationality: userData.nationality,
                     seniority: userData.seniority,
-                    languages: userData.languages
+                    languages: userData.languages,
+                    allowedRange: userData.allowedRange,
                 })
             });
             res = await res.json();
@@ -243,6 +244,8 @@ const UserCommunication = {
 
 
         else if (userData.userType == UserTypes.cabinCrew) {
+            console.log("geliyor")
+            console.log("create user userData: ", userData)
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('Accept', 'application/json');    

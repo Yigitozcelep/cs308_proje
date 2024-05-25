@@ -1061,7 +1061,6 @@ const dictionary = {
 }
 
 const getText = (text) => {
-    console.log("text: ", text);
     return dictionary[text][localStorage.getItem("language")];
 }
 

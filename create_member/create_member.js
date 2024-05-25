@@ -115,6 +115,8 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
         userType = "PilotCrew";
     }
     
+    console.log("languages: ", languages);
+    
     
     const newUser = new UserData(
         email,
@@ -128,10 +130,9 @@ document.getElementById('createMemberButton').addEventListener('click', async (e
         userType, 
         [], // Kullanıcının uçuş bilgileri (başlangıçta boş)
         seniority, 
-        null, // Bekleyen uçuş bilgisi (başlangıçta null)
-        Recipe,
+        languages, // Bekleyen uçuş bilgisi (başlangıçta null)
         allowedRange,
-        languages
+        Recipe,
     );
     console.log(newUser);
     UserCommunication.createUser(newUser);

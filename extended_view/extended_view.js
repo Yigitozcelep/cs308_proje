@@ -1,7 +1,7 @@
 import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
 import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js";
 import { UserData } from "../backend_communication/users/users.js";
-import {UserTypes} from "../backend_communication/users/users.js"
+import { UserTypes } from "../backend_communication/users/users.js";
 import { getText } from "../dictionary.js";
 import { FlightData } from "../backend_communication/flights/flights.js";
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
@@ -10,12 +10,11 @@ function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
 
-      
     const logo = document.getElementById('logo');
     const apply = document.getElementById('apply');
 
     apply.innerHTML = getText("apply");
-    logo.innerHTML=getText("AIR308 Airlines")
+    logo.innerHTML = getText("AIR308 Airlines")
 
     name_search.setAttribute('placeholder', getText("name_search"));
     surname_search.setAttribute('placeholder', getText("surname_search"));
@@ -25,7 +24,6 @@ function handleLanguageChange() {
     seniority_search.setAttribute('placeholder', getText("seniority_search"));
     seat_search.setAttribute('placeholder', getText("seat_search"));
     email_search.setAttribute('placeholder', getText("email_search"));
-
 }
 
 document.addEventListener('DOMContentLoaded', handleLanguageChange);
@@ -34,29 +32,41 @@ document.addEventListener('DOMContentLoaded', handleLanguageChange);
 document.getElementById('language').addEventListener('change', handleLanguageChange);
 
 
-console.log(localStorage.getItem("flightIdView"));
+
 document.addEventListener('DOMContentLoaded', async function () {
+    const flightId = localStorage.getItem("flightIdView");
+    console.log(flightId);
 
+    const flightData = await FlightsCommunication.getFlightByFlightId(flightId);
+    const currentState = document.getElementById("table-type").innerHTML.replace(' ', '');
+    let userData;
 
+    if (currentState === "PilotCrew") {
+        console.log("Pilot Crew data loaded");
+        userData= await FlightsCommunication.getPilotData(flightData);
+    } else if (currentState === "Passenger") {
+        userData = await FlightsCommunication.getPassengerData(flightData);
+    } else if (currentState === "CabinCrew") {
+        console.log("Cabin Crew data loaded");
+        userData = await FlightsCommunication.getFlightCrew(flightData);
+    }
 
-    let FlightData = await FlightsCommunication.getFlightByFlightId(localStorage.getItem("flightIdView"));
-    const currentState = document.getElementById("table-type").innerHTML;
-    let currentData;
-    if (currentState === "Pilot Crew") currentData = await FlightsCommunication.getPilotData(FlightData);
-    else if (currentState === "Passenger") currentData = await FlightsCommunication.getPassangerData(FlightData);
-    else if (currentState === "Cabin Crew") currentData = await FlightsCommunication.getFlightCrew(FlightData);
-
+    console.log(flightData);
 
     var state = {
-        'querySet': currentData,
+        'querySet': userData,
         'page': 1,
         'rows': 20,
         'currentTable': currentState
-        };
+    };
+
+    function filterByUserType(userType, userData) {
+        return userData.filter(user => user.userType === userType);
+    }
 
     function buildTable() {
         var data = pagination(state.querySet, state.page, state.rows);
-        var tableBody = document.querySelector(`#${state.currentTable.toLowerCase().replace(' ', '-')}-table tbody`);
+        var tableBody = document.querySelector(`#table-body-${state.currentTable.replace(" ", "").toLowerCase()}`);
         tableBody.innerHTML = '';
 
         data.querySet.forEach(function (item) {
@@ -64,16 +74,16 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (item.flights && item.flights.length > 0) {
                 for (let item1 of item.flights) {
                     const flightData = item1.flightData;
-                   // console.log('Flight ID:', flightData.getFlightId());
-                    if (flightData.getFlightId() == localStorage.getItem("flightIdView")) {
+                    if (flightData.getFlightId() == flightId) {
                         seatNo = item1.userSeat.getSeatPosition();
                         console.log('Seat Position:', seatNo);
-                        console.log(user);
                         break;
                     }
                 }
             }
-            
+
+            console.log("Building table row", tableBody);
+
             var row = `<tr>
                 <td>${item.name}</td>
                 <td>${item.surname}</td>
@@ -81,37 +91,27 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.age}</td>
                 <td>${item.gender}</td>
                 <td>${item.nationality}</td>
-                <td>${item.email}</td>
-                <td>${item.seniority}</td>
-                <td>${seatNo ? seatNo : 'N/A'}</td>
-
+                <td>${item.email}</td>`;
+            if (state.currentTable === 'Passenger') {
+                row += `<td>${item.hasChild}</td>`;
+            } else {
+                row += `<td>${item.seniority}</td>`;
+            }
+            row += `<td>${seatNo}</td>
                 <td>
                     <button id="update-user" class="update-user" data-user-id="${item.Id}">Update</button>
-                    <button id="delete-user" class="delete-user" delete-user-id="${item.Id}">Delete</button>
+                    <button id="delete-user" class="delete-user" data-user-id="${item.Id}">Delete</button>
                 </td>
-
             </tr>`;
             tableBody.innerHTML += row;
-          
         });
 
         pageButtons(data.pages);
+        console.log("Table built successfully");
     }
-    document.getElementById('table-body-cabin-crew').addEventListener('click', async function(event) {
-        if (event.target.classList.contains('delete-user')) {
-            const userId = event.target.getAttribute('data-user-id');
-            console.log(`Deleting user with ID: ${userId}`);  
-            const user = await UserCommunication.getUserById(userId);
-            console.log(`User data for deletion: `, user);  
-            await UserCommunication.deleteUser(user);
-            event.target.closest('tr').remove();
-        } else if (event.target.classList.contains('update-user')) {
-            const userId = event.target.getAttribute('data-user-id');
-            console.log(`Updating user with ID: ${userId}`);  
-            const user = await UserCommunication.getUserById(userId);
-            console.log(`User data for update: `, user);  
-            showUpdateForm(user);
-        }
+
+    document.getElementById('add-btn').addEventListener('click', function() {
+        window.location.href = '../assignCrew/assignCrew.html';
     });
 
     function showUpdateForm(user) {
@@ -143,7 +143,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <input type="text" id="update-nationality" value="${user.nationality}">
                 <label>Seniority:</label>
                 <input type="text" id="update-seniority" value="${user.seniority}">
-                <label>Seat:</label>
                 <button type="button" id="save-update">Save</button>
                 <button type="button" id="cancel-update">Cancel</button>
             </form>
@@ -158,10 +157,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             user.gender = document.getElementById('update-gender').value;
             user.nationality = document.getElementById('update-nationality').value;
             user.seniority = document.getElementById('update-seniority').value;
-           // seatNo = document.getElementById('update-seatno').value;
 
-            console.log(`Updated user data to save: `, user);  // Debugging line
-            
             await UserCommunication.updateUser(user);
             document.body.removeChild(updateForm);
             buildTable(); // Refresh the table
@@ -171,6 +167,23 @@ document.addEventListener('DOMContentLoaded', async function () {
             document.body.removeChild(updateForm);
         });
     }
+
+    for (const el of ["pilotcrew", "cabincrew"]) {
+        document.getElementById('table-body-' + el ).addEventListener('click', async function(event) {
+            if (event.target.classList.contains('delete-user')) {
+                const userId = event.target.getAttribute('data-user-id');
+                console.log("userId: ", userId);
+                const user = await UserCommunication.getUserById(userId);
+                await UserCommunication.deleteUser(user);
+                event.target.closest('tr').remove();
+            } else if (event.target.classList.contains('update-user')) {
+                const userId = event.target.getAttribute('data-user-id');
+                const user = await UserCommunication.getUserById(userId);
+                showUpdateForm(user);
+            }
+        });
+    }
+
     function pagination(querySet, page, rows) {
         var trimStart = (page - 1) * rows;
         var trimEnd = trimStart + rows;
@@ -197,8 +210,37 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function compareValues(key, order = 'asc') {
         return function innerSort(a, b) {
-            const varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
-            const varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
+            let varA;
+            let varB;
+            if (key === "Name") {
+                varA = a.name;
+                varB = b.name;
+            } else if (key === "Surname") {
+                varA = a.surname;
+                varB = b.surname;
+            } else if (key === "user-id") {
+                varA = a.Id;
+                varB = b.Id;
+            } else if (key === "Age") {
+                varA = a.age;
+                varB = b.age;
+            } else if (key === "Gender") {
+                varA = a.gender;
+                varB = b.gender;
+            } else if (key === "Nationality") {
+                varA = a.nationality;
+                varB = b.nationality;
+            } else if (key === "Email") {
+                varA = a.email;
+                varB = b.email;
+            } else if (key === "Seniority") {
+                varA = a.seniority;
+                varB = b.seniority;
+            } else if (key === "SeatNum") {
+                varA = a.seatNum;
+                varB = b.seatNum;
+            }
+
             let comparison = 0;
             if (varA > varB) {
                 comparison = 1;
@@ -227,65 +269,85 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function searchTable(filters, data) {
         return data.filter(item => {
-            return (!filters.name || item.Name.toLowerCase().includes(filters.name.toLowerCase())) &&
-                (!filters.surname || item.Surname.toLowerCase().includes(filters.surname.toLowerCase())) &&
-                (!filters.id || item.CrewID.toLowerCase().includes(filters.id.toLowerCase())) &&
-                (!filters.age || item.Age.toString() === filters.age) &&
-                (!filters.gender || item.Gender.toLowerCase() === filters.gender.toLowerCase()) &&
-                (!filters.nationality || item.Nationality.toLowerCase().includes(filters.nationality.toLowerCase())) &&
-                (!filters.email || item.Email.toLowerCase().includes(filters.email.toLowerCase())) &&
-                (!filters.seniority || item.Seniority.toLowerCase().includes(filters.seniority.toLowerCase())) &&
-                (!filters.seatNum || item.SeatNum.toLowerCase().includes(filters.seatNum.toLowerCase()));
+            let seatNo = '';
+            if (item.flights && item.flights.length > 0) {
+                for (let item1 of item.flights) {
+                    const flightData = item1.flightData;
+                    if (flightData.getFlightId() == flightId) {
+                        seatNo = item1.userSeat.getSeatPosition();
+                        break;
+                    }
+                }
+            }
+            return (!filters.name || item.name.toLowerCase().includes(filters.name.toLowerCase())) &&
+                (!filters.surname || item.surname.toLowerCase().includes(filters.surname.toLowerCase())) &&
+                (!filters.id || item.Id.toString().includes(filters.id.toString())) &&
+                (!filters.age || item.age.toString().includes(filters.age.toString())) &&
+                (!filters.gender || item.gender.toLowerCase() === filters.gender.toLowerCase()) &&
+                (!filters.nationality || item.nationality.toLowerCase().includes(filters.nationality.toLowerCase())) &&
+                (!filters.email || item.email.toLowerCase().includes(filters.email.toLowerCase())) &&
+                (!filters.seniority || item.seniority.toLowerCase().includes(filters.seniority.toLowerCase())) &&
+                (!filters.seatNum || seatNo.toLowerCase().includes(filters.seatNum.toLowerCase()));
         });
     }
 
     function applyFilters() {
         var filters = {
-            name: document.getElementById('name-search').value,
-            surname: document.getElementById('surname-search').value,
-            id: document.getElementById('id-search').value,
-            age: document.getElementById('age-search').value,
-            gender: document.getElementById('gender-search').value,
-            nationality: document.getElementById('nationality-search').value,
-            email: document.getElementById('email-search').value,
-            seniority: document.getElementById('seniority-search').value,
-            seatNum: document.getElementById('seat-search').value
+            name: document.getElementById('name_search').value,
+            surname: document.getElementById('surname_search').value,
+            id: document.getElementById('id_search').value,
+            age: document.getElementById('age_search').value,
+            gender: document.getElementById('gender_search').value,
+            nationality: document.getElementById('nationality_search').value,
+            email: document.getElementById('email_search').value,
+            seniority: document.getElementById('seniority_search').value,
+            seatNum: document.getElementById('seat_search').value
         };
         var filteredData = searchTable(filters, currentData);
         state.querySet = filteredData;
         state.page = 1;
         buildTable();
-        
     }
 
     document.getElementById('apply').addEventListener('click', applyFilters);
 
-    
     // Table navigation
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');
     const tableType = document.getElementById('table-type');
 
-    const tableOrder = ['Pilot Crew', 'Cabin Crew', 'Passenger'];
+    const tableOrder = ['PilotCrew', 'CabinCrew', 'Passenger'];
 
-    function showTable(tableName) {
-        document.getElementById('cabin-crew-table').style.display = 'none';
+    async function showTable(tableName) {
+        document.getElementById('cabincrew-table').style.display = 'none';
         document.getElementById('passenger-table').style.display = 'none';
-        document.getElementById('pilot-crew-table').style.display = 'none';
+        document.getElementById('pilotcrew-table').style.display = 'none';
 
-        if (tableName === 'Cabin Crew') {
-            document.getElementById('cabin-crew-table').style.display = 'block';
-        } else if (tableName === 'Passenger') {
-            document.getElementById('passenger-table').style.display = 'block';
-        } else if (tableName === 'Pilot Crew') {
-            document.getElementById('pilot-crew-table').style.display = 'block';
+        if (tableName === 'Passenger') {
+            //state.querySet = filterByUserType("Passenger", userData);
+            state.querySet = userData = await FlightsCommunication.getPassangerData(flightData);
+            state.currentTable = "Passenger";
+
+        } else if (tableName === 'CabinCrew') {
+            //state.querySet = filterByUserType("CabinCrew", userData);
+            state.querySet = userData = await FlightsCommunication.getFlightCrew(flightData);
+            state.currentTable = "CabinCrew";
+
+        } else if (tableName === 'PilotCrew') {
+            //state.querySet = filterByUserType("PilotCrew", userData);
+            state.querySet = userData = await FlightsCommunication.getPilotData(flightData);
+            state.currentTable = "PilotCrew";
+
         }
+        console.log("currentState: ", state.currentTable);
 
+        document.getElementById(`${state.currentTable.toLowerCase()}-table`).style.display = 'block';
         state.currentTable = tableName;
         tableType.textContent = tableName;
         buildTable();
         updateButtons(tableName);
     }
+
     function updateButtons(currentTable) {
         const currentIndex = tableOrder.indexOf(currentTable);
         const prevIndex = (currentIndex - 1 + tableOrder.length) % tableOrder.length;
@@ -308,36 +370,4 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     showTable('Cabin Crew');
-
-    /*Popup functionality
-    var openPopupBtn = document.getElementById("open-popup-btn");
-    var popup = document.getElementById("popup");
-    var closeBtn = popup.querySelector(".close");
-
-    openPopupBtn.addEventListener("click", function () {
-        const mainDiv = document.getElementById("myMainDiv");
-        const myDiv = document.createElement("div");
-        myDiv.style.width = "100vw";
-        myDiv.classList.add("randomDiv")
-        myDiv.style.height = "100vh";
-        myDiv.style.position = "absolute";
-        myDiv.style.zIndex = 100;
-        mainDiv.appendChild(myDiv);
-
-        popup.style.display = "block";
-    });
-
-    closeBtn.addEventListener("click", function () {
-        popup.style.display = "none";
-        for (const el of document.getElementsByClassName("randomDiv")) el.parentNode.removeChild(el)
-    });
-
-    window.addEventListener("click", function (event) {
-        if (event.target == popup) {
-            popup.style.display = "none";
-        }
-    });*/
-    
-})
-
-
+});

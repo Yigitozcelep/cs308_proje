@@ -88,12 +88,21 @@ const FlightsCommunication = {
      * @returns {Promise<UserData[]>}
      */
     async getFlightCrew(flightData) {
-
-        
-
-        return dummyData.crewData[flightData.getPlaneId() - "0"]
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        const adminId = localStorage.getItem("userId");
+        let res = await fetch(`http://localhost:8080/main/flight/${flightData.getFlightId()}/getAttendants`,{
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+            headers: headers,
+            }
+        );
+        res = await res.json();
+        return res;
     },
-
 
     /**
      * @param {FlightData} flightData 
@@ -189,9 +198,10 @@ const FlightsCommunication = {
             let currentFlight = new FlightData(item.from, item.goTo, item.departureAirport, item.landingAirport, new Date(item.departureTime), new Date(item.landingTime), item.planeType, item.airlineCompany, item.flightId, item.planeId, item.menu);
             flightDatas.push(currentFlight)
         }
-        console.log(flightDatas);
         return flightDatas;
     },
+
+    
 
 
     /**

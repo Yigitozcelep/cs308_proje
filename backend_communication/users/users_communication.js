@@ -60,16 +60,26 @@ const UserCommunication = {
     },
 
     /**
-     * @param {String} email 
-     * @returns {Promise<UserData>}
+     * @param {UserData} userData 
+     * @returns {Promise<bool>}
      */
-    async getUserDataByEmail(email) {
-        await new Promise(resolve => setTimeout(resolve, 50));
-        for (let i = 0; i < dummyData.dummyUsers.length; i++) {
-            if (dummyData.dummyUsers[i].email == email) return dummyData.dummyUsers[i];
-        }
-        return 0;
+    async forgetPassword(userData) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        let res = await fetch("http://localhost:8080/auth/forgetPassword", {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'DELETE',
+            headers: headers,
+            body: JSON.stringify({username: userData.email, password: userData.password})
+        });
+        res = await res.json();
+        return res.status == 200;
     },
+
+
     /**
      * @param {UserData} user 
      */
@@ -118,6 +128,40 @@ const UserCommunication = {
         for (let el of dummyData.dummyUsers) {
             if (el.Id == id) { return el; }
         }
+    },
+
+    /**
+     * @param {UserData} userData 
+     * @param {FlightData} flightData 
+     */
+    async assignCrewToFlight(userData, flightData) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        let res = await fetch(`http://localhost:8080/main/attendant/${userData.Id}/assignToFlight/${flightData.getFlightId()}`, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',
+            headers: headers,
+        });
+        res = await res.json();
+        return res.status == 200;
+    },
+
+    async removeCrewFromFlight(userData, flightData) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        let res = await fetch(`http://localhost:8080/main/attendant/${userData.Id}/removeFromFlight/${flightData.getFlightId()}`, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'DELETE',
+            headers: headers,
+        });
+        res = await res.json();
+        return res.status == 200;
     },
 
     /**
@@ -199,8 +243,26 @@ const UserCommunication = {
                 })
             });
             res = await res.json();
-            console.log("res: ", res);
         }
+    },
+
+    /**
+     * @param {FlightData} flightData 
+     * @returns {Promise<UserData[]>}
+     */
+    async getAvailableCrew(flightData) {
+        let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');    
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+            let res = await fetch(`http://localhost:8080/main/flight/${flightData.getFlightId()}/getAvailableAttendants`, {
+                mode: 'cors',
+                credentials: 'include',
+                method: 'GET',
+                headers: headers,
+            });
+            res = await res.json();
+            return res;
     },
 }
 

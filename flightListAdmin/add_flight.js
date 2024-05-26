@@ -78,7 +78,6 @@ document.getElementById('addFlightForm').addEventListener("submit", async (event
     } catch (error) {
         
         alert("An error occurred while adding the flight. Please try again later.");
-        console.error(error);
     }
 });
 document.addEventListener('DOMContentLoaded', (event) => {

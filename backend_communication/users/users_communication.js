@@ -92,6 +92,7 @@ const UserCommunication = {
      * @param {String} purchaseId 
      */
     async refundSeat(purchaseId) {
+        console.log("purchase id:", purchaseId);
         const passangerId = localStorage.getItem("userId");
         let headers = new Headers();
         console.log("deneme1 purchaseId: ", purchaseId);
@@ -150,8 +151,6 @@ const UserCommunication = {
             });
             return res.status == 200;
         }
-
-        
 
 
 

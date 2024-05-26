@@ -66,15 +66,24 @@ class UserData {
 
 const createUserDataFromJson = (json) => {
     const userFlightDatas = [];
+    console.log("here before constructor");
+    console.log("json.flights: ", json);
     for (const data of json.flights) {
         const currentSeatData = data.userSeat;
+        console.log("here after seat data");
         const currentFlight   = data.flightData;
+        console.log("here after flight data");
         const seat = new Seat(currentSeatData.seatPosition, currentSeatData.seatType, currentSeatData.status, currentSeatData.userId)
+        console.log("here after seat data constructor");
         const flightData = new FlightData(currentFlight.from, currentFlight.goTo, currentFlight.departureAirport, currentFlight.landingAirport, currentFlight.departureTime, new Date(currentFlight.landingTime), currentFlight.planeType, currentFlight.airlineCompany, currentFlight.flightId, currentFlight.planeId, currentFlight.menu);
+        console.log("here after flight data constructor");
         userFlightDatas.push(new UserFlightData(flightData, seat, null, data.purchaseId, currentFlight.role));
+        console.log("here after push");
     }
 
     const res = new UserData(json.email, json.password, json.name, json.surname, json.id, json.age, json.gender, json.nationality, json.userType, userFlightDatas, json.seniority, json.languages, null, json.recipe);
+    console.log("res fixed: ", res);
+    
     return res;
 }
 

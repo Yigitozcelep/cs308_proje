@@ -55,7 +55,7 @@ const FlightsCommunication = {
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
         const adminId = localStorage.getItem("userId");
-        let res = await fetch("http://localhost:8080/api/flights/saveFlight/" + adminId, {
+        let res = await fetch("http://localhost:8080/api/flights/createFlight/" + adminId, {
             mode: 'cors',
             credentials: 'include',
             method: 'POST',
@@ -82,7 +82,7 @@ const FlightsCommunication = {
      * @param {FlightData} flight 
      */
     async updateFlight(flight) {
-
+        
     },
 
     /**

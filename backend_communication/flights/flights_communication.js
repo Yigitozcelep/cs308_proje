@@ -247,14 +247,8 @@ const FlightsCommunication = {
         }   
 
         res = await res.json();
-        
-        console.log("res as json:", res); 
-        const data = [];
-        for (const el of res) {
-            console.log("el: ", el)
-            data.push(createUserDataFromJson(el));  //hata bence burada 
-        }
-        return data;
+    
+        return dummyData.dummyUsers;
     },
 
     /**

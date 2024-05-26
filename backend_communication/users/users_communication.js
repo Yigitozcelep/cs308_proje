@@ -12,7 +12,6 @@ const UserCommunication = {
      * @returns {Promise<Boolean>}
      */
     async isValidUser(email, password) {
-        console.log(email, password)
         var myHeaders = new Headers();
         // josh_flight@gmail.com
         // pswrd4321
@@ -84,7 +83,7 @@ const UserCommunication = {
      */
     async buySeat(flight, seat) {
         await new Promise(resolve => setTimeout(resolve, 50));
-
+        
     },
     
     /**
@@ -94,7 +93,6 @@ const UserCommunication = {
     async refundSeat(purchaseId) {
         const passangerId = localStorage.getItem("userId");
         let headers = new Headers();
-        console.log("deneme1 purchaseId: ", purchaseId);
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
@@ -106,7 +104,7 @@ const UserCommunication = {
         });
         return res.status == 200;
     },
-    
+
     /**
      * localstorageda current user idsi var
      * @param {UserData} user
@@ -119,7 +117,6 @@ const UserCommunication = {
         if (userType == UserTypes.cabinCrew)
         {
             let headers = new Headers();
-            console.log("deneme1 purchaseId: ", purchaseId);
             headers.append('Content-Type', 'application/json');
             headers.append('Accept', 'application/json');    
             headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
@@ -136,7 +133,6 @@ const UserCommunication = {
         else if (userType == UserTypes.pilotCrew)
         {
             let headers = new Headers();
-            console.log("deneme1 purchaseId: ", purchaseId);
             headers.append('Content-Type', 'application/json');
             headers.append('Accept', 'application/json');    
             headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
@@ -156,7 +152,6 @@ const UserCommunication = {
     },
 
     /**
-     * @param {String} id 
      * @returns {Promise<UserData>}
      */
 
@@ -164,7 +159,6 @@ const UserCommunication = {
         // TODO problem need to construct 
         const userType = localStorage.getItem("userType");
         const id       = localStorage.getItem("userId");
-        console.log("userType: ", userType);
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
@@ -180,10 +174,9 @@ const UserCommunication = {
                 headers: headers,
             });
         res = await res.json();
-        console.log("res: ", res);
         return createUserDataFromJson(res);
     },
-
+    
     /**
      * @param {UserData} userData 
      * @param {FlightData} flightData 
@@ -214,8 +207,6 @@ const UserCommunication = {
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
         let url;
-        console.log("userData: ", userData);
-        console.log("FlightData: ", flightData);
         if (userData.isUserPilotCrew()) url = `http://localhost:8080/main/pilot/${userData.Id}/removeFromFlight/${flightData.getFlightId()}`;
         if (userData.isUserCabinCrew()) url = `http://localhost:8080/main/attendant/${userData.Id}/removeFromFlight/${flightData.getFlightId()}`;
         let res = await fetch(url, {
@@ -242,7 +233,6 @@ const UserCommunication = {
     async createUser(userData) {
         console.log("user type:", userData.userType);
         if (userData.userType == UserTypes.passanger) {
-            console.log("currentUser: ", userData);
             var requestOptions = {
                 headers: {
                     'Accept': 'application/json',
@@ -284,8 +274,6 @@ const UserCommunication = {
 
 
         else if (userData.userType == UserTypes.cabinCrew) {
-            console.log("geliyor")
-            console.log("create user userData: ", userData)
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('Accept', 'application/json');    

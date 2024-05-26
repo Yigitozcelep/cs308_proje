@@ -1,6 +1,6 @@
 import * as dummyData from "../dummy_data.js"
 import { UserData, UserFlightData, createUserDataFromJson } from "../users/users.js";
-import { FlightData, Seats, Seat } from "./flights.js";
+import { FlightData, Seats, Seat, convertJsonToSeats } from "./flights.js";
 
 const FlightsCommunication = {
 
@@ -29,7 +29,6 @@ const FlightsCommunication = {
      */
     async deleteFlight(flightId) {
         let headers = new Headers();
-        console.log("flightId: ", flightId);
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
@@ -39,9 +38,6 @@ const FlightsCommunication = {
             method: 'DELETE',
             headers: headers,
         });
-        console.log("res1: " ,res);
-        
-        console.log("res: ", res.status);
         return res.status == 200;
     },
 
@@ -123,7 +119,6 @@ const FlightsCommunication = {
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
         const adminId = localStorage.getItem("userId");
-        console.log("flightData: ", flightData);
         let res = await fetch(`http://localhost:8080/main/flight/${flightData.getFlightId()}/getAttendants`,{
             mode: 'cors',
             credentials: 'include',
@@ -184,7 +179,6 @@ const FlightsCommunication = {
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
         const adminId = localStorage.getItem("userId");
-        console.log("flightData: ", flightData);
         let res = await fetch(` http://localhost:8080/main/flight/${flightData.getFlightId()}/getPassengers`,{
             mode: 'cors',
             credentials: 'include',
@@ -367,8 +361,19 @@ const FlightsCommunication = {
      * @returns {Promise<Seats>}
      */
     async getSeatsData(flight) {
-        await new Promise(resolve => setTimeout(resolve, 50));
-        return dummyData.seats[flight.getFlightId().slice(2) - "0"];
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        let res = await fetch(`http://localhost:8080/api/flights/${flight.getFlightId()}/seats`, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+            headers: headers,
+        })
+        res = await res.json();
+        return convertJsonToSeats(res);
+        
     }
 }
 

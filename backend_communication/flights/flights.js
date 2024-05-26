@@ -147,4 +147,26 @@ class Seats {
     getAvaliableBussinesSeats()         { return new Seats(this.#seats.filter(seat => seat.isSeatBussiness() && seat.isSeatAvaliable()), this.#rowCount, this.#bussinessConsecutiveSeat, this.#ecenomyConsecutiveSeat)        }
 }
 
-export {SeatStatus, SeatTypes, FlightData, Seat, Seats}
+const convertJsonToSeats = (json) => {
+    const seatList  = json.seatList;
+    const seatsData = [];
+    const bData     = seatList[0].columns.split("/");
+    const rowCount  = bData.length;
+    const Bleft = bData[0].split("-")[0].charCodeAt(0);
+    const Bright = bData[0].split("-")[1].charCodeAt(0);
+    
+    const eData     = seatList[1].columns.split("/");
+    const Eleft = bData[0].split("-")[0].charCodeAt(0);
+    const Eright = bData[0].split("-")[1].charCodeAt(0);
+
+    const bussinessConsecutiveSeat = Bright - Bleft + 1;
+    const ecenomyConsecutiveSeat   = Eright - Eleft + 1;
+    
+    for (const el of json.seatingList) {
+        const seatStatus = (el.status === false) ? SeatStatus.avaliable : SeatStatus.unAvaliable;
+        seatsData.push(new Seat(el.seatPosition, el.seatType, seatStatus, el.userId));
+    }
+    return new Seats(seatsData, rowCount, bussinessConsecutiveSeat, ecenomyConsecutiveSeat);
+}
+
+export {SeatStatus, SeatTypes, FlightData, Seat, Seats, convertJsonToSeats}

@@ -1,6 +1,7 @@
 import { getText } from "../dictionary.js";
 import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
+import { UserTypes } from "../backend_communication/users/users.js";
 
 
 const helpDiv    = document.getElementById("helpDiv");
@@ -8,13 +9,29 @@ const helpButton = document.getElementById("helpButton");
 const signOut    = document.getElementById("signOut");
 const title      = document.getElementById("myTitle");
 const brandName  = document.getElementById("brandName");
+const jsonDiv    = document.getElementById("exportJson");
+
+jsonDiv.onclick = async () => {
+    const flightId  = localStorage.getItem("flightIdView");
+    const curFlight = await FlightsCommunication.getFlightByFlightId(flightId);
+    const cabinCrew = await FlightsCommunication.getFlightCrew(curFlight);
+
+    const dataStr = JSON.stringify(cabinCrew, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.json';
+    a.click();
+}
+
 
 const changeHelp = async () => {
     const userId  = localStorage.getItem("userId");
     const curUser = await UserCommunication.getUserById(userId);
     if (curUser.isUserAdmin()) helpDiv.innerHTML = getText("plaineViewHelpAdmin");
     else helpDiv.innerHTML = getText("plaineViewHelpPassanger");
-}
+}   
 
 document.addEventListener('DOMContentLoaded', (event) => {
     var helpButton = document.getElementById('helpButton');
@@ -109,8 +126,8 @@ const getMaxSeatNum = (seatData) => {
 }
 
 const displayFlightCrewData = async (curFlight) => {
-
     const cabinCrew = await FlightsCommunication.getFlightCrew(curFlight);
+    jsonDiv.style.visibility = "visible";
     flightCrewInfoTable.style.visibility = "visible";
 
     for (const el of cabinCrew) {
@@ -142,24 +159,24 @@ const initializeFlightImg = async () => {
     const flightId  = localStorage.getItem("flightIdView");
     const curFlight = await FlightsCommunication.getFlightByFlightId(flightId);
     const userId = localStorage.getItem("userId");
-    const curUser = await UserCommunication.getUserById(userId);
-    console.log("CurrentUser: ", curUser);
+    const currentType = localStorage.getItem("userType");
+
     const res = await FlightsCommunication.getSeatsData(curFlight);
     let maxSeatNum = getMaxSeatNum(res);
-    if (curUser.isUserAdmin()) displayFlightCrewData(curFlight);
+    if (currentType == UserTypes.admin) displayFlightCrewData(curFlight);
     else buySeatButton.style.visibility = "visible";
     const airPlaineWidth  = 800;
     const airPlaineHeight = 200;
     const bussinessHeight = airPlaineHeight / (res.getRowCount() * res.getBussinessConsecutiveSeat() + res.getRowCount() - 1);
     const ecenomyHeight   = airPlaineHeight / (res.getRowCount() * res.getEcenomyConsecutiveSeat() + res.getRowCount() - 1);
     const width = airPlaineWidth / (maxSeatNum * 1.8);
-
+    
     for (let seat of res.iterateSeats()) {
         const row = seat.getSeatLetter().charCodeAt() - 'A'.charCodeAt();
         const column = seat.getSeatNumber() - "1";
         const img = document.createElement("img");
-        
-        if (curUser.isUserAdmin()) {
+
+        if (currentType === UserTypes.admin) {
             img.className = "adminSeat";
             img.addEventListener("click", async e => {
                 const seatUser = await UserCommunication.getUserById(seat.getUserId());
@@ -172,7 +189,6 @@ const initializeFlightImg = async () => {
                 userInfoTable.style.visibility = "visible";
             })
         }
-
         else if (seat.isSeatAvaliable()) {
             img.className = "passangerSeat";
             const func = selectSeatListener.bind(this, img);
@@ -192,6 +208,7 @@ const initializeFlightImg = async () => {
             img.style.left = (airPlaineLeft + width * 1.8 * column) + "px";
         }
         else {
+            console.log(seat);
             img.src = (seat.isSeatAvaliable()) ? "svgs/normalSeatAvaliable.svg" : "svgs/normalSeatUnAvaliable.svg"
             img.style.height = ecenomyHeight + "px";
             img.style.width = width + "px";

@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function buildTable() {
         var data = pagination(state.querySet, state.page, state.rows);
-        var tableBody = document.querySelector(`table-body-${state.currentTable.toLowerCase().replace(' ','')}`);
+        var tableBody = document.getElementById(`table-body-${state.currentTable.toLowerCase().replace(' ','')}`);
         tableBody.innerHTML = '';
 
         data.querySet.forEach(function (item) {
@@ -222,7 +222,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const userId = event.target.getAttribute('data-user-id');
                 console.log("userId: ", userId);
                 const user = getUserById(userId);
-                await UserCommunication.deleteUser(user);
+                const currentFlightData = await FlightsCommunication.getFlightByFlightId(localStorage.getItem("flightIdView"));
+                await UserCommunication.removeCrewFromFlight(user, currentFlightData);
                 event.target.closest('tr').remove();
             } else if (event.target.classList.contains('update-user')) {
                 const userId = event.target.getAttribute('data-user-id');
@@ -374,23 +375,23 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (tableName === 'Passenger') {
           //  console.log(userData)
             state.querySet = filterByUserType("Passenger", userData);
-            state.querySet = userData = await FlightsCommunication.getPassangerData(FlightData);
+            state.querySet = userData = await FlightsCommunication.getPassangerData(flightData);
             state.currentTable = "Passenger";
 
         } 
         else if (tableName === 'CabinCrew') {
             state.querySet = filterByUserType("CabinCrew", userData);
-            state.querySet = userData = await FlightsCommunication.getFlightCrew(FlightData);
+            state.querySet = userData = await FlightsCommunication.getFlightCrew(flightData);
             state.currentTable = "CabinCrew";
 
         } else if (tableName === 'PilotCrew') {
           state.querySet = filterByUserType("PilotCrew", userData);
-            state.querySet = userData = await FlightsCommunication.getPilotData(FlightData);
+            state.querySet = userData = await FlightsCommunication.getPilotData(flightData);
             state.currentTable = "PilotCrew";
         }
         console.log(state.currentTable.toLowerCase());
-        document.getElementById(`${state.currentTable.toLowerCase()}`-table).style.display = 'block';
-        state.currentTable = tableName;
+        document.getElementById(`${state.currentTable.toLowerCase()}-table`).style.display = 'block';
+        state.currentTable = tableName
         tableType.textContent = tableName;
         console.log(tableName);
         buildTable();

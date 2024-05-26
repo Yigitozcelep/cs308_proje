@@ -1073,7 +1073,7 @@ const dictionary = {
         [languages.turkish]: "Eposta",
         [languages.english]: "Email Address"
     },
-    "seatnum": {
+    "seatNum": {
         [languages.turkish]: "Koltuk Numarası",
         [languages.english]: "Seat Number"
     },

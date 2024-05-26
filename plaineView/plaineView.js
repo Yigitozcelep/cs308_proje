@@ -28,8 +28,7 @@ jsonDiv.onclick = async () => {
 
 const changeHelp = async () => {
     const userId  = localStorage.getItem("userId");
-    const curUser = await UserCommunication.getUserById(userId);
-    if (curUser.isUserAdmin()) helpDiv.innerHTML = getText("plaineViewHelpAdmin");
+    if (localStorage.getItem("userType") === UserTypes.admin) helpDiv.innerHTML = getText("plaineViewHelpAdmin");
     else helpDiv.innerHTML = getText("plaineViewHelpPassanger");
 }   
 
@@ -242,7 +241,7 @@ const buySeatPopUp = (seat, flightData) => {
     popup.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
     popup.style.zIndex = '1000';
     const message = document.createElement('p');
-    message.textContent = getText("DoYouHaveChild");
+    message.textContent = getText("DoYouHaveChild") +  seat.getSeatPosition();
     popup.appendChild(message);
 
     const trueButton = document.createElement('button');
@@ -265,8 +264,11 @@ const buySeatPopUp = (seat, flightData) => {
 
 buySeatButton.onclick = async (e) => {
     const selectedSeats = document.getElementsByClassName("selectedSeat");
-    Array.from(selectedSeats).forEach(el => {
-        
+    const data = Array.from(selectedSeats);
+    if (data.length == 0) { 
+        UserCommunication.autoBuySeat(); 
+    }
+    data.forEach(el => {
         buySeatPopUp(el.seatData);
         el.classList.remove("selectedSeat");
         if (el.seatData.isSeatBussiness()) el.src = "svgs/bussinessSeatUnAvaliable.svg";

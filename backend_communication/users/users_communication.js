@@ -87,8 +87,8 @@ const UserCommunication = {
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        
-        let res = await fetch(`passenger/${passengerId}/bookFlight/${flight.getFlightId()}/${isParent}`, {
+        console.log("seat: ", seat.getSeatPosition());
+        let res = await fetch(`http://localhost:8080/main/passenger/${localStorage.getItem("userId")}/bookFlight/${flight.getFlightId()}/${isParent}`, {
             mode: 'cors',
             credentials: 'include',
             method: 'POST',
@@ -99,6 +99,23 @@ const UserCommunication = {
                 status: !seat.isSeatAvaliable(),
                 userId: seat.getUserId(),
             })
+        });
+        console.log("res:", res);
+        res = await res.json();
+    },
+
+    async autoBuySeat() {
+        const passengerId = localStorage.getItem("userId");
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        const flightID = localStorage.getItem("flightIdView");
+        let res = await fetch(`http://localhost:8080/passenger/${localStorage.getItem("userId")}/bookFlightAuto/${flightID}/T/false`, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',
+            headers: headers,
         });
         console.log("res: ", res);
         res = await res.json();
@@ -192,6 +209,7 @@ const UserCommunication = {
                 headers: headers,
             });
         res = await res.json();
+        console.log("differnet resposne: ", res);
         return createUserDataFromJson(res);
     },
 

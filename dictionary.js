@@ -1091,8 +1091,8 @@ const dictionary = {
     },
 
     "DoYouHaveChild": {
-        [languages.english]: "Will you sit with your child ?",
-        [languages.turkish]: "Çocuğunuz ile mi oturcaksınz ?"
+        [languages.english]: "Will you sit with your child ?  Seat Number: ",
+        [languages.turkish]: "Çocuğunuz ile mi oturcaksınz ?  Koltuk Numarası: "
     },
 
     "Yes": {

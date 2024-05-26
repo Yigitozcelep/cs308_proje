@@ -329,6 +329,7 @@ const FlightsCommunication = {
             headers: headers,
 
         })
+        console.log("res: ", res);
         res = await res.json();
         let flightDatas = []
         

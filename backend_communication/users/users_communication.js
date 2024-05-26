@@ -317,6 +317,10 @@ const UserCommunication = {
      * @returns {Promise<UserData[]>}
      */
     async getAvailableCrew(flightData) {
+        
+        
+        //for available attendants 
+        
         let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('Accept', 'application/json');    
@@ -327,8 +331,15 @@ const UserCommunication = {
                 method: 'GET',
                 headers: headers,
             });
+            console.log("res::", res);            
             res = await res.json();
             return res;
+
+
+
+
+
+        //for available 
     },
 }
 

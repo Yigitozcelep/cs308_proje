@@ -379,17 +379,21 @@ document.addEventListener('DOMContentLoaded', async function () {
             state.querySet = filterByUserType("Passenger", userData);
             state.querySet = userData = await FlightsCommunication.getPassangerData(flightData);
             state.currentTable = "Passenger";
+            localStorage.setItem("currentTable", state.currentTable);
 
         } 
         else if (tableName === 'CabinCrew') {
             state.querySet = filterByUserType("CabinCrew", userData);
             state.querySet = userData = await FlightsCommunication.getFlightCrew(flightData);
             state.currentTable = "CabinCrew";
+            localStorage.setItem("currentTable", state.currentTable);
+
 
         } else if (tableName === 'PilotCrew') {
           state.querySet = filterByUserType("PilotCrew", userData);
             state.querySet = userData = await FlightsCommunication.getPilotData(flightData);
             state.currentTable = "PilotCrew";
+            localStorage.setItem("currentTable", state.currentTable);
         }
         console.log(state.currentTable.toLowerCase());
         document.getElementById(`${state.currentTable.toLowerCase()}-table`).style.display = 'block';

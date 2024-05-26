@@ -1,27 +1,19 @@
 import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js";
+import { UserTypes } from "../backend_communication/users/users.js";
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
 import { getText } from "../dictionary.js";
+
+const tableType = localStorage.getItem("currentTable");
+
 
 async function fetchAvailableMembers() {
 
     console.log(localStorage.getItem("flightIdView"));
     
-    // let availableMembers = await UserCommunication.getAvailableMembers();
+    //let availableMembers = await UserCommunication.getAvailableCrew();
     // For now, using dummy data
-    const availableMembers = [
-        {
-            Id: '1',
-            name: 'John',
-            surname: 'Doe',
-            age: 30,
-            gender: 'Male',
-            nationality: 'American',
-            email: 'john.doe@outlook.com',
-            seniority: 'Senior',
-            seatNum: 'A1'
-        },
-    ];
-    return availableMembers;
+    
+    //return availableMembers;
 }
 
 async function addMemberToFlight(memberId) {
@@ -46,7 +38,33 @@ async function addMemberToFlight(memberId) {
 
 document.addEventListener('DOMContentLoaded', async function () {
     handleLanguageChange();
-    const availableMembers = await FlightsCommunication.getPilotData();
+    const flightId = localStorage.getItem("flightIdView");
+    console.log("flight Id: ", flightId);
+
+    const flightData = await FlightsCommunication.getFlightByFlightId(flightId);
+
+    let userData;
+
+    let availableMembers;
+
+    console.log("table type: " , tableType);
+    if (tableType == UserTypes.pilotCrew)
+    {
+        availableMembers = await FlightsCommunication.getAvailablePilotData(flightData);
+        console.log("got available pilots");
+    
+    }
+    else if (tableType == UserTypes.cabinCrew)
+    {
+        availableMembers = await FlightsCommunication.getAvailableFlightCrew(flightData);
+        console.log("got available attendants");
+
+    }
+    
+
+
+
+
     console.log(availableMembers);
     
     buildTable(availableMembers);

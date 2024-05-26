@@ -139,6 +139,40 @@ const FlightsCommunication = {
         return data;
     },
 
+    /**
+     * @param {FlightData} flightData 
+     * @returns {Promise<UserData[]>}
+     */
+    async getAvailableFlightCrew(flightData) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        const adminId = localStorage.getItem("userId");
+        console.log("flightData: ", flightData);
+        let res = await fetch(`http://localhost:8080/main/flight/${flightData.getFlightId()}/getAvailableAttendants`,{
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+            headers: headers,
+            }
+        );
+        console.log("res:", res);
+        if (res.status == 404)
+        {
+            //add alert here 
+            window.location.href = "../extended_view/extended_view.html"
+        }            
+        res = await res.body.json();
+
+        console.log("res as json:", res); 
+        const data = []
+        for (const el of res) {
+            data.push(createUserDataFromJson(el));
+        }
+        return data;
+    },
+
 
     /**
      * @param {FlightData} flightData 
@@ -188,6 +222,43 @@ const FlightsCommunication = {
         const data = [];
         for (const el of res) {
             data.push(createUserDataFromJson(el));
+        }
+        return data;
+    },
+
+    /**
+     * @param {FlightData} flightData 
+     * @returns {Promise<UserData[]>}
+     */
+    async getAvailablePilotData(flightData) {
+        
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        const adminId = localStorage.getItem("userId");
+        let res = await fetch(`http://localhost:8080/main/flight/${flightData.getFlightId()}/getAvailablePilots`,{
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+            headers: headers,
+            }
+        );
+        console.log("res:", res);     
+        
+        if (res.status == 404)
+        {
+                //add alert here 
+                window.location.href = "../extended_view/extended_view.html"
+        }   
+
+        res = await res.json();
+        
+        console.log("res as json:", res); 
+        const data = [];
+        for (const el of res) {
+            console.log("el: ", el)
+            data.push(createUserDataFromJson(el));  //hata bence burada 
         }
         return data;
     },

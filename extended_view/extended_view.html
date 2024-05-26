@@ -28,7 +28,7 @@
                      If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.</p>
                 </div>
               </div>
-            <a href="../start_screen/index.html" class="top-bar-item">Sign Out</a>
+            <a href="../start_screen/index.html" class="top-bar-item" id="signOutLink">Sign Out</a>
         </div>
 
         <div class="main-container" id="myMainDiv">
@@ -59,11 +59,11 @@
                     <table>
                         <thead>
                         <tr>
-                            <th id="name" data-column="Name" data-order="desc">Name</th>
-                            <th id="surname"data-column="Surname" data-order="desc">Surname</th>
-                            <th id="id" data-column="user-id" data-order="desc">ID</th>
-                            <th id="age" data-column="Age" data-order="desc">Age</th>
-                            <th id="gender" data-column="Gender" data-order="desc">Gender</th>
+                            <th class="column-name" data-column="Name" data-order="desc">Name</th>
+                            <th class="column-surname" data-column="Surname" data-order="desc">Surname</th>
+                            <th class="column-id" id="id" data-column="user-id" data-order="desc">ID</th>
+                            <th class="column-age" id="age" data-column="Age" data-order="desc">Age</th>
+                            <th class="column-gender" id="gender" data-column="Gender" data-order="desc">Gender</th>
                             <th id="nationality" data-column="Nationality" data-order="desc">Nationality</th>
                             <th id="email" data-column="Email" data-order="desc">Email Address</th>
                             <th id="seniority" data-column="seniority" data-order="desc">Seniority</th>
@@ -81,7 +81,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th id="name" data-column="Name" data-order="desc">Name</th>
+                                <th class="column-name" id="name" data-column="Name" data-order="desc">Name</th>
                                 <th id="surname"data-column="Surname" data-order="desc">Surname</th>
                                 <th id="id" data-column="user-id" data-order="desc">ID</th>
                                 <th id="age" data-column="Age" data-order="desc">Age</th>
@@ -149,4 +149,4 @@
 
     </body>
     
-</html>      
+</html>

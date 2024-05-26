@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function buildTable() {
         var data = pagination(state.querySet, state.page, state.rows);
-        var tableBody = document.querySelector(#table-body-${state.currentTable.toLowerCase().replace(' ','')});
+        var tableBody = document.querySelector(`table-body-${state.currentTable.toLowerCase().replace(' ','')}`);
         tableBody.innerHTML = '';
 
         data.querySet.forEach(function (item) {
@@ -131,9 +131,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.nationality}</td>
                 <td>${item.email}</td>`;
             if (state.currentTable === 'Passenger') {
-                row += <td>${item.hasChild}</td>;
+                row += `<td>${item.hasChild}</td>`;
             } else {
-                row += <td>${item.seniority}</td>;
+                row += `<td>${item.seniority}</td>`;
             }
             row += `<td>${seatNo}</td>
                 <td>
@@ -389,7 +389,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             state.currentTable = "PilotCrew";
         }
         console.log(state.currentTable.toLowerCase());
-        document.getElementById(${state.currentTable.toLowerCase()}-table).style.display = 'block';
+        document.getElementById(`${state.currentTable.toLowerCase()}`-table).style.display = 'block';
         state.currentTable = tableName;
         tableType.textContent = tableName;
         console.log(tableName);
@@ -406,8 +406,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         const prevIndex = (currentIndex - 1 + availableTables.length) % availableTables.length;
         const nextIndex = (currentIndex + 1) % availableTables.length;
 
-        prevButton.textContent = < ${availableTables[prevIndex]};
-        nextButton.textContent = ${availableTables[nextIndex]} >;
+        prevButton.textContent = `< ${availableTables[prevIndex]}`;
+        nextButton.textContent =` ${availableTables[nextIndex]} >`;
     }
 
 
@@ -423,5 +423,5 @@ document.addEventListener('DOMContentLoaded', async function () {
         showTable(tableOrder[nextIndex]);
     });
 
-    showTable('Cabin Crew');
+    showTable('CabinCrew');
 });

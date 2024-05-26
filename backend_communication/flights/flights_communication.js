@@ -25,6 +25,7 @@ const FlightsCommunication = {
 
     /**
      * @param {String} flightId
+     * @returns {boolean}
      */
     async deleteFlight(flightId) {
         let headers = new Headers();
@@ -38,7 +39,9 @@ const FlightsCommunication = {
             method: 'DELETE',
             headers: headers,
         });
-        res = await res.json();
+        console.log("res1: " ,res);
+        
+        console.log("res: ", res.status);
         return res.status == 200;
     },
 

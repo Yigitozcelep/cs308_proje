@@ -80,7 +80,10 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     }
 
     document.getElementById('personalInfoForm').addEventListener('submit', async function(event) {
+        
         event.preventDefault();
+
+        let lang = document.getElementById('language').value;
         const surname = document.getElementById('personalP_surname').value;
         const password = document.getElementById('personalP_password').value;
 

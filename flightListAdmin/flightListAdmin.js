@@ -234,11 +234,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
     document.getElementById('table-body').addEventListener('click', async function(event) {
         if (event.target.classList.contains('delete-row')) {
+            
+            console.log("here1");
             const flightId = event.target.getAttribute('delete-flight-id');
             const status = await FlightsCommunication.deleteFlight(flightId);
             if(status)
             {
-                document.querySelector(`button[delete-flight-id="${flightId}"]`).closest('tr').remove();
+                console.log("here2");
+                location.reload();
+                console.log("here3");
             }
             else
             {

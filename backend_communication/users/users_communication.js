@@ -104,7 +104,6 @@ const UserCommunication = {
             method: 'DELETE',
             headers: headers,
         });
-        res = await res.json();
         return res.status == 200;
     },
 
@@ -113,7 +112,49 @@ const UserCommunication = {
      * @param {UserData} user
      */
     async updateUser(user) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+        
+        const userType = localStorage.getItem("userType");
+        const id = localStorage.getItem("userId");
+
+        if (userType == UserTypes.cabinCrew)
+        {
+            let headers = new Headers();
+            console.log("deneme1 purchaseId: ", purchaseId);
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');    
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+            let res = await fetch(`http://localhost:8080/api/attendants/${id}`, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'PUT',
+            headers: headers,
+
+            //body lazım buraya 
+        });
+        return res.status == 200;
+        }
+        else if (userType == UserTypes.pilotCrew)
+        {
+            let headers = new Headers();
+            console.log("deneme1 purchaseId: ", purchaseId);
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');    
+            headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+            let res = await fetch(`http://localhost:8080/api/pilots/${id}`, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'PUT',
+            headers: headers
+
+            //body lazım buraya 
+            });
+            return res.status == 200;
+        }
+
+        
+
+
+
     },
 
     /**

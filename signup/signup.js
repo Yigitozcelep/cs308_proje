@@ -1,5 +1,5 @@
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
-import { UserData } from "../backend_communication/users/users.js";
+import { UserData, UserTypes } from "../backend_communication/users/users.js";
 import { getText, languages } from "../dictionary.js"; // dictionary.js'yi içe aktarıyoruz
 
 function handleLanguageChange() {
@@ -96,13 +96,14 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
         age, // Yaşı integer olarak kaydedin
         gender,
         nationality,
-        'Passsenger', // Varsayılan olarak kullanıcı türü yolcu
+        UserTypes.passanger, // Varsayılan olarak kullanıcı türü yolcu
         [], // Kullanıcının uçuş bilgileri (başlangıçta boş)
         true, // Uçuşları reddedebilme durumu
         null // Bekleyen uçuş bilgisi (başlangıçta null)
     );
     await UserCommunication.createUser(newUser);
-    
+    let lang = document.getElementById('language').value;
+
     if(lang == "turkish")
         {
             alert("Kayıt başarılı!")
@@ -111,5 +112,5 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
         {
             alert("Registration Successful!")
         }
-    window.location.href = '../login/login.html'; // Giriş sayfasına yönlendirin
+    //window.location.href = '../login/login.html'; // Giriş sayfasına yönlendirin
 });

@@ -249,7 +249,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         else if (event.target.classList.contains('select-row')) 
         {
             const flightId = event.target.getAttribute('select-flight-id');
+            let flightData = await FlightsCommunication.getFlightByFlightId(flightId);
+
             localStorage.setItem("flightIdView", flightId);
+            localStorage.setItem("menu", flightData.getMenu());
+            localStorage.setItem("planeId", flightData.getPlaneId());
+            localStorage.setItem("vehicleType", flightData.getPlaneType());
             showPopup();
         }
     });
@@ -277,7 +282,14 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.getElementById('button4').addEventListener('click', function() {
         showUpdatePopup();
         const flightIdToUpdate = localStorage.getItem("flightIdView");
+        const foodMenu = localStorage.getItem("menu");
+        const planeId = localStorage.getItem("planeId");
+        const vehicleType = localStorage.getItem("vehicleType");
         document.getElementById('flightId').value = flightIdToUpdate;
+        document.getElementById('newFoodMenu').value = foodMenu;
+        document.getElementById('newVehicleType').value = vehicleType;
+        document.getElementById('newPlaneId').value = planeId;
+
 
     });
     document.getElementById('updateForm').addEventListener('submit', async function(event) {

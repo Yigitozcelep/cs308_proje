@@ -240,6 +240,7 @@ const UserCommunication = {
      * @param {UserData} userData 
      */
     async createUser(userData) {
+        console.log("user type:", userData.userType);
         if (userData.userType == UserTypes.passanger) {
             console.log("currentUser: ", userData);
             var requestOptions = {
@@ -253,8 +254,7 @@ const UserCommunication = {
         };  
         
             let response = await fetch("http://localhost:8080/auth/register", requestOptions);
-            response = await response.json()
-            return user;
+            return response.status == 200;
         }
         else if (userData.userType == UserTypes.pilotCrew) {
             let headers = new Headers();

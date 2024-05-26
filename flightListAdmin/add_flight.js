@@ -74,7 +74,7 @@ document.getElementById('addFlightForm').addEventListener("submit", async (event
         await FlightsCommunication.addFlight(flightData);
         document.getElementById('addFlightForm').reset();
        
-        //window.location.href = "flightListAdmin.html";
+        window.location.href = "flightListAdmin.html";
     } catch (error) {
         
         alert("An error occurred while adding the flight. Please try again later.");

@@ -92,14 +92,13 @@ const UserCommunication = {
      * @param {String} purchaseId 
      */
     async refundSeat(purchaseId) {
-        console.log("purchase id:", purchaseId);
         const passangerId = localStorage.getItem("userId");
         let headers = new Headers();
         console.log("deneme1 purchaseId: ", purchaseId);
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        let res = await fetch(`http://localhost:8080/main/passenger/${passangerId}/cancelFlight/${purchaseId}`, {
+        let res = await fetch(`http://localhost:8080/main/passenger/${passangerId}/cancelBooking/${purchaseId}`, {
             mode: 'cors',
             credentials: 'include',
             method: 'DELETE',

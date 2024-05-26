@@ -215,6 +215,8 @@ const UserCommunication = {
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
         let url;
+        console.log("userData: ", userData);
+        console.log("FlightData: ", flightData);
         if (userData.isUserPilotCrew()) url = `http://localhost:8080/main/pilot/${userData.Id}/removeFromFlight/${flightData.getFlightId()}`;
         if (userData.isUserCabinCrew()) url = `http://localhost:8080/main/attendant/${userData.Id}/removeFromFlight/${flightData.getFlightId()}`;
         let res = await fetch(url, {
@@ -224,6 +226,7 @@ const UserCommunication = {
             headers: headers,
         });
         res = await res.json();
+        console.log("res: ", res);
         return res.status == 200;
     },
 

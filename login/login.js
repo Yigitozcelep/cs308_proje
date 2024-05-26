@@ -9,6 +9,7 @@ function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
 
+    document.getElementById('brandName').innerHTML = getText("brandName");
     document.getElementById('loginTitle').innerHTML = getText("loginTitle");
     document.getElementById('log_email').innerHTML = getText("log_email");
     document.getElementById('log_password').innerHTML = getText("log_password");

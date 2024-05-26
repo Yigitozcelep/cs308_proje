@@ -226,7 +226,6 @@ const UserCommunication = {
             headers: headers,
         });
         res = await res.json();
-        console.log("res: ", res);
         return res.status == 200;
     },
 

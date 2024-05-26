@@ -117,7 +117,24 @@ const FlightsCommunication = {
      * @returns {Promise<UserData[]>} 
      */
     async getPassangerData(flightData) {
-        return dummyData.dummyUsers;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        const adminId = localStorage.getItem("userId");
+        console.log("flightData: ", flightData);
+        let res = await fetch(` http://localhost:8080/main/flight/${flightData.getFlightId()}/getPassengers`,{
+            mode: 'cors',
+            credentials: 'include',
+            method: 'GET',
+            headers: headers,
+            }
+        );
+        res = await res.json();
+        const data = [];
+        for (const el of res) data.push(createUserDataFromJson(el));
+        return data;
+        
     },
     /**
      * @param {FlightData} flightData 

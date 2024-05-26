@@ -7,10 +7,12 @@ function handleLanguageChange() {
   let lang = document.getElementById('language').value;
   localStorage.setItem("language", lang);
 
+  const brandName = document.getElementById('brandName');
   const dreamsText = document.getElementById('dreamsText');
   const rosterText = document.getElementById('rosterText');
   const startButton = document.getElementById('startButton');
 
+  brandName.innerHTML = getText("brandName");
   dreamsText.innerHTML = getText("dreamsText");
   rosterText.innerHTML = getText("rosterText");
   startButton.innerHTML = getText("startButton");

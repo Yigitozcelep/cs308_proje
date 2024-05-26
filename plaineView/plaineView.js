@@ -267,6 +267,8 @@ buySeatButton.onclick = async (e) => {
     const data = Array.from(selectedSeats);
     if (data.length == 0) { 
         UserCommunication.autoBuySeat(); 
+        location.reload()
+        alert(getText("The transaction was completed successfully"));
     }
     data.forEach(el => {
         buySeatPopUp(el.seatData);

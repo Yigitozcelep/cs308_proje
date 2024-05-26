@@ -111,14 +111,14 @@ const UserCommunication = {
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
         const flightID = localStorage.getItem("flightIdView");
-        let res = await fetch(`http://localhost:8080/passenger/${localStorage.getItem("userId")}/bookFlightAuto/${flightID}/T/false`, {
+        let res = await fetch(`http://localhost:8080/main/passenger/${localStorage.getItem("userId")}/bookFlightAuto/${flightID}/F/true`, {
             mode: 'cors',
             credentials: 'include',
             method: 'POST',
             headers: headers,
         });
-        console.log("res: ", res);
         res = await res.json();
+        console.log("res: ", res);
     },
     
     /**
@@ -148,7 +148,7 @@ const UserCommunication = {
         
         const userType = localStorage.getItem("userType");
         const id = localStorage.getItem("userId");
-
+        console.log("userdata cur: ", user);
         if (userType == UserTypes.cabinCrew)
         {
             let headers = new Headers();
@@ -160,8 +160,19 @@ const UserCommunication = {
             credentials: 'include',
             method: 'PUT',
             headers: headers,
-            
-            //body lazım buraya 
+            body: JSON.stringify({
+                attendantId: user.Id,
+                email: user.email,
+                password: user.password,
+                firstName: user.name,
+                surname: user.surname,
+                age: user.age,
+                gender: user.gender,
+                nationality: user.nationality,
+                seniority: user.seniority,
+                languages: user.languages,
+                recipes: user.recipe
+            })
         });
         return res.status == 200;
         }
@@ -175,15 +186,23 @@ const UserCommunication = {
             mode: 'cors',
             credentials: 'include',
             method: 'PUT',
-            headers: headers
-
-            //body lazım buraya 
+            headers: headers,
+            body: JSON.stringify({
+                pilotId: user.Id,
+                emai: user.email,
+                password: user.password,
+                firstName: user.name,
+                surname: user.surname,
+                age: user.age,
+                gender: user.gender,
+                allowedRange: user.allowedRange,
+                nationality: user.nationality,
+                seniority: user.seniority,
+                languages: user.languages
+            })
             });
             return res.status == 200;
         }
-
-
-
     },
 
     /**

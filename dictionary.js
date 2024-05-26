@@ -1056,9 +1056,44 @@ const dictionary = {
     "plaineViewTitle": {
         [languages.turkish]: "AIR308 Uçak Görünümü",
         [languages.english]: "AIR308 Plaine View"
-    }
+    },
+
+
+    "name": {
+        [languages.turkish]: "İsim",
+        [languages.english]: "Name"
+    },
+
+    "surname": {
+        [languages.turkish]: "Soyad",
+        [languages.english]: "Surname"
+    },
+
+    "email": {
+        [languages.turkish]: "Eposta",
+        [languages.english]: "Email Address"
+    },
+    "seatnum": {
+        [languages.turkish]: "Koltuk Numarası",
+        [languages.english]: "Seat Number"
+    },
+    "viewing-for": {
+        [languages.turkish]: "Görüntülenen:",
+        [languages.english]: "Viewing for:"
+    },
+    "signOutLink": {
+        [languages.turkish]: "Çıkış",
+        [languages.english]: "Sign Out"
+    },
+
+    "CabinCrew":{
+
+        [languages.turkish]: "Kabin Ekibi",
+        [languages.english]: "Cabin Crew", 
+
+   
     
-}
+}}
 
 const getText = (text) => {
     return dictionary[text][localStorage.getItem("language")];

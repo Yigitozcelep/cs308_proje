@@ -106,7 +106,7 @@ const UserCommunication = {
         });
         return res.status == 200;
     },
-
+    
     /**
      * localstorageda current user idsi var
      * @param {UserData} user

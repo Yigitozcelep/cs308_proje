@@ -28,7 +28,7 @@ const FlightsCommunication = {
      */
     async deleteFlight(flightId) {
         let headers = new Headers();
-
+        console.log("flightId: ", flightId);
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
@@ -37,7 +37,6 @@ const FlightsCommunication = {
             credentials: 'include',
             method: 'DELETE',
             headers: headers,
-            body: JSON.stringify({flightNumber: flightId})
         });
         res = await res.json();
         return res.status == 200;

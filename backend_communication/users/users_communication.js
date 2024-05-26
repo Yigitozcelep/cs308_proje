@@ -89,10 +89,23 @@ const UserCommunication = {
     
     /**
      * localstorageda current user idsi var
-     * @param {UserFlightData} userFlight 
+     * @param {String} purchaseId 
      */
-    async refundSeat(userFlight) {
-        
+    async refundSeat(purchaseId) {
+        const passangerId = localStorage.getItem("userId");
+        let headers = new Headers();
+        console.log("deneme1 purchaseId: ", purchaseId);
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        let res = await fetch(`http://localhost:8080/main/passenger/${passangerId}/cancelFlight/${purchaseId}`, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'DELETE',
+            headers: headers,
+        });
+        res = await res.json();
+        return res.status == 200;
     },
 
     /**
@@ -112,40 +125,22 @@ const UserCommunication = {
         // TODO problem need to construct 
         const userType = localStorage.getItem("userType");
         const id       = localStorage.getItem("userId");
+        console.log("userType: ", userType);
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        console.log("userType: ", userType);
-        let res;
-        if (userType == UserTypes.pilotCrew) {
-            res = await fetch(`http://localhost:8080/main/pilot/${id}/getFlights`, {
+        let url = "";
+        if (userType == UserTypes.pilotCrew) url = `http://localhost:8080/main/pilot/${id}/getFlights`;
+        if (userType == UserTypes.cabinCrew) url = `http://localhost:8080/main/attendant/${id}/getFlights`;
+        if (userType == UserTypes.passanger) url = `http://localhost:8080/main/passenger/${id}/getFlights`;
+        let res = await fetch(url, {
                 mode: 'cors',
                 credentials: 'include',
                 method: 'GET',
                 headers: headers,
             });
-            res = await res.json();
-            console.log("deneme123")
-        } 
-        if (userType == UserTypes.cabinCrew) {
-            res = await fetch(`http://localhost:8080/main/attendant/${id}/getFlights`, {
-                mode: 'cors',
-                credentials: 'include',
-                method: 'GET',
-                headers: headers,
-            });
-            res = await res.json();
-        }
-        if (userType == UserTypes.passanger) {
-            res = await fetch(`http://localhost:8080/main/passenger/${id}/getFlights`, {
-                mode: 'cors',
-                credentials: 'include',
-                method: 'GET',
-                headers: headers,
-            });
-            res = await res.json();
-        }
+        res = await res.json();
         console.log("res: ", res);
         return createUserDataFromJson(res);
     },
@@ -169,12 +164,20 @@ const UserCommunication = {
         return res.status == 200;
     },
 
+    /**
+     * @param {UserData} userData 
+     * @param {FlightData} flightData 
+     * @returns {Promise<Boolean>}
+     */
     async removeCrewFromFlight(userData, flightData) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        let res = await fetch(`http://localhost:8080/main/attendant/${userData.Id}/removeFromFlight/${flightData.getFlightId()}`, {
+        let url;
+        if (userData.isUserPilotCrew()) url = `http://localhost:8080/main/pilot/${userData.Id}/removeFromFlight/${flightData.getFlightId()}`;
+        if (userData.isUserCabinCrew()) url = `http://localhost:8080/main/attendant/${userData.Id}/removeFromFlight/${flightData.getFlightId()}`;
+        let res = await fetch(url, {
             mode: 'cors',
             credentials: 'include',
             method: 'DELETE',
@@ -210,7 +213,6 @@ const UserCommunication = {
         
             let response = await fetch("http://localhost:8080/auth/register", requestOptions);
             response = await response.json()
-            console.log(response)
             return user;
         }
         else if (userData.userType == UserTypes.pilotCrew) {

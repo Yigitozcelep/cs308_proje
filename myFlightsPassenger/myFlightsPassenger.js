@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.userSeat.getSeatPosition()}</td>
                 <td>${item.flightData.getAirlineCompany()}</td>
                 <td>${item.flightData.getMenu()}</td>
-                <td><button class="delete-row" data-item="${item}">Cancel</button></td>
+                <td><button class="delete-row" data-item="${item.purchaseId}">Cancel</button></td>
             </tr>`;
             tableBody.innerHTML += row;
             i++;
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
 
         pageButtons(data.pages);
-
+        
         document.querySelectorAll('.delete-row').forEach(button => {
             button.addEventListener('click', async function() {
                 const purchaseId = this.dataset.item;

@@ -1,7 +1,7 @@
 import { FlightData, Seat } from "../flights/flights.js";
 
 const UserTypes = {
-    passanger:   "Passsenger",
+    passanger:   "Passenger",
     cabinCrew:   "CabinCrew",
     pilotCrew:   "PilotCrew",
     admin:       "Admin",
@@ -57,7 +57,6 @@ class UserData {
         this.allowedRange    = allowedRange;
         this.recipe          = recipe;
     }
-    
     isUserAdmin()     { return this.userType == UserTypes.admin     }
     isUserCabinCrew() { return this.userType == UserTypes.cabinCrew }
     isUserPilotCrew() { return this.userType == UserTypes.pilotCrew }
@@ -66,15 +65,17 @@ class UserData {
 
 
 const createUserDataFromJson = (json) => {
-    console.log("user: ", json);
-    const currentFlights = [];
-    console.log("json : ", json);
-    const currentFlight = json.flights[0].flightData;
-    const currentSeatData = json.flights[0].userSeat;
-    const seat = new Seat(currentSeatData.seatPosition, currentSeatData.seatType, currentSeatData.status, currentSeatData.userId)
-    const flightData = new FlightData(currentFlight.from, currentFlight.goTo, currentFlight.departureAirport, currentFlight.landingAirport, currentFlight.departureTime, new Date(currentFlight.landingTime), currentFlight.planeType, currentFlight.airlineCompany, currentFlight.flightId, currentFlight.planeId, currentFlight.menu);
-    const userFlightData = [new UserFlightData(flightData, seat, null, null, currentFlight.role)];
-    return new UserData(json.email, json.password, json.name, json.surname, json.id, json.age, json.gender, json.nationality, json.userType, userFlightData, json.seniority, json.languages, null, json.recipe);
+    const userFlightDatas = [];
+    for (const data of json.flights) {
+        const currentSeatData = data.userSeat;
+        const currentFlight   = data.flightData;
+        const seat = new Seat(currentSeatData.seatPosition, currentSeatData.seatType, currentSeatData.status, currentSeatData.userId)
+        const flightData = new FlightData(currentFlight.from, currentFlight.goTo, currentFlight.departureAirport, currentFlight.landingAirport, currentFlight.departureTime, new Date(currentFlight.landingTime), currentFlight.planeType, currentFlight.airlineCompany, currentFlight.flightId, currentFlight.planeId, currentFlight.menu);
+        userFlightDatas.push(new UserFlightData(flightData, seat, null, data.purchaseId, currentFlight.role));
+    }
+
+    const res = new UserData(json.email, json.password, json.name, json.surname, json.id, json.age, json.gender, json.nationality, json.userType, userFlightDatas, json.seniority, json.languages, null, json.recipe);
+    return res;
 }
 
 export {UserData, UserFlightData, UserTypes, createUserDataFromJson}

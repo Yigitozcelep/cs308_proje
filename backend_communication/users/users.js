@@ -63,7 +63,6 @@ class UserData {
     isUserAdmin()     { return this.userType == UserTypes.admin     }
 }
 
-
 const createUserDataFromJson = (json) => {
     const userFlightDatas = [];
     for (const data of json.flights) {

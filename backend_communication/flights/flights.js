@@ -166,6 +166,7 @@ const convertJsonToSeats = (json) => {
         const seatStatus = (el.status === false) ? SeatStatus.avaliable : SeatStatus.unAvaliable;
         seatsData.push(new Seat(el.seatPosition, el.seatType, seatStatus, el.userId));
     }
+    
     return new Seats(seatsData, rowCount, bussinessConsecutiveSeat, ecenomyConsecutiveSeat);
 }
 

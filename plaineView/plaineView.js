@@ -179,7 +179,8 @@ const initializeFlightImg = async () => {
         if (currentType === UserTypes.admin) {
             img.className = "adminSeat";
             img.addEventListener("click", async e => {
-                const seatUser = await UserCommunication.getUserById(seat.getUserId());
+
+                const seatUser = await UserCommunication.getPassangerById(seat.getUserId());
                 nameEntry.innerHTML         = seatUser.name;
                 genderEntry.innerHTML       = seatUser.gender;
                 nationalityEntry.innerHTML  = seatUser.nationality;
@@ -208,7 +209,6 @@ const initializeFlightImg = async () => {
             img.style.left = (airPlaineLeft + width * 1.8 * column) + "px";
         }
         else {
-            console.log(seat);
             img.src = (seat.isSeatAvaliable()) ? "svgs/normalSeatAvaliable.svg" : "svgs/normalSeatUnAvaliable.svg"
             img.style.height = ecenomyHeight + "px";
             img.style.width = width + "px";
@@ -221,19 +221,59 @@ const initializeFlightImg = async () => {
     }
 }
 
+const handleResponse = async (seat, response) => {
+    console.log('User selected:', response);
+    const flightId  = localStorage.getItem("flightIdView");
+    const curFlight = await FlightsCommunication.getFlightByFlightId(flightId);
+    console.log("afterClick: ", curFlight, seat, response);
+    UserCommunication.buySeat(curFlight, seat, response);
+    alert(getText("The transaction was completed successfully"));
+}
+
+const buySeatPopUp = (seat, flightData) => {
+    const popup = document.createElement('div');
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.padding = '20px';
+    popup.style.backgroundColor = 'white';
+    popup.style.border = '1px solid #ccc';
+    popup.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+    popup.style.zIndex = '1000';
+    const message = document.createElement('p');
+    message.textContent = getText("DoYouHaveChild");
+    popup.appendChild(message);
+
+    const trueButton = document.createElement('button');
+    trueButton.textContent = getText("Yes");
+    trueButton.onclick = function() {
+        document.body.removeChild(popup);
+        handleResponse(seat, "T");
+    };
+    popup.appendChild(trueButton);
+
+    const falseButton = document.createElement('button');
+    falseButton.textContent = getText("No");
+    falseButton.onclick = function() {
+        document.body.removeChild(popup);
+        handleResponse(seat, "F");
+    };
+    popup.appendChild(falseButton);
+    document.body.appendChild(popup);
+}
+
 buySeatButton.onclick = async (e) => {
     const selectedSeats = document.getElementsByClassName("selectedSeat");
     Array.from(selectedSeats).forEach(el => {
-        UserCommunication.buySeat(el.seatData);
+        
+        buySeatPopUp(el.seatData);
         el.classList.remove("selectedSeat");
         if (el.seatData.isSeatBussiness()) el.src = "svgs/bussinessSeatUnAvaliable.svg";
         else el.src = "svgs/normalSeatUnAvaliable.svg";
         el.removeEventListener("click", handlers[el.seatCounter], false)
         el.classList.remove("passangerSeat");
-    })
-
-    alert(getText("The transaction was completed successfully"));
-        
+    })        
 }
 
 initializeFlightImg();

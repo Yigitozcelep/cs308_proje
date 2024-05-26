@@ -1056,7 +1056,6 @@ const dictionary = {
         [languages.english]: "AIR308 Plaine View"
     },
 
-
     "name": {
         [languages.turkish]: "İsim",
         [languages.english]: "Name"
@@ -1089,9 +1088,25 @@ const dictionary = {
         [languages.turkish]: "Kabin Ekibi",
         [languages.english]: "Cabin Crew", 
 
-   
+    },
+
+    "DoYouHaveChild": {
+        [languages.english]: "Will you sit with your child ?",
+        [languages.turkish]: "Çocuğunuz ile mi oturcaksınz ?"
+    },
+
+    "Yes": {
+        [languages.turkish]: "Evet",
+        [languages.english]: "Yes",
+    },
     
-}}
+    "No": {
+        [languages.turkish]: "Hayır",
+        [languages.english]: "No",
+    }
+    
+    
+}
 
 const getText = (text) => {
     return dictionary[text][localStorage.getItem("language")];

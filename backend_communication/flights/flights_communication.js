@@ -361,6 +361,7 @@ const FlightsCommunication = {
      * @returns {Promise<Seats>}
      */
     async getSeatsData(flight) {
+        console.log(localStorage.getItem("token"));
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    

@@ -81,9 +81,27 @@ const UserCommunication = {
      * @param {FlightData} flight 
      * @param {Seat} seat 
      */
-    async buySeat(flight, seat) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+    async buySeat(flight, seat, isParent) {
+        const passengerId = localStorage.getItem("userId");
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
         
+        let res = await fetch(`passenger/${passengerId}/bookFlight/${flight.getFlightId()}/${isParent}`, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({
+                seatPosition: seat.getSeatPosition(),
+                seatType: seat.getSeatType(),
+                status: !seat.isSeatAvaliable(),
+                userId: seat.getUserId(),
+            })
+        });
+        console.log("res: ", res);
+        res = await res.json();
     },
     
     /**
@@ -175,6 +193,26 @@ const UserCommunication = {
             });
         res = await res.json();
         return createUserDataFromJson(res);
+    },
+
+    /**
+     * @param {String} userId 
+     * @returns {Promise<UserData>}
+     */
+    async getPassangerById(userId) {
+           let headers = new Headers();
+           headers.append('Content-Type', 'application/json');
+           headers.append('Accept', 'application/json');    
+           headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+           let url = `http://localhost:8080/main/passenger/${userId}/getFlights`;
+           let res = await fetch(url, {
+                   mode: 'cors',
+                   credentials: 'include',
+                   method: 'GET',
+                   headers: headers,
+               });
+           res = await res.json();
+           return createUserDataFromJson(res);
     },
     
     /**

@@ -15,7 +15,7 @@ jsonDiv.onclick = async () => {
     const flightId  = localStorage.getItem("flightIdView");
     const curFlight = await FlightsCommunication.getFlightByFlightId(flightId);
     const cabinCrew = await FlightsCommunication.getFlightCrew(curFlight);
-
+    
     const dataStr = JSON.stringify(cabinCrew, null, 2);
     const blob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(blob);

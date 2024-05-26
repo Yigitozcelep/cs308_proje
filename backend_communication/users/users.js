@@ -65,12 +65,14 @@ class UserData {
 
 const createUserDataFromJson = (json) => {
     const userFlightDatas = [];
-    for (const data of json.flights) {
-        const currentSeatData = data.userSeat;
-        const currentFlight   = data.flightData;
-        const seat = new Seat(currentSeatData.seatPosition, currentSeatData.seatType, currentSeatData.status, currentSeatData.userId)
-        const flightData = new FlightData(currentFlight.from, currentFlight.goTo, currentFlight.departureAirport, currentFlight.landingAirport, currentFlight.departureTime, new Date(currentFlight.landingTime), currentFlight.planeType, currentFlight.airlineCompany, currentFlight.flightId, currentFlight.planeId, currentFlight.menu);
-        userFlightDatas.push(new UserFlightData(flightData, seat, null, data.purchaseId, currentFlight.role));
+    if (json.flights) {
+        for (const data of json.flights) {
+            const currentSeatData = data.userSeat;
+            const currentFlight   = data.flightData;
+            const seat = new Seat(currentSeatData.seatPosition, currentSeatData.seatType, currentSeatData.status, currentSeatData.userId)
+            const flightData = new FlightData(currentFlight.from, currentFlight.goTo, currentFlight.departureAirport, currentFlight.landingAirport, currentFlight.departureTime, new Date(currentFlight.landingTime), currentFlight.planeType, currentFlight.airlineCompany, currentFlight.flightId, currentFlight.planeId, currentFlight.menu);
+            userFlightDatas.push(new UserFlightData(flightData, seat, null, data.purchaseId, currentFlight.role));
+        }
     }
     const res = new UserData(json.email, json.password, json.name, json.surname, json.id, json.age, json.gender, json.nationality, json.userType, userFlightDatas, json.seniority, json.languages, null, json.recipe);
     return res;

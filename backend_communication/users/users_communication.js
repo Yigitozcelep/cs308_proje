@@ -160,7 +160,7 @@ const UserCommunication = {
             credentials: 'include',
             method: 'PUT',
             headers: headers,
-
+            
             //body lazım buraya 
         });
         return res.status == 200;

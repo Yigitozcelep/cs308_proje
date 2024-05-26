@@ -1,6 +1,6 @@
 import * as dummyData from "../dummy_data.js";
 import { FlightData, Seat } from "../flights/flights.js";
-import { UserData, UserFlightData, UserTypes } from "./users.js";
+import { UserData, UserFlightData, UserTypes, createUserDataFromJson } from "./users.js";
 
 
 
@@ -49,7 +49,6 @@ const UserCommunication = {
     };
         let response = await fetch("http://localhost:8080/auth/login", requestOptions);
         response = await response.json()
-        console.log(response)
         localStorage.setItem("token", response.jwt);
         let user = new UserData();
         user.Id = response.user.id
@@ -93,7 +92,7 @@ const UserCommunication = {
      * @param {UserFlightData} userFlight 
      */
     async refundSeat(userFlight) {
-        await new Promise(resolve => setTimeout(resolve, 50));
+        
     },
 
     /**
@@ -138,19 +137,17 @@ const UserCommunication = {
             });
             res = await res.json();
         }
-
-        console.log(res)
-        let pilotFlightData = [];
-        console.log("xxx: ", res.flights[0].flightData)
-        const currentFlight = res.flights[0].flightData;
-        const currentSeatData = res.flights[0].userSeat;
-
-        const seat = new Seat(currentSeatData.seatPosition, currentSeatData.seatType, currentSeatData.status, currentSeatData.userId)
-        pilotFlightData.push(new UserFlightData(currentFlight, seat, null, null, res.flights[0].role));
-
-        const data =  new UserData(res.email, res.password, res.name, res.surname, res.id, res.age, res.gender, res.nationality, res.userType, pilotFlightData[0], res.seniority, res.languages, null, res.recipe);
-        console.log(data)
-        return data;
+        if (userType == UserTypes.passanger) {
+            res = await fetch(`http://localhost:8080/main/passenger/${id}/getFlights`, {
+                mode: 'cors',
+                credentials: 'include',
+                method: 'GET',
+                headers: headers,
+            });
+            res = await res.json();
+        }
+        console.log("res: ", res);
+        return createUserDataFromJson(res);
     },
 
     /**

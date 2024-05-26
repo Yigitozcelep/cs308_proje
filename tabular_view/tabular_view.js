@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 for (let item1 of item.flights) {
                     //console.log(item1);
                     const flightData = item1.flightData;
-                  //  console.log(flightData);
+                    console.log("flightData: ", flightData);
                    // console.log(flightData.getFlightId());
                     if (flightData.getFlightId() == localStorage.getItem("flightIdView")) {
                         seatNo = item1.userSeat.getSeatPosition();

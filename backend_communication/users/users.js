@@ -1,4 +1,4 @@
-import { FlightData } from "../flights/flights.js";
+import { FlightData, Seat } from "../flights/flights.js";
 
 const UserTypes = {
     passanger:   "Passsenger",
@@ -64,4 +64,17 @@ class UserData {
     isUserAdmin()     { return this.userType == UserTypes.admin     }
 }
 
-export {UserData, UserFlightData, UserTypes}
+
+const createUserDataFromJson = (json) => {
+    console.log("user: ", json);
+    const currentFlights = [];
+    console.log("json : ", json);
+    const currentFlight = json.flights[0].flightData;
+    const currentSeatData = json.flights[0].userSeat;
+    const seat = new Seat(currentSeatData.seatPosition, currentSeatData.seatType, currentSeatData.status, currentSeatData.userId)
+    const flightData = new FlightData(currentFlight.from, currentFlight.goTo, currentFlight.departureAirport, currentFlight.landingAirport, currentFlight.departureTime, new Date(currentFlight.landingTime), currentFlight.planeType, currentFlight.airlineCompany, currentFlight.flightId, currentFlight.planeId, currentFlight.menu);
+    const userFlightData = [new UserFlightData(flightData, seat, null, null, currentFlight.role)];
+    return new UserData(json.email, json.password, json.name, json.surname, json.id, json.age, json.gender, json.nationality, json.userType, userFlightData, json.seniority, json.languages, null, json.recipe);
+}
+
+export {UserData, UserFlightData, UserTypes, createUserDataFromJson}

@@ -217,7 +217,6 @@ select.input {
 
 .airplane-image {
   position: absolute;
-  left: 50px; /* Adjust the value to move the image more to the left */
   top: 50%;
   transform: translate(-150%, -50%); /* Adjust translate values to position the image correctly */
   max-width: 400px; /* Increase or decrease the size of the image */

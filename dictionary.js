@@ -145,23 +145,23 @@ const dictionary = {
     "helpText": {
         [languages.turkish]: `İşte bazı yararlı bilgiler:
             Lütfen hiçbir kutuyu boş bırakmamaya dikkat edin.
-            "Söylememeyi tercih et" seçeneği cinsiyetini belirtmek istemeyen kişiler için oluşturulmuş bir seçenektir. Kişiler üyelik işleminden sonra tercihlerini değiştirme hakkına sahiptir.
+            "Diğer" seçeneği cinsiyetini belirtmek istemeyen kişiler için oluşturulmuş bir seçenektir. Kişiler üyelik işleminden sonra tercihlerini değiştirme hakkına sahiptir.
             Kayıt olmak için e-posta adresinizi girmelisiniz. Kayıt işlemi başarılı olmazsa lütfen e-posta adresinizi doğru girdiğinizden emin olun.
             Zaten bir hesabınız varsa, "Giriş yap" seçeneğini tıklayın ve bağlantıdan işleme devam edin.`,
         [languages.english]: `Here is some helpful information:
            Please be careful not to leave any boxes blank.
-           The "prefer not to say" option is an option created for people who do not want to specify their gender. People have the right to change their preferences after the membership process.
+           The "Other" option is an option created for people who do not want to specify their gender. People have the right to change their preferences after the membership process.
            You must enter your e-mail address to sign up. If successful sign up is not achieved, please make sure that you have entered the e-mail address correctly.
            If you already have an account, click "Log in" and continue the process from the link.`,
     },
     "member_helpText": {
-        [languages.turkish]: `Here is some helpful information:
-        Please be careful not to leave any boxes blank.
-        The "prefer not to say" option is an option created for people who do not want to specify their gender. 
-        You must enter the e-mail address to create member.`,
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+        Lütfen kutuları boş bırakmamaya dikkat edin.
+        "Diğer" seçeneği, cinsiyetlerini belirtmek istemeyen kişiler için oluşturulmuş bir seçenektir. 
+        Üye oluşturmak için e-posta adresini girmeniz gerekir.`,
         [languages.english]: `Here is some helpful information:
         Please be careful not to leave any boxes blank.
-        The "prefer not to say" option is an option created for people who do not want to specify their gender. 
+        The "Other" option is an option created for people who do not want to specify their gender. 
         You must enter the e-mail address to create member.`,
     },
     "confirm": {
@@ -199,11 +199,9 @@ const dictionary = {
     },
     "log_helpText": {
         [languages.turkish]: `İşte bazı yararlı bilgiler:
-        Lütfen rolünüzü seçiniz (Yolcular yolcu seçeneğiyle devam etmelidir, çalışan iseniz lütfen size uygun kabin veya kokpit seçeneğini seçiniz).
         Giriş yapabilmek için e-posta adresinizi girmelisiniz. Başarılı giriş sağlanamadıysa lütfen e-posta adresinizi doğru girdiğinizden emin olun veya sistemde kayıtlı değilseniz kayıt ekranına dönüp işlemleri tamamlayın. kayıt işlemi.
         Şifrenizi unuttuysanız "Şifrenizi mi unuttunuz?" seçeneğine tıklayın. Bağlantıdan şifre yenileme işlemini tamamlayın.`,
         [languages.english]: `Here is some helpful information:
-        Please select your role (passengers should continue with the passenger option, if you are an employee, please choose the cabin or cockpit option that suits you).
         You must enter your e-mail address to log in. If successful login is not achieved, please make sure that you have entered the e-mail address correctly, or if you are not registered in the system, return to the registration screen and complete the registration process.
         If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.`,
     },

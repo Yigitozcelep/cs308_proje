@@ -34,14 +34,14 @@ function handleLanguageChange() {
     document.getElementById('name').setAttribute('placeholder', getText('name'));
     document.getElementById('surname').setAttribute('placeholder', getText('surname'));
     document.getElementById('email').setAttribute('placeholder', getText('email'));
-    document.getElementById('seatnum').setAttribute('placeholder', getText('seatnum'));
+    document.getElementById('seatNum').setAttribute('placeholder', getText('seatNum'));
 
 
 
     document.getElementById('name').innerHTML = getText('name');
     document.getElementById('surname').innerHTML = getText('surname');
     document.getElementById('email').innerHTML = getText('email');
-    document.getElementById('seatnum').innerHTML = getText('seatnum');
+    document.getElementById('seatNum').innerHTML = getText('seatNum');
 
 
 
@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     let FlightData = await FlightsCommunication.getFlightByFlightId(localStorage.getItem("flightIdView"));
     const currentState = document.getElementById("table-type").innerHTML.replace(' ', '');
+    console.log(currentState);
     let userData;
     if (currentState === "PilotCrew") userData = await FlightsCommunication.getPilotData(FlightData);
     else if (currentState === "Passenger") {
@@ -70,9 +71,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     console.log(currentState);
     //.log(currentData);
     console.log(localStorage.getItem("flightIdView"));
-    let flightData = await FlightsCommunication.getFlightByFlightId(localStorage.getItem("flightIdView"));
     //console.log(flightData);
-    const x = await FlightsCommunication.getPassangerData(flightData);
     
     var state = {
         'querySet': userData,
@@ -185,16 +184,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                 varB = parseInt(b.Id, 10);
 
             }
-             else if(key == "ID"){ 
-                varA = a.Id;
-                varB = b.Id;
+             //   varA = a.Id;
+              //  varB = b.Id;
                 
-             }
-             else if(key == "Seat Number"){ 
-                varA = a.getSeatPosition();
-                varB = b.getSeatPosition();
-                
-             }
+             //}
+             else if (key === "seatNum") {
+                varA = a.seatNum;
+                varB = b.seatNum;
+            }
 
 
             let comparison = 0;
@@ -282,6 +279,18 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('cabincrew-table').style.display = 'none';
         document.getElementById('passenger-table').style.display = 'none';
         document.getElementById('pilotcrew-table').style.display = 'none';
+
+
+        if (userRole === 'Admin') {
+            document.getElementById(`${tableName.toLowerCase().replace(' ', '-')}-table`).style.display = 'block';
+        } else if (userRole === 'PilotCrew' && tableName !== 'Passenger') {
+            document.getElementById(`${tableName.toLowerCase().replace(' ', '-')}-table`).style.display = 'block';
+        } else if (userRole === 'CabinCrew' && tableName !== 'Pilot Crew') {
+            document.getElementById(`${tableName.toLowerCase().replace(' ', '-')}-table`).style.display = 'block';
+        } else {
+            return; 
+        }
+
         if (tableName === 'Passenger') {
           //  console.log(userData)
             state.querySet = filterByUserType("Passenger", userData);

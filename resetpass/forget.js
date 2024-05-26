@@ -6,6 +6,7 @@ function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
 
+    document.getElementById('brandName').innerHTML = getText("brandName");
     document.getElementById('reset_helpButton').innerHTML = getText("reset_helpButton");
     document.getElementById('reset_helpText').innerHTML = getText("reset_helpText");
     document.getElementById('reset_back').innerHTML = getText("reset_back");

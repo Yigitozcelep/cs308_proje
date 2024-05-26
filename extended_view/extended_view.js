@@ -1,4 +1,4 @@
-import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js"
+import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js";
 import { dummyFlights, dummyUsers } from "../backend_communication/dummy_data.js";
 import { UserData } from "../backend_communication/users/users.js";
 import { UserTypes } from "../backend_communication/users/users.js";
@@ -6,17 +6,49 @@ import { getText } from "../dictionary.js";
 import { FlightData } from "../backend_communication/flights/flights.js";
 import { UserCommunication } from "../backend_communication/users/users_communication.js";
 
+let userList = []; // List to store user data
+
 function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
 
     const logo = document.getElementById('logo');
     const apply = document.getElementById('apply');
+    const signOutLink = document.getElementById('signOutLink');
+    const name = document.getElementById('name');
+    const surname = document.getElementById('surname');
+    const age = document.getElementById('age');
+    const gender = document.getElementById('gender');
+    const id = document.getElementById('id');
+    const nationality = document.getElementById('nationality');
+    const email = document.getElementById('email');
+    const seniority = document.getElementById('seniority');
+    const seatNum = document.getElementById('seatNum');
+
+    document.querySelectorAll('.column-name').forEach(el => el.innerHTML = getText("name"));
+    document.querySelectorAll('.column-surname').forEach(el => el.innerHTML = getText("surname"));
+    document.querySelectorAll('.column-nationality').forEach(el => el.innerHTML = getText("nationality"));
+    document.querySelectorAll('.column-id').forEach(el => el.innerHTML = getText("id"));
+    document.querySelectorAll('.column-age').forEach(el => el.innerHTML = getText("age"));
+    document.querySelectorAll('.column-gender').forEach(el => el.innerHTML = getText("gender"));
+    document.querySelectorAll('.column-email').forEach(el => el.innerHTML = getText("email"));
+    document.querySelectorAll('.column-seniority').forEach(el => el.innerHTML = getText("seniority"));
+    document.querySelectorAll('.column-seatNum').forEach(el => el.innerHTML = getText("seatNum"));
 
     apply.innerHTML = getText("apply");
-    logo.innerHTML = getText("AIR308 Airlines")
+    logo.innerHTML = getText("AIR308 Airlines");
+    signOutLink.innerHTML = getText("signOutLink");
+    name.innerHTML = getText("name");
+    surname.innerHTML = getText("surname");
+    age.innerHTML = getText("age");
+    gender.innerHTML = getText("gender");
+    id.innerHTML = getText("id");
+    nationality.innerHTML = getText("nationality");
+    email.innerHTML = getText("email");
+    seniority.innerHTML = getText("seniority");
+    seatNum.innerHTML = getText("seatNum");
 
-    name_search.setAttribute('placeholder', getText("name_search"));
+    name_search.setAttribute('placeholder', getText("Name"));
     surname_search.setAttribute('placeholder', getText("surname_search"));
     id_search.setAttribute('placeholder', getText("id_search"));
     age_search.setAttribute('placeholder', getText("age_search"));
@@ -24,14 +56,17 @@ function handleLanguageChange() {
     seniority_search.setAttribute('placeholder', getText("seniority_search"));
     seat_search.setAttribute('placeholder', getText("seat_search"));
     email_search.setAttribute('placeholder', getText("email_search"));
+
+    document.getElementById('surname').innerHTML = getText('surname');
+    document.getElementById('id').innerHTML = getText('id');
+    document.getElementById('email').innerHTML = getText('email');
+    document.getElementById('seatnum').innerHTML = getText('seatnum');
 }
 
 document.addEventListener('DOMContentLoaded', handleLanguageChange);
 
 // Add event listener to the language dropdown to handle language change
 document.getElementById('language').addEventListener('change', handleLanguageChange);
-
-
 
 document.addEventListener('DOMContentLoaded', async function () {
     const flightId = localStorage.getItem("flightIdView");
@@ -43,13 +78,16 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     if (currentState === "PilotCrew") {
         console.log("Pilot Crew data loaded");
-        userData= await FlightsCommunication.getPilotData(flightData);
+        userData = await FlightsCommunication.getPilotData(flightData);
     } else if (currentState === "Passenger") {
         userData = await FlightsCommunication.getPassengerData(flightData);
     } else if (currentState === "CabinCrew") {
         console.log("Cabin Crew data loaded");
         userData = await FlightsCommunication.getFlightCrew(flightData);
     }
+
+    // Populate userList
+    userList = userData;
 
     console.log(flightData);
 
@@ -66,13 +104,13 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function buildTable() {
         var data = pagination(state.querySet, state.page, state.rows);
-        var tableBody = document.querySelector(`#table-body-${state.currentTable.replace(" ", "").toLowerCase()}`);
+        var tableBody = document.querySelector(#table-body-${state.currentTable.toLowerCase().replace(' ','')});
         tableBody.innerHTML = '';
+
         data.querySet.forEach(function (item) {
             let seatNo = '';
             if (item.flights && item.flights.length > 0) {
                 for (let item1 of item.flights) {
-                    console.log("item1: ", item1);
                     const flightData = item1.flightData;
                     if (flightData.getFlightId() == flightId) {
                         seatNo = item1.userSeat.getSeatPosition();
@@ -83,7 +121,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             console.log("Building table row", tableBody);
-            console.log("item: ", item);
+
             var row = `<tr>
                 <td>${item.name}</td>
                 <td>${item.surname}</td>
@@ -93,9 +131,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.nationality}</td>
                 <td>${item.email}</td>`;
             if (state.currentTable === 'Passenger') {
-                row += `<td>${item.hasChild}</td>`;
+                row += <td>${item.hasChild}</td>;
             } else {
-                row += `<td>${item.seniority}</td>`;
+                row += <td>${item.seniority}</td>;
             }
             row += `<td>${seatNo}</td>
                 <td>
@@ -115,17 +153,16 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     function showUpdateForm(user) {
+        // Create the overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'overlay';
+        document.body.appendChild(overlay);
+
+        // Show the overlay
+        overlay.style.display = 'block';
+
         const updateForm = document.createElement('div');
         updateForm.classList.add('update-form');
-        updateForm.style.position = 'fixed';
-        updateForm.style.top = '50%';
-        updateForm.style.left = '50%';
-        updateForm.style.transform = 'translate(-50%, -50%)';
-        updateForm.style.backgroundColor = 'white';
-        updateForm.style.padding = '20px';
-        updateForm.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
-        updateForm.style.zIndex = '1000';
-
         updateForm.innerHTML = `
             <h3>Update User</h3>
             <form id="update-user-form">
@@ -160,25 +197,36 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             await UserCommunication.updateUser(user);
             document.body.removeChild(updateForm);
+            document.body.removeChild(overlay);
             buildTable(); // Refresh the table
         });
 
         document.getElementById('cancel-update').addEventListener('click', function() {
             document.body.removeChild(updateForm);
+            document.body.removeChild(overlay); 
+        });
+
+        overlay.addEventListener('click', function() {
+            document.body.removeChild(updateForm);
+            document.body.removeChild(overlay);
         });
     }
 
-    for (const el of ["pilotcrew", "cabincrew"]) {
-        document.getElementById('table-body-' + el ).addEventListener('click', async function(event) {
+    function getUserById(userId) {
+        return userList.find(user => user.Id == userId);
+    }
+
+    for (const el of ["pilotcrew", "cabincrew", "passenger"]) {
+        document.getElementById('table-body-' + el).addEventListener('click', async function(event) {
             if (event.target.classList.contains('delete-user')) {
                 const userId = event.target.getAttribute('data-user-id');
                 console.log("userId: ", userId);
-                const user = await UserCommunication.getUserById(userId);
+                const user = getUserById(userId);
                 await UserCommunication.deleteUser(user);
                 event.target.closest('tr').remove();
             } else if (event.target.classList.contains('update-user')) {
                 const userId = event.target.getAttribute('data-user-id');
-                const user = await UserCommunication.getUserById(userId);
+                const user = getUserById(userId);
                 showUpdateForm(user);
             }
         });
@@ -303,7 +351,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             seniority: document.getElementById('seniority_search').value,
             seatNum: document.getElementById('seat_search').value
         };
-        var filteredData = searchTable(filters, currentData);
+        var filteredData = searchTable(filters, userList); // Use userList here
         state.querySet = filteredData;
         state.page = 1;
         buildTable();
@@ -319,43 +367,49 @@ document.addEventListener('DOMContentLoaded', async function () {
     const tableOrder = ['PilotCrew', 'CabinCrew', 'Passenger'];
 
     async function showTable(tableName) {
+
         document.getElementById('cabincrew-table').style.display = 'none';
         document.getElementById('passenger-table').style.display = 'none';
         document.getElementById('pilotcrew-table').style.display = 'none';
-
         if (tableName === 'Passenger') {
-            //state.querySet = filterByUserType("Passenger", userData);
-            state.querySet = userData = await FlightsCommunication.getPassangerData(flightData);
+          //  console.log(userData)
+            state.querySet = filterByUserType("Passenger", userData);
+            state.querySet = userData = await FlightsCommunication.getPassangerData(FlightData);
             state.currentTable = "Passenger";
 
-        } else if (tableName === 'CabinCrew') {
-            //state.querySet = filterByUserType("CabinCrew", userData);
-            state.querySet = userData = await FlightsCommunication.getFlightCrew(flightData);
+        } 
+        else if (tableName === 'CabinCrew') {
+            state.querySet = filterByUserType("CabinCrew", userData);
+            state.querySet = userData = await FlightsCommunication.getFlightCrew(FlightData);
             state.currentTable = "CabinCrew";
 
         } else if (tableName === 'PilotCrew') {
-            //state.querySet = filterByUserType("PilotCrew", userData);
-            state.querySet = userData = await FlightsCommunication.getPilotData(flightData);
+          state.querySet = filterByUserType("PilotCrew", userData);
+            state.querySet = userData = await FlightsCommunication.getPilotData(FlightData);
             state.currentTable = "PilotCrew";
-
         }
-        console.log("currentState: ", state.currentTable);
-
-        document.getElementById(`${state.currentTable.toLowerCase()}-table`).style.display = 'block';
+        console.log(state.currentTable.toLowerCase());
+        document.getElementById(${state.currentTable.toLowerCase()}-table).style.display = 'block';
         state.currentTable = tableName;
         tableType.textContent = tableName;
+        console.log(tableName);
         buildTable();
         updateButtons(tableName);
     }
 
     function updateButtons(currentTable) {
         const currentIndex = tableOrder.indexOf(currentTable);
-        const prevIndex = (currentIndex - 1 + tableOrder.length) % tableOrder.length;
-        const nextIndex = (currentIndex + 1) % tableOrder.length;
+        let availableTables = tableOrder;
 
-        prevButton.textContent = `< ${tableOrder[prevIndex]}`;
-        nextButton.textContent = `${tableOrder[nextIndex]} >`;
+       
+
+        const prevIndex = (currentIndex - 1 + availableTables.length) % availableTables.length;
+        const nextIndex = (currentIndex + 1) % availableTables.length;
+
+        prevButton.textContent = < ${availableTables[prevIndex]};
+        nextButton.textContent = ${availableTables[nextIndex]} >;
     }
+
 
     prevButton.addEventListener('click', function () {
         const currentIndex = tableOrder.indexOf(state.currentTable);

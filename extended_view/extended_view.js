@@ -109,11 +109,13 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         data.querySet.forEach(function (item) {
             let seatNo = '';
+            let seatType = '';
             if (item.flights && item.flights.length > 0) {
                 for (let item1 of item.flights) {
                     const flightData = item1.flightData;
                     if (flightData.getFlightId() == flightId) {
                         seatNo = item1.userSeat.getSeatPosition();
+                        seatType = item1.userSeat.getSeatType();
                         console.log('Seat Position:', seatNo);
                         break;
                     }
@@ -131,7 +133,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${item.nationality}</td>
                 <td>${item.email}</td>`;
             if (state.currentTable === 'Passenger') {
-                row += `<td>${item.hasChild}</td>`;
+                row += `<td>${seatType}</td>`;
             } else {
                 row += `<td>${item.seniority}</td>`;
             }

@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
    
 
-    document.getElementById('sign_login').addEventListener('click', redirectToSignIn);
 });
 
 

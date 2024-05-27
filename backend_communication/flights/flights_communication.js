@@ -126,6 +126,9 @@ const FlightsCommunication = {
             headers: headers,
             }
         );
+        if (res.status == 404) {
+            return [];
+        }
         res = await res.json();
         const data = []
         for (const el of res) {

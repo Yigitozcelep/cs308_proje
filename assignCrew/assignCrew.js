@@ -5,37 +5,6 @@ import { getText } from "../dictionary.js";
 
 const tableType = localStorage.getItem("currentTable");
 
-
-async function fetchAvailableMembers() {
-
-    console.log(localStorage.getItem("flightIdView"));
-    
-    //let availableMembers = await UserCommunication.getAvailableCrew();
-    // For now, using dummy data
-    
-    //return availableMembers;
-}
-
-async function addMemberToFlight(memberId) {
-    const flightId = localStorage.getItem("flightIdView");
-    const user = await UserCommunication.getUserById(memberId);
-    
-    if (user) {
-        // Update user's flight data to include the new flight
-        const newFlight = {
-            flightData: flightId,
-            //userSeat: { seatPosition: user.seatNum }, // This is a placeholder
-            boughtTime: new Date(),
-            purchaseId: Date.now(),
-            role: user.userType
-        };
-        user.flights.push(newFlight);
-        console.log(`Updated user data to save: `, user);  
-        await UserCommunication.updateUser(user);
-        alert(`Member ${user.name} ${user.surname} has been added to the flight.`);
-    }
-}
-
 document.addEventListener('DOMContentLoaded', async function () {
     handleLanguageChange();
     const flightId = localStorage.getItem("flightIdView");
@@ -72,7 +41,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.querySelector('#table-body-available-members').addEventListener('click', async function (event) {
         if (event.target.classList.contains('add-member')) {
             const memberId = event.target.getAttribute('data-member-id');
-            await addMemberToFlight(memberId);
+            await UserCommunication.addMemberToFlight(memberId, tableType);
+            alert(`Member has been added to the flight.`);
+            window.location.href = "../extended_view/extended_view.html"
             event.target.closest('tr').remove();
         }
     });
@@ -87,7 +58,7 @@ function handleLanguageChange() {
 
     apply.innerHTML = getText("apply");
     logo.innerHTML = getText("AIR308 Airlines");
-
+    
     const placeholders = {
         name_search: 'name_search',
         surname_search: 'surname_search',

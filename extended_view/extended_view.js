@@ -261,9 +261,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (event.target.classList.contains('delete-user')) {
                 const userId = event.target.getAttribute('data-user-id');
                 console.log("userId: ", userId);
-                const user = getUserById(userId);
-                const currentFlightData = await FlightsCommunication.getFlightByFlightId(localStorage.getItem("flightIdView"));
-                await UserCommunication.removeCrewFromFlight(user, currentFlightData);
+                console.log("state: ", state.currentTable);
+                const user = new UserData();
+                const flightData = new FlightData();
+                user.userType = state.currentTable;
+                user.Id = userId;
+                flightData.setFlightId(localStorage.getItem("flightIdView"));
+                await UserCommunication.removeCrewFromFlight(user, flightData);
                 event.target.closest('tr').remove();
             } else if (event.target.classList.contains('update-user')) {
                 const userId = event.target.getAttribute('data-user-id');

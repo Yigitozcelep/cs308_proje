@@ -58,6 +58,32 @@ const UserCommunication = {
     },
 
     /**
+     * @param {String} userId 
+     * @param {String} userType
+     */
+    async addMemberToFlight(userId, userType) {
+        console.log("userId: ", userId);
+        const flightId = localStorage.getItem("flightIdView");
+        console.log("flightId: ", flightId);
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        let url;
+
+        if (userType === UserTypes.cabinCrew) url = `http://localhost:8080/main/attendant/${userId}/assignToFlight/${flightId}`;
+        if (userType === UserTypes.pilotCrew) url = `http://localhost:8080/main/pilot/${userId}/assignToFlight/${flightId}`;
+        let res = await fetch(url, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'POST',
+            headers: headers,
+        });
+        
+    },
+
+
+    /**
      * @param {UserData} userData 
      * @returns {Promise<bool>}
      */
@@ -203,11 +229,11 @@ const UserCommunication = {
             method: 'PUT',
             headers: headers,
             body: JSON.stringify({
-                id: user.Id,
                 email: user.email,
                 password: user.password,
                 name: user.name,
                 surname: user.surname,
+                id: user.Id,
                 age: user.age,
                 gender: user.gender,
                 nationality: user.nationality,
@@ -245,7 +271,6 @@ const UserCommunication = {
                 headers: headers,
             });
         res = await res.json();
-        console.log("differnet resposne: ", res);
         return createUserDataFromJson(res);
     },
 
@@ -298,6 +323,7 @@ const UserCommunication = {
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        console.log("userData: ", userData);
         let url;
         if (userData.isUserPilotCrew()) url = `http://localhost:8080/main/pilot/${userData.Id}/removeFromFlight/${flightData.getFlightId()}`;
         if (userData.isUserCabinCrew()) url = `http://localhost:8080/main/attendant/${userData.Id}/removeFromFlight/${flightData.getFlightId()}`;
@@ -308,6 +334,7 @@ const UserCommunication = {
             headers: headers,
         });
         res = await res.json();
+        console.log("res: ", res);
         return res.status == 200;
     },
 
@@ -397,10 +424,6 @@ const UserCommunication = {
      * @returns {Promise<UserData[]>}
      */
     async getAvailableCrew(flightData) {
-        
-        
-        //for available attendants 
-        
         let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('Accept', 'application/json');    
@@ -414,12 +437,6 @@ const UserCommunication = {
             console.log("res::", res);            
             res = await res.json();
             return res;
-
-
-
-
-
-        //for available 
     },
 }
 

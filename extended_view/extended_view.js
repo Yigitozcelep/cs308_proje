@@ -162,12 +162,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             } else {
                 row += `<td>${item.seniority}</td>`;
             }
-            row += `<td>${seatNo}</td>
-                <td>
+            row += `<td>${seatNo}</td>`;
+           if (state.currentTable !== "Passenger"){
+                row += `<td>
                     <button id="update-user" class="update-user" data-user-id="${item.Id}">Update</button>
                     <button id="delete-user" class="delete-user" data-user-id="${item.Id}">Delete</button>
-                </td>
-            </tr>`;
+                </td>  
+                </tr>`;
+            }
+            ;
             tableBody.innerHTML += row;
         });
 
@@ -401,6 +404,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('pilotcrew-table').style.display = 'none';
         if (tableName === 'Passenger') {
           //  console.log(userData)
+            document.getElementById("add-btn").style.display="none";
             state.querySet = filterByUserType("Passenger", userData);
             state.querySet = userData = await FlightsCommunication.getPassangerData(flightData);
             state.currentTable = "Passenger";

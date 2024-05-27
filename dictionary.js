@@ -1144,7 +1144,93 @@ const dictionary = {
         To update a person's information, click the "Update" button next to their entry. If successful, their information will be updated in the table.
                     To add a new person to the table, click the "Add" button and fill in the required details.  To filter the table, use the options on the left side. By clicking on the buttons, you can filter the table based on the type written on the button. To sort the data, click on the column headers. This will sort the table alphabetically or numerically based on the selected column.
                     To delete a person from the table, click the "Delete" button next to their entry. The person will be removed from the table.`,
+    },
+
+    "name": {
+        [languages.turkish]: "İsim",
+        [languages.english]: "Name"
+    },
+
+    "surname": {
+        [languages.turkish]: "Soyad",
+        [languages.english]: "Surname"
+    },
+
+    "email": {
+        [languages.turkish]: "Eposta",
+        [languages.english]: "Email Address"
+    },
+    "seatNum": {
+        [languages.turkish]: "Koltuk Numarası",
+        [languages.english]: "Seat Number"
+    },
+    "viewing-for": {
+        [languages.turkish]: "Görüntülenen:",
+        [languages.english]: "Viewing for:"
+    },
+    "signOutLink": {
+        [languages.turkish]: "Çıkış",
+        [languages.english]: "Sign Out"
+    },
+    "seniority": {
+        [languages.turkish]: "Kıdem",
+        [languages.english]: "Seniority"
+    },
+    "seatType": {
+        [languages.turkish]: "Koltuk Tipi",
+        [languages.english]: "Seat Type"
+    },
+
+    "CabinCrew":{
+
+        [languages.turkish]: "Kabin Ekibi",
+        [languages.english]: "Cabin Crew", 
+
+    },
+
+    "DoYouHaveChild": {
+        [languages.english]: "Will you sit with your child ?  Seat Number: ",
+        [languages.turkish]: "Çocuğunuz ile mi oturcaksınz ?  Koltuk Numarası: "
+    },
+
+    "Yes": {
+        [languages.turkish]: "Evet",
+        [languages.english]: "Yes",
+    },
+
+    "tab_helpText": {
+
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+
+         Tabloyu filtrelemek için, sol taraftaki seçenekleri kullanın.
+          Butonlara tıklayarak tabloyu butonun üzerinde yazan türüne göre filtreleyebilirsiniz.
+           Örneğin, Yolcu butonuna tıklayarak yalnızca yolcuları içeren tabloyu görebilir,Kabin Ekib butonuna 
+           tıklayarak yalnızca kabin ekibini içeren tabloyu görebilirsiniz. Verileri sıralamak için, sütun başlıklarına tıklayın. 
+           Bu, tabloyu seçilen sütuna göre alfabetik veya sayısal olarak sıralayacaktır.` , 
+
+        [languages.english]: `Here is some helpful information: 
+        To filter the table,use the options on the left side.
+        By clicking on the buttons, you can filter the table based on the type written on the button.
+        For example, clicking "Passenger" will show a table with only passengers, and clicking "Cabin Crew" will show a table with only cabin crew.To sort the data, click on the column headers. 
+         This will sort the table alphabetically or numerically based on the selected column`
+
+
+    },
+
+   
+
+
+    "tableInfo": {
+        [languages.turkish]: "KabinMemuru",
+        [languages.english]: "CabinCrew",
+    },
+    
+    "No": {
+        [languages.turkish]: "Hayır",
+        [languages.english]: "No",
     }
+    
+    
     
     
 }

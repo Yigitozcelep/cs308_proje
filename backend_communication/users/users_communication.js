@@ -170,7 +170,7 @@ const UserCommunication = {
                 nationality: user.nationality,
                 seniority: user.seniority,
                 languages: user.languages,
-                recipes: user.recipe,
+                recipes: (user.recipe) ? (user.recipe) : "",
             })
         });
         }
@@ -189,7 +189,6 @@ const UserCommunication = {
                 surname: user.surname,
                 age: user.age,
                 gender: user.gender,
-                allowedRange: user.allowedRange,
                 nationality: user.nationality,
                 seniority: user.seniority,
                 languages: user.languages,
@@ -197,7 +196,24 @@ const UserCommunication = {
             })
             });
         }
-        
+        else if (userType == UserTypes.passanger) {
+            res = await fetch(`http://localhost:8080/api/passengers/${user.Id}`, {
+            mode: 'cors',
+            credentials: 'include',
+            method: 'PUT',
+            headers: headers,
+            body: JSON.stringify({
+                id: user.Id,
+                email: user.email,
+                password: user.password,
+                name: user.name,
+                surname: user.surname,
+                age: user.age,
+                gender: user.gender,
+                nationality: user.nationality,
+            })
+            });
+        }
         return res.status == 200;
     },
 

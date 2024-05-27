@@ -178,7 +178,6 @@ const FlightsCommunication = {
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        const adminId = localStorage.getItem("userId");
         let res = await fetch(` http://localhost:8080/main/flight/${flightData.getFlightId()}/getPassengers`,{
             mode: 'cors',
             credentials: 'include',

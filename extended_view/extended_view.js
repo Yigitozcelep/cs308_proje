@@ -12,63 +12,51 @@ function handleLanguageChange() {
     let lang = document.getElementById('language').value;
     localStorage.setItem("language", lang);
 
-    const logo = document.getElementById('logo');
+    const logo = document.querySelector('.logo');
     const apply = document.getElementById('apply');
+    const helpButton = document.getElementById('helpButton');
     const signOutLink = document.getElementById('signOutLink');
-    const name = document.getElementById('name');
-    const surname = document.getElementById('surname');
-    const age = document.getElementById('age');
-    const gender = document.getElementById('gender');
-    const id = document.getElementById('id');
-    const nationality = document.getElementById('nationality');
-    const email = document.getElementById('email');
-    const seniority = document.getElementById('seniority');
-    const seatNum = document.getElementById('seatNum');
 
     document.querySelectorAll('.column-name').forEach(el => el.innerHTML = getText("name"));
     document.querySelectorAll('.column-surname').forEach(el => el.innerHTML = getText("surname"));
-    document.querySelectorAll('.column-nationality').forEach(el => el.innerHTML = getText("nationality"));
-    document.querySelectorAll('.column-id').forEach(el => el.innerHTML = getText("id"));
-    document.querySelectorAll('.column-age').forEach(el => el.innerHTML = getText("age"));
-    document.querySelectorAll('.column-gender').forEach(el => el.innerHTML = getText("gender"));
     document.querySelectorAll('.column-email').forEach(el => el.innerHTML = getText("email"));
-    document.querySelectorAll('.column-seniority').forEach(el => el.innerHTML = getText("seniority"));
     document.querySelectorAll('.column-seatNum').forEach(el => el.innerHTML = getText("seatNum"));
+    document.querySelectorAll('.column-age').forEach(el => el.innerHTML = getText("age"));
+
+    document.querySelectorAll('.column-gender').forEach(el => el.innerHTML = getText("gender"));
+    document.querySelectorAll('.column-nationality').forEach(el => el.innerHTML = getText("nationality"));
+    document.querySelectorAll('.column-seniority').forEach(el => el.innerHTML = getText("seniority"));
+    document.querySelectorAll('.column-seatType').forEach(el => el.innerHTML = getText("seatType"));
+
+
 
     apply.innerHTML = getText("apply");
     logo.innerHTML = getText("AIR308 Airlines");
+    helpButton.innerHTML = getText("helpButton");
     signOutLink.innerHTML = getText("signOutLink");
-    name.innerHTML = getText("name");
-    surname.innerHTML = getText("surname");
-    age.innerHTML = getText("age");
-    gender.innerHTML = getText("gender");
-    id.innerHTML = getText("id");
-    nationality.innerHTML = getText("nationality");
-    email.innerHTML = getText("email");
-    seniority.innerHTML = getText("seniority");
-    seatNum.innerHTML = getText("seatNum");
 
-    name_search.setAttribute('placeholder', getText("Name"));
-    surname_search.setAttribute('placeholder', getText("surname_search"));
-    id_search.setAttribute('placeholder', getText("id_search"));
-    age_search.setAttribute('placeholder', getText("age_search"));
-    nationality_search.setAttribute('placeholder', getText("nationality_search"));
-    seniority_search.setAttribute('placeholder', getText("seniority_search"));
-    seat_search.setAttribute('placeholder', getText("seat_search"));
-    email_search.setAttribute('placeholder', getText("email_search"));
 
+
+    document.getElementById('name_search').setAttribute('placeholder', getText('name_search'));
+    document.getElementById('surname_search').setAttribute('placeholder', getText('surname_search'));
+    document.getElementById('email_search').setAttribute('placeholder', getText('email_search'));
+    document.getElementById('seat_search').setAttribute('placeholder', getText('seat_search'));
+
+
+    document.getElementById('name').innerHTML = getText('name');
     document.getElementById('surname').innerHTML = getText('surname');
-    document.getElementById('id').innerHTML = getText('id');
     document.getElementById('email').innerHTML = getText('email');
-    document.getElementById('seatnum').innerHTML = getText('seatnum');
+    document.getElementById('seatNum').innerHTML = getText('seatNum');
+
+
+    document.querySelector('.filters-container div div').innerHTML = getText('filterBy');
+    document.querySelector('.table-name').innerHTML = getText('viewing-for');
+
 }
 
 document.addEventListener('DOMContentLoaded', handleLanguageChange);
-
-// Add event listener to the language dropdown to handle language change
-document.getElementById('language').addEventListener('change', handleLanguageChange);
-
 document.addEventListener('DOMContentLoaded', (event) => {
+
     var helpButton = document.getElementById('helpButton');
     var helpPopup = document.getElementById('helpPopup');
     var closeSpan = document.getElementsByClassName('close')[0];
@@ -76,6 +64,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // When the help button is clicked, show the pop-up
     helpButton.onclick = function() {
         helpPopup.style.display = "flex";
+
     }
 
     // When the close button (x) inside the pop-up is clicked, hide the pop-up
@@ -87,10 +76,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     window.onclick = function(event) {
         if (event.target == helpPopup) {
             helpPopup.style.display = "none";
+
         }
     }
 
-   
 });
 
 document.addEventListener('DOMContentLoaded', async function () {
@@ -297,12 +286,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             } else if (key === "Surname") {
                 varA = a.surname;
                 varB = b.surname;
-            } else if (key === "user-id") {
-                varA = a.Id;
-                varB = b.Id;
-            } else if (key === "Age") {
-                varA = a.age;
-                varB = b.age;
+            } 
+           else if (key === "user-id") {
+                varA = parseInt(a.Id, 10);
+                varB = parseInt(b.Id, 10);
+            }
+            else if (key == "Age") { 
+                varA = parseInt(a.age, 10);
+                varB = parseInt(b.age, 10);
             } else if (key === "Gender") {
                 varA = a.gender;
                 varB = b.gender;

@@ -247,8 +247,13 @@ const FlightsCommunication = {
         }   
 
         res = await res.json();
-    
-        return dummyData.dummyUsers;
+        
+        const data = [];
+        for (const el of res) {
+            console.log("el: ", el)
+            data.push(createUserDataFromJson(el));
+        }
+        return data;
     },
 
     /**

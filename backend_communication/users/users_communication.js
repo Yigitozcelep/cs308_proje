@@ -145,26 +145,14 @@ const UserCommunication = {
      * @param {UserData} user
      */
     async updateUser(user) {
+        const beforeUser = await UserCommunication.getUserById();
+
         const userType = localStorage.getItem("userType");
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
         let res;
-        const x = JSON.stringify({
-            pilotId: user.Id,
-            emai: user.email,
-            password: user.password,
-            firstName: user.name,
-            surname: user.surname,
-            age: user.age,
-            gender: user.gender,
-            allowedRange: user.allowedRange,
-            nationality: user.nationality,
-            seniority: user.seniority,
-            languages: user.languages
-        });
-        console.log("x: ", x);
         if (userType == UserTypes.cabinCrew) {
             res = await fetch(`http://localhost:8080/api/attendants/${user.Id}`, {
             mode: 'cors',
@@ -182,7 +170,7 @@ const UserCommunication = {
                 nationality: user.nationality,
                 seniority: user.seniority,
                 languages: user.languages,
-                recipes: user.recipe
+                recipes: user.recipe,
             })
         });
         }
@@ -195,7 +183,7 @@ const UserCommunication = {
             headers: headers,
             body: JSON.stringify({
                 pilotId: user.Id,
-                emai: user.email,
+                email: user.email,
                 password: user.password,
                 firstName: user.name,
                 surname: user.surname,
@@ -204,10 +192,12 @@ const UserCommunication = {
                 allowedRange: user.allowedRange,
                 nationality: user.nationality,
                 seniority: user.seniority,
-                languages: user.languages
+                languages: user.languages,
+                allowedRange: beforeUser.allowedRange
             })
             });
         }
+        
         return res.status == 200;
     },
 

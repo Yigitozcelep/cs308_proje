@@ -75,6 +75,9 @@ const createUserDataFromJson = (json) => {
         }
     }
     const res = new UserData(json.email, json.password, json.name, json.surname, json.id, json.age, json.gender, json.nationality, json.userType, userFlightDatas, json.seniority, json.languages, null, json.recipe);
+    if (res.userType === UserTypes.cabinCrew) {
+        res.seniority = json.flights[0].role;
+    }
     return res;
 }
 

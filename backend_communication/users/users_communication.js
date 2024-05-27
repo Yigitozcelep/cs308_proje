@@ -145,17 +145,28 @@ const UserCommunication = {
      * @param {UserData} user
      */
     async updateUser(user) {
-        
         const userType = localStorage.getItem("userType");
-        const id = localStorage.getItem("userId");
-        console.log("userdata cur: ", user);
-        if (userType == UserTypes.cabinCrew)
-        {
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('Accept', 'application/json');    
-            headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-            let res = await fetch(`http://localhost:8080/api/attendants/${id}`, {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');    
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        let res;
+        const x = JSON.stringify({
+            pilotId: user.Id,
+            emai: user.email,
+            password: user.password,
+            firstName: user.name,
+            surname: user.surname,
+            age: user.age,
+            gender: user.gender,
+            allowedRange: user.allowedRange,
+            nationality: user.nationality,
+            seniority: user.seniority,
+            languages: user.languages
+        });
+        console.log("x: ", x);
+        if (userType == UserTypes.cabinCrew) {
+            res = await fetch(`http://localhost:8080/api/attendants/${user.Id}`, {
             mode: 'cors',
             credentials: 'include',
             method: 'PUT',
@@ -174,15 +185,10 @@ const UserCommunication = {
                 recipes: user.recipe
             })
         });
-        return res.status == 200;
         }
         else if (userType == UserTypes.pilotCrew)
         {
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('Accept', 'application/json');    
-            headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-            let res = await fetch(`http://localhost:8080/api/pilots/${id}`, {
+            res = await fetch(`http://localhost:8080/api/pilots/${user.Id}`, {
             mode: 'cors',
             credentials: 'include',
             method: 'PUT',
@@ -201,8 +207,8 @@ const UserCommunication = {
                 languages: user.languages
             })
             });
-            return res.status == 200;
         }
+        return res.status == 200;
     },
 
     /**

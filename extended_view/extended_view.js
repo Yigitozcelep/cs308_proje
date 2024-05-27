@@ -16,8 +16,8 @@ function handleLanguageChange() {
     const apply = document.getElementById('apply');
     const helpButton = document.getElementById('helpButton');
     const signOutLink = document.getElementById('signOutLink');
-    const add = document.getElementById('add-btn);
-    const updateUser = document.getElementById('update-user);
+    const add = document.getElementById('add-btn');
+    const updateUser = document.getElementById('update-user');
     const deleteUser = document.getElementById('delete-user');                                          
 
     document.querySelectorAll('.column-name').forEach(el => el.innerHTML = getText("name"));

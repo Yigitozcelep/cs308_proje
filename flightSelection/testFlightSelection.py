@@ -1,213 +1,123 @@
-import { getText } from "../dictionary.js";
-import { FlightsCommunication } from "../backend_communication/flights/flights_communication.js";
-window.addEventListener('load', function() {
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
 
-    document.getElementById('searchType').dispatchEvent(new Event('change'));
-});
+class FlightSelectionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.driver = webdriver.Chrome()
 
+        cls.driver.get('http://127.0.0.1:5500/flightSelection/flightSelection.html')
 
-function handleLanguageChange() {
-    let lang = document.getElementById('language').value;
-    localStorage.setItem("language", lang);
-    
-    const air308FlightSelection = document.getElementById('air308FlightSelection');
-    const brandName = document.getElementById('brandName');
-    const flightSelectionTable = document.getElementById('flightSelectionTable');
-    const myFlights = document.getElementById('myFlights');
-    const helpButton = document.getElementById('helpButton');
-    const flightSelectionHelp = document.getElementById('flightSelectionHelp');
-    const helpInfo = document.getElementById('helpInfo');
-    const searchOptions = document.getElementById('searchOptions');
-    const flightSelectionSearchMethod = document.getElementById('flightSelectionSearchMethod');
-    const flightNumberInfo = document.getElementById('flightNumberInfo');
-    const routeInfo = document.getElementById('routeInfo');
-    const airportInfo = document.getElementById('airportInfo');
-    const fillingForm = document.getElementById('fillingForm');
-    const ensureAccuracy = document.getElementById('ensureAccuracy');
-    const doubleCheck = document.getElementById('doubleCheck');
-    const viewBookedFlights= document.getElementById('viewBookedFlights');
-    const viewBookedFlightsInfo = document.getElementById('viewBookedFlightsInfo');
-    const signOut = document.getElementById('signOut');
-    const searchBy = document.getElementById('searchBy:');
-    const flightNo =  document.getElementById('flightNo');
-    const flightNoPHolder = document.getElementById('flightNoPHolder');
-    const departurePHolder = document.getElementById('departure');
-    const arrivalPHolder = document.getElementById('arrival');
-    const intervalStartPHolder = document.getElementById('startDate');
-    const intervalEndPHolder = document.getElementById('endDate');
-    const airportPHolder = document.getElementById('airport');
-    const intervalStartPHolder2 = document.getElementById('startDate2');
-    const intervalEndPHolder2 = document.getElementById('endDate2');
-    const route = document.getElementById('routeDropDown');
-    const airport = document.getElementById('airportDropDown');
-    const flightNoText = document.getElementById('flightNo:');
-    const departureInput = document.getElementById('departureInput');
-    const arrivalInput = document.getElementById('arrivalInput');
-    const intervalStartInput = document.getElementById('intervalStartInput');
-    const intervalEndInput = document.getElementById('intervalEndInput'); 
-    const airportInput = document.getElementById('airportText1');
-    const intervalStartInput2 = document.getElementById('intervalStartInput2');
-    const intervalEndInput2 = document.getElementById('intervalEndInput2');
-    const submit = document.getElementById('submit');
-    
-    
-    
-    brandName.innerHTML = getText("brandName");
-    air308FlightSelection.innerHTML = getText("air308FlightSelection");
-    flightSelectionTable.innerHTML = getText("flightSelectionTable");
-    myFlights.innerHTML = getText("myFlights");
-    helpButton.innerHTML = getText("helpButton");
-    flightSelectionHelp.innerHTML = getText("myFlightsHelp");
-    helpInfo.innerHTML = getText("helpInfo");
-    flightSelectionSearchMethod.innerHTML = getText("flightSelectionSearchMethod");
-    searchOptions.innerHTML = getText("searchOptions");
-    flightNumberInfo.innerHTML = getText("flightNumberInfo");
-    routeInfo.innerHTML = getText("routeInfo:");
-    airportInfo.innerHTML = getText("airportInfo:");
-    fillingForm.innerHTML = getText("fillingForm");
-    signOut.innerHTML = getText("signOut");
-    ensureAccuracy.innerHTML = getText("ensureAccuracy");
-    doubleCheck.innerHTML = getText("doubleCheck");
-    flightNo.innerHTML = getText("flightNo");
-    viewBookedFlights.innerHTML = getText("viewBookedFlights");
-    viewBookedFlightsInfo.innerHTML = getText("viewBookedFlightsInfo");
-    searchBy.innerHTML = getText("searchBy:");
-    route.innerHTML = getText("route");
-    airport.innerHTML = getText("airport");
-    flightNoText.innerHTML = getText("flightNo:");
-    departureInput.innerHTML = getText("departure:");
-    arrivalInput.innerHTML = getText("arrival:");
-    intervalStartInput.innerHTML = getText("intervalStart:");
-    intervalEndInput.innerHTML = getText("intervalEnd:");
-    airportInput.innerHTML = getText("airport:");
-    intervalStartInput2.innerHTML = getText("intervalStart:");
-    intervalEndInput2.innerHTML = getText("intervalEnd:");
-    submit.innerHTML = getText("submit");
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
 
-    flightNoPHolder.setAttribute('placeholder', getText("flightNo"));
-    departurePHolder.setAttribute('placeholder', getText("departurePlace"));
-    arrivalPHolder.setAttribute('placeholder', getText("arrivalPlace"));
-    intervalStartPHolder.setAttribute('placeholder', getText("date"));
-    intervalEndPHolder.setAttribute('placeholder', getText("date"));
-    intervalStartPHolder2.setAttribute('placeholder', getText("date"));
-    intervalEndPHolder2.setAttribute('placeholder', getText("date"));
-    airportPHolder.setAttribute('placeholder', getText("airport"));
+    def test_search_type_change(self):
+        search_type_dropdown = self.driver.find_element(By.ID, 'searchType')
+        search_type_dropdown.send_keys(Keys.ENTER)
 
-}
-// Call the function to initialize language preferences
-document.addEventListener('DOMContentLoaded', handleLanguageChange)
+        selected_option = search_type_dropdown.get_attribute('value')
+        input_fields = self.driver.find_elements(By.CLASS_NAME, 'input-field')
+
+        for input_field in input_fields:
+            if input_field.get_attribute('id') == f'{selected_option}Input':
+                self.assertTrue(input_field.is_displayed(), f"{selected_option}Input should be displayed")
+            else:
+                self.assertFalse(input_field.is_displayed(), f"{input_field.get_attribute('id')} should not be displayed")
+    def test_invalid_input_alert(self):
+        self.driver.get('http://127.0.0.1:5500/flightSelection/flightSelection.html')
+
+        # Select 'flightNo' for this test
+        search_type_dropdown = self.driver.find_element(By.ID, 'searchType')
+        search_type_dropdown.send_keys('flightNo')
+        time.sleep(1)
+
+        # Input an invalid flight number
+        flight_no_input = self.driver.find_element(By.ID, 'flightNoPHolder')
+        flight_no_input.send_keys('InvalidFlightNo')
+
+        time.sleep(1)
+
+        # Submit the form
+        form = self.driver.find_element(By.TAG_NAME, 'form')
+        form.submit()
+        time.sleep(2)
 
 
-// Add event listener to the language dropdown to handle language change
-document.getElementById('language').addEventListener('change', handleLanguageChange);
-
-document.getElementById('searchType').addEventListener('change', function() {
-    let selectedOption = this.value;
-    let inputFields = document.querySelectorAll('.input-field');
-
-    inputFields.forEach(function(inputField) {
-        if (inputField.id === selectedOption + 'Input') {
-            inputField.style.display = 'block';
-            inputField.querySelector('input').setAttribute('required', true); // Make the input field required
-        } else {
-            inputField.style.display = 'none';
-            inputField.querySelector('input').removeAttribute('required'); // Remove the required attribute
-        }
-    });
-});
-
-document.getElementById('searchType').addEventListener('change', function() {
-    let selectedOption = this.value;
-    let inputFields = document.querySelectorAll('.input-field');
-    
-    inputFields.forEach(function(inputField) {
-        if (inputField.id === selectedOption + 'Input') {
-            inputField.style.display = 'block';
-        } else {
-            inputField.style.display = 'none';
-        }
-    });
-});
-
-document.querySelector('form').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Prevent default form submission
-    let lang = document.getElementById('language').value;
-    let selectedOption = document.getElementById('searchType').value;
-    let flightData = [];
-    let flightNo
-    let departure
-    let arrival
-    let airport
-    let startDate
-    let endDate
-    if (selectedOption === 'flightNo') {
-        flightNo = document.getElementById('flightNoPHolder').value;
-        flightData = await FlightsCommunication.getFlightByFlightId(flightNo);
-    } else if (selectedOption === 'route') {
-        departure = document.getElementById('departure').value;
-        arrival = document.getElementById('arrival').value;
-        startDate = new Date(document.getElementById('startDate').value);
-        endDate = new Date(document.getElementById('endDate').value);
-        flightData = await FlightsCommunication.getFlightsDataWithoutAirport(departure, arrival, startDate, endDate);
-    } else if (selectedOption === 'airport') {
-        airport = document.getElementById('airport').value;
-        startDate = new Date(document.getElementById('startDate2').value);
-        endDate = new Date(document.getElementById('endDate2').value);
-        flightData = await FlightsCommunication.getFlightsDataFromWithoutFromGoto(startDate, endDate, airport);
-    }
-    console.log(flightData)
-    if (flightData === undefined || flightData.length === 0) {
-        if(lang == "turkish")
-        {
-            alert("Verilen kriterlere uygun uçuş bulunamadı.")
-        }
-        else
-        {
-            alert("No flights found for the given criteria.")
-        }
-    } 
-    else 
-    {
-        if (selectedOption === 'flightNo') {
-            window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&flightNo=${flightNo}`;
-        } else if (selectedOption === 'route') {
-            window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&departure=${departure}&arrival=${arrival}&startDate=${startDate}&endDate=${endDate}`;
-        } else if (selectedOption === 'airport') {
-            window.location.href = `/flightListPassenger/flightListPassenger.html?searchType=${selectedOption}&airport=${airport}&startDate2=${startDate}&endDate2=${endDate}`;
-        }
-    }
-    
-});
+        alert = self.driver.switch_to.alert
+        self.assertIn("No flights found for the given criteria.", alert.text, "Alert message does not match expected")
+        alert.accept()
 
 
-document.addEventListener('DOMContentLoaded', function() { 
-    // Add click event listener to the "My Flights" button
-    document.getElementById('myFlights').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default link behavior
-        
-        window.location.href = `/myFlightsPassenger/myFlightsPassenger.html`;
-    });
-});
+    def test_form_submission(self):
+        search_type_dropdown = self.driver.find_element(By.ID, 'searchType')
+        search_type_dropdown.send_keys('flightNo')  # Selecting 'flightNo' for this test
+        time.sleep(2)
+        flight_no_input = self.driver.find_element(By.ID, 'flightNoPHolder')
+        flight_no_input.send_keys('TK1')  # Example flight number
+        time.sleep(2)
+        form = self.driver.find_element(By.TAG_NAME, 'form')
+        form.submit()
+        time.sleep(2)
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    var helpButton = document.getElementById('helpButton');
-    var helpPopup = document.getElementById('helpPopup');
-    var closeSpan = document.getElementsByClassName('close')[0];
+        expected_url = '/flightListPassenger/flightListPassenger.html?searchType=flightNo&flightNo=TK1'
+        self.assertTrue(self.driver.current_url.endswith(expected_url), "Form submission did not redirect to the correct URL")
 
-    // When the help button is clicked, show the pop-up
-    helpButton.onclick = function() {
-        helpPopup.style.display = "flex";
-    }
 
-    // When the close button (x) inside the pop-up is clicked, hide the pop-up
-    closeSpan.onclick = function() {
-        helpPopup.style.display = "none";
-    }
+    def test_help_popup(self):
+        self.driver.get('http://127.0.0.1:5500/flightSelection/flightSelection.html')
+        help_button = self.driver.find_element(By.ID, 'helpButton')
+        help_button.click()
 
-    // When the user clicks anywhere outside of the pop-up, close it
-    window.onclick = function(event) {
-        if (event.target == helpPopup) {
-            helpPopup.style.display = "none";
-        }
-    }
-});
+        help_popup = self.driver.find_element(By.ID, 'helpPopup')
+        self.assertTrue(help_popup.is_displayed(), "Help popup should be displayed when the help button is clicked")
+
+        close_button = self.driver.find_element(By.CLASS_NAME, 'close')
+        close_button.click()
+
+        self.assertFalse(help_popup.is_displayed(), "Help popup should be hidden after clicking the close button")
+
+    def test_quit_button(self):
+        self.driver.get('http://127.0.0.1:5500/flightSelection/flightSelection.html')
+
+        quit_button = self.driver.find_element(By.ID, 'signOut')
+        quit_button.click()
+
+        expected_url = 'http://127.0.0.1:5500/start_screen/index.html'
+        self.assertEqual(self.driver.current_url, expected_url, "Browser should be redirected to /start_screen/index.html after clicking the quit button")
+    def test_my_flights_button(self):
+        self.driver.get('http://127.0.0.1:5500/flightSelection/flightSelection.html')
+
+        my_flights_button = self.driver.find_element(By.ID, 'myFlights')
+        my_flights_button.click()
+
+        expected_url = 'http://127.0.0.1:5500/myFlightsPassenger/myFlightsPassenger.html'
+        self.assertEqual(self.driver.current_url, expected_url, "Browser should be redirected to My Flights page after clicking the My Flights button")    
+    def test_language_change(self):
+        self.driver.get('http://127.0.0.1:5500/flightSelection/flightSelection.html')
+
+        language_dropdown = self.driver.find_element(By.ID, 'language')
+
+        language_dropdown.send_keys('TR')
+
+        time.sleep(2)
+
+        text_element = self.driver.find_element(By.ID, 'flightSelectionTable')
+        self.assertEqual(text_element.text, "UÇUŞ ARAMA", "Language change to Turkish failed")
+    def test_go_to_personal_information(self):
+
+        self.driver.get('http://127.0.0.1:5500/flightSelection/flightSelection.html')
+
+
+        # Click on the personal information link
+        profile_icon = self.driver.find_element(By.ID, 'profileIcon')
+        profile_icon.click()
+
+        expected_url = 'http://127.0.0.1:5500/personal_info_psngr/personal_info_psngr.html'
+        self.assertEqual(self.driver.current_url, expected_url, "Browser should be redirected to Personal Information page")
+
+if __name__ == '__main__':
+    suite = unittest.TestSuite()

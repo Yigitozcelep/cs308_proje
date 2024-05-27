@@ -16,6 +16,9 @@ function handleLanguageChange() {
     const apply = document.getElementById('apply');
     const helpButton = document.getElementById('helpButton');
     const signOutLink = document.getElementById('signOutLink');
+    const add = document.getElementById('add-btn);
+    const updateUser = document.getElementById('update-user);
+    const deleteUser = document.getElementById('delete-user');                                          
 
     document.querySelectorAll('.column-name').forEach(el => el.innerHTML = getText("name"));
     document.querySelectorAll('.column-surname').forEach(el => el.innerHTML = getText("surname"));
@@ -34,6 +37,9 @@ function handleLanguageChange() {
     logo.innerHTML = getText("AIR308 Airlines");
     helpButton.innerHTML = getText("helpButton");
     signOutLink.innerHTML = getText("signOutLink");
+    add.innerHTML = getText("add-btn");
+    updateUser.innerHTML = getText("update-user");
+    deleteUser.innerHTML = getText("delete-user");
 
 
 
@@ -47,6 +53,7 @@ function handleLanguageChange() {
     document.getElementById('surname').innerHTML = getText('surname');
     document.getElementById('email').innerHTML = getText('email');
     document.getElementById('seatNum').innerHTML = getText('seatNum');
+    document.getElementById('extended_helptext').innerHTML= getText('extended_helptext');
 
 
     document.querySelector('.filters-container div div').innerHTML = getText('filterBy');

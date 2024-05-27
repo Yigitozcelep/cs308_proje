@@ -186,6 +186,10 @@ const FlightsCommunication = {
             headers: headers,
             }
         );
+        if (res.status === 404) {
+            alert("There is no passanger");
+            return [];
+        }
         res = await res.json();
         const data = [];
         for (const el of res) data.push(createUserDataFromJson(el));

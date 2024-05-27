@@ -152,6 +152,7 @@ const FlightsCommunication = {
             headers: headers,
             }
         );
+        
         console.log("res:", res);
         if (res.status == 404)
         {

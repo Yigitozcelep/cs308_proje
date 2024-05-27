@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     function showUpdateForm(user) {
+        
         // Create the overlay
         const overlay = document.createElement('div');
         overlay.id = 'overlay';
@@ -234,7 +235,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             user.gender = document.getElementById('update-gender').value;
             user.nationality = document.getElementById('update-nationality').value;
             user.seniority = document.getElementById('update-seniority').value;
-
             await UserCommunication.updateUser(user);
             document.body.removeChild(updateForm);
             document.body.removeChild(overlay);
@@ -447,7 +447,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById(`${state.currentTable.toLowerCase()}-table`).style.display = 'block';
         state.currentTable = tableName
         tableType.textContent = tableName;
-        console.log("bum: ");
         buildTable();
         updateButtons(tableName);
     }
@@ -455,7 +454,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     function updateButtons(currentTable) {
         const currentIndex = tableOrder.indexOf(currentTable);
         let availableTables = tableOrder;
-        
+
         const prevIndex = (currentIndex - 1 + availableTables.length) % availableTables.length;
         const nextIndex = (currentIndex + 1) % availableTables.length;
 

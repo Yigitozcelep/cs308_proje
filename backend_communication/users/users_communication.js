@@ -171,14 +171,20 @@ const UserCommunication = {
      * @param {UserData} user
      */
     async updateUser(user) {
-        const beforeUser = await UserCommunication.getUserById();
-
-        const userType = localStorage.getItem("userType");
+        let userType = localStorage.getItem("userType");
+        let beforeUser;
+        if (userType === UserTypes.admin) beforeUser = user;
+        if (userType === UserTypes.admin) {
+            userType = user.userType;
+        }
+        else beforeUser = await UserCommunication.getUserById();
+        console.log("beforeUser: ", beforeUser);
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        let res;
+        let res
+
         if (userType == UserTypes.cabinCrew) {
             res = await fetch(`http://localhost:8080/api/attendants/${user.Id}`, {
             mode: 'cors',
@@ -237,7 +243,7 @@ const UserCommunication = {
                 age: user.age,
                 gender: user.gender,
                 nationality: user.nationality,
-                userType: user.userType,
+                userType: "passenger",
                 flights: null,
                 seniority: null,
                 languages: null,
@@ -245,6 +251,7 @@ const UserCommunication = {
             })
             });
         }
+        console.log("res: ", res);
         return res.status == 200;
     },
 
@@ -256,6 +263,7 @@ const UserCommunication = {
         // TODO problem need to construct 
         const userType = localStorage.getItem("userType");
         const id       = localStorage.getItem("userId");
+        console.log("userType: ", userType);
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');    
@@ -264,6 +272,7 @@ const UserCommunication = {
         if (userType == UserTypes.pilotCrew) url = `http://localhost:8080/main/pilot/${id}/getFlights`;
         if (userType == UserTypes.cabinCrew) url = `http://localhost:8080/main/attendant/${id}/getFlights`;
         if (userType == UserTypes.passanger) url = `http://localhost:8080/main/passenger/${id}/getFlights`;
+        console.log("url: ", url);
         let res = await fetch(url, {
                 mode: 'cors',
                 credentials: 'include',

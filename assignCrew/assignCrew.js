@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.log("got available attendants");
 
     }
-    
-    console.log(availableMembers);
     buildTable(availableMembers);
 
     document.querySelector('#table-body-available-members').addEventListener('click', async function (event) {

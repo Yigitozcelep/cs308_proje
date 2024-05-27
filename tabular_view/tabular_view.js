@@ -37,7 +37,6 @@ function handleLanguageChange() {
     //document.getElementById('surname').setAttribute('placeholder', getText('surname'));
     //document.getElementById('email').setAttribute('placeholder', getText('email'));
     //document.getElementById('seatNum').setAttribute('placeholder', getText('seatNum'));
-    tableInfo.innerHTML = getText('table-info');
 
 
 

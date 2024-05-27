@@ -1091,18 +1091,59 @@ const dictionary = {
     },
 
     "DoYouHaveChild": {
-        [languages.english]: "Will you sit with your child ?  Seat Number: ",
-        [languages.turkish]: "Çocuğunuz ile mi oturcaksınz ?  Koltuk Numarası: "
+        [languages.english]: "Will you sit with your child ?",
+        [languages.turkish]: "Çocuğunuz ile mi oturcaksınz ?"
     },
 
     "Yes": {
         [languages.turkish]: "Evet",
         [languages.english]: "Yes",
     },
+
+    "extended_helptext": {
+
+
+
+        [languages.turkish]: "Yes",
+        [languages.english]: `To update a person's information, click the Update button next to their entry. If successful, their information will be updated in the table.
+        To add a new person to the table, click the Add button and fill in the required details.  To filter the table, use the options on the left side. By clicking on the buttons, you can filter the table based on the type written on the button. To sort the data, click on the column headers. This will sort the table alphabetically or numerically based on the selected column.
+        To delete a person from the table, click
+         the Delete button next to their entry. 
+        The person will be removed from the table.`,
+
+
+
+    },
     
     "No": {
         [languages.turkish]: "Hayır",
         [languages.english]: "No",
+    },
+    
+    "update-user": {
+        [languages.turkish]: "Güncelle",
+        [languages.english]: "Update",
+    },
+    
+    "delete-user": {
+        [languages.turkish]: "Sil",
+        [languages.english]: "Delete",
+    },
+    
+    "add-btn": {
+        [languages.turkish]: "Ekle+",
+        [languages.english]: "Add+",
+    },
+
+    "extended_helptext": {
+        [languages.turkish]: `İşte bazı yararlı bilgiler:
+        Bir kişinin bilgilerini güncellemek için, girişinin yanındaki "Güncelle" düğmesini tıklayın. Başarılı olması durumunda bilgileri tabloda güncellenecektir.
+                     Tabloya yeni bir kişi eklemek için "Ekle" butonuna tıklayın ve gerekli bilgileri doldurun.   Tabloyu filtrelemek için sol taraftaki seçenekleri kullanın. Butonlara tıklayarak tabloyu butonun üzerinde yazan türe göre filtreleyebilirsiniz. Verileri sıralamak için sütun başlıklarına tıklayın. Bu, tabloyu seçilen sütuna göre alfabetik veya sayısal olarak sıralayacaktır.
+                     Bir kişiyi tablodan silmek için, girişinin yanındaki "Sil" düğmesini tıklayın. Kişi masadan kaldırılacaktır.`,
+        [languages.english]: `Here is some helpful information:
+        To update a person's information, click the "Update" button next to their entry. If successful, their information will be updated in the table.
+                    To add a new person to the table, click the "Add" button and fill in the required details.  To filter the table, use the options on the left side. By clicking on the buttons, you can filter the table based on the type written on the button. To sort the data, click on the column headers. This will sort the table alphabetically or numerically based on the selected column.
+                    To delete a person from the table, click the "Delete" button next to their entry. The person will be removed from the table.`,
     }
     
     

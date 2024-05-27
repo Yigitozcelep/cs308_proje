@@ -455,9 +455,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     function updateButtons(currentTable) {
         const currentIndex = tableOrder.indexOf(currentTable);
         let availableTables = tableOrder;
-
-       
-
+        
         const prevIndex = (currentIndex - 1 + availableTables.length) % availableTables.length;
         const nextIndex = (currentIndex + 1) % availableTables.length;
 

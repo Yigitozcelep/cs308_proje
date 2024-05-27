@@ -8,7 +8,7 @@ const SeatStatus = {
 
 const SeatTypes = {
     ecenomy:       "ecenomy",
-    bussiness:     "bussiness",
+    bussiness:     "business",
     emergencyExit: "emergencyExit"
 }
 

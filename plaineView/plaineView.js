@@ -130,11 +130,9 @@ const displayFlightCrewData = async (curFlight) => {
     let cabinCrew = await FlightsCommunication.getFlightCrew(curFlight);
     cabinCrew = cabinCrew.concat(await FlightsCommunication.getPilotData(curFlight));
     
-    console.log("pilotData: ", await FlightsCommunication.getPilotData(curFlight));
-    console.log("cabinCrew: ", cabinCrew)
     jsonDiv.style.visibility = "visible";
     flightCrewInfoTable.style.visibility = "visible";
-
+    
     for (const el of cabinCrew) {
         const newRow           = flightCrewInfoTable.insertRow();
         const ageCell          = newRow.insertCell(0);
@@ -165,7 +163,7 @@ const initializeFlightImg = async () => {
     const curFlight = await FlightsCommunication.getFlightByFlightId(flightId);
     const userId = localStorage.getItem("userId");
     const currentType = localStorage.getItem("userType");
-
+    
     const res = await FlightsCommunication.getSeatsData(curFlight);
     let maxSeatNum = getMaxSeatNum(res);
     if (currentType == UserTypes.admin) displayFlightCrewData(curFlight);
@@ -180,7 +178,6 @@ const initializeFlightImg = async () => {
         const row = seat.getSeatLetter().charCodeAt() - 'A'.charCodeAt();
         const column = seat.getSeatNumber() - "1";
         const img = document.createElement("img");
-
         if (currentType === UserTypes.admin) {
             img.className = "adminSeat";
             img.addEventListener("click", async e => {

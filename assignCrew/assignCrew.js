@@ -30,12 +30,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     }
     
-
-
-
-
     console.log(availableMembers);
-    
     buildTable(availableMembers);
 
     document.querySelector('#table-body-available-members').addEventListener('click', async function (event) {

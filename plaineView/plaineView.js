@@ -14,8 +14,10 @@ const jsonDiv    = document.getElementById("exportJson");
 jsonDiv.onclick = async () => {
     const flightId  = localStorage.getItem("flightIdView");
     const curFlight = await FlightsCommunication.getFlightByFlightId(flightId);
-    const cabinCrew = await FlightsCommunication.getFlightCrew(curFlight);
-    
+    let cabinCrew = await FlightsCommunication.getFlightCrew(curFlight);
+    cabinCrew = cabinCrew.concat(await FlightsCommunication.getPilotData(curFlight));
+    cabinCrew = cabinCrew.concat(await FlightsCommunication.getPassangerData(curFlight));
+
     const dataStr = JSON.stringify(cabinCrew, null, 2);
     const blob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -125,7 +127,11 @@ const getMaxSeatNum = (seatData) => {
 }
 
 const displayFlightCrewData = async (curFlight) => {
-    const cabinCrew = await FlightsCommunication.getFlightCrew(curFlight);
+    let cabinCrew = await FlightsCommunication.getFlightCrew(curFlight);
+    cabinCrew = cabinCrew.concat(await FlightsCommunication.getPilotData(curFlight));
+    
+    console.log("pilotData: ", await FlightsCommunication.getPilotData(curFlight));
+    console.log("cabinCrew: ", cabinCrew)
     jsonDiv.style.visibility = "visible";
     flightCrewInfoTable.style.visibility = "visible";
 

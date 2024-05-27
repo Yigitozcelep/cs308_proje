@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     handleLanguageChange();
     const flightId = localStorage.getItem("flightIdView");
     console.log("flight Id: ", flightId);
-
+    
     const flightData = await FlightsCommunication.getFlightByFlightId(flightId);
 
     let userData;

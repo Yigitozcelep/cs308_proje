@@ -252,8 +252,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 
-    function getUserById(userId) {
-        return userList.find(user => user.Id == userId);
+    function getUserById(userId, userType) {
+        return userList.find(user => user.Id == userId && user.userType == userType);
     }
 
     for (const el of ["pilotcrew", "cabincrew", "passenger"]) {
@@ -271,7 +271,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 event.target.closest('tr').remove();
             } else if (event.target.classList.contains('update-user')) {
                 const userId = event.target.getAttribute('data-user-id');
-                const user = getUserById(userId);
+                const userType = state.currentTable;
+                const user = getUserById(userId, userType);
+                console.log("user: ", user);
                 showUpdateForm(user);
             }
         });
@@ -414,23 +416,21 @@ document.addEventListener('DOMContentLoaded', async function () {
     const tableOrder = ['PilotCrew', 'CabinCrew', 'Passenger'];
 
     async function showTable(tableName) {
-
         document.getElementById('cabincrew-table').style.display = 'none';
         document.getElementById('passenger-table').style.display = 'none';
         document.getElementById('pilotcrew-table').style.display = 'none';
         if (tableName === 'Passenger') {
-          //  console.log(userData)
             document.getElementById("add-btn").style.display="none";
             state.querySet = filterByUserType("Passenger", userData);
             state.querySet = userData = await FlightsCommunication.getPassangerData(flightData);
             state.currentTable = "Passenger";
             localStorage.setItem("currentTable", state.currentTable);
-
         } 
+
         else if (tableName === 'CabinCrew') {
             document.getElementById("add-btn").style.display="block";
-
             state.querySet = filterByUserType("CabinCrew", userData);
+
             state.querySet = userData = await FlightsCommunication.getFlightCrew(flightData);
             state.currentTable = "CabinCrew";
             localStorage.setItem("currentTable", state.currentTable);
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById(`${state.currentTable.toLowerCase()}-table`).style.display = 'block';
         state.currentTable = tableName
         tableType.textContent = tableName;
-        console.log(tableName);
+        console.log("bum: ");
         buildTable();
         updateButtons(tableName);
     }

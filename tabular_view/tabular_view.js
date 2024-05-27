@@ -18,6 +18,7 @@ function handleLanguageChange() {
     document.querySelectorAll('.column-surname').forEach(el => el.innerHTML = getText("surname"));
     document.querySelectorAll('.column-email').forEach(el => el.innerHTML = getText("email"));
     document.querySelectorAll('.column-seatNum').forEach(el => el.innerHTML = getText("seatNum"));
+    document.getElementById('tab_helpText').innerHTML = getText("tab_helpText");
 
 
 
@@ -25,16 +26,19 @@ function handleLanguageChange() {
     apply.innerHTML = getText("apply");
     logo.innerHTML = getText("AIR308 Airlines");
     helpButton.innerHTML = getText("helpButton");
-    signOutLink.innerHTML = getText("signOutLink");
-
+    signOutLink.innerHTML = getText("signOutLink")
+    
+    document.querySelector('.table-name').innerHTML = getText('viewing-for');
     document.getElementById('name_search').setAttribute('placeholder', getText('name_search'));
     document.getElementById('surname_search').setAttribute('placeholder', getText('surname_search'));
     document.getElementById('email_search').setAttribute('placeholder', getText('email_search'));
     document.getElementById('seat_search').setAttribute('placeholder', getText('seat_search'));
-    document.getElementById('name').setAttribute('placeholder', getText('name'));
-    document.getElementById('surname').setAttribute('placeholder', getText('surname'));
-    document.getElementById('email').setAttribute('placeholder', getText('email'));
-    document.getElementById('seatNum').setAttribute('placeholder', getText('seatNum'));
+    //document.getElementById('name').setAttribute('placeholder', getText('name'));
+    //document.getElementById('surname').setAttribute('placeholder', getText('surname'));
+    //document.getElementById('email').setAttribute('placeholder', getText('email'));
+    //document.getElementById('seatNum').setAttribute('placeholder', getText('seatNum'));
+    tableInfo.innerHTML = getText('table-info');
+
 
 
 
@@ -47,12 +51,41 @@ function handleLanguageChange() {
 
 
     document.querySelector('.filters-container div div').innerHTML = getText('filterBy');
-    document.querySelector('.table-name').innerHTML = getText('viewing-for');
 }
 
 
 document.addEventListener('DOMContentLoaded', handleLanguageChange);
 document.getElementById('language').addEventListener('change', handleLanguageChange);
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    var helpButton = document.getElementById('helpButton');
+    var helpPopup = document.getElementById('helpPopup');
+    var closeSpan = document.getElementsByClassName('close')[0];
+
+    // When the help button is clicked, show the pop-up
+    helpButton.onclick = function() {
+        helpPopup.style.display = "flex";
+    }
+
+    // When the close button (x) inside the pop-up is clicked, hide the pop-up
+    closeSpan.onclick = function() {
+        helpPopup.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the pop-up, close it
+    window.onclick = function(event) {
+        if (event.target == helpPopup) {
+            helpPopup.style.display = "none";
+        }
+    }
+
+   
+
+    document.getElementById('sign_login').addEventListener('click', redirectToSignIn);
+});
+
+
 
 document.addEventListener('DOMContentLoaded', async function () {
 
@@ -188,9 +221,13 @@ document.addEventListener('DOMContentLoaded', async function () {
               //  varB = b.Id;
                 
              //}
-             else if (key === "seatNum") {
-                varA = a.seatNum;
-                varB = b.seatNum;
+            
+            else if(key == "SeatNumber"){ 
+             
+
+                varA = parseInt(a.seatNo, 10);
+
+                varB = parseInt(b.seatNo, 10);
             }
 
 

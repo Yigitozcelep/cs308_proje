@@ -197,7 +197,7 @@ const UserCommunication = {
             });
         }
         else if (userType == UserTypes.passanger) {
-            res = await fetch(`http://localhost:8080/api/passengers/${user.Id}`, {
+            res = await fetch(`http://localhost:8080/api/passengers/update/${user.Id}`, {
             mode: 'cors',
             credentials: 'include',
             method: 'PUT',

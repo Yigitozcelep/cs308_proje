@@ -159,7 +159,7 @@ const FlightsCommunication = {
             //add alert here 
             window.location.href = "../extended_view/extended_view.html"
         }            
-        res = await res.body.json();
+        res = await res.json();
 
         console.log("res as json:", res); 
         const data = []

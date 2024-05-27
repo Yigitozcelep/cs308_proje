@@ -32,10 +32,13 @@
         <div id="helpPopup" class="help-popup" style="display: none;">
             <div class="help-content">
                 <span class="close">&times;</span>
-                <p>Here is some helpful information:</p>
-                <p>Please select your role(passengers should continue with the passenger option, if you are an employee, please choose the cabin or cockpit option that suits you).</p>
-                <p>You must enter your e-mail address to log in. If successful login is not achieved, please make sure that you have entered the e-mail address correctly, or if you are not registered in the system, return to the registration screen and complete the registration process.</p>
-                <p>If you forgot your password, click "Forgot password?" Complete the password renewal process from the link.</p>
+                <p id="tab_helpText">     To filter the table, use the options on the left side.
+                    By clicking on the buttons, you can filter the table based on the type written on the 
+                    button. For example, clicking "Passenger" will show a table with only passengers,
+                     and clicking "Cabin Crew" will show a table with only cabin crew.To sort the data,
+                      click on the column headers. This will sort the table alphabetically or numerically
+                    based on the selected column.
+                </p>
             </div>
         </div>
         <a href="../start_screen/index.html" class="top-bar-item" id = "signOutLink">Sign Out</a>
@@ -114,8 +117,8 @@
             </div>
 
             <div class="table-navigation">
-                <button class="nav-button" id="prev-button">&lt; Pilot Crew</button>
-                <div class="table-info" id="table-type">Cabin Crew</div>
+                <button class="nav-button" id="prev-button">&lt; PilotCrew</button>
+                <div class="table-info" id="table-type">CabinCrew</div>
                 <button class="nav-button" id="next-button">Passenger &gt;</button>
                 
             </div>

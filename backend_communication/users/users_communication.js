@@ -211,6 +211,11 @@ const UserCommunication = {
                 age: user.age,
                 gender: user.gender,
                 nationality: user.nationality,
+                userType: user.userType,
+                flights: null,
+                seniority: null,
+                languages: null,
+                recipe: null,
             })
             });
         }

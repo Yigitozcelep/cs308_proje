@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     const userId = localStorage.getItem('userId');
     if (userId) {
         userData = await UserCommunication.getUserById(userId);
-        userData.userType = "CabinCrew";
         console.log(userData);
         if (userData) {
             document.getElementById('personalP_name').value = userData.name;

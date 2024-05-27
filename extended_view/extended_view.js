@@ -17,15 +17,16 @@ function handleLanguageChange() {
     const helpButton = document.getElementById('helpButton');
     const signOutLink = document.getElementById('signOutLink');
     const add = document.getElementById('add-btn');
-    const updateUser = document.getElementById('update-user');
-    const deleteUser = document.getElementById('delete-user');                                          
+
+    const action = document.getElementById('action');
+
+                                        
 
     document.querySelectorAll('.column-name').forEach(el => el.innerHTML = getText("name"));
     document.querySelectorAll('.column-surname').forEach(el => el.innerHTML = getText("surname"));
     document.querySelectorAll('.column-email').forEach(el => el.innerHTML = getText("email"));
     document.querySelectorAll('.column-seatNum').forEach(el => el.innerHTML = getText("seatNum"));
     document.querySelectorAll('.column-age').forEach(el => el.innerHTML = getText("age"));
-
     document.querySelectorAll('.column-gender').forEach(el => el.innerHTML = getText("gender"));
     document.querySelectorAll('.column-nationality').forEach(el => el.innerHTML = getText("nationality"));
     document.querySelectorAll('.column-seniority').forEach(el => el.innerHTML = getText("seniority"));
@@ -38,15 +39,25 @@ function handleLanguageChange() {
     helpButton.innerHTML = getText("helpButton");
     signOutLink.innerHTML = getText("signOutLink");
     add.innerHTML = getText("add-btn");
-    updateUser.innerHTML = getText("update-user");
-    deleteUser.innerHTML = getText("delete-user");
+    action.innerHTML = getText("action");
+
+   
+    
 
 
 
     document.getElementById('name_search').setAttribute('placeholder', getText('name_search'));
     document.getElementById('surname_search').setAttribute('placeholder', getText('surname_search'));
     document.getElementById('email_search').setAttribute('placeholder', getText('email_search'));
+    document.getElementById('age_search').setAttribute('placeholder', getText('age_search'));
     document.getElementById('seat_search').setAttribute('placeholder', getText('seat_search'));
+    document.getElementById('gender_search').setAttribute('placeholder', getText('gender_search'));
+    document.getElementById('seniority_search').setAttribute('placeholder', getText('seniority_search'));
+    document.getElementById('id_search').setAttribute('placeholder', getText('id_search'));
+    document.getElementById('nationality_search').setAttribute('placeholder', getText('nationality_search'));
+
+
+
 
 
     document.getElementById('name').innerHTML = getText('name');
@@ -62,6 +73,9 @@ function handleLanguageChange() {
 }
 
 document.addEventListener('DOMContentLoaded', handleLanguageChange);
+document.getElementById('language').addEventListener('change', handleLanguageChange);
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
 
     var helpButton = document.getElementById('helpButton');
@@ -410,6 +424,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         } 
         else if (tableName === 'CabinCrew') {
+            document.getElementById("add-btn").style.display="block";
+
             state.querySet = filterByUserType("CabinCrew", userData);
             state.querySet = userData = await FlightsCommunication.getFlightCrew(flightData);
             state.currentTable = "CabinCrew";
@@ -417,6 +433,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
         } else if (tableName === 'PilotCrew') {
+            document.getElementById("add-btn").style.display="block";
           state.querySet = filterByUserType("PilotCrew", userData);
             state.querySet = userData = await FlightsCommunication.getPilotData(flightData);
             state.currentTable = "PilotCrew";

@@ -840,13 +840,13 @@ const dictionary = {
     },
 
     "gender": {
-        [languages.turkish]: "cinsiyet",
-        [languages.english]: "gender",
+        [languages.turkish]: "Cinsiyet",
+        [languages.english]: "Gender",
     },
 
     "nationality": {
-        [languages.turkish]: "ulus",
-        [languages.english]: "nationality"
+        [languages.turkish]: "Ulus",
+        [languages.english]: "Nationality"
     },
 
     "surname": {
@@ -1224,6 +1224,18 @@ const dictionary = {
         [languages.turkish]: "KabinMemuru",
         [languages.english]: "CabinCrew",
     },
+
+
+    "age": {
+        [languages.turkish]: "Yaş",
+        [languages.english]: "Age",
+    },
+
+    "action": {
+        [languages.turkish]: "Aksiyon",
+        [languages.english]: "Action",
+    },
+    
     
     "No": {
         [languages.turkish]: "Hayır",
